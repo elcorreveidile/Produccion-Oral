@@ -1,1 +1,428 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Producción e Interacción Oral en Español — Nivel 7 (B2.1)</title>
+  <style>
+    :root{
+      --fg:#1f2937; --bg:#ffffff; --border:#e5e7eb; --brand:#111827; --card:#ffffff;
+      --s1:#e0f2fe; --s2:#fef3c7; --s3:#dcfce7; --s4:#fae8ff; --s5:#dbeafe;
+    }
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:1rem}
+    :target{scroll-margin-top:72px}
+
+    /* NAV */
+    .nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--border)}
+    .nav .inner{display:flex;gap:.5rem;align-items:center}
+    .brand{font-weight:800}
+    .spacer{flex:1}
+    .links{display:flex;gap:.5rem;align-items:center}
+    .links a{display:inline-block;padding:.5rem .75rem;border:1px solid var(--border);border-radius:9999px;background:#fff;white-space:nowrap}
+    .hamb{display:none;appearance:none;border:1px solid var(--border);background:#fff;border-radius:.75rem;padding:.5rem .6rem}
+    .mobile-panel{display:none;position:fixed;top:56px;left:0;right:0;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 6px 20px rgba(0,0,0,.06)}
+    .mobile-panel .row{display:flex;overflow-x:auto;gap:.5rem;padding:.75rem 1rem}
+    .mobile-panel a{display:inline-block;padding:.5rem .75rem;border:1px solid var(--border);border-radius:9999px;background:#fff;white-space:nowrap}
+
+    /* Layout */
+    .section{padding:3rem 0;position:relative;overflow:hidden}
+    .section > .container{position:relative;z-index:1}
+    /* Fondo con imagen opcional (velo 0.35) */
+    .section::before{content:"";position:absolute;inset:0;background-position:center;background-repeat:no-repeat;background-size:cover;opacity:.35;z-index:0}
+    #s1{background:var(--s1)} #s2{background:var(--s2)} #s3{background:var(--s3)} #s4{background:var(--s4)} #s5{background:var(--s5)}
+    /* Si subes imágenes a materials/img/s1.jpg...s5.jpg, se verán sin tocar el HTML */
+    #s1::before{background-image:url("materials/img/s1.jpg?v=1")} 
+    #s2::before{background-image:url("materials/img/s2.jpg?v=1")} 
+    #s3::before{background-image:url("materials/img/s3.jpg?v=1")} 
+    #s4::before{background-image:url("materials/img/s4.jpg?v=1")} 
+    #s5::before{background-image:url("materials/img/s5.jpg?v=1")} 
+
+    h1{font-size:clamp(1.8rem,2.5vw,3rem);margin:.3rem 0}
+    h2{font-size:clamp(1.5rem,2vw,2.2rem);margin:0 0 .5rem 0}
+    h3{margin:.5rem 0}
+    .muted{color:#374151;font-size:.95rem}
+    .btn{display:inline-block;padding:.6rem 1rem;border-radius:9999px;border:1px solid var(--border);background:#fff;cursor:pointer}
+    .btn.primary{background:var(--brand);color:#fff;border-color:var(--brand)}
+    .list{padding-left:1.1rem}
+    .list li{margin:.35rem 0}
+    .footer{border-top:1px solid var(--border);padding:1rem 0;color:#6b7280}
+    .card{background:rgba(255,255,255,.92);border:1px solid var(--border);border-radius:1rem;padding:1rem}
+    @media(max-width:899px){.card{background:rgba(255,255,255,.96)}}
+    .grid{display:grid;gap:1rem}
+    @media(min-width:900px){.grid-3{grid-template-columns: 1fr 1fr 1fr;}}
+    .chip{display:inline-block;padding:.25rem .6rem;border:1px solid var(--border);border-radius:9999px;margin:.15rem .25rem;background:#fff;cursor:pointer}
+    .chip.active{background:#111827;color:#fff;border-color:#111827}
+    .hint{font-size:.9rem;color:#334155;margin:.25rem 0 .5rem}
+
+    table{width:100%;border-collapse:collapse}
+    th,td{border:1px solid var(--border);padding:.6rem;text-align:left}
+    th{background:#f8fafc}
+
+    @media (max-width:899px){.links{display:none}.hamb{display:inline-block}.container{padding:.75rem 1rem}.section{padding:2rem 0}}
+    .nav.open .mobile-panel{display:block}
+
+    /* Visor PDF */
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;z-index:50}
+    .overlay.show{display:block}
+    .viewer{position:fixed;inset:5% 3%;background:#111827;border-radius:1rem;box-shadow:0 25px 50px rgba(0,0,0,.35);display:none;flex-direction:column;z-index:60}
+    .viewer .top{display:flex;align-items:center;gap:.5rem;padding:.6rem .75rem;background:#0f172a;color:#fff;border-top-left-radius:1rem;border-top-right-radius:1rem;flex-wrap:wrap}
+    .viewer .top .spacer{flex:1}
+    .viewer .btn{border-color:#334155;background:#fff;color:#0f172a;font-weight:600;padding:.45rem .8rem;border-radius:.65rem;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem}
+    .viewer iframe{flex:1;border:0;border-bottom-left-radius:1rem;border-bottom-right-radius:1rem;background:#fff}
+    @media (max-width:640px){ .viewer{inset:4% 2%} .viewer .btn{flex:1;justify-content:center;min-width:120px} #fileName{flex-basis:100%;font-size:1rem} }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <div class="nav" id="nav">
+    <div class="container inner">
+      <div class="brand">🗣️ Producción e Interacción Oral — Nivel 7 (B2.1)</div>
+      <div class="spacer"></div>
+      <div class="links" aria-label="Menú principal">
+        <a href="#s1">Guía</a>
+        <a href="#s2">Competencias</a>
+        <a href="#s3">Temario</a>
+        <a href="#s4">Proyectos</a>
+        <a href="#s5">Evaluación</a>
+        <a href="#descargas">Descargas</a>
+        <a href="#foro">Foro</a>
+        <a href="#taller">Taller</a>
+      </div>
+      <button class="hamb" id="hamb" aria-label="Abrir menú">☰</button>
+    </div>
+    <div class="mobile-panel" id="mobilePanel">
+      <div class="row">
+        <a href="#s1">Guía</a>
+        <a href="#s2">Competencias</a>
+        <a href="#s3">Temario</a>
+        <a href="#s4">Proyectos</a>
+        <a href="#s5">Evaluación</a>
+        <a href="#descargas">Descargas</a>
+        <a href="#foro">Foro</a>
+        <a href="#taller">Taller</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN 1: GUÍA -->
+  <section class="section" id="s1">
+    <div class="container">
+      <h2>📘 Guía del curso</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>Datos clave</h3>
+          <ul class="list">
+            <li><b>Curso:</b> 2024/2025</li>
+            <li><b>Periodo:</b> 3 feb — 22 may</li>
+            <li><b>Grupo:</b> O704 · 45 h · 4,5 ECTS · Optativa</li>
+            <li><b>Horario:</b> Martes y jueves · Aula A5</li>
+            <li><b>Profesor:</b> Javier Benítez Láinez</li>
+            <li><b>Tutorías:</b> L-X 17:00–18:30 · <a href="mailto:benitezl@go.ugr.es">benitezl@go.ugr.es</a></li>
+            <li><b>Requisitos:</b> Prueba de nivel + B1 acreditado</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Objetivo general</h3>
+          <p>Desarrollar la producción e interacción oral hasta un desempeño B2.1, con fluidez, precisión y registro adecuado en contextos reales.</p>
+          <h3 style="margin-top:.75rem">Metodología</h3>
+          <p>Aprendizaje por tareas, integración de destrezas, dinámica de grupo e inmersión (dentro y fuera del aula). Aula de Cine y proyectos de campo.</p>
+        </div>
+        <div class="card">
+          <h3>Guías de la sesión</h3>
+          <p class="hint">Pulsa la sesión para abrir su guía (PDF).</p>
+          <div id="chips-s1"></div>
+          <ul class="list" id="lista-s1"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 2: COMPETENCIAS -->
+  <section class="section" id="s2">
+    <div class="container">
+      <h2>🎯 Competencias</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>Comprensión</h3>
+          <ul class="list">
+            <li>Auditiva: conferencias, debates y noticias con registro estándar.</li>
+            <li>Lectora: instrucciones extensas, artículos e informes con ideas principales y detalles.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Interacción y expresión</h3>
+          <ul class="list">
+            <li>Debates: postura, cortesía, cohesión y cooperación conversacional.</li>
+            <li>Presentaciones: argumentos, ventajas/desventajas, claridad y matices.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Otras competencias</h3>
+          <ul class="list">
+            <li>Pragmática, gramatical, fonológica y ortográfica.</li>
+            <li>Conciencia de la lengua para evitar malentendidos y ambigüedad.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 3: TEMARIO -->
+  <section class="section" id="s3">
+    <div class="container">
+      <h2>🗂️ Temario</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>Interacción</h3>
+          <ul class="list">
+            <li>Conocer a la clase.</li>
+            <li>Intensificación y atenuación.</li>
+            <li>Tú/usted/vosotros/ustedes; cortesía.</li>
+            <li>Mostrar acuerdo y desacuerdo.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Expresión y estrategias</h3>
+          <ul class="list">
+            <li>Descripción de la personalidad.</li>
+            <li>Definir y dar instrucciones.</li>
+            <li>Repetir, contar y resumir lo dicho.</li>
+            <li>Emociones, sentimientos y comunicación no verbal.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Comprensión y proyectos</h3>
+          <ul class="list">
+            <li>Estrategias para cine, TV y documental.</li>
+            <li>Recursos léxicos para distintos textos.</li>
+            <li>Proyectos colaborativos de inmersión cultural.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 4: PROYECTOS -->
+  <section class="section" id="s4">
+    <div class="container">
+      <h2>🧭 Proyectos</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>Webquest · Ruta de Tapas por Granada</h3>
+          <p>Trabajo de campo en grupos de tres (historiador/a, reportero/a, experto/a gastronómico). Documentación de cultura del tapeo, entorno histórico-cultural y oferta gastronómica.</p>
+          <p><a class="btn" href="https://detapasporgranada.wordpress.com" target="_blank" rel="noopener">Abrir la ruta</a></p>
+          <ul class="list">
+            <li>Producto final: presentación oral multimedia.</li>
+            <li>Informes individuales y receta.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Aula de Cine · “Para mudarse a España”</h3>
+          <ul class="list">
+            <li>Creación de personajes, guion, registro y entonación.</li>
+            <li>Interpretación, grabación y subtitulado.</li>
+            <li>Producto final: capítulo grabado + guion y reflexión.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Criterios de valoración</h3>
+          <ul class="list">
+            <li>Interacción real fuera del aula.</li>
+            <li>Precisión léxica (historia, cultura, gastronomía).</li>
+            <li>Recursos visuales y entrevistas.</li>
+            <li>Fluidez, espontaneidad y organización.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 5: EVALUACIÓN -->
+  <section class="section" id="s5">
+    <div class="container">
+      <h2>📊 Evaluación</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>Asistencia</h3>
+          <p>Al menos el 80% de las clases para ser evaluado/a.</p>
+          <h3 style="margin-top:.5rem">Sistema español</h3>
+          <p>Sobresaliente (9–10), Notable (7–8.99), Aprobado (5–6.99), Suspenso (0–4.99).</p>
+        </div>
+        <div class="card">
+          <h3>60% · Evaluación continua</h3>
+          <ul class="list">
+            <li>Participación activa y progreso.</li>
+            <li>Prácticas en aula y fuera.</li>
+            <li>Proyecto Ruta de Tapas (grupal e individual).</li>
+            <li>Proyecto Aula de Cine.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>40% · Pruebas orales</h3>
+          <ul class="list">
+            <li>Parcial y final con tareas orales.</li>
+            <li>Conciencia y adecuación como nuevos hablantes.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESCARGAS -->
+  <section class="section" id="descargas">
+    <div class="container">
+      <h2>📥 Descargas</h2>
+      <div class="card">
+        <table>
+          <thead><tr><th>Documento</th><th>Acción</th></tr></thead>
+          <tbody>
+            <tr><td>Guía docente (PDF)</td><td><button class="btn" data-pdf="materials/guia-docente.pdf">Abrir/descargar</button></td></tr>
+            <tr><td>Programa detallado (PDF)</td><td><button class="btn" data-pdf="materials/programa-detallado.pdf">Abrir/descargar</button></td></tr>
+            <tr><td>Rúbricas de evaluación (PDF)</td><td><button class="btn" data-pdf="materials/rubricas.pdf">Abrir/descargar</button></td></tr>
+          </tbody>
+        </table>
+        <p class="muted" style="margin-top:.4rem">Sube tus PDF a <code>materials/</code> con estos nombres o cámbialos aquí.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORO -->
+  <section class="section" id="foro">
+    <div class="container">
+      <h2>💬 Foro</h2>
+      <div class="card">
+        <p>Usaremos el foro/plataforma del centro.</p>
+        <p><a class="btn primary" href="#" target="_blank" rel="noreferrer">Abrir foro</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TALLER (plantilla de guion/actividad descargable) -->
+  <section class="section" id="taller">
+    <div class="container">
+      <h2>🛠️ Taller</h2>
+      <div class="card">
+        <div class="grid" style="grid-template-columns:1fr;gap:1rem">
+          <label>Actividad
+            <select id="obra">
+              <option>Presentación oral</option>
+              <option>Entrevista</option>
+              <option>Debate</option>
+              <option>Guion mini serie</option>
+            </select>
+          </label>
+          <label>Título
+            <input id="titulo" placeholder="Ej.: Opiniones sobre turismo" />
+          </label>
+          <label>Descripción breve
+            <input id="sinopsis" placeholder="Una línea que resuma la tarea" />
+          </label>
+          <label>Guion / texto
+            <textarea id="guion"></textarea>
+          </label>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+            <button class="btn primary" id="guardar">Descargar .txt</button>
+            <button class="btn" id="plantilla">Cargar plantilla</button>
+            <button class="btn" id="limpiar">Limpiar</button>
+          </div>
+        </div>
+        <p class="muted" style="margin-top:.75rem">La descarga funciona sin servidor: genera un archivo de texto al momento.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer"><div class="container">© <span id="y"></span> Producción e Interacción Oral — Nivel 7 (B2.1) · Sitio simple (HTML+CSS+JS)</div></footer>
+
+  <!-- Visor PDF -->
+  <div class="overlay" id="overlay"></div>
+  <div class="viewer" id="viewer">
+    <div class="top">
+      <strong id="fileName">Documento</strong>
+      <div class="spacer"></div>
+      <a class="btn" id="openTab" target="_blank" rel="noopener">Abrir en pestaña</a>
+      <a class="btn" id="download" download>Descargar</a>
+      <button class="btn primary" id="closeViewer">Volver</button>
+    </div>
+    <iframe id="frame" title="Visor PDF" src="about:blank"></iframe>
+  </div>
+
+  <script>
+    // Año
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Menú móvil
+    const nav = document.getElementById('nav');
+    const hamb = document.getElementById('hamb');
+    hamb?.addEventListener('click', ()=> nav.classList.toggle('open'));
+    document.querySelectorAll('#mobilePanel a').forEach(a=> a.addEventListener('click', ()=> nav.classList.remove('open')));
+
+    // Visor PDF
+    const overlay = document.getElementById('overlay');
+    const viewer = document.getElementById('viewer');
+    const frame = document.getElementById('frame');
+    const openTab = document.getElementById('openTab');
+    const download = document.getElementById('download');
+    const fileName = document.getElementById('fileName');
+    const closeViewer = document.getElementById('closeViewer');
+
+    function openPDF(path){
+      fileName.textContent = decodeURIComponent(path.split('/').pop());
+      frame.src = path; openTab.href = path; download.href = path;
+      overlay.classList.add('show'); viewer.style.display = 'flex';
+      document.body.style.overflow='hidden';
+    }
+    function closePDF(){
+      overlay.classList.remove('show'); viewer.style.display = 'none';
+      frame.src = 'about:blank'; document.body.style.overflow='';
+    }
+    overlay.addEventListener('click', closePDF);
+    closeViewer.addEventListener('click', closePDF);
+
+    // Delegación: cualquier [data-pdf] abre visor
+    document.addEventListener('click', (e)=>{
+      const target = e.target.closest('[data-pdf]');
+      if(target){ e.preventDefault(); openPDF(target.getAttribute('data-pdf')); }
+    });
+
+    // ===== GUÍAS POR SESIÓN (SECCIÓN 1) =====
+    // Sube PDFs a materials/cuadernos/ con estos nombres o cámbialos aquí
+    const GUIAS_S1 = [
+      // { t: 'Sesión 1 · Presentaciones e intensificación', href: 'materials/cuadernos/S1_Presentaciones_Intensificacion.pdf' },
+      // { t: 'Sesión 2 · Atenuación y cortesía', href: 'materials/cuadernos/S2_Atenuacion_Cortesia.pdf' },
+      // { t: 'Sesión 3 · Descripción de personalidad', href: 'materials/cuadernos/S3_Personalidad.pdf' },
+      // { t: 'Sesión 4 · Definir & dar instrucciones', href: 'materials/cuadernos/S4_Instrucciones.pdf' },
+      // { t: 'Sesión 5 · Acuerdo y desacuerdo', href: 'materials/cuadernos/S5_Acuerdo_Desacuerdo.pdf' },
+      // { t: 'Sesión 6 · Resumir lo dicho', href: 'materials/cuadernos/S6_Resumen.pdf' },
+      // { t: 'Sesión 7 · Emociones y no verbal', href: 'materials/cuadernos/S7_Emociones_NoVerbal.pdf' },
+      // { t: 'Sesión 8 · Estrategias cine/TV', href: 'materials/cuadernos/S8_Estrategias_AV.pdf' },
+      // { t: 'Sesión 9 · Léxico por ámbitos', href: 'materials/cuadernos/S9_Lexico_Ambitos.pdf' },
+      // { t: 'Sesión 10 · Proyecto Ruta de Tapas', href: 'materials/cuadernos/S10_Ruta_Tapas.pdf' },
+      // { t: 'Sesión 11 · Aula de Cine', href: 'materials/cuadernos/S11_Aula_Cine.pdf' },
+      // { t: 'Sesión 12 · Ensayo Presentación', href: 'materials/cuadernos/S12_Ensayo_Presentacion.pdf' },
+    ];
+
+    function renderGuiasS1(){
+      const chips = document.getElementById('chips-s1');
+      const list = document.getElementById('lista-s1');
+      chips.innerHTML = ''; list.innerHTML = '';
+      GUIAS_S1.forEach((s)=>{
+        const span = document.createElement('span');
+        span.className = 'chip'; span.textContent = s.t;
+        span.onclick = ()=>{
+          document.querySelectorAll('#chips-s1 .chip').forEach(c=>c.classList.remove('active'));
+          span.classList.add('active');
+          list.innerHTML = `<li><button class="btn primary" data-pdf="${s.href}">⬇️ Abrir/descargar (${s.t})</button></li>`;
+        };
+        chips.appendChild(span);
+      });
+      if(GUIAS_S1[0]) setTimeout(()=> chips.querySelector('.chip')?.click(), 0);
+      else list.innerHTML = '<li class="muted">No hay guías subidas todavía.</li>';
+    }
+
+    renderGuiasS1();
+  </script>
+</body>
+</html>
 
