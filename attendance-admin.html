@@ -441,13 +441,13 @@
             console.log('🚪 Admin panel fully loaded');
         }
 
-        async function loadAttendanceData() {
+        function loadAttendanceData() {
             console.log('🔍 LOADING ATTENDANCE DATA FROM ALL SOURCES');
 
             let allRecords = [];
             let sources = [];
 
-            // SOURCE 1: localStorage (primary)
+            // SOURCE 1: localStorage (primary) - SIMPLIFIED
             try {
                 const stored = localStorage.getItem('attendanceRecords');
                 if (stored) {
@@ -460,19 +460,7 @@
                 console.error('❌ localStorage error:', err);
             }
 
-            // SOURCE 2: IndexedDB (browser database)
-            try {
-                const indexedDBRecords = await loadFromIndexedDB();
-                if (indexedDBRecords.length > 0) {
-                    allRecords.push(...indexedDBRecords);
-                    sources.push(`IndexedDB (${indexedDBRecords.length} records)`);
-                    console.log('✅ IndexedDB loaded:', indexedDBRecords.length, 'records');
-                }
-            } catch (err) {
-                console.error('❌ IndexedDB error:', err);
-            }
-
-            // SOURCE 3: sessionStorage (backup)
+            // SOURCE 2: sessionStorage (backup) - SIMPLIFIED
             try {
                 const sessionStored = sessionStorage.getItem('attendanceSession');
                 if (sessionStored) {
@@ -483,27 +471,6 @@
                 }
             } catch (err) {
                 console.error('❌ sessionStorage error:', err);
-            }
-
-            // SOURCE 4: Emergency backups
-            try {
-                const emergencyKeys = Object.keys(localStorage).filter(key => key.startsWith('emergencyBackup_'));
-                console.log('Found emergency backups:', emergencyKeys.length);
-
-                emergencyKeys.forEach(key => {
-                    try {
-                        const backupData = localStorage.getItem(key);
-                        if (backupData) {
-                            // This is a blob URL, can't parse directly
-                            console.log('📄 Emergency backup found:', key);
-                            sources.push('Emergency backup file');
-                        }
-                    } catch (err) {
-                        console.error('Error reading emergency backup:', err);
-                    }
-                });
-            } catch (err) {
-                console.error('❌ Emergency backup error:', err);
             }
 
             // Remove duplicates based on timestamp and student ID
@@ -535,44 +502,8 @@
             loadFromCloudStorage();
         }
 
-        async function loadFromIndexedDB() {
-            return new Promise((resolve) => {
-                if (!('indexedDB' in window)) {
-                    resolve([]);
-                    return;
-                }
-
-                const request = indexedDB.open('AttendanceDB', 1);
-
-                request.onerror = () => {
-                    console.error('IndexedDB open error');
-                    resolve([]);
-                };
-
-                request.onupgradeneeded = (event) => {
-                    const db = event.target.result;
-                    if (!db.objectStoreNames.contains('records')) {
-                        resolve([]);
-                        return;
-                    }
-                };
-
-                request.onsuccess = (event) => {
-                    const db = event.target.result;
-                    if (!db.objectStoreNames.contains('records')) {
-                        resolve([]);
-                        return;
-                    }
-
-                    const transaction = db.transaction(['records'], 'readonly');
-                    const store = transaction.objectStore('records');
-
-                    const getAllRequest = store.getAll();
-                    getAllRequest.onsuccess = () => resolve(getAllRequest.result || []);
-                    getAllRequest.onerror = () => resolve([]);
-                };
-            });
-        }
+        // Removed async IndexedDB to avoid async/await errors
+        // loadFromIndexedDB function removed temporarily
 
         function updateDataSourceInfo(sources) {
             // Display information about data sources
