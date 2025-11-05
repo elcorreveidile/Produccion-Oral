@@ -1409,6 +1409,7 @@
                             <h2>CONTENIDOS</h2>
                         </div>
 
+                        ${session.content.expressions ? `
                         <h3>1. EXPRESIONES ÚTILES (Nivel B2.1)</h3>
                         <ul>
                             ${session.content.expressions.map(expr => `<li>${expr}</li>`).join('')}
@@ -1423,49 +1424,24 @@
                         <ul>
                             ${session.content.grammar.map(grammar => `<li>${grammar}</li>`).join('')}
                         </ul>
-                    </div>
-                </div>
+                    ` : session.content.project ? `
+                        <h3>1. PROYECTO FINAL</h3>
+                        <ul>
+                            ${session.content.project.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
 
-                <!-- Salto de página -->
-                <div class="page-break"></div>
-
-                <!-- Página 3: Actividades y mini serie -->
-                <div class="section-container">
-                    <div class="activities-section avoid-break">
-                        <h2>ACTIVIDADES PRÁCTICAS</h2>
-                        <div class="activity-grid">
-                            ${session.activities.map((activity, index) => `
-                                <div class="activity avoid-break">
-                                    <h3>Actividad ${index + 1}: ${activity.name}</h3>
-                                    <p>${activity.description}</p>
-                                    <p class="objective"><strong>Objetivo:</strong> ${activity.objective}</p>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-
-                    ${session.miniSerie ? `
-                        <div class="mini-serie-section avoid-break">
-                            <h2>SITUACIÓN DE HABLA PARA MINI SERIE</h2>
-                            <h3>ESCENA: ${session.miniSerie.scene}</h3>
-                            <p><strong>Personajes:</strong></p>
-                            <ul>
-                                ${session.miniSerie.characters.map(char => `<li>${char}</li>`).join('')}
-                            </ul>
-                            <p><strong>Diálogo modelo:</strong></p>
-                            <div class="dialogue avoid-break">
-                                ${session.miniSerie.dialogue.map(line =>
-                                    `<div class="dialogue-line"><strong>${line.speaker}:</strong> ${line.text}</div>`
-                                ).join('')}
-                            </div>
-                        </div>
+                        <h3>2. EVALUACIÓN DEL CURSO</h3>
+                        <ul>
+                            ${session.content.evaluation.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
                     ` : ''}
+                    </div>
                 </div>
 
                 <!-- Salto de página -->
                 <div class="page-break"></div>
 
-                <!-- Página 4: Tarea y evaluación -->
+                <!-- Página 3: Tarea y evaluación -->
                 <div class="section-container">
                     <div class="task-section avoid-break">
                         <h2>TAREA PARA PRÓXIMA SESIÓN</h2>
