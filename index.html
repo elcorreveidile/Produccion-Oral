@@ -469,34 +469,75 @@
       { t: 'Sesión 1 · Presentaciones y situación inicial', href: 'materials/cuadernos/S1_Produccion_Oral.pdf', type: 'pdf' },
       { t: 'Sesión 2 · Debate: ¿Mudarse a España?', href: 'materials/cuadernos/S2_Produccion_Oral.pdf', type: 'pdf' },
       { t: 'Sesión 3 · Situación: Buscar piso en Granada', href: 'materials/cuadernos/S3_Produccion_Oral.pdf', type: 'pdf' },
+      { t: 'Sesión 4 · Debate: Cultura de tapas vs. comida rápida', href: 'materials/cuadernos/S4_Debate_Tapas.pdf', type: 'pdf' },
+      { t: 'Sesión 5 · Situación: En el mercado municipal', href: 'materials/cuadernos/S5_Mercado.pdf', type: 'pdf' },
+      { t: 'Sesión 6 · Debate: ¿Estudiar o trabajar en el extranjero?', href: 'materials/cuadernos/S6_Debate_Estudiar_Trabajar.pdf', type: 'pdf' },
+      { t: 'Sesión 7 · Situación: Problemas con el vecindario', href: 'materials/cuadernos/S7_Vecinos.pdf', type: 'pdf' },
+      { t: 'Sesión 8 · Debate: Tradición vs. modernidad en España', href: 'materials/cuadernos/S8_Debate_Tradicion.pdf', type: 'pdf' },
+      { t: 'Sesión 9 · Situación: Preparar una cena española', href: 'materials/cuadernos/S9_Cena_Espanola.pdf', type: 'pdf' },
+      { t: 'Sesión 10 · Debate: Turismo sostenible en Granada', href: 'materials/cuadernos/S10_Debate_Turismo.pdf', type: 'pdf' },
+      { t: 'Sesión 11 · Situación: Emergencia médica', href: 'materials/cuadernos/S11_Emergencia_Medica.pdf', type: 'pdf' },
+      { t: 'Sesión 12 · Debate: Redes sociales y relaciones', href: 'materials/cuadernos/S12_Debate_Redes_Sociales.pdf', type: 'pdf' },
+      { t: 'Sesión 13 · Presentación final: Proyecto mini serie', href: 'materials/cuadernos/S13_Presentacion_Final.pdf', type: 'pdf' },
     ];
 
-    function renderGuiasS1(){
+    async function renderGuiasS1(){
       const chips = document.getElementById('chips-s1');
       const list = document.getElementById('lista-s1');
       chips.innerHTML = ''; list.innerHTML = '';
-      GUIAS_S1.forEach((s)=>{
+
+      for (const s of GUIAS_S1) {
         const span = document.createElement('span');
-        span.className = 'chip'; span.textContent = s.t;
-        span.onclick = ()=>{
+        span.className = 'chip';
+        span.textContent = s.t;
+
+        span.onclick = async () => {
           document.querySelectorAll('#chips-s1 .chip').forEach(c=>c.classList.remove('active'));
           span.classList.add('active');
 
-          // Determinar el tipo de archivo y mostrar opciones correspondientes
-          const isPDF = s.type === 'pdf' || s.href.endsWith('.pdf');
-          const fileIcon = isPDF ? '📄' : '📝';
-          const dataAttr = isPDF ? 'data-pdf' : 'data-doc';
+          // Verificar si el archivo existe
+          const fileExists = await checkFileExists(s.href);
 
-          list.innerHTML = `
-            <li><button class="btn primary" ${dataAttr}="${s.href}">${fileIcon} Ver en navegador (${s.t})</button></li>
-            <li><button class="btn" onclick="window.open('${s.href}', '_blank')">🔗 Abrir en nueva pestaña</button></li>
-            <li><button class="btn" onclick="downloadFile('${s.href}', '${s.t}.pdf')">💾 Descargar directamente</button></li>
-          `;
+          if (fileExists) {
+            // Archivo existe - mostrar opciones de descarga/visualización
+            const isPDF = s.type === 'pdf' || s.href.endsWith('.pdf');
+            const fileIcon = isPDF ? '📄' : '📝';
+            const dataAttr = isPDF ? 'data-pdf' : 'data-doc';
+
+            list.innerHTML = `
+              <li><button class="btn primary" ${dataAttr}="${s.href}">${fileIcon} Ver en navegador (${s.t})</button></li>
+              <li><button class="btn" onclick="window.open('${s.href}', '_blank')">🔗 Abrir en nueva pestaña</button></li>
+              <li><button class="btn" onclick="downloadFile('${s.href}', '${s.t}.pdf')">💾 Descargar directamente</button></li>
+            `;
+          } else {
+            // Archivo no existe - mostrar mensaje informativo
+            list.innerHTML = `
+              <li class="muted">📝 ${s.t}</li>
+              <li class="muted" style="font-size: 0.9rem; margin-top: 10px;">
+                ⚠️ Este material estará disponible próximamente.<br>
+                Las sesiones 1-3 ya están listas con PDFs de alta calidad.
+              </li>
+              ${s.href.includes('S1') || s.href.includes('S2') || s.href.includes('S3') ?
+                '<li><button class="btn" onclick="window.open(\'materials/cuadernos/' + s.href.split('/').pop().replace('Produccion_Oral', 'txt') + '\', \'_blank\')">📄 Ver versión original (.txt)</button></li>' :
+                ''}
+            `;
+          }
         };
         chips.appendChild(span);
-      });
+      }
+
       if(GUIAS_S1[0]) setTimeout(()=> chips.querySelector('.chip')?.click(), 0);
       else list.innerHTML = '<li class="muted">No hay guías subidas todavía.</li>';
+    }
+
+    // Función para verificar si un archivo existe
+    async function checkFileExists(url) {
+      try {
+        const response = await fetch(url, { method: 'HEAD' });
+        return response.ok;
+      } catch {
+        return false;
+      }
     }
 
     // Función para descargar archivos directamente
