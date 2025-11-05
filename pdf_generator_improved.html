@@ -61,6 +61,13 @@
             font-family: 'Arial', sans-serif;
         }
 
+        .header .logo {
+            max-width: 120px;
+            height: auto;
+            margin-bottom: 15px;
+            page-break-inside: avoid;
+        }
+
         /* Información de sesión */
         .session-info {
             background: var(--light-bg);
@@ -1376,6 +1383,7 @@
 
             return `
                 <div class="header avoid-break">
+                    <img src="images/Logo-CLM-V1.jpg" alt="Logo CLM" class="logo">
                     <h1>Producción e Interacción Oral en Español</h1>
                     <div class="subtitle">Nivel B2.1 (Avanzado Intermedio) - Universidad de Granada</div>
                     <div class="subtitle">Centro de Lenguas Modernas</div>
