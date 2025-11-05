@@ -466,134 +466,51 @@
             }
         }
 
-        async function saveAttendanceRecord(record) {
-            console.log('🔥 SAVING CRITICAL ATTENDANCE RECORD:', record);
+        function saveAttendanceRecord(record) {
+            console.log('💾 SIMPLE SAVE: Saving attendance record:', record);
 
-            let saveSuccess = false;
-            let saveMethods = [];
-
-            // METHOD 1: Primary - Enhanced localStorage with verification
             try {
+                // SIMPLE: Just save to localStorage
                 const existingRecords = JSON.parse(localStorage.getItem('attendanceRecords') || '[]');
+                console.log('💾 Existing records before:', existingRecords.length);
+
                 existingRecords.push(record);
+                console.log('💾 Records after adding:', existingRecords.length);
 
-                // Create backup copy
-                const backupData = JSON.stringify(existingRecords);
-                localStorage.setItem('attendanceRecords', backupData);
+                // Save to localStorage
+                const dataToSave = JSON.stringify(existingRecords);
+                localStorage.setItem('attendanceRecords', dataToSave);
 
-                // Verify save
+                // Verify it was saved
                 const verification = localStorage.getItem('attendanceRecords');
-                if (verification === backupData) {
-                    saveSuccess = true;
-                    saveMethods.push('localStorage');
-                    console.log('✅ localStorage SAVED successfully');
+                console.log('💾 Verification - saved data length:', verification ? verification.length : 'null');
+                console.log('💾 Verification - data matches:', verification === dataToSave);
+
+                if (verification === dataToSave) {
+                    console.log('✅ SUCCESS: Attendance record saved to localStorage');
+
+                    // Show success to user
+                    showSaveConfirmation(['localStorage']);
+
+                    // Force admin panel refresh
+                    forceAdminPanelRefresh();
+
+                    return true;
                 } else {
-                    console.error('❌ localStorage verification failed');
+                    console.error('❌ FAILED: Data verification failed');
+                    alert('❌ Error al guardar el registro. Por favor, intenta de nuevo.');
+                    return false;
                 }
             } catch (err) {
-                console.error('❌ localStorage save failed:', err);
-            }
-
-            // METHOD 2: Secondary - IndexedDB (browser database)
-            try {
-                if ('indexedDB' in window) {
-                    const dbResult = await saveToIndexedDB(record);
-                    if (dbResult) {
-                        saveSuccess = true;
-                        saveMethods.push('IndexedDB');
-                        console.log('✅ IndexedDB SAVED successfully');
-                    }
-                }
-            } catch (err) {
-                console.error('❌ IndexedDB save failed:', err);
-            }
-
-            // METHOD 3: Tertiary - Session storage (backup)
-            try {
-                const sessionRecords = JSON.parse(sessionStorage.getItem('attendanceSession') || '[]');
-                sessionRecords.push(record);
-                sessionStorage.setItem('attendanceSession', JSON.stringify(sessionRecords));
-
-                saveSuccess = true;
-                saveMethods.push('sessionStorage');
-                console.log('✅ sessionStorage SAVED successfully');
-            } catch (err) {
-                console.error('❌ sessionStorage save failed:', err);
-            }
-
-            // METHOD 4: Emergency - Create downloadable file
-            try {
-                const blob = new Blob([JSON.stringify([record], null, 2)], { type: 'application/json' });
-                const fileUrl = URL.createObjectURL(blob);
-
-                // Trigger automatic download for emergency backup
-                const link = document.createElement('a');
-                link.href = fileUrl;
-                link.download = `attendance_backup_${new Date().toISOString()}.json`;
-                link.style.display = 'none';
-                document.body.appendChild(link);
-
-                // Store for manual download
-                localStorage.setItem('emergencyBackup_' + Date.now(), fileUrl);
-                console.log('✅ Emergency backup created');
-            } catch (err) {
-                console.error('❌ Emergency backup failed:', err);
-            }
-
-            // RESULT
-            if (saveSuccess) {
-                console.log('🎯 ATTENDANCE RECORD SAVED using methods:', saveMethods);
-
-                // Show success to user
-                showSaveConfirmation(saveMethods);
-
-                // Force admin panel refresh
-                forceAdminPanelRefresh();
-
-                return true;
-            } else {
-                console.error('💥 ALL SAVE METHODS FAILED - CRITICAL ERROR');
-
-                // Show error to user
-                alert('⚠️ ERROR CRÍTICO: No se pudo guardar el registro. Por favor, toma una captura de pantalla de esta página y contacta al profesor inmediatamente.');
-
-                // Create emergency visible record
-                createEmergencyVisibleRecord(record);
-
+                console.error('💥 CRITICAL ERROR in saveAttendanceRecord:', err);
+                alert('💥 Error crítico al guardar. Por favor, toma una captura de pantalla.');
                 return false;
             }
         }
 
-        // IndexedDB helper
-        async function saveToIndexedDB(record) {
-            return new Promise((resolve) => {
-                const request = indexedDB.open('AttendanceDB', 1);
-
-                request.onerror = () => {
-                    console.error('IndexedDB error');
-                    resolve(false);
-                };
-
-                request.onupgradeneeded = (event) => {
-                    const db = event.target.result;
-                    if (!db.objectStoreNames.contains('records')) {
-                        db.createObjectStore('records', { keyPath: 'timestamp' });
-                    }
-                };
-
-                request.onsuccess = (event) => {
-                    const db = event.target.result;
-                    const transaction = db.transaction(['records'], 'readwrite');
-                    const store = transaction.objectStore('records');
-
-                    const addRequest = store.add(record);
-                    addRequest.onsuccess = () => resolve(true);
-                    addRequest.onerror = () => resolve(false);
-                };
-            });
-        }
-
         function showSaveConfirmation(methods) {
+            console.log('✅ Success confirmation for:', methods);
+
             const confirmationDiv = document.createElement('div');
             confirmationDiv.style.cssText = `
                 position: fixed;
@@ -611,7 +528,7 @@
 
             confirmationDiv.innerHTML = `
                 <div style="font-weight: bold; margin-bottom: 8px;">✅ REGISTRO GUARDADO</div>
-                <div>Métodos: ${methods.join(', ')}</div>
+                <div>Método: ${methods.join(', ')}</div>
                 <div style="font-size: 12px; margin-top: 8px;">Asistencia registrada exitosamente</div>
             `;
 
@@ -623,6 +540,11 @@
         }
 
         function forceAdminPanelRefresh() {
+            console.log('🔄 Forcing admin panel refresh...');
+
+            // Simple refresh - reload the admin panel if open
+            const adminUrl = 'https://elcorreveidile.github.io/Produccion-Oral/attendance-admin.html';
+
             // Create storage event to force refresh
             const refreshEvent = new StorageEvent('storage', {
                 key: 'attendanceRecords',
@@ -633,44 +555,7 @@
 
             window.dispatchEvent(refreshEvent);
 
-            // Also create custom event
-            const customEvent = new CustomEvent('attendanceUpdate', {
-                detail: {
-                    type: 'force_refresh',
-                    timestamp: new Date().toISOString()
-                }
-            });
-
-            window.dispatchEvent(customEvent);
-        }
-
-        function createEmergencyVisibleRecord(record) {
-            const emergencyDiv = document.createElement('div');
-            emergencyDiv.style.cssText = `
-                position: fixed;
-                bottom: 20px;
-                left: 20px;
-                right: 20px;
-                background: #dc2626;
-                color: white;
-                padding: 20px;
-                border-radius: 8px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-                z-index: 10000;
-                font-family: monospace;
-                font-size: 12px;
-            `;
-
-            emergencyDiv.innerHTML = `
-                <div style="font-weight: bold; margin-bottom: 10px;">⚠️ REGISTRO DE EMERGENCIA</div>
-                <div>Estudiante: ${record.studentName}</div>
-                <div>ID: ${record.studentId}</div>
-                <div>Hora: ${record.timestamp}</div>
-                <div>SESIÓN: ${record.session}</div>
-                <div style="margin-top: 10px;">¡TOMA CAPTURA DE PANTALLA!</div>
-            `;
-
-            document.body.appendChild(emergencyDiv);
+            console.log('🔄 Storage event dispatched');
         }
 
         function notifyAdminPanel(record) {
