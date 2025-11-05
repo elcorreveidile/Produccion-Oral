@@ -381,15 +381,20 @@
         });
 
         function checkAuthentication() {
-            const isAuthenticated = sessionStorage.getItem('adminAuthenticated');
-            console.log('🔍 Checking authentication, found:', isAuthenticated);
+            // TEMPORARY: Skip authentication for immediate access
+            console.log('🔓 TEMPORARY: Skipping authentication for immediate access');
+            showAdminPanel();
 
-            if (isAuthenticated === 'true') {
-                console.log('✅ Already authenticated, showing admin panel');
-                showAdminPanel();
-            } else {
-                console.log('❌ Not authenticated, showing login');
-            }
+            // Original code (commented out):
+            // const isAuthenticated = sessionStorage.getItem('adminAuthenticated');
+            // console.log('🔍 Checking authentication, found:', isAuthenticated);
+
+            // if (isAuthenticated === 'true') {
+            //     console.log('✅ Already authenticated, showing admin panel');
+            //     showAdminPanel();
+            // } else {
+            //     console.log('❌ Not authenticated, showing login');
+            // }
         }
 
         function resetSession() {
