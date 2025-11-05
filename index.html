@@ -136,9 +136,14 @@
             <p style="font-size: 0.9rem; color: var(--muted-color); margin-top: 10px;">
               Escanear con el móvil para registrar asistencia
             </p>
-            <button id="generate-new-qr" style="margin-top: 10px; padding: 8px 16px; background: var(--secondary-color); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
-              Generar Nuevo Código
-            </button>
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 10px;">
+              <button id="generate-new-qr" style="padding: 8px 16px; background: var(--secondary-color); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+                Generar Nuevo Código
+              </button>
+              <button id="open-pdf-generator" style="padding: 8px 16px; background: #059669; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem;" onclick="window.open('attendance-pdf.html', '_blank')">
+                📄 Generar Hoja de Asistencia
+              </button>
+            </div>
           </div>
           <ul class="list">
             <li>2024/2025</li>
