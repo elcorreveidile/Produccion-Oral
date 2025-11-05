@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador de PDFs - Producción Oral</title>
+    <title>Generador Profesional de PDFs - Producción Oral</title>
     <style>
         :root {
             --primary-color: #1e40af;
@@ -28,16 +28,13 @@
             line-height: 1.6;
             color: var(--text-color);
             background: var(--bg-color);
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px;
         }
 
         /* Cabecera profesional */
         .header {
             text-align: center;
             border-bottom: 3px solid var(--primary-color);
-            padding-bottom: 20px;
+            padding: 30px 0;
             margin-bottom: 30px;
             page-break-after: avoid;
         }
@@ -46,15 +43,214 @@
             font-size: 18pt;
             font-weight: 700;
             color: var(--primary-color);
-            margin: 0;
+            margin-bottom: 8px;
             font-family: 'Arial', sans-serif;
         }
 
         .header .subtitle {
-            font-size: 11pt;
+            font-size: 12pt;
             color: var(--muted-color);
-            margin-top: 5px;
+            margin-bottom: 4px;
+        }
+
+        .header .session-title {
+            font-size: 16pt;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-top: 10px;
             font-family: 'Arial', sans-serif;
+        }
+
+        /* Información de sesión */
+        .session-info {
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--primary-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+            page-break-inside: avoid;
+        }
+
+        .session-info h2 {
+            font-size: 14pt;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .session-info p {
+            margin: 4px 0;
+            font-size: 11pt;
+        }
+
+        /* Secciones principales */
+        .section-container {
+            page-break-inside: avoid;
+            margin: 30px 0;
+        }
+
+        .section-header {
+            page-break-after: avoid;
+            margin-bottom: 20px;
+        }
+
+        .section-header h2 {
+            font-size: 16pt;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 5px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Objetivos */
+        .objectives-section {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-left: 5px solid #f59e0b;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+
+        .objectives-section h2 {
+            color: #92400e;
+            font-size: 14pt;
+            margin-bottom: 15px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Contenidos */
+        .content-section {
+            background: #e0f2fe;
+            border: 1px solid #0284c7;
+            border-left: 5px solid #0284c7;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+
+        .content-section h3 {
+            color: #075985;
+            font-size: 13pt;
+            margin: 15px 0 10px 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Actividades */
+        .activities-section {
+            background: #dcfce7;
+            border: 1px solid #16a34a;
+            border-left: 5px solid #16a34a;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+
+        .activities-section h2 {
+            color: #14532d;
+            font-size: 14pt;
+            margin-bottom: 15px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .activity {
+            background: white;
+            border: 1px solid #e5e7eb;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .activity h3 {
+            color: var(--primary-color);
+            font-size: 12pt;
+            margin-bottom: 8px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .activity .objective {
+            color: var(--muted-color);
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        /* Mini serie */
+        .mini-serie-section {
+            background: #fae8ff;
+            border: 1px solid #9333ea;
+            border-left: 5px solid #9333ea;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+
+        .mini-serie-section h2 {
+            color: #581c87;
+            font-size: 14pt;
+            margin-bottom: 15px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Diálogo */
+        .dialogue {
+            background: white;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .dialogue-line {
+            margin: 8px 0;
+        }
+
+        .dialogue-line strong {
+            color: var(--accent-color);
+        }
+
+        /* Tarea y Evaluación */
+        .task-section {
+            background: #dbeafe;
+            border: 1px solid #2563eb;
+            border-left: 5px solid #2563eb;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+            page-break-inside: avoid;
+        }
+
+        .task-section h2 {
+            color: #1e3a8a;
+            font-size: 14pt;
+            margin-bottom: 15px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .evaluation-section {
+            background: #fce7f3;
+            border: 1px solid #db2777;
+            border-left: 5px solid #db2777;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+
+        .evaluation-section h2 {
+            color: #831843;
+            font-size: 14pt;
+            margin-bottom: 15px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Listas */
+        ul {
+            margin: 8px 0;
+            padding-left: 25px;
+        }
+
+        li {
+            margin: 5px 0;
         }
 
         /* Saltos de página */
@@ -66,12 +262,48 @@
             page-break-inside: avoid;
         }
 
-        /* Estilos de impresión mejorados */
+        /* Controles (no se imprimen) */
+        .controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 1000;
+            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+        }
+
+        .controls button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .controls button:hover {
+            background: #1d4ed8;
+        }
+
+        /* Estilos de impresión */
         @media print {
+            .controls {
+                display: none;
+            }
+
             body {
                 margin: 0;
                 font-size: 11pt;
-                padding: 20px;
+            }
+
+            .header {
+                padding: 20px 0;
             }
 
             .header h1 {
@@ -79,13 +311,17 @@
             }
 
             .header .subtitle {
-                font-size: 10pt;
+                font-size: 11pt;
+            }
+
+            .section-container {
+                margin: 20px 0;
             }
 
             /* Eliminar headers y footers del navegador */
             @page {
                 size: A4;
-                margin: 1.5cm;
+                margin: 2cm;
                 @top-center {
                     content: "";
                 }
@@ -101,193 +337,33 @@
             }
         }
 
-        .controls {
-            print-color-adjust: exact;
-            -webkit-print-color-adjust: exact;
+        /* Grid para actividades */
+        .activity-grid {
+            display: grid;
+            gap: 15px;
         }
 
-        .session-info {
-            background: #f8fafc;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 4px solid #3b82f6;
-        }
-
-        .objectives {
-            background: #fef3c7;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 4px solid #f59e0b;
-        }
-
-        .objectives h2 {
-            color: #92400e;
-            margin-top: 0;
-        }
-
-        .activities {
-            background: #dcfce7;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 4px solid #16a34a;
-        }
-
-        .activities h2 {
-            color: #14532d;
-            margin-top: 0;
-        }
-
-        .mini-serie {
-            background: #fae8ff;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 4px solid #9333ea;
-        }
-
-        .mini-serie h2 {
-            color: #581c87;
-            margin-top: 0;
-        }
-
-        .task {
-            background: #dbeafe;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 4px solid #2563eb;
-        }
-
-        .task h2 {
-            color: #1e3a8a;
-            margin-top: 0;
-        }
-
-        .evaluation {
-            background: #fce7f3;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 4px solid #db2777;
-        }
-
-        .evaluation h2 {
-            color: #831843;
-            margin-top: 0;
-        }
-
-        h1 {
-            font-size: 2rem;
-            color: #111827;
-            border-bottom: 2px solid #e5e7eb;
-            padding-bottom: 10px;
-        }
-
-        h2 {
-            font-size: 1.4rem;
-            color: #374151;
-            margin: 25px 0 15px 0;
-        }
-
-        h3 {
-            font-size: 1.2rem;
-            color: #4b5563;
-            margin: 20px 0 10px 0;
-        }
-
-        ul {
-            margin: 10px 0;
-            padding-left: 25px;
-        }
-
-        li {
-            margin: 8px 0;
-        }
-
-        strong {
-            color: #111827;
-            font-weight: 600;
-        }
-
-        .dialogue {
-            background: #f3f4f6;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-            font-style: italic;
-        }
-
-        .dialogue strong {
-            color: #059669;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #e5e7eb;
-            color: #6b7280;
-            font-size: 0.9rem;
-        }
-
-        @media print {
-            body { margin: 0; padding: 20px; }
-            .no-print { display: none; }
-        }
-
-        .controls {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            z-index: 1000;
-        }
-
-        .controls button {
-            background: #3b82f6;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 5px;
-        }
-
-        .controls button:hover {
-            background: #2563eb;
+        /* Espaciado consistente */
+        .spacer {
+            height: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="controls no-print">
+    <!-- Controles (no se imprimen) -->
+    <div class="controls">
         <button onclick="window.print()">🖨️ Imprimir PDF</button>
         <button onclick="generatePDF()">📄 Generar PDF</button>
     </div>
 
-    <div class="header">
-        <h1>Producción e Interacción Oral en Español</h1>
-        <div class="subtitle">Nivel B2.1 (Avanzado Intermedio) - Universidad de Granada</div>
-        <div class="subtitle">Centro de Lenguas Modernas</div>
-    </div>
-
-    <div id="content">
-        <!-- El contenido se inyectará aquí -->
-    </div>
-
-    <div class="footer">
-        <p>© 2024-2025 Producción e Interacción Oral — Nivel 7 (B2.1)<br>
-        Profesor: Javier Benítez Láinez<br>
-        Universidad de Granada</p>
+    <!-- Contenido principal -->
+    <div id="main-content">
+        <!-- El contenido se generará dinámicamente -->
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script>
+        // Importar datos completos del generador original
         const sessionData = {
             'S1': {
                 title: 'Presentaciones y situación inicial',
@@ -1275,9 +1351,7 @@
                 ],
                 certificate: 'Todos los participantes recibirán certificado de aprovechamiento del curso Nivel B2.1'
             }
-        };
-
-        function generateSessionHTML(sessionKey) {
+        }function generateSessionHTML(sessionKey) {
             const session = sessionData[sessionKey];
             if (!session) return '';
 
@@ -1287,160 +1361,129 @@
                 day: '2-digit'
             });
 
-            let html = `
+            return `
                 <div class="header avoid-break">
                     <h1>Producción e Interacción Oral en Español</h1>
                     <div class="subtitle">Nivel B2.1 (Avanzado Intermedio) - Universidad de Granada</div>
                     <div class="subtitle">Centro de Lenguas Modernas</div>
-                    <div class="subtitle">SESIÓN ${sessionKey.substring(1)}: ${session.title}</div>
+                    <div class="session-title">SESIÓN ${sessionKey.substring(1)}: ${session.title}</div>
                     <div class="subtitle">${currentDate}</div>
                 </div>
 
                 <!-- Página 1: Información básica y objetivos -->
-                <div class="session-info avoid-break">
-                    <h2>Información de la sesión</h2>
-                    <p><strong>Fecha:</strong> ${session.date}</p>
-                    <p><strong>Horario:</strong> ${session.time}</p>
-                </div>
+                <div class="section-container">
+                    <div class="session-info avoid-break">
+                        <h2>Información de la sesión</h2>
+                        <p><strong>Fecha:</strong> ${session.date}</p>
+                        <p><strong>Horario:</strong> ${session.time}</p>
+                    </div>
 
-                <div class="objectives avoid-break">
-                    <h2>OBJETIVOS DE LA SESIÓN</h2>
-                    <ul>
-                        ${session.objectives.map(obj => `<li>${obj}</li>`).join('')}
-                    </ul>
+                    <div class="objectives-section avoid-break">
+                        <h2>OBJETIVOS DE LA SESIÓN</h2>
+                        <ul>
+                            ${session.objectives.map(obj => `<li>${obj}</li>`).join('')}
+                        </ul>
+                    </div>
                 </div>
 
                 <!-- Salto de página -->
                 <div class="page-break"></div>
 
                 <!-- Página 2: Contenidos -->
-                <h2>CONTENIDOS:</h2>
-            `;
-
-            // Añadir contenido específico según la sesión
-            if (session.content.expressions) {
-                html += `
-                    <h3>1. EXPRESIONES ÚTILES (Nivel B2.1):</h3>
-                    <ul>
-                        ${session.content.expressions.map(expr => `<li>${expr}</li>`).join('')}
-                    </ul>
-                `;
-            }
-
-            if (session.content.vocabulary) {
-                html += `
-                    <h3>2. VOCABULARIO:</h3>
-                    <ul>
-                        ${Array.isArray(session.content.vocabulary)
-                            ? session.content.vocabulary.map(vocab => `<li>${vocab}</li>`).join('')
-                            : Object.entries(session.content.vocabulary).map(([key, value]) => `<li><strong>${key}:</strong> ${value}</li>`).join('')
-                        }
-                    </ul>
-                `;
-            }
-
-            if (session.content.grammar) {
-                html += `
-                    <h3>3. ESTRUCTURAS GRAMATICALES:</h3>
-                    <ul>
-                        ${session.content.grammar.map(grammar => `<li>${grammar}</li>`).join('')}
-                    </ul>
-                `;
-            }
-
-            if (session.content.connectors) {
-                html += `
-                    <h3>3. CONECTORES DISCURSIVOS:</h3>
-                    <ul>
-                        ${session.content.connectors.map(connector => `<li>${connector}</li>`).join('')}
-                    </ul>
-                `;
-            }
-
-                      // Salto de página para actividades
-            html += `<div class="page-break"></div>`;
-
-            // Actividades
-            html += `
-                <div class="activities avoid-break">
-                    <h2>ACTIVIDADES PRÁCTICAS:</h2>
-                    ${session.activities.map((activity, index) => `
-                        <div class="avoid-break">
-                            <h3>Actividad ${index + 1}: ${activity.name}</h3>
-                            <p>${activity.description}</p>
-                            <p><strong>Objetivo:</strong> ${activity.objective}</p>
+                <div class="section-container">
+                    <div class="content-section avoid-break">
+                        <div class="section-header">
+                            <h2>CONTENIDOS</h2>
                         </div>
-                    `).join('')}
-                </div>
-            `;
 
-                      // Mini serie
-            if (session.miniSerie) {
-                html += `
-                    <div class="mini-serie avoid-break">
-                        <h2>SITUACIÓN DE HABLA PARA MINI SERIE:</h2>
-                        <h3>ESCENA: ${session.miniSerie.scene}</h3>
-                        <p><strong>Personajes:</strong></p>
+                        <h3>1. EXPRESIONES ÚTILES (Nivel B2.1)</h3>
                         <ul>
-                            ${session.miniSerie.characters.map(char => `<li>${char}</li>`).join('')}
+                            ${session.content.expressions.map(expr => `<li>${expr}</li>`).join('')}
                         </ul>
-                        <p><strong>Diálogo modelo:</strong></p>
-                        <div class="dialogue avoid-break">
-                            ${session.miniSerie.dialogue.map(line =>
-                                `<p><strong>${line.speaker}:</strong> ${line.text}</p>`
-                            ).join('')}
+
+                        <h3>2. VOCABULARIO</h3>
+                        <ul>
+                            ${session.content.vocabulary.map(vocab => `<li>${vocab}</li>`).join('')}
+                        </ul>
+
+                        <h3>3. ESTRUCTURAS GRAMATICALES</h3>
+                        <ul>
+                            ${session.content.grammar.map(grammar => `<li>${grammar}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Salto de página -->
+                <div class="page-break"></div>
+
+                <!-- Página 3: Actividades y mini serie -->
+                <div class="section-container">
+                    <div class="activities-section avoid-break">
+                        <h2>ACTIVIDADES PRÁCTICAS</h2>
+                        <div class="activity-grid">
+                            ${session.activities.map((activity, index) => `
+                                <div class="activity avoid-break">
+                                    <h3>Actividad ${index + 1}: ${activity.name}</h3>
+                                    <p>${activity.description}</p>
+                                    <p class="objective"><strong>Objetivo:</strong> ${activity.objective}</p>
+                                </div>
+                            `).join('')}
                         </div>
                     </div>
-                `;
-            }
 
-            // Salto de página para tarea y evaluación
-            html += `<div class="page-break"></div>`;
+                    ${session.miniSerie ? `
+                        <div class="mini-serie-section avoid-break">
+                            <h2>SITUACIÓN DE HABLA PARA MINI SERIE</h2>
+                            <h3>ESCENA: ${session.miniSerie.scene}</h3>
+                            <p><strong>Personajes:</strong></p>
+                            <ul>
+                                ${session.miniSerie.characters.map(char => `<li>${char}</li>`).join('')}
+                            </ul>
+                            <p><strong>Diálogo modelo:</strong></p>
+                            <div class="dialogue avoid-break">
+                                ${session.miniSerie.dialogue.map(line =>
+                                    `<div class="dialogue-line"><strong>${line.speaker}:</strong> ${line.text}</div>`
+                                ).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+                </div>
 
-            // Tarea
-            if (session.task) {
-                html += `
-                    <div class="task avoid-break">
-                        <h2>TAREA PARA PRÓXIMA SESIÓN:</h2>
+                <!-- Salto de página -->
+                <div class="page-break"></div>
+
+                <!-- Página 4: Tarea y evaluación -->
+                <div class="section-container">
+                    <div class="task-section avoid-break">
+                        <h2>TAREA PARA PRÓXIMA SESIÓN</h2>
                         <ul>
                             ${session.task.map(task => `<li>${task}</li>`).join('')}
                         </ul>
                     </div>
-                `;
-            }
 
-            // Evaluación
-            if (session.evaluation) {
-                html += `
-                    <div class="evaluation avoid-break">
-                        <h2>EVALUACIÓN FORMATIVA:</h2>
+                    <div class="evaluation-section avoid-break">
+                        <h2>EVALUACIÓN FORMATIVA</h2>
                         <ul>
                             ${session.evaluation.map(eval => `<li>${eval}</li>`).join('')}
                         </ul>
                     </div>
-                `;
-            }
+                </div>
 
-            // Vocabulario específico de Granada (S3)
-            if (session.granadaVocabulary) {
-                html += `
-                    <h3>VOCABULARIO ESPECÍFICO GRANADA:</h3>
-                    <ul>
-                        ${session.granadaVocabulary.map(vocab => `<li>${vocab}</li>`).join('')}
-                    </ul>
-                `;
-            }
-
-            return html;
+                <div class="footer" style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-color); color: var(--muted-color); font-size: 10pt;">
+                    <p>© 2024-2025 Universidad de Granada - Centro de Lenguas Modernas</p>
+                    <p>Producción e Interacción Oral — Nivel B2.1</p>
+                    <p>Profesor: Javier Benítez Láinez</p>
+                </div>
+            `;
         }
 
         function loadSession(sessionKey) {
-            const content = document.getElementById('content');
+            const content = document.getElementById('main-content');
             content.innerHTML = generateSessionHTML(sessionKey);
         }
 
         function generatePDF() {
-            const element = document.body;
+            const element = document.getElementById('main-content');
             const opt = {
                 margin: [10, 10, 10, 10],
                 filename: `sesion_${getUrlParameter('session') || 'S1'}.pdf`,
@@ -1464,6 +1507,7 @@
                     avoid: '.avoid-break'
                 }
             };
+
             html2pdf().set(opt).from(element).save();
         }
 
@@ -1472,10 +1516,15 @@
             return urlParams.get(name);
         }
 
-        // Cargar sesión automáticamente según el parámetro URL
+        // Cargar sesión automáticamente
         document.addEventListener('DOMContentLoaded', () => {
             const session = getUrlParameter('session') || 'S1';
             loadSession(session);
+        });
+
+        // Configurar impresión para eliminar headers
+        window.addEventListener('beforeprint', () => {
+            document.title = `Producción Oral B2.1 - Sesión ${getUrlParameter('session') || 'S1'}`;
         });
     </script>
 </body>
