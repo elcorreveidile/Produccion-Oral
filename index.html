@@ -121,6 +121,7 @@
   <!-- SECCIÓN 1: GUÍA -->
   <section class="section" id="s1">
     <div class="container">
+      <div id="current-date" style="text-align: center; font-size: 1.2rem; font-weight: 600; color: var(--primary-color); margin-bottom: 1rem;"></div>
       <h2>📘 Guía del curso</h2>
       <div class="grid grid-3">
         <div class="card">
@@ -563,6 +564,26 @@
       a.click();
       document.body.removeChild(a);
     }
+
+    // Mostrar fecha actual
+    function updateCurrentDate() {
+      const dateElement = document.getElementById('current-date');
+      if (dateElement) {
+        const today = new Date();
+        const days = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+        const months = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+
+        const dayName = days[today.getDay()];
+        const day = today.getDate();
+        const monthName = months[today.getMonth()];
+        const year = today.getFullYear();
+
+        dateElement.textContent = `Hoy es ${dayName}, ${day} de ${monthName} de ${year}`;
+      }
+    }
+
+    // Actualizar fecha cuando se carga la página
+    updateCurrentDate();
 
     renderGuiasS1();
   </script>
