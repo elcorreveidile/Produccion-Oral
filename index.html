@@ -71,7 +71,15 @@
     .viewer .top .spacer{flex:1}
     .viewer .btn{border-color:#334155;background:#fff;color:#0f172a;font-weight:600;padding:.45rem .8rem;border-radius:.65rem;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem}
     .viewer iframe{flex:1;border:0;border-bottom-left-radius:1rem;border-bottom-right-radius:1rem;background:#fff}
-    @media (max-width:640px){ .viewer{inset:4% 2%} .viewer .btn{flex:1;justify-content:center;min-width:120px} #fileName{flex-basis:100%;font-size:1rem} }
+    .viewer .content{flex:1;border-bottom-left-radius:1rem;border-bottom-right-radius:1rem;background:#fff;padding:2rem;overflow-y:auto;font-family:Georgia, serif;line-height:1.6;color:#1f2937}
+    .viewer .content pre{white-space:pre-wrap;font-family:inherit;margin:0}
+    .viewer .content h1{font-size:1.8rem;color:#111827;margin-bottom:1rem;border-bottom:2px solid #e5e7eb;padding-bottom:0.5rem}
+    .viewer .content h2{font-size:1.4rem;color:#374151;margin-top:1.5rem;margin-bottom:0.75rem}
+    .viewer .content h3{font-size:1.2rem;color:#4b5563;margin-top:1rem;margin-bottom:0.5rem}
+    .viewer .content ul{margin:0.5rem 0;padding-left:1.5rem}
+    .viewer .content li{margin:0.3rem 0}
+    .viewer .content strong{color:#111827}
+    @media (max-width:640px){ .viewer{inset:4% 2%} .viewer .btn{flex:1;justify-content:center;min-width:120px} #fileName{flex-basis:100%;font-size:1rem} .viewer .content{padding:1rem} }
   </style>
 </head>
 <body>
@@ -335,7 +343,7 @@
 
   <footer class="footer"><div class="container">© <span id="y"></span> Producción e Interacción Oral — Nivel 7 (B2.1) · Sitio simple (HTML+CSS+JS)</div></footer>
 
-  <!-- Visor PDF -->
+  <!-- Visor de Documentos -->
   <div class="overlay" id="overlay"></div>
   <div class="viewer" id="viewer">
     <div class="top">
@@ -345,7 +353,8 @@
       <a class="btn" id="download" download>Descargar</a>
       <button class="btn primary" id="closeViewer">Volver</button>
     </div>
-    <iframe id="frame" title="Visor PDF" src="about:blank"></iframe>
+    <iframe id="frame" title="Visor PDF" src="about:blank" style="display:none;"></iframe>
+    <div id="textcontent" class="content" style="display:none;"></div>
   </div>
 
   <script>
@@ -358,50 +367,108 @@
     hamb?.addEventListener('click', ()=> nav.classList.toggle('open'));
     document.querySelectorAll('#mobilePanel a').forEach(a=> a.addEventListener('click', ()=> nav.classList.remove('open')));
 
-    // Visor PDF
+    // Visor de Documentos
     const overlay = document.getElementById('overlay');
     const viewer = document.getElementById('viewer');
     const frame = document.getElementById('frame');
+    const textcontent = document.getElementById('textcontent');
     const openTab = document.getElementById('openTab');
     const download = document.getElementById('download');
     const fileName = document.getElementById('fileName');
     const closeViewer = document.getElementById('closeViewer');
 
-    function openPDF(path){
-      fileName.textContent = decodeURIComponent(path.split('/').pop());
-      frame.src = path; openTab.href = path; download.href = path;
-      overlay.classList.add('show'); viewer.style.display = 'flex';
-      document.body.style.overflow='hidden';
-    }
-    function closePDF(){
-      overlay.classList.remove('show'); viewer.style.display = 'none';
-      frame.src = 'about:blank'; document.body.style.overflow='';
-    }
-    overlay.addEventListener('click', closePDF);
-    closeViewer.addEventListener('click', closePDF);
+    function formatTextContent(text) {
+      // Convertir texto plano a HTML con formato
+      let formatted = text
+        .replace(/\n\n+/g, '</p><p>')
+        .replace(/^\S+/m, '<p>')
+        .replace(/([A-Z][A-ZÁ-Ú\s]+:)/g, '<strong>$1</strong>')
+        .replace(/SESIÓN (\d+):/g, '<h1>SESIÓN $1:')
+        .replace(/(\d+\.\s[^:]+:)/g, '<h2>$1</h2>')
+        .replace(/^•\s(.+)$/gm, '<li>$1</li>')
+        .replace(/^- (.+)$/gm, '<li>$1</li>');
 
-    // Delegación: cualquier [data-pdf] abre visor
+      // Envolver listas
+      formatted = formatted.replace(/(<li>.*?<\/li>)/gs, '<ul>$1</ul>');
+      formatted += '</p>';
+
+      return formatted;
+    }
+
+    async function openDocument(path){
+      fileName.textContent = decodeURIComponent(path.split('/').pop());
+      const extension = path.split('.').pop().toLowerCase();
+
+      openTab.href = path;
+      download.href = path;
+      overlay.classList.add('show');
+      viewer.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+
+      if (extension === 'pdf') {
+        // Mostrar PDF en iframe
+        frame.style.display = 'block';
+        textcontent.style.display = 'none';
+        frame.src = path;
+      } else if (extension === 'txt' || extension === 'rtf') {
+        // Mostrar texto con formato
+        frame.style.display = 'none';
+        textcontent.style.display = 'block';
+
+        try {
+          const response = await fetch(path);
+          if (!response.ok) throw new Error('No se pudo cargar el archivo');
+
+          let text = await response.text();
+
+          // Si es RTF, eliminar código RTF básico
+          if (extension === 'rtf') {
+            text = text.replace(/\\[^a-zA-Z]+\d*/g, '')
+                      .replace(/\{[^}]*\}/g, '')
+                      .replace(/\\par/g, '\n')
+                      .replace(/\\tab/g, '  ')
+                      .replace(/\\'d[0-9a-fA-F]{2}/g, '')
+                      .replace(/\\[a-zA-Z]+\s*/g, '');
+          }
+
+          textcontent.innerHTML = formatTextContent(text);
+        } catch (error) {
+          textcontent.innerHTML = `<p>Error al cargar el documento: ${error.message}</p>`;
+        }
+      } else {
+        // Para otros tipos, abrir en nueva pestaña
+        window.open(path, '_blank');
+        closeDocument();
+      }
+    }
+
+    function closeDocument(){
+      overlay.classList.remove('show');
+      viewer.style.display = 'none';
+      frame.src = 'about:blank';
+      textcontent.innerHTML = '';
+      document.body.style.overflow = '';
+    }
+
+    overlay.addEventListener('click', closeDocument);
+    closeViewer.addEventListener('click', closeDocument);
+
+    // Delegación: cualquier [data-pdf] o [data-doc] abre visor
     document.addEventListener('click', (e)=>{
-      const target = e.target.closest('[data-pdf]');
-      if(target){ e.preventDefault(); openPDF(target.getAttribute('data-pdf')); }
+      const target = e.target.closest('[data-pdf], [data-doc]');
+      if(target){
+        e.preventDefault();
+        const path = target.getAttribute('data-pdf') || target.getAttribute('data-doc');
+        openDocument(path);
+      }
     });
 
     // ===== GUÍAS POR SESIÓN (SECCIÓN 1) =====
     // Sube PDFs a materials/cuadernos/ con estos nombres o cámbialos aquí
     const GUIAS_S1 = [
-      { t: 'Sesión 1 · Presentaciones y situación inicial', href: 'materials/cuadernos/S1_Presentaciones_Inicial.rtf' },
-      { t: 'Sesión 2 · Debate: ¿Mudarse a España?', href: 'materials/cuadernos/S2_Debate_Mudarse.rtf' },
-      { t: 'Sesión 3 · Situación: Buscar piso en Granada', href: 'materials/cuadernos/S3_Buscar_Piso.rtf' },
-      { t: 'Sesión 4 · Debate: Cultura de tapas vs. comida rápida', href: 'materials/cuadernos/S4_Debate_Tapas.pdf' },
-      { t: 'Sesión 5 · Situación: En el mercado municipal', href: 'materials/cuadernos/S5_Mercado.pdf' },
-      { t: 'Sesión 6 · Debate: ¿Estudiar o trabajar en el extranjero?', href: 'materials/cuadernos/S6_Debate_Estudiar_Trabajar.pdf' },
-      { t: 'Sesión 7 · Situación: Problemas con el vecindario', href: 'materials/cuadernos/S7_Vecinos.pdf' },
-      { t: 'Sesión 8 · Debate: Tradición vs. modernidad en España', href: 'materials/cuadernos/S8_Debate_Tradicion.pdf' },
-      { t: 'Sesión 9 · Situación: Preparar una cena española', href: 'materials/cuadernos/S9_Cena_Espanola.pdf' },
-      { t: 'Sesión 10 · Debate: Turismo sostenible en Granada', href: 'materials/cuadernos/S10_Debate_Turismo.pdf' },
-      { t: 'Sesión 11 · Situación: Emergencia médica', href: 'materials/cuadernos/S11_Emergencia_Medica.pdf' },
-      { t: 'Sesión 12 · Debate: Redes sociales y relaciones', href: 'materials/cuadernos/S12_Debate_Redes_Sociales.pdf' },
-      { t: 'Sesión 13 · Presentación final: Proyecto mini serie', href: 'materials/cuadernos/S13_Presentacion_Final.pdf' },
+      { t: 'Sesión 1 · Presentaciones y situación inicial', href: 'materials/cuadernos/S1_Produccion_Oral.pdf', type: 'pdf' },
+      { t: 'Sesión 2 · Debate: ¿Mudarse a España?', href: 'materials/cuadernos/S2_Produccion_Oral.pdf', type: 'pdf' },
+      { t: 'Sesión 3 · Situación: Buscar piso en Granada', href: 'materials/cuadernos/S3_Produccion_Oral.pdf', type: 'pdf' },
     ];
 
     function renderGuiasS1(){
@@ -414,12 +481,32 @@
         span.onclick = ()=>{
           document.querySelectorAll('#chips-s1 .chip').forEach(c=>c.classList.remove('active'));
           span.classList.add('active');
-          list.innerHTML = `<li><button class="btn primary" data-pdf="${s.href}">⬇️ Abrir/descargar (${s.t})</button></li>`;
+
+          // Determinar el tipo de archivo y mostrar opciones correspondientes
+          const isPDF = s.type === 'pdf' || s.href.endsWith('.pdf');
+          const fileIcon = isPDF ? '📄' : '📝';
+          const dataAttr = isPDF ? 'data-pdf' : 'data-doc';
+
+          list.innerHTML = `
+            <li><button class="btn primary" ${dataAttr}="${s.href}">${fileIcon} Ver en navegador (${s.t})</button></li>
+            <li><button class="btn" onclick="window.open('${s.href}', '_blank')">🔗 Abrir en nueva pestaña</button></li>
+            <li><button class="btn" onclick="downloadFile('${s.href}', '${s.t}.pdf')">💾 Descargar directamente</button></li>
+          `;
         };
         chips.appendChild(span);
       });
       if(GUIAS_S1[0]) setTimeout(()=> chips.querySelector('.chip')?.click(), 0);
       else list.innerHTML = '<li class="muted">No hay guías subidas todavía.</li>';
+    }
+
+    // Función para descargar archivos directamente
+    function downloadFile(url, filename) {
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     }
 
     renderGuiasS1();

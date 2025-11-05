@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de PDFs - Producción Oral</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #1f2937;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #e5e7eb;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #111827;
+            font-size: 2.5rem;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .header .subtitle {
+            color: #6b7280;
+            font-size: 1.1rem;
+            margin-top: 5px;
+        }
+
+        .session-info {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .objectives {
+            background: #fef3c7;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .objectives h2 {
+            color: #92400e;
+            margin-top: 0;
+        }
+
+        .activities {
+            background: #dcfce7;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 4px solid #16a34a;
+        }
+
+        .activities h2 {
+            color: #14532d;
+            margin-top: 0;
+        }
+
+        .mini-serie {
+            background: #fae8ff;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 4px solid #9333ea;
+        }
+
+        .mini-serie h2 {
+            color: #581c87;
+            margin-top: 0;
+        }
+
+        .task {
+            background: #dbeafe;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 4px solid #2563eb;
+        }
+
+        .task h2 {
+            color: #1e3a8a;
+            margin-top: 0;
+        }
+
+        .evaluation {
+            background: #fce7f3;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 4px solid #db2777;
+        }
+
+        .evaluation h2 {
+            color: #831843;
+            margin-top: 0;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #111827;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            color: #374151;
+            margin: 25px 0 15px 0;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            color: #4b5563;
+            margin: 20px 0 10px 0;
+        }
+
+        ul {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        strong {
+            color: #111827;
+            font-weight: 600;
+        }
+
+        .dialogue {
+            background: #f3f4f6;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+
+        .dialogue strong {
+            color: #059669;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        @media print {
+            body { margin: 0; padding: 20px; }
+            .no-print { display: none; }
+        }
+
+        .controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .controls button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .controls button:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls no-print">
+        <button onclick="window.print()">🖨️ Imprimir PDF</button>
+        <button onclick="generatePDF()">📄 Generar PDF</button>
+    </div>
+
+    <div class="header">
+        <h1>Producción e Interacción Oral en Español</h1>
+        <div class="subtitle">Nivel 7 (B2.1) - Centro de Lenguas Modernas</div>
+    </div>
+
+    <div id="content">
+        <!-- El contenido se inyectará aquí -->
+    </div>
+
+    <div class="footer">
+        <p>© 2024-2025 Producción e Interacción Oral — Nivel 7 (B2.1)<br>
+        Profesor: Javier Benítez Láinez<br>
+        Universidad de Granada</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        const sessionData = {
+            'S1': {
+                title: 'Presentaciones y situación inicial',
+                date: 'Miércoles 6/11/2024',
+                time: '08:30 - 10:30',
+                objectives: [
+                    'Presentarse y presentar a compañeros usando estructuras variadas',
+                    'Establecer el nivel B2.1 como referencia',
+                    'Introducir el proyecto de mini serie "Para mudarse a España"',
+                    'Evaluar necesidades individuales de los estudiantes'
+                ],
+                content: {
+                    expressions: [
+                        '"Me llamo... y soy de..."',
+                        '"Vengo de... pero vivo en..."',
+                        '"Estoy estudiando/trabajando en..."',
+                        '"Lo que más me gusta de España es..."',
+                        '"Mi objetivo con este curso es..."'
+                    ],
+                    vocabulary: [
+                        'Nacionalidades y países',
+                        'Profesiones y estudios',
+                        'Aficiones e intereses',
+                        'Características personales'
+                    ],
+                    grammar: [
+                        'Uso de ser/estar en presentaciones',
+                        'Pretérito perfecto vs. indefinido',
+                        'Comparativos y superlativos',
+                        'Expresiones de frecuencia'
+                    ]
+                },
+                activities: [
+                    {
+                        name: '"Presentaciones en círculo" (20 minutos)',
+                        description: 'Cada estudiante se presenta usando 3 frases diferentes',
+                        objective: 'Fluidez y espontaneidad'
+                    },
+                    {
+                        name: '"Entrevista por parejas" (25 minutos)',
+                        description: 'En parejas, se entrevistan mutuamente',
+                        objective: 'Práctica de preguntas y respuestas'
+                    },
+                    {
+                        name: '"Mi personaje para la mini serie" (30 minutos)',
+                        description: 'Brainstorming individual: ¿Quién sería yo en "Para mudarse a España"?',
+                        objective: 'Introducción al proyecto final'
+                    }
+                ],
+                miniSerie: {
+                    scene: '"La llegada al aeropuerto"',
+                    characters: [
+                        'El estudiante extranjero (protagonista)',
+                        'El compañero de piso español',
+                        'El agente de inmobiliaria',
+                        'El dueño del bar de tapas'
+                    ],
+                    dialogue: [
+                        { speaker: 'A', text: '"¡Hola! ¿Eres [nombre]? Soy [nombre], tu compañero de piso."' },
+                        { speaker: 'B', text: '"¡Sí, por fin! El vuelvo tuvo un retraso terrible. ¿Cómo está el piso?"' },
+                        { speaker: 'A', text: '"Perfecto. Te va a encantar. Está en el centro, cerca de todo."' },
+                        { speaker: 'B', text: '"¿Y los vecinos? ¿son amables?"' },
+                        { speaker: 'A', text: '"Súper amables. Ayer mismo la vecina del 3º me invitó a unas tapas..."' }
+                    ]
+                },
+                task: [
+                    'Preparar una presentación de 2 minutos sobre "Mi experiencia en España"',
+                    'Grabar un audio de 1 minuto presentándose como personaje de la mini serie',
+                    'Investigar 3 expresiones coloquiales granadinas'
+                ],
+                evaluation: [
+                    'Participación activa en todas las actividades',
+                    'Uso adecuado de estructuras B2.1',
+                    'Fluidez en presentaciones espontáneas',
+                    'Creatividad en el desarrollo del personaje'
+                ]
+            },
+            'S2': {
+                title: 'Debate: ¿Mudarse a España?',
+                date: 'Lunes 11/11/2024',
+                time: '08:30 - 10:30',
+                objectives: [
+                    'Practicar estructuras para expresar opiniones y argumentos',
+                    'Desarrollar vocabulario relacionado con ventajas/desventajas',
+                    'Introducir conectores discursivos para debates',
+                    'Crear material para el capítulo 1 de la mini serie'
+                ],
+                content: {
+                    expressions: [
+                        '"Desde mi punto de vista..."',
+                        '"Me parece que..."',
+                        '"En mi opinión..."',
+                        '"Creo que..."',
+                        '"Estoy convencido/a de que..."'
+                    ],
+                    vocabulary: [
+                        'Ventajas: oportunidad, experiencia, crecimiento, enriquecimiento',
+                        'Desventajas: dificultad, adaptación, nostalgia, barreras',
+                        'Aspectos culturales: costumbres, tradiciones, gastronomía',
+                        'Aspectos prácticos: vivienda, trabajo, documentos, idioma'
+                    ],
+                    connectors: [
+                        'Para añadir: además, también, es más',
+                        'Para contrastar: sin embargo, no obstante, por otro lado',
+                        'Para concluir: en conclusión, finalmente, en resumen'
+                    ]
+                },
+                activities: [
+                    {
+                        name: '"Torbellino de ideas" (15 minutos)',
+                        description: 'En grupos de 4, escribir ventajas de mudarse a España',
+                        objective: 'Activar vocabulario y estructuras'
+                    },
+                    {
+                        name: '"Debate estructurado" (40 minutos)',
+                        description: 'Dividir la clase en dos grupos: A favor y en contra',
+                        objective: 'Práctica de conectores y expresiones de opinión'
+                    },
+                    {
+                        name: '"Mini-debates por parejas" (25 minutos)',
+                        description: 'Temas específicos: trabajo, estudios, vida social, costumbres',
+                        objective: 'Práctica espontánea y fluidez'
+                    }
+                ],
+                miniSerie: {
+                    scene: '"La decisión de mudarse"',
+                    characters: [
+                        'Protagonista (decidiendo mudarse)',
+                        'Amigo/a en país de origen (en contra)',
+                        'Amigo/a español (a favor)',
+                        'Familiar (neutral/preocupado)'
+                    ],
+                    dialogue: [
+                        { speaker: 'Amigo origen', text: '"¿Estás seguro/a? Es un cambio muy grande."' },
+                        { speaker: 'Protagonista', text: '"Sé que es difícil, pero es una oportunidad única."' },
+                        { speaker: 'Amigo español', text: '"España es increíble. La gente es muy acogedora."' },
+                        { speaker: 'Amigo origen', text: '"Pero ¿y el idioma? ¿y la cultura?"' },
+                        { speaker: 'Protagonista', text: '"Por eso quiero ir, para aprender y crecer."' }
+                    ]
+                },
+                task: [
+                    'Escribir un párrafo argumentando tu posición personal sobre mudarse a España',
+                    'Preparar 3 preguntas para una entrevista sobre experiencias de extranjeros en España',
+                    'Investigar sobre el proceso de búsqueda de vivienda en Granada'
+                ],
+                evaluation: [
+                    'Uso adecuado de expresiones de opinión',
+                    'Empleo correcto de conectores discursivos',
+                    'Fluidez en la argumentación',
+                    'Capacidad de escuchar y responder a argumentos contrarios'
+                ]
+            },
+            'S3': {
+                title: 'Situación: Buscar piso en Granada',
+                date: 'Miércoles 13/11/2024',
+                time: '08:30 - 10:30',
+                objectives: [
+                    'Practicar vocabulario relacionado con vivienda y alquiler',
+                    'Desarrollar habilidades para negociar y preguntar',
+                    'Simular situaciones reales de búsqueda de piso',
+                    'Crear escenas para la mini serie'
+                ],
+                content: {
+                    vocabulary: [
+                        'Tipos: piso, apartamento, estudio, ático, bajo',
+                        'Habitaciones: salón, dormitorio, cocina, baño, balcón, terraza',
+                        'Muebles: sofá, cama, mesa, sillas, armario, estantería',
+                        'Servicios: calefacción, aire acondicionado, internet, ascensor'
+                    ],
+                    expressions: [
+                        '"¿Cuánto es el alquiler?"',
+                        '"¿Qué gastos incluye?"',
+                        '"¿Está amueblado?"',
+                        '"¿Hay depósito?"',
+                        '"¿Cuándo puedo visitarla?"'
+                    ],
+                    grammar: [
+                        'Condicional para preguntas educadas: "¿Podría visitar...?"',
+                        'Comparativos: "más grande que", "menos caro que"',
+                        'Expresiones de necesidad: "necesito", "busco", "prefiero"'
+                    ]
+                },
+                activities: [
+                    {
+                        name: '"Vocabulario visual" (20 minutos)',
+                        description: 'Presentación de imágenes de diferentes tipos de viviendas',
+                        objective: 'Asegurar dominio del vocabulario básico'
+                    },
+                    {
+                        name: '"Llamadas telefónicas" (30 minutos)',
+                        description: 'Por parejas: uno es el casero/a, otro el inquilino/a',
+                        objective: 'Práctica de expresiones telefónicas y preguntas'
+                    },
+                    {
+                        name: '"Visita al piso" (35 minutos)',
+                        description: 'En grupos de 3: casero/a, inquilino/a, amigo/a',
+                        objective: 'Integración de todas las habilidades'
+                    }
+                ],
+                miniSerie: {
+                    scene: '"La primera visita al piso"',
+                    characters: [
+                        'Protagonista (buscando piso)',
+                        'Casero/a español/a',
+                        'Compañero/a de piso potencial',
+                        'Agente inmobiliario/a'
+                    ],
+                    dialogue: [
+                        { speaker: 'Casero', text: '"Este es el piso. Como puede ver, está muy bien ubicado."' },
+                        { speaker: 'Protagonista', text: '"Me encanta la luz. ¿Cuánto es el alquiler?"' },
+                        { speaker: 'Casero', text: '"Son 600 euros, más gastos. ¿Dónde trabaja?"' },
+                        { speaker: 'Protagonista', text: '"En la universidad. ¿Está bien comunicado?"' },
+                        { speaker: 'Casero', text: '"Perfecto. Hay autobús cada 10 minutos."' }
+                    ]
+                },
+                task: [
+                    'Preparar un anuncio de piso (real o imaginario)',
+                    'Investigar precios de alquiler en diferentes zonas de Granada',
+                    'Grabar un audio de 2 minutos describiendo tu piso ideal',
+                    'Preparar 5 preguntas para un casero/a'
+                ],
+                evaluation: [
+                    'Uso correcto del vocabulario de vivienda',
+                    'Fluidez en simulaciones de llamadas',
+                    'Capacidad de negociación',
+                    'Claridad en la descripción de espacios'
+                ],
+                granadaVocabulary: [
+                    '"Piso céntrico": en el centro',
+                    '"Cerca de la facultad": bien ubicado para estudiantes',
+                    '"Barrio tranquilo": zona residencial',
+                    '"Bien comunicado": con buen transporte público',
+                    '"Primera planta": piso bajo (fácil acceso)'
+                ]
+            }
+        };
+
+        function generateSessionHTML(sessionKey) {
+            const session = sessionData[sessionKey];
+            if (!session) return '';
+
+            let html = `
+                <div class="session-info">
+                    <h1>SESIÓN ${sessionKey.substring(1)}: ${session.title}</h1>
+                    <p><strong>Fecha:</strong> ${session.date}</p>
+                    <p><strong>Horario:</strong> ${session.time}</p>
+                </div>
+
+                <div class="objectives">
+                    <h2>OBJETIVOS DE LA SESIÓN:</h2>
+                    <ul>
+                        ${session.objectives.map(obj => `<li>${obj}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <h2>CONTENIDOS:</h2>
+            `;
+
+            // Añadir contenido específico según la sesión
+            if (session.content.expressions) {
+                html += `
+                    <h3>1. EXPRESIONES ÚTILES (Nivel B2.1):</h3>
+                    <ul>
+                        ${session.content.expressions.map(expr => `<li>${expr}</li>`).join('')}
+                    </ul>
+                `;
+            }
+
+            if (session.content.vocabulary) {
+                html += `
+                    <h3>2. VOCABULARIO:</h3>
+                    <ul>
+                        ${Array.isArray(session.content.vocabulary)
+                            ? session.content.vocabulary.map(vocab => `<li>${vocab}</li>`).join('')
+                            : Object.entries(session.content.vocabulary).map(([key, value]) => `<li><strong>${key}:</strong> ${value}</li>`).join('')
+                        }
+                    </ul>
+                `;
+            }
+
+            if (session.content.grammar) {
+                html += `
+                    <h3>3. ESTRUCTURAS GRAMATICALES:</h3>
+                    <ul>
+                        ${session.content.grammar.map(grammar => `<li>${grammar}</li>`).join('')}
+                    </ul>
+                `;
+            }
+
+            if (session.content.connectors) {
+                html += `
+                    <h3>3. CONECTORES DISCURSIVOS:</h3>
+                    <ul>
+                        ${session.content.connectors.map(connector => `<li>${connector}</li>`).join('')}
+                    </ul>
+                `;
+            }
+
+            // Actividades
+            html += `
+                <div class="activities">
+                    <h2>ACTIVIDADES PRÁCTICAS:</h2>
+                    ${session.activities.map((activity, index) => `
+                        <h3>Actividad ${index + 1}: ${activity.name}</h3>
+                        <p>${activity.description}</p>
+                        <p><strong>Objetivo:</strong> ${activity.objective}</p>
+                    `).join('')}
+                </div>
+            `;
+
+            // Mini serie
+            if (session.miniSerie) {
+                html += `
+                    <div class="mini-serie">
+                        <h2>SITUACIÓN DE HABLA PARA MINI SERIE:</h2>
+                        <h3>ESCENA: ${session.miniSerie.scene}</h3>
+                        <p><strong>Personajes:</strong></p>
+                        <ul>
+                            ${session.miniSerie.characters.map(char => `<li>${char}</li>`).join('')}
+                        </ul>
+                        <p><strong>Diálogo modelo:</strong></p>
+                        <div class="dialogue">
+                            ${session.miniSerie.dialogue.map(line =>
+                                `<p><strong>${line.speaker}:</strong> ${line.text}</p>`
+                            ).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Tarea
+            if (session.task) {
+                html += `
+                    <div class="task">
+                        <h2>TAREA PARA PRÓXIMA SESIÓN:</h2>
+                        <ul>
+                            ${session.task.map(task => `<li>${task}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            // Evaluación
+            if (session.evaluation) {
+                html += `
+                    <div class="evaluation">
+                        <h2>EVALUACIÓN FORMATIVA:</h2>
+                        <ul>
+                            ${session.evaluation.map(eval => `<li>${eval}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            // Vocabulario específico de Granada (S3)
+            if (session.granadaVocabulary) {
+                html += `
+                    <h3>VOCABULARIO ESPECÍFICO GRANADA:</h3>
+                    <ul>
+                        ${session.granadaVocabulary.map(vocab => `<li>${vocab}</li>`).join('')}
+                    </ul>
+                `;
+            }
+
+            return html;
+        }
+
+        function loadSession(sessionKey) {
+            const content = document.getElementById('content');
+            content.innerHTML = generateSessionHTML(sessionKey);
+        }
+
+        function generatePDF() {
+            const element = document.body;
+            const opt = {
+                margin: [10, 10, 10, 10],
+                filename: `sesion_${getUrlParameter('session') || 'S1'}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
+        }
+
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Cargar sesión automáticamente según el parámetro URL
+        document.addEventListener('DOMContentLoaded', () => {
+            const session = getUrlParameter('session') || 'S1';
+            loadSession(session);
+        });
+    </script>
+</body>
+</html>
