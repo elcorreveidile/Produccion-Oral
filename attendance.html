@@ -466,11 +466,22 @@
         }
 
         async function saveAttendanceRecord(record) {
+            console.log('Saving attendance record:', record);
+
             // In production, save to your backend
             // For now, save to localStorage as backup
             const existingRecords = JSON.parse(localStorage.getItem('attendanceRecords') || '[]');
+            console.log('Existing records before save:', existingRecords);
+
             existingRecords.push(record);
+            console.log('Records after adding new:', existingRecords);
+
             localStorage.setItem('attendanceRecords', JSON.stringify(existingRecords));
+            console.log('Saved to localStorage successfully');
+
+            // Verify it was saved
+            const verification = localStorage.getItem('attendanceRecords');
+            console.log('Verification - stored data:', verification);
 
             // Also try to save to JSONBin (if configured)
             if (JSONBIN_KEY !== 'YOUR_JSONBIN_API_KEY') {

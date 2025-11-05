@@ -326,6 +326,7 @@
                     <button class="btn btn-success" onclick="window.open('attendance-pdf.html', '_blank')">📄 Generar PDF</button>
                     <button class="btn btn-primary" onclick="window.open('email-sender.html', '_blank')">📧 Enviar IDs por Email</button>
                     <button class="btn btn-secondary" onclick="refreshData()">🔄 Actualizar</button>
+                    <button class="btn btn-warning" onclick="debugLocalStorage()">🐛 Debug LocalStorage</button>
                 </div>
             </div>
 
@@ -402,15 +403,18 @@
             // Load from localStorage (same key as attendance.html)
             const stored = localStorage.getItem('attendanceRecords');
             console.log('Loading attendance records, found:', stored ? JSON.parse(stored).length : 0, 'records');
+            console.log('Raw localStorage data:', stored);
 
             if (stored) {
                 try {
                     attendanceRecords = JSON.parse(stored);
+                    console.log('Parsed attendance records:', attendanceRecords);
                 } catch (err) {
                     console.error('Error parsing attendance records:', err);
                     attendanceRecords = [];
                 }
             } else {
+                console.log('No attendance records found in localStorage');
                 attendanceRecords = [];
             }
 
@@ -567,6 +571,50 @@
             displayRecords();
         }
 
+        function debugLocalStorage() {
+            console.log('=== DEBUGGING LOCAL STORAGE ===');
+
+            // Check all localStorage keys
+            const allKeys = Object.keys(localStorage);
+            console.log('All localStorage keys:', allKeys);
+
+            // Check attendanceRecords specifically
+            const attendanceData = localStorage.getItem('attendanceRecords');
+            console.log('attendanceRecords raw:', attendanceData);
+
+            if (attendanceData) {
+                try {
+                    const parsed = JSON.parse(attendanceData);
+                    console.log('attendanceRecords parsed:', parsed);
+                    console.log('Number of records:', parsed.length);
+
+                    parsed.forEach((record, index) => {
+                        console.log(`Record ${index}:`, {
+                            studentName: record.studentName,
+                            studentId: record.studentId,
+                            timestamp: record.timestamp,
+                            session: record.session
+                        });
+                    });
+                } catch (e) {
+                    console.error('Error parsing attendanceRecords:', e);
+                }
+            } else {
+                console.log('No attendanceRecords found');
+            }
+
+            // Check other keys
+            const otherKeys = ['lastAttendanceRecord', 'adminNotification', 'attendanceUpdate'];
+            otherKeys.forEach(key => {
+                const value = localStorage.getItem(key);
+                if (value) {
+                    console.log(`${key}:`, value);
+                }
+            });
+
+            alert('Debug info logged to console. Press F12 to see details.');
+        }
+
         // Listen for attendance updates from other tabs
         window.addEventListener('attendanceUpdate', (event) => {
             console.log('Received attendance update:', event.detail);
@@ -585,12 +633,29 @@
             }
         });
 
-        // Auto-refresh every 30 seconds
+        // Auto-refresh every 10 seconds (faster for debugging)
         setInterval(() => {
             if (adminContainer.style.display !== 'none') {
                 refreshData();
             }
-        }, 30000);
+        }, 10000);
+
+        // Also refresh when window gets focus (user switches back to admin tab)
+        window.addEventListener('focus', () => {
+            if (adminContainer.style.display !== 'none') {
+                refreshData();
+            }
+        });
+
+        // Listen for storage changes from other tabs
+        window.addEventListener('storage', (event) => {
+            if (event.key === 'attendanceRecords') {
+                console.log('Storage event detected for attendanceRecords');
+                if (adminContainer.style.display !== 'none') {
+                    refreshData();
+                }
+            }
+        });
     </script>
 </body>
 </html>
