@@ -366,8 +366,8 @@
         // Importar datos completos del generador original
         const sessionData = {
             'S1': {
-                title: 'Presentaciones y situación inicial',
-                date: 'Miércoles 6/11/2024',
+                title: 'Poesía - Javier Egea (sesión completada)',
+                date: 'Miércoles 01/10/2024',
                 time: '08:30 - 10:30',
                 objectives: [
                     'Presentarse y presentar a compañeros usando estructuras variadas',
@@ -442,8 +442,8 @@
                 ]
             },
             'S2': {
-                title: 'Debate: ¿Mudarse a España?',
-                date: 'Lunes 11/11/2024',
+                title: 'Ruta de tapas (sesión completada)',
+                date: 'Lunes 06/10/2024',
                 time: '08:30 - 10:30',
                 objectives: [
                     'Practicar estructuras para expresar opiniones y argumentos',
@@ -518,7 +518,7 @@
             },
             'S3': {
                 title: 'Situación: Buscar piso en Granada',
-                date: 'Miércoles 13/11/2024',
+                date: 'Miércoles 05/11/2025',
                 time: '08:30 - 10:30',
                 objectives: [
                     'Practicar vocabulario relacionado con vivienda y alquiler',
@@ -601,7 +601,7 @@
             },
             'S4': {
                 title: 'Debate: Cultura de tapas vs. comida rápida',
-                date: 'Lunes 18/11/2024',
+                date: 'Lunes 10/11/2025',
                 time: '08:30 - 10:30',
                 objectives: [
                     'Practicar vocabulario gastronómico y cultural',
@@ -676,7 +676,7 @@
             },
             'S5': {
                 title: 'Situación: En el mercado municipal',
-                date: 'Miércoles 20/11/2024',
+                date: 'Miércoles 12/11/2025',
                 time: '08:30 - 10:30',
                 objectives: [
                     'Practicar vocabulario de compras y alimentos',
@@ -753,7 +753,7 @@
             },
             'S6': {
                 title: 'Debate: ¿Estudiar o trabajar en el extranjero?',
-                date: 'Lunes 25/11/2024',
+                date: 'Lunes 17/11/2025',
                 time: '08:30 - 10:30',
                 objectives: [
                     'Practicar expresiones para hablar del futuro y planes',
@@ -830,7 +830,7 @@
             },
             'S7': {
                 title: 'Situación: Problemas con el vecindario',
-                date: 'Miércoles 27/11/2024',
+                date: 'Miércoles 19/11/2025',
                 time: '08:30 - 10:30',
                 objectives: [
                     'Practicar vocabulario de convivencia y problemas',
@@ -1138,7 +1138,7 @@
             },
             'S11': {
                 title: 'Situación: Emergencia médica',
-                date: 'Miércoles 11/12/2024',
+                date: 'Miércoles 03/12/2025',
                 time: '08:30 - 10:30',
                 objectives: [
                     'Practicar vocabulario médico y de emergencias',
@@ -1215,7 +1215,7 @@
             },
             'S12': {
                 title: 'Debate: Redes sociales y relaciones',
-                date: 'Lunes 16/12/2024',
+                date: 'Lunes 08/12/2025',
                 time: '08:30 - 10:30',
                 objectives: [
                     'Practicar vocabulario de redes sociales y comunicación digital',
@@ -1292,7 +1292,7 @@
             },
             'S13': {
                 title: 'Presentación final: Proyecto mini serie',
-                date: 'Miércoles 18/12/2024',
+                date: 'Miércoles 10/12/2025',
                 time: '08:30 - 10:30',
                 objectives: [
                     'Presentar proyectos finales de mini serie',
@@ -1351,7 +1351,17 @@
                 ],
                 certificate: 'Todos los participantes recibirán certificado de aprovechamiento del curso Nivel B2.1'
             }
-        }function generateSessionHTML(sessionKey) {
+        }
+
+        function calculateDaysRemaining() {
+            const today = new Date();
+            const courseEnd = new Date('2025-12-15'); // Fin del curso
+            const diffTime = courseEnd - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            return diffDays > 0 ? diffDays : 0;
+        }
+
+        function generateSessionHTML(sessionKey) {
             const session = sessionData[sessionKey];
             if (!session) return '';
 
@@ -1361,13 +1371,15 @@
                 day: '2-digit'
             });
 
+            const daysRemaining = calculateDaysRemaining();
+
             return `
                 <div class="header avoid-break">
                     <h1>Producción e Interacción Oral en Español</h1>
                     <div class="subtitle">Nivel B2.1 (Avanzado Intermedio) - Universidad de Granada</div>
                     <div class="subtitle">Centro de Lenguas Modernas</div>
                     <div class="session-title">SESIÓN ${sessionKey.substring(1)}: ${session.title}</div>
-                    <div class="subtitle">${currentDate}</div>
+                    <div class="subtitle">${currentDate} • ${daysRemaining} días restantes para finalizar el curso</div>
                 </div>
 
                 <!-- Página 1: Información básica y objetivos -->
