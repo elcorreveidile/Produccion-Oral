@@ -114,12 +114,12 @@
         <div class="card">
           <h3>Datos clave</h3>
           <ul class="list">
-            2025/2026</li>
-            1 octubre – 18 diciembre</li>
-            0701 · 45 h · 4,5 CTS · Optativa</li>
-            Lunes y miércoles · Aula A4</li>
+            <li>2024/2025</li>
+            <li>5 noviembre – 18 diciembre</li>
+            <li>0701 · 45 h · 4,5 CTS · Optativa</li>
+            <li>Lunes y miércoles · Aula A4</li>
             <li><b>Profesor:</b> Javier Benítez Láinez</li>
-            L-X de 08:30 a 10:30
+            <li>L-X de 08:30 a 10:30</li>
             <li><b>Requisitos:</b> Prueba de nivel + B1 acreditado</li>
           </ul>
         </div>
@@ -131,7 +131,7 @@
         </div>
         <div class="card">
           <h3>Guías de la sesión</h3>
-          <p class="hint">Pulsa la sesión para abrir su guía (PDF).</p>
+          <p class="hint">Pulsa la sesión para abrir su guía (RTF).</p>
           <div id="chips-s1"></div>
           <ul class="list" id="lista-s1"></ul>
         </div>
@@ -219,7 +219,7 @@
           </ul>
         </div>
         <div class="card">
-          <h3>Aula de Cine · “Para mudarse a España”</h3>
+          <h3>Aula de Cine · "Para mudarse a España"</h3>
           <ul class="list">
             <li>Creación de personajes, guion, registro y entonación.</li>
             <li>Interpretación, grabación y subtitulado.</li>
@@ -389,18 +389,19 @@
     // ===== GUÍAS POR SESIÓN (SECCIÓN 1) =====
     // Sube PDFs a materials/cuadernos/ con estos nombres o cámbialos aquí
     const GUIAS_S1 = [
-      // { t: 'Sesión 1 · Presentaciones e intensificación', href: 'materials/cuadernos/S1_Presentaciones_Intensificacion.pdf' },
-      // { t: 'Sesión 2 · Atenuación y cortesía', href: 'materials/cuadernos/S2_Atenuacion_Cortesia.pdf' },
-      // { t: 'Sesión 3 · Descripción de personalidad', href: 'materials/cuadernos/S3_Personalidad.pdf' },
-      // { t: 'Sesión 4 · Definir & dar instrucciones', href: 'materials/cuadernos/S4_Instrucciones.pdf' },
-      // { t: 'Sesión 5 · Acuerdo y desacuerdo', href: 'materials/cuadernos/S5_Acuerdo_Desacuerdo.pdf' },
-      // { t: 'Sesión 6 · Resumir lo dicho', href: 'materials/cuadernos/S6_Resumen.pdf' },
-      // { t: 'Sesión 7 · Emociones y no verbal', href: 'materials/cuadernos/S7_Emociones_NoVerbal.pdf' },
-      // { t: 'Sesión 8 · Estrategias cine/TV', href: 'materials/cuadernos/S8_Estrategias_AV.pdf' },
-      // { t: 'Sesión 9 · Léxico por ámbitos', href: 'materials/cuadernos/S9_Lexico_Ambitos.pdf' },
-      // { t: 'Sesión 10 · Proyecto Ruta de Tapas', href: 'materials/cuadernos/S10_Ruta_Tapas.pdf' },
-      // { t: 'Sesión 11 · Aula de Cine', href: 'materials/cuadernos/S11_Aula_Cine.pdf' },
-      // { t: 'Sesión 12 · Ensayo Presentación', href: 'materials/cuadernos/S12_Ensayo_Presentacion.pdf' },
+      { t: 'Sesión 1 · Presentaciones y situación inicial', href: 'materials/cuadernos/S1_Presentaciones_Inicial.rtf' },
+      { t: 'Sesión 2 · Debate: ¿Mudarse a España?', href: 'materials/cuadernos/S2_Debate_Mudarse.rtf' },
+      { t: 'Sesión 3 · Situación: Buscar piso en Granada', href: 'materials/cuadernos/S3_Buscar_Piso.rtf' },
+      { t: 'Sesión 4 · Debate: Cultura de tapas vs. comida rápida', href: 'materials/cuadernos/S4_Debate_Tapas.pdf' },
+      { t: 'Sesión 5 · Situación: En el mercado municipal', href: 'materials/cuadernos/S5_Mercado.pdf' },
+      { t: 'Sesión 6 · Debate: ¿Estudiar o trabajar en el extranjero?', href: 'materials/cuadernos/S6_Debate_Estudiar_Trabajar.pdf' },
+      { t: 'Sesión 7 · Situación: Problemas con el vecindario', href: 'materials/cuadernos/S7_Vecinos.pdf' },
+      { t: 'Sesión 8 · Debate: Tradición vs. modernidad en España', href: 'materials/cuadernos/S8_Debate_Tradicion.pdf' },
+      { t: 'Sesión 9 · Situación: Preparar una cena española', href: 'materials/cuadernos/S9_Cena_Espanola.pdf' },
+      { t: 'Sesión 10 · Debate: Turismo sostenible en Granada', href: 'materials/cuadernos/S10_Debate_Turismo.pdf' },
+      { t: 'Sesión 11 · Situación: Emergencia médica', href: 'materials/cuadernos/S11_Emergencia_Medica.pdf' },
+      { t: 'Sesión 12 · Debate: Redes sociales y relaciones', href: 'materials/cuadernos/S12_Debate_Redes_Sociales.pdf' },
+      { t: 'Sesión 13 · Presentación final: Proyecto mini serie', href: 'materials/cuadernos/S13_Presentacion_Final.pdf' },
     ];
 
     function renderGuiasS1(){
