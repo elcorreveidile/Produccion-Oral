@@ -186,17 +186,7 @@
             <form id="attendance-form" class="info-form">
                 <div class="form-group">
                     <label for="student-name">Nombre completo *</label>
-                    <input type="text" id="student-name" required placeholder="Ej: María García López">
-                </div>
-
-                <div class="form-group">
-                    <label for="student-dni">DNI/NIE/Pasaporte *</label>
-                    <input type="text" id="student-dni" required placeholder="Ej: 12345678A">
-                </div>
-
-                <div class="form-group">
-                    <label for="student-email">Email (opcional)</label>
-                    <input type="email" id="student-email" placeholder="ejemplo@correo.com">
+                    <input type="text" id="student-name" required placeholder="Ej: BAI, MIAORUI">
                 </div>
 
                 <button type="submit" id="submit-btn">
@@ -228,18 +218,18 @@
         const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/YOUR_JSONBIN_ID';
         const JSONBIN_KEY = 'YOUR_JSONBIN_API_KEY'; // You'll need to get this
 
-        // Lista de estudiantes autorizados
+        // Lista de estudiantes autorizados (solo nombres)
         const AUTHORIZED_STUDENTS = [
-            { name: 'BAI, MIAORUI', dni: '1' },
-            { name: 'CHAFFIN, NATHANIEL HAYEN', dni: '2' },
-            { name: 'DIAZ, ANGELA CLARICE', dni: '3' },
-            { name: 'KEMPF, RYAN ELIZABETH', dni: '4' },
-            { name: 'LANTER, WESLEY MITCHELL', dni: '5' },
-            { name: 'MANCIPE, GABRIEL FELIPE', dni: '6' },
-            { name: 'MIRANDA, MARISOL ESPERANZA', dni: '7' },
-            { name: 'MOREY, GABRIELLE KAI', dni: '8' },
-            { name: 'PORTZLINE, EVAN GRACE', dni: '9' },
-            { name: 'SALAZAR, NATALIE', dni: '10' }
+            'BAI, MIAORUI',
+            'CHAFFIN, NATHANIEL HAYEN',
+            'DIAZ, ANGELA CLARICE',
+            'KEMPF, RYAN ELIZABETH',
+            'LANTER, WESLEY MITCHELL',
+            'MANCIPE, GABRIEL FELIPE',
+            'MIRANDA, MARISOL ESPERANZA',
+            'MOREY, GABRIELLE KAI',
+            'PORTZLINE, EVAN GRACE',
+            'SALAZAR, NATALIE'
         ];
 
         // DOM elements
@@ -342,31 +332,13 @@
             });
         }
 
-        function validateStudent(name, dni) {
-            const nameUpper = name.toUpperCase();
-            const dniUpper = dni.toUpperCase();
+        function validateStudent(name) {
+            const nameUpper = name.toUpperCase().trim();
 
-            // Search by exact match or partial match
+            // Strict validation - exact match only
             return AUTHORIZED_STUDENTS.find(student => {
-                const studentNameUpper = student.name.toUpperCase();
-                const studentDniUpper = student.dni.toUpperCase();
-
-                // Exact match by name
-                if (studentNameUpper === nameUpper) {
-                    return true;
-                }
-
-                // Exact match by DNI
-                if (studentDniUpper === dniUpper) {
-                    return true;
-                }
-
-                // Partial match (allowing for different name order)
-                if (studentNameUpper.includes(nameUpper) || nameUpper.includes(studentNameUpper)) {
-                    return true;
-                }
-
-                return false;
+                const studentNameUpper = student.toUpperCase();
+                return studentNameUpper === nameUpper;
             });
         }
 
@@ -375,23 +347,21 @@
                 token: token,
                 session: session,
                 studentName: document.getElementById('student-name').value.trim(),
-                studentDNI: document.getElementById('student-dni').value.trim(),
-                studentEmail: document.getElementById('student-email').value.trim(),
                 timestamp: new Date().toISOString(),
                 ipAddress: await getClientIP(),
                 userAgent: navigator.userAgent
             };
 
             // Validate form
-            if (!formData.studentName || !formData.studentDNI) {
-                alert('Por favor, completa todos los campos obligatorios');
+            if (!formData.studentName || formData.studentName.length < 3) {
+                alert('Por favor, ingresa tu nombre completo.');
                 return;
             }
 
-            // Validate student is authorized
-            const authorizedStudent = validateStudent(formData.studentName, formData.studentDNI);
+            // Validate student is authorized - exact match only
+            const authorizedStudent = validateStudent(formData.studentName);
             if (!authorizedStudent) {
-                alert('Estudiante no encontrado en la lista autorizada. Por favor, verifica tu nombre y DNI.');
+                alert('Estudiante no autorizado. Tu nombre debe coincidir exactamente con la lista autorizada:\n\n• BAI, MIAORUI\n• CHAFFIN, NATHANIEL HAYEN\n• DIAZ, ANGELA CLARICE\n• KEMPF, RYAN ELIZABETH\n• LANTER, WESLEY MITCHELL\n• MANCIPE, GABRIEL FELIPE\n• MIRANDA, MARISOL ESPERANZA\n• MOREY, GABRIELLE KAI\n• PORTZLINE, EVAN GRACE\n• SALAZAR, NATALIE');
                 return;
             }
 
@@ -402,9 +372,7 @@
                 const recordDate = new Date(record.timestamp).toDateString();
                 const recordName = record.studentName.toUpperCase();
                 const inputName = formData.studentName.toUpperCase();
-
-                return recordDate === today && (recordName === inputName ||
-                       recordName.includes(inputName) || inputName.includes(recordName));
+                return recordDate === today && recordName === inputName;
             });
 
             if (alreadyRegistered) {
@@ -419,6 +387,9 @@
             try {
                 // Save attendance record
                 await saveAttendanceRecord(formData);
+
+                // Notify admin panel
+                notifyAdminPanel(formData);
 
                 // Show success
                 showSuccess(formData);
@@ -461,6 +432,29 @@
             }
         }
 
+        function notifyAdminPanel(record) {
+            // Save to localStorage with timestamp for immediate admin panel access
+            localStorage.setItem('lastAttendanceRecord', JSON.stringify(record));
+
+            // Create notification event for real-time updates
+            const adminNotification = {
+                type: 'new_attendance',
+                record: record,
+                timestamp: new Date().toISOString()
+            };
+
+            // Store notification for admin panel
+            localStorage.setItem('adminNotification', JSON.stringify(adminNotification));
+
+            // Dispatch custom event to notify admin panel (if it's open in another tab)
+            window.dispatchEvent(new CustomEvent('attendanceUpdate', {
+                detail: adminNotification
+            }));
+
+            // Also dispatch to storage event for cross-tab communication
+            localStorage.setItem('attendanceUpdate', JSON.stringify(adminNotification));
+        }
+
         function showSuccess(record) {
             formContainer.style.display = 'none';
             success.style.display = 'block';
@@ -472,7 +466,6 @@
             const registeredInfo = document.getElementById('student-registered');
             registeredInfo.innerHTML = `
                 <p><strong>Nombre:</strong> ${record.studentName}</p>
-                <p><strong>DNI:</strong> ${record.studentDNI}</p>
                 <p><strong>Fecha y hora:</strong> ${new Date(record.timestamp).toLocaleString('es-ES')}</p>
             `;
 

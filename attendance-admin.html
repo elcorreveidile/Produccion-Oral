@@ -395,10 +395,19 @@
         }
 
         function loadAttendanceData() {
-            // Load from localStorage
-            const stored = localStorage.getItem(STORAGE_KEY);
+            // Load from localStorage (same key as attendance.html)
+            const stored = localStorage.getItem('attendanceRecords');
+            console.log('Loading attendance records, found:', stored ? JSON.parse(stored).length : 0, 'records');
+
             if (stored) {
-                attendanceRecords = JSON.parse(stored);
+                try {
+                    attendanceRecords = JSON.parse(stored);
+                } catch (err) {
+                    console.error('Error parsing attendance records:', err);
+                    attendanceRecords = [];
+                }
+            } else {
+                attendanceRecords = [];
             }
 
             // Also try to load from other sources if available
@@ -455,8 +464,8 @@
             // Apply filters
             filteredRecords = attendanceRecords.filter(record => {
                 const matchesSearch = !searchTerm ||
-                    record.studentName.toLowerCase().includes(searchTerm) ||
-                    record.studentDNI.toLowerCase().includes(searchTerm);
+                    (record.studentName && record.studentName.toLowerCase().includes(searchTerm)) ||
+                    (record.studentDNI && record.studentDNI.toLowerCase().includes(searchTerm));
 
                 const matchesSession = !sessionFilter || record.session === sessionFilter;
 
@@ -486,11 +495,11 @@
 
                 row.innerHTML = `
                     <td>${dateStr}</td>
-                    <td><strong>${record.studentName}</strong></td>
-                    <td>${record.studentDNI}</td>
+                    <td><strong>${record.studentName || 'Desconocido'}</strong></td>
+                    <td>${record.studentDNI || '-'}</td>
                     <td>${record.studentEmail || '-'}</td>
-                    <td>${record.session}</td>
-                    <td>${record.ipAddress || '-'}</td>
+                    <td>${record.session || 'Sesión actual'}</td>
+                    <td>${record.ipAddress || record.ip || '-'}</td>
                     <td>
                         <span class="status-badge ${isLate ? 'status-late' : 'status-present'}">
                             ${isLate ? 'Tarde' : 'A tiempo'}
@@ -523,11 +532,11 @@
 
                     return [
                         `"${date}"`,
-                        `"${record.studentName}"`,
-                        `"${record.studentDNI}"`,
+                        `"${record.studentName || 'Desconocido'}"`,
+                        `"${record.studentDNI || ''}"`,
                         `"${record.studentEmail || ''}"`,
-                        `"${record.session}"`,
-                        `"${record.ipAddress || ''}"`,
+                        `"${record.session || 'Sesión actual'}"`,
+                        `"${record.ipAddress || record.ip || ''}"`,
                         `"${isLate ? 'Tarde' : 'A tiempo'}"`
                     ].join(',');
                 })
@@ -551,6 +560,24 @@
             updateStatistics();
             displayRecords();
         }
+
+        // Listen for attendance updates from other tabs
+        window.addEventListener('attendanceUpdate', (event) => {
+            console.log('Received attendance update:', event.detail);
+            loadAttendanceData();
+            updateStatistics();
+            displayRecords();
+        });
+
+        // Listen for storage events (cross-tab communication)
+        window.addEventListener('storage', (event) => {
+            if (event.key === 'attendanceUpdate' || event.key === 'attendanceRecords') {
+                console.log('Storage update detected:', event.key);
+                loadAttendanceData();
+                updateStatistics();
+                displayRecords();
+            }
+        });
 
         // Auto-refresh every 30 seconds
         setInterval(() => {
