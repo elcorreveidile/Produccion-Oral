@@ -17,7 +17,8 @@
     /* NAV */
     .nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--border)}
     .nav .inner{display:flex;gap:.5rem;align-items:center}
-    .brand{font-weight:800}
+    .brand{font-weight:800;display:flex;align-items:center;gap:.75rem}
+    .brand .logo{height:40px;width:auto;object-fit:contain}
     .spacer{flex:1}
     .links{display:flex;gap:.5rem;align-items:center}
     .links a{display:inline-block;padding:.5rem .75rem;border:1px solid var(--border);border-radius:9999px;background:#fff;white-space:nowrap}
@@ -86,7 +87,10 @@
   <!-- NAV -->
   <div class="nav" id="nav">
     <div class="container inner">
-      <div class="brand">🗣️ Producción e Interacción Oral — Nivel B2.1 (Avanzado)</div>
+      <div class="brand">
+    <img src="images/Logo-CLM-V1.jpg" alt="Logo CLM" class="logo">
+    🗣️ Producción e Interacción Oral — Nivel B2.1 (Avanzado)
+  </div>
       <div class="spacer"></div>
       <div class="links" aria-label="Menú principal">
         <a href="#s1">Guía</a>
