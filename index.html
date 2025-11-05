@@ -140,6 +140,9 @@
               <button id="generate-new-qr" style="padding: 8px 16px; background: var(--secondary-color); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
                 Generar Nuevo Código
               </button>
+              <button onclick="window.open('attendance-admin-v2.html', '_blank')" style="padding: 8px 16px; background: #1e40af; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+                📊 Panel de Asistencia
+              </button>
               <button id="open-pdf-generator" style="padding: 8px 16px; background: #059669; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem;" onclick="window.open('attendance-pdf.html', '_blank')">
                 📄 Generar Hoja de Asistencia
               </button>
@@ -597,8 +600,22 @@
 
     function generateQR() {
       currentToken = generateToken();
-      const baseUrl = window.location.origin.replace(window.location.port, '8080') || 'https://elcorreveidile.github.io';
-      const attendanceUrl = `${baseUrl}/Produccion-Oral/attendance.html?token=${currentToken}&session=Sesion actual`;
+
+      // Generate session ID
+      const now = new Date();
+      const date = now.toISOString().split('T')[0]; // YYYY-MM-DD
+      const time = now.toTimeString().split(' ')[0].substring(0, 5); // HH:MM
+      const sessionId = `${date}_${time}`;
+
+      // Create QR data for new system
+      const qrData = {
+        sessionId: sessionId,
+        timestamp: now.toISOString(),
+        type: 'attendance'
+      };
+
+      const baseUrl = 'https://elcorreveidile.github.io';
+      const attendanceUrl = `${baseUrl}/Produccion-Oral/attendance-register-v2.html?qr=${encodeURIComponent(JSON.stringify(qrData))}`;
 
       // Clear previous QR
       document.getElementById('qr-code').innerHTML = '';
@@ -612,6 +629,14 @@
         colorLight: '#ffffff',
         correctLevel: QRCode.CorrectLevel.H
       });
+
+      // Save QR data to localStorage for admin panel
+      localStorage.setItem('currentQRData', JSON.stringify(qrData));
+      localStorage.setItem('currentSession', JSON.stringify({
+        sessionId: sessionId,
+        timestamp: now.toISOString(),
+        date: now.toDateString()
+      }));
 
       // Reset timer
       timeRemaining = 300;
