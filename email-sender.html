@@ -247,6 +247,155 @@
             color: #6b7280;
         }
 
+        /* Mass Email Composer Styles */
+        .mass-email-composer {
+            margin-top: 40px;
+            padding: 30px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+        }
+
+        .composer-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .composer-header h2 {
+            color: #1e40af;
+            margin-bottom: 10px;
+        }
+
+        .composer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .composer-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .recipient-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        .btn-template {
+            background: #3b82f6;
+            color: white;
+            margin: 5px;
+        }
+
+        .btn-template:hover {
+            background: #2563eb;
+        }
+
+        .btn-info {
+            background: #0ea5e9;
+            color: white;
+        }
+
+        .btn-warning {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #d97706;
+        }
+
+        .students-list {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 10px;
+            background: white;
+        }
+
+        .student-checkbox {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            transition: background-color 0.2s;
+        }
+
+        .student-checkbox:hover {
+            background: #f3f4f6;
+        }
+
+        .student-checkbox input {
+            margin-right: 10px;
+        }
+
+        .student-checkbox label {
+            cursor: pointer;
+            font-size: 14px;
+            flex: 1;
+        }
+
+        .selected-count {
+            padding: 10px;
+            background: #dcfce7;
+            border: 1px solid #bbf7d0;
+            border-radius: 6px;
+            font-weight: 500;
+            color: #166534;
+        }
+
+        .template-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .variables-help {
+            padding: 10px;
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 6px;
+            font-size: 12px;
+            line-height: 1.6;
+            color: #0c4a6e;
+        }
+
+        .variables-help code {
+            background: #1e293b;
+            color: #f1f5f9;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .composer-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .group-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 20px;
@@ -258,6 +407,18 @@
 
             .buttons {
                 flex-direction: column;
+            }
+
+            .composer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mass-email-composer {
+                padding: 20px;
+            }
+
+            .recipient-controls {
+                justify-content: center;
             }
         }
     </style>
@@ -293,10 +454,13 @@
 
         <div class="buttons">
             <button class="btn btn-primary" onclick="generateAllEmails()">
-                📧 Generar Todos los Emails
+                📧 Generar Todos los Emails de IDs
             </button>
             <button class="btn btn-success" onclick="copyAllEmails()">
                 📋 Copiar Todo el Contenido
+            </button>
+            <button class="btn btn-warning" onclick="toggleMassEmailComposer()">
+                ✉️ Redactar Correo Masivo
             </button>
             <button class="btn btn-secondary" onclick="window.open('attendance-admin.html', '_blank')">
                 📊 Ir al Panel de Administración
@@ -305,6 +469,119 @@
                 🔍 Ver Referencia de Estudiantes
             </button>
         </div>
+
+        <!-- Mass Email Composer Section -->
+        <div class="mass-email-composer" id="massEmailComposer" style="display: none;">
+            <div class="composer-header">
+                <h2>✉️ Redactar Correo Masivo Personalizado</h2>
+                <p>Crea y envía correos personalizados a grupos específicos de estudiantes</p>
+            </div>
+
+            <div class="composer-grid">
+                <!-- Left Column: Recipients -->
+                <div class="composer-column">
+                    <div class="form-group">
+                        <label><strong>Seleccionar Destinatarios:</strong></label>
+                        <div class="recipient-controls">
+                            <button class="btn btn-sm btn-secondary" onclick="selectAllStudents()">Seleccionar Todos</button>
+                            <button class="btn btn-sm btn-secondary" onclick="deselectAllStudents()">Deseleccionar Todos</button>
+                            <button class="btn btn-sm btn-info" onclick="selectByGroup()">Por Grupo</button>
+                        </div>
+                    </div>
+
+                    <div class="students-list" id="studentsCheckboxes">
+                        <!-- Student checkboxes will be generated here -->
+                    </div>
+
+                    <div class="form-group">
+                        <label><strong>Destinatarios seleccionados:</strong></label>
+                        <div class="selected-count" id="selectedCount">0 estudiantes seleccionados</div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Email Composition -->
+                <div class="composer-column">
+                    <div class="form-group">
+                        <label for="customSubject"><strong>Asunto del Correo:</strong></label>
+                        <input type="text" id="customSubject" placeholder="Ej: Próxima entrega de proyecto" style="width: 100%;">
+                    </div>
+
+                    <div class="form-group">
+                        <label><strong>Plantillas Rápidas:</strong></label>
+                        <div class="template-buttons">
+                            <button class="btn btn-sm btn-template" onclick="loadTemplate('reminder')">Recordatorio Tarea</button>
+                            <button class="btn btn-sm btn-template" onclick="loadTemplate('cancellation')">Clase Cancelada</button>
+                            <button class="btn btn-sm btn-template" onclick="loadTemplate('announcement')">Anuncio General</button>
+                            <button class="btn btn-sm btn-template" onclick="loadTemplate('meeting')">Reunión/Extra Clase</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label><strong>Variables Disponibles:</strong></label>
+                        <div class="variables-help">
+                            <code>{{nombre}}</code> - Nombre del estudiante<br>
+                            <code>{{id}}</code> - ID del estudiante<br>
+                            <code>{{nombreCompleto}}</code> - Nombre completo<br>
+                            <code>{{fecha}}</code> - Fecha actual<br>
+                            <code>{{profesor}}</code> - Javier Benítez Láinez
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customEmailBody"><strong>Cuerpo del Correo:</strong></label>
+                        <textarea id="customEmailBody" rows="12" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-family: inherit; resize: vertical;" placeholder="Hola {{nombre}},
+
+Escribe tu mensaje aquí. Puedes usar las variables que se muestran arriba para personalizar cada correo.
+
+Ejemplo:
+Quería recordarte que la entrega del proyecto es el próximo {{fecha}}.
+
+Un saludo,
+{{profesor}}"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label><strong>Vista Previa:</strong></label>
+                        <div class="email-preview" id="massEmailPreview">
+                            <div class="email-subject">Asunto: [Escribe un asunto]</div>
+                            <div style="white-space: pre-line; padding: 10px;">
+                                El correo personalizado aparecerá aquí...
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="composer-buttons">
+                        <button class="btn btn-primary" onclick="generateMassEmails()">
+                            📧 Generar Correos
+                        </button>
+                        <button class="btn btn-success" onclick="copyMassEmails()">
+                            📋 Copiar Correos
+                        </button>
+                        <button class="btn btn-secondary" onclick="clearMassComposer()">
+                            🔄 Limpiar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Group Selection Modal -->
+    <div class="modal" id="groupModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Seleccionar por Grupo</h3>
+                <button class="close-btn" onclick="closeGroupModal()">&times;</button>
+            </div>
+            <div class="group-options">
+                <button class="btn btn-secondary" onclick="selectByChineseNames()">Estudiantes con Nombres Chinos</button>
+                <button class="btn btn-secondary" onclick="selectByEmailDomain('@ugr.es')">Dominio @ugr.es</button>
+                <button class="btn btn-secondary" onclick="selectByEmailDomain('@gmail.com')">Dominio @gmail.com</button>
+                <button class="btn btn-secondary" onclick="selectByIdRange('2000')">IDs altos (2000+)</button>
+                <button class="btn btn-secondary" onclick="selectByIdRange('4000')">IDs bajos (<4000)</button>
+            </div>
+        </div>
+    </div>
     </div>
 
     <!-- Modal for email preview -->
@@ -701,8 +978,275 @@ ${body}
             }
         }
 
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', initializeStudentInputs);
+        // Mass Email Composer Functions
+        function toggleMassEmailComposer() {
+            const composer = document.getElementById('massEmailComposer');
+            const isVisible = composer.style.display !== 'none';
+
+            if (!isVisible) {
+                composer.style.display = 'block';
+                initializeStudentCheckboxes();
+                updateMassEmailPreview();
+            } else {
+                composer.style.display = 'none';
+            }
+        }
+
+        function initializeStudentCheckboxes() {
+            const container = document.getElementById('studentsCheckboxes');
+
+            if (container.children.length === 0) {
+                STUDENTS_DATA.forEach((student, index) => {
+                    const checkboxDiv = document.createElement('div');
+                    checkboxDiv.className = 'student-checkbox';
+                    checkboxDiv.innerHTML = `
+                        <input type="checkbox" id="mass-checkbox-${index}" value="${index}">
+                        <label for="mass-checkbox-${index}">
+                            <strong>${student.fullName}</strong> (${student.id})<br>
+                            <small style="color: #6b7280;">${student.email}</small>
+                        </label>
+                    `;
+                    container.appendChild(checkboxDiv);
+
+                    // Add change listener to update count
+                    checkboxDiv.querySelector('input').addEventListener('change', updateSelectedCount);
+                });
+            }
+        }
+
+        function updateSelectedCount() {
+            const checkboxes = document.querySelectorAll('#studentsCheckboxes input[type="checkbox"]');
+            const selected = document.querySelectorAll('#studentsCheckboxes input[type="checkbox"]:checked');
+            const countElement = document.getElementById('selectedCount');
+
+            countElement.textContent = `${selected.length} estudiantes seleccionados`;
+            countElement.style.background = selected.length > 0 ? '#dcfce7' : '#fef3c7';
+            countElement.style.borderColor = selected.length > 0 ? '#bbf7d0' : '#fcd34d';
+            countElement.style.color = selected.length > 0 ? '#166534' : '#92400e';
+        }
+
+        function selectAllStudents() {
+            const checkboxes = document.querySelectorAll('#studentsCheckboxes input[type="checkbox"]');
+            checkboxes.forEach(cb => cb.checked = true);
+            updateSelectedCount();
+            updateMassEmailPreview();
+        }
+
+        function deselectAllStudents() {
+            const checkboxes = document.querySelectorAll('#studentsCheckboxes input[type="checkbox"]');
+            checkboxes.forEach(cb => cb.checked = false);
+            updateSelectedCount();
+            updateMassEmailPreview();
+        }
+
+        function selectByGroup() {
+            document.getElementById('groupModal').style.display = 'block';
+        }
+
+        function closeGroupModal() {
+            document.getElementById('groupModal').style.display = 'none';
+        }
+
+        function selectByChineseNames() {
+            deselectAllStudents();
+            const checkboxes = document.querySelectorAll('#studentsCheckboxes input[type="checkbox"]');
+            STUDENTS_DATA.forEach((student, index) => {
+                if (student.likelyChinese) {
+                    checkboxes[index].checked = true;
+                }
+            });
+            updateSelectedCount();
+            closeGroupModal();
+            updateMassEmailPreview();
+        }
+
+        function selectByEmailDomain(domain) {
+            deselectAllStudents();
+            const checkboxes = document.querySelectorAll('#studentsCheckboxes input[type="checkbox"]');
+            STUDENTS_DATA.forEach((student, index) => {
+                if (student.email.includes(domain)) {
+                    checkboxes[index].checked = true;
+                }
+            });
+            updateSelectedCount();
+            closeGroupModal();
+            updateMassEmailPreview();
+        }
+
+        function selectByIdRange(threshold) {
+            deselectAllStudents();
+            const checkboxes = document.querySelectorAll('#studentsCheckboxes input[type="checkbox"]');
+            STUDENTS_DATA.forEach((student, index) => {
+                if (threshold === '2000' && parseInt(student.id) >= 2000) {
+                    checkboxes[index].checked = true;
+                } else if (threshold === '4000' && parseInt(student.id) < 4000) {
+                    checkboxes[index].checked = true;
+                }
+            });
+            updateSelectedCount();
+            closeGroupModal();
+            updateMassEmailPreview();
+        }
+
+        function loadTemplate(templateType) {
+            const templates = {
+                reminder: {
+                    subject: "Recordatorio: Próxima entrega",
+                    body: "Hola {{nombre}},\n\nQuería recordarte que la entrega de la tarea es el próximo {{fecha}}.\n\nSi tienes alguna pregunta, no dudes en consultarme.\n\nUn saludo,\n{{profesor}}"
+                },
+                cancellation: {
+                    subject: "Clase cancelada",
+                    body: "Hola {{nombre}},\n\nTe informo que la clase de {{fecha}} ha sido cancelada por motivos personales.\n\nNos vemos en la siguiente sesión.\n\nDisculpa las molestias.\n\nUn saludo,\n{{profesor}}"
+                },
+                announcement: {
+                    subject: "Anuncio importante del curso",
+                    body: "Hola {{nombre}},\n\nQuería comunicarte un cambio importante en el curso:\n\n[Describe el anuncio aquí]\n\nSi tienes alguna pregunta, estoy a tu disposición.\n\nUn saludo,\n{{profesor}}"
+                },
+                meeting: {
+                    subject: "Reunión/Extra clase",
+                    body: "Hola {{nombre}},\n\nTe convocó a una reunión el próximo {{fecha}} a las [hora] en [lugar].\n\nEl motivo es: [describe el motivo]\n\nPor favor, confirma tu asistencia.\n\nUn saludo,\n{{profesor}}"
+                }
+            };
+
+            const template = templates[templateType];
+            if (template) {
+                document.getElementById('customSubject').value = template.subject;
+                document.getElementById('customEmailBody').value = template.body;
+                updateMassEmailPreview();
+            }
+        }
+
+        function updateMassEmailPreview() {
+            const subject = document.getElementById('customSubject').value || '[Escribe un asunto]';
+            const body = document.getElementById('customEmailBody').value || 'El correo personalizado aparecerá aquí...';
+
+            // Find a selected student for preview
+            const checkboxes = document.querySelectorAll('#studentsCheckboxes input[type="checkbox"]:checked');
+            let previewStudent = null;
+
+            if (checkboxes.length > 0) {
+                const selectedIndex = parseInt(checkboxes[0].value);
+                previewStudent = STUDENTS_DATA[selectedIndex];
+            } else {
+                // Use first student as default preview
+                previewStudent = STUDENTS_DATA[0];
+            }
+
+            const personalizedSubject = replaceVariables(subject, previewStudent);
+            const personalizedBody = replaceVariables(body, previewStudent);
+
+            const previewDiv = document.getElementById('massEmailPreview');
+            previewDiv.innerHTML = `
+                <div class="email-subject">Asunto: ${personalizedSubject}</div>
+                <div style="white-space: pre-line; padding: 10px;">
+                    ${personalizedBody}
+                </div>
+                <div style="margin-top: 10px; font-size: 12px; color: #6b7280; font-style: italic;">
+                    Vista previa para: ${previewStudent.fullName} (${previewStudent.id})
+                </div>
+            `;
+        }
+
+        function replaceVariables(text, student) {
+            const firstName = student.fullName.split(',')[1] || student.fullName.split(',')[0];
+            const currentDate = new Date().toLocaleDateString('es-ES');
+
+            return text
+                .replace(/\{\{nombre\}\}/g, firstName.trim())
+                .replace(/\{\{id\}\}/g, student.id)
+                .replace(/\{\{nombreCompleto\}\}/g, student.fullName)
+                .replace(/\{\{fecha\}\}/g, currentDate)
+                .replace(/\{\{profesor\}\}/g, 'Javier Benítez Láinez');
+        }
+
+        function generateMassEmails() {
+            const checkboxes = document.querySelectorAll('#studentsCheckboxes input[type="checkbox"]:checked');
+            const subject = document.getElementById('customSubject').value;
+            const body = document.getElementById('customEmailBody').value;
+
+            if (checkboxes.length === 0) {
+                alert('Por favor, selecciona al menos un estudiante.');
+                return;
+            }
+
+            if (!subject.trim() || !body.trim()) {
+                alert('Por favor, completa el asunto y el cuerpo del correo.');
+                return;
+            }
+
+            let allEmails = '';
+            let emailCount = 0;
+
+            checkboxes.forEach(checkbox => {
+                const index = parseInt(checkbox.value);
+                const student = STUDENTS_DATA[index];
+
+                const personalizedSubject = replaceVariables(subject, student);
+                const personalizedBody = replaceVariables(body, student);
+
+                allEmails += `=== EMAIL ${++emailCount} ===
+Para: ${student.email}
+Asunto: ${personalizedSubject}
+
+${personalizedBody}
+
+========================
+
+`;
+            });
+
+            // Show success message
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = `✅ ¡${emailCount} emails generados correctamente! Usa "Copiar Correos" para enviarlos.`;
+            successDiv.style.display = 'block';
+
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 5000);
+
+            // Store emails for copying
+            window.massEmailContent = allEmails;
+        }
+
+        function copyMassEmails() {
+            if (window.massEmailContent) {
+                navigator.clipboard.writeText(window.massEmailContent).then(() => {
+                    alert('¡Correos copiados al portapapeles! Ahora puedes pegarlos en tu cliente de correo.');
+                }).catch(err => {
+                    console.error('Error al copiar correos: ', err);
+                    alert('Error al copiar correos. Por favor, inténtalo de nuevo.');
+                });
+            } else {
+                alert('Primero genera los correos usando el botón "Generar Correos".');
+            }
+        }
+
+        function clearMassComposer() {
+            if (confirm('¿Estás seguro de que quieres limpiar todo el contenido?')) {
+                document.getElementById('customSubject').value = '';
+                document.getElementById('customEmailBody').value = '';
+                deselectAllStudents();
+                window.massEmailContent = null;
+                updateMassEmailPreview();
+            }
+        }
+
+        // Update preview when email content changes
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeStudentInputs();
+
+            // Add listeners for mass email composer
+            const subjectInput = document.getElementById('customSubject');
+            const bodyInput = document.getElementById('customEmailBody');
+
+            if (subjectInput) {
+                subjectInput.addEventListener('input', updateMassEmailPreview);
+            }
+
+            if (bodyInput) {
+                bodyInput.addEventListener('input', updateMassEmailPreview);
+            }
+        });
     </script>
 </body>
 </html>
