@@ -483,22 +483,40 @@
       { t: 'Sesión 13 · Presentación final: Proyecto mini serie', href: 'materials/cuadernos/S13_Presentacion_Final.pdf', type: 'pdf' },
     ];
 
-    async function renderGuiasS1(){
+    // Lista de sesiones que tienen PDFs generados
+    const SESSIONS_AVAILABLE = [
+      'S1_Produccion_Oral.pdf',
+      'S2_Produccion_Oral.pdf',
+      'S3_Produccion_Oral.pdf',
+      'S4_Produccion_Oral.pdf',
+      'S5_Produccion_Oral.pdf',
+      'S6_Produccion_Oral.pdf',
+      'S7_Produccion_Oral.pdf',
+      'S8_Produccion_Oral.pdf',
+      'S9_Produccion_Oral.pdf',
+      'S10_Produccion_Oral.pdf',
+      'S11_Produccion_Oral.pdf',
+      'S12_Produccion_Oral.pdf',
+      'S13_Produccion_Oral.pdf'
+    ];
+
+    function renderGuiasS1(){
       const chips = document.getElementById('chips-s1');
       const list = document.getElementById('lista-s1');
       chips.innerHTML = ''; list.innerHTML = '';
 
-      for (const s of GUIAS_S1) {
+      GUIAS_S1.forEach((s) => {
         const span = document.createElement('span');
         span.className = 'chip';
         span.textContent = s.t;
 
-        span.onclick = async () => {
+        span.onclick = () => {
           document.querySelectorAll('#chips-s1 .chip').forEach(c=>c.classList.remove('active'));
           span.classList.add('active');
 
-          // Verificar si el archivo existe
-          const fileExists = await checkFileExists(s.href);
+          // Verificar si el archivo está disponible usando la lista manual
+          const fileName = s.href.split('/').pop();
+          const fileExists = SESSIONS_AVAILABLE.includes(fileName);
 
           if (fileExists) {
             // Archivo existe - mostrar opciones de descarga/visualización
@@ -517,7 +535,7 @@
               <li class="muted">📝 ${s.t}</li>
               <li class="muted" style="font-size: 0.9rem; margin-top: 10px;">
                 ⚠️ Este material estará disponible próximamente.<br>
-                Las sesiones 1-3 ya están listas con PDFs de alta calidad.
+                Todas las sesiones 1-13 ya están disponibles en PDF de alta calidad.
               </li>
               ${s.href.includes('S1') || s.href.includes('S2') || s.href.includes('S3') ?
                 '<li><button class="btn" onclick="window.open(\'materials/cuadernos/' + s.href.split('/').pop().replace('Produccion_Oral', 'txt') + '\', \'_blank\')">📄 Ver versión original (.txt)</button></li>' :
@@ -526,20 +544,10 @@
           }
         };
         chips.appendChild(span);
-      }
+      });
 
       if(GUIAS_S1[0]) setTimeout(()=> chips.querySelector('.chip')?.click(), 0);
       else list.innerHTML = '<li class="muted">No hay guías subidas todavía.</li>';
-    }
-
-    // Función para verificar si un archivo existe
-    async function checkFileExists(url) {
-      try {
-        const response = await fetch(url, { method: 'HEAD' });
-        return response.ok;
-      } catch {
-        return false;
-      }
     }
 
     // Función para descargar archivos directamente
