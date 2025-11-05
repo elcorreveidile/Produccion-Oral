@@ -334,6 +334,7 @@
                     <tr>
                         <th>Fecha y Hora</th>
                         <th>Estudiante</th>
+                        <th>ID</th>
                         <th>DNI</th>
                         <th>Email</th>
                         <th>Sesión</th>
@@ -481,7 +482,7 @@
             tbody.innerHTML = '';
 
             if (filteredRecords.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #6b7280;">No se encontraron registros</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: #6b7280;">No se encontraron registros</td></tr>';
                 return;
             }
 
@@ -498,6 +499,7 @@
                 row.innerHTML = `
                     <td>${dateStr}</td>
                     <td><strong>${record.studentName || 'Desconocido'}</strong></td>
+                    <td><code>${record.studentId || '-'}</code></td>
                     <td>${record.studentDNI || '-'}</td>
                     <td>${record.studentEmail || '-'}</td>
                     <td>${record.session || 'Sesión actual'}</td>
@@ -523,7 +525,7 @@
                 return;
             }
 
-            const headers = ['Fecha', 'Nombre', 'DNI', 'Email', 'Sesión', 'IP', 'Estado'];
+            const headers = ['Fecha', 'Nombre', 'ID', 'DNI', 'Email', 'Sesión', 'IP', 'Estado'];
             const csvContent = [
                 headers.join(','),
                 ...filteredRecords.map(record => {
@@ -535,6 +537,7 @@
                     return [
                         `"${date}"`,
                         `"${record.studentName || 'Desconocido'}"`,
+                        `"${record.studentId || ''}"`,
                         `"${record.studentDNI || ''}"`,
                         `"${record.studentEmail || ''}"`,
                         `"${record.session || 'Sesión actual'}"`,

@@ -240,18 +240,58 @@
     </div>
 
     <script>
-        // Lista de estudiantes autorizados
+        // Lista de estudiantes autorizados con ID y variantes
         const AUTHORIZED_STUDENTS = [
-            'BAI, MIAORUI',
-            'CHAFFIN, NATHANIEL HAYEN',
-            'DIAZ, ANGELA CLARICE',
-            'KEMPF, RYAN ELIZABETH',
-            'LANTER, WESLEY MITCHELL',
-            'MANCIPE, GABRIEL FELIPE',
-            'MIRANDA, MARISOL ESPERANZA',
-            'MOREY, GABRIELLE KAI',
-            'PORTZLINE, EVAN GRACE',
-            'SALAZAR, NATALIE'
+            {
+                id: '1523',
+                fullName: 'BAI, MIAORUI',
+                variants: ['Miaorui Bai', 'Miaorui', 'M. Bai', 'Bai']
+            },
+            {
+                id: '2847',
+                fullName: 'CHAFFIN, NATHANIEL HAYEN',
+                variants: ['Nathaniel Chaffin', 'Nathaniel', 'N. Chaffin', 'Nat', 'Chaffin']
+            },
+            {
+                id: '3915',
+                fullName: 'DIAZ, ANGELA CLARICE',
+                variants: ['Angela Diaz', 'Angela', 'A. Diaz', 'Diaz']
+            },
+            {
+                id: '4602',
+                fullName: 'KEMPF, RYAN ELIZABETH',
+                variants: ['Ryan Kempf', 'Ryan', 'R. Kempf', 'Kempf']
+            },
+            {
+                id: '5789',
+                fullName: 'LANTER, WESLEY MITCHELL',
+                variants: ['Wesley Lanter', 'Wesley', 'W. Lanter', 'Lanter']
+            },
+            {
+                id: '6134',
+                fullName: 'MANCIPE, GABRIEL FELIPE',
+                variants: ['Gabriel Mancipe', 'Gabriel', 'G. Mancipe', 'Mancipe']
+            },
+            {
+                id: '7256',
+                fullName: 'MIRANDA, MARISOL ESPERANZA',
+                variants: ['Marisol Miranda', 'Marisol', 'M. Miranda', 'Miranda']
+            },
+            {
+                id: '8901',
+                fullName: 'MOREY, GABRIELLE KAI',
+                variants: ['Gabrielle Morey', 'Gabrielle', 'G. Morey', 'Morey', 'Kai']
+            },
+            {
+                id: '9467',
+                fullName: 'PORTZLINE, EVAN GRACE',
+                variants: ['Evan Portzline', 'Evan', 'E. Portzline', 'Portzline']
+            },
+            {
+                id: '1089',
+                fullName: 'SALAZAR, NATALIE',
+                variants: ['Natalie Salazar', 'Natalie', 'N. Salazar', 'Salazar']
+            }
         ];
 
         let attendanceRecords = [];
@@ -294,7 +334,7 @@
 
             AUTHORIZED_STUDENTS.forEach(student => {
                 const attendanceRecord = dayRecords.find(record =>
-                    record.studentName === student
+                    record.studentId === student.id
                 );
 
                 const studentDiv = document.createElement('div');
@@ -303,8 +343,9 @@
                 const statusClass = attendanceRecord ? 'present' : 'pending';
                 const statusText = attendanceRecord ? 'Presente' : 'Pendiente';
 
+                const displayName = attendanceRecord ? attendanceRecord.studentName : student.fullName;
                 studentDiv.innerHTML = `
-                    <div class="student-name">${student}</div>
+                    <div class="student-name">${displayName} (${student.id})</div>
                     <div class="attendance-status ${statusClass}">${statusText}</div>
                 `;
 
@@ -353,7 +394,7 @@
             // Table data (empty students for blank sheet)
             const students = AUTHORIZED_STUDENTS.map((student, index) => [
                 (index + 1).toString(),
-                student,
+                `${student.fullName} (${student.id})`,
                 '',  // Signature space
                 '',  // Time space
                 ''   // Observations space
@@ -450,12 +491,12 @@
 
             // Table data with attendance information
             const students = AUTHORIZED_STUDENTS.map((student, index) => {
-                const attendanceRecord = dayRecords.find(record => record.studentName === student);
+                const attendanceRecord = dayRecords.find(record => record.studentId === student.id);
 
                 return [
                     (index + 1).toString(),
-                    student,
-                    attendanceRecord ? '✓ Presente' : '✗ Ausente',
+                    `${student.fullName} (${student.id})`,
+                    attendanceRecord ? `✓ ${attendanceRecord.studentName}` : '✗ Ausente',
                     attendanceRecord ? new Date(attendanceRecord.timestamp).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' }) : '-',
                     attendanceRecord && attendanceRecord.ipAddress ? `IP: ${attendanceRecord.ipAddress}` : ''
                 ];

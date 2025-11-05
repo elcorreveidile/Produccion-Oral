@@ -185,8 +185,13 @@
 
             <form id="attendance-form" class="info-form">
                 <div class="form-group">
-                    <label for="student-name">Nombre completo *</label>
-                    <input type="text" id="student-name" required placeholder="Ej: BAI, MIAORUI">
+                    <label for="student-name">Tu nombre (como prefieras) *</label>
+                    <input type="text" id="student-name" required placeholder="Ej: Miaorui, Nathaniel, Angie...">
+                </div>
+
+                <div class="form-group">
+                    <label for="student-id">Tu código de estudiante (4 dígitos) *</label>
+                    <input type="text" id="student-id" required placeholder="Ej: 1523" maxlength="4" pattern="[0-9]{4}">
                 </div>
 
                 <button type="submit" id="submit-btn">
@@ -196,6 +201,8 @@
 
             <div class="details">
                 <strong>Importante:</strong> Esta página solo es válida para registrar tu asistencia hoy. Una vez confirmada, no podrás volver a usar este mismo enlace.
+                <br><br>
+                <strong>¿No recuerdas tu código?</strong> Tu código de estudiante es un número de 4 dígitos que te proporcionó el profesor al inicio del curso.
             </div>
         </div>
 
@@ -218,18 +225,58 @@
         const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/YOUR_JSONBIN_ID';
         const JSONBIN_KEY = 'YOUR_JSONBIN_API_KEY'; // You'll need to get this
 
-        // Lista de estudiantes autorizados (solo nombres)
+        // Lista de estudiantes autorizados con ID único y variantes de nombre
         const AUTHORIZED_STUDENTS = [
-            'BAI, MIAORUI',
-            'CHAFFIN, NATHANIEL HAYEN',
-            'DIAZ, ANGELA CLARICE',
-            'KEMPF, RYAN ELIZABETH',
-            'LANTER, WESLEY MITCHELL',
-            'MANCIPE, GABRIEL FELIPE',
-            'MIRANDA, MARISOL ESPERANZA',
-            'MOREY, GABRIELLE KAI',
-            'PORTZLINE, EVAN GRACE',
-            'SALAZAR, NATALIE'
+            {
+                id: '1523',
+                fullName: 'BAI, MIAORUI',
+                variants: ['Miaorui Bai', 'Miaorui', 'M. Bai', 'Bai']
+            },
+            {
+                id: '2847',
+                fullName: 'CHAFFIN, NATHANIEL HAYEN',
+                variants: ['Nathaniel Chaffin', 'Nathaniel', 'N. Chaffin', 'Nat', 'Chaffin']
+            },
+            {
+                id: '3915',
+                fullName: 'DIAZ, ANGELA CLARICE',
+                variants: ['Angela Diaz', 'Angela', 'A. Diaz', 'Diaz']
+            },
+            {
+                id: '4602',
+                fullName: 'KEMPF, RYAN ELIZABETH',
+                variants: ['Ryan Kempf', 'Ryan', 'R. Kempf', 'Kempf']
+            },
+            {
+                id: '5789',
+                fullName: 'LANTER, WESLEY MITCHELL',
+                variants: ['Wesley Lanter', 'Wesley', 'W. Lanter', 'Lanter']
+            },
+            {
+                id: '6134',
+                fullName: 'MANCIPE, GABRIEL FELIPE',
+                variants: ['Gabriel Mancipe', 'Gabriel', 'G. Mancipe', 'Mancipe']
+            },
+            {
+                id: '7256',
+                fullName: 'MIRANDA, MARISOL ESPERANZA',
+                variants: ['Marisol Miranda', 'Marisol', 'M. Miranda', 'Miranda']
+            },
+            {
+                id: '8901',
+                fullName: 'MOREY, GABRIELLE KAI',
+                variants: ['Gabrielle Morey', 'Gabrielle', 'G. Morey', 'Morey', 'Kai']
+            },
+            {
+                id: '9467',
+                fullName: 'PORTZLINE, EVAN GRACE',
+                variants: ['Evan Portzline', 'Evan', 'E. Portzline', 'Portzline']
+            },
+            {
+                id: '1089',
+                fullName: 'SALAZAR, NATALIE',
+                variants: ['Natalie Salazar', 'Natalie', 'N. Salazar', 'Salazar']
+            }
         ];
 
         // DOM elements
@@ -332,47 +379,64 @@
             });
         }
 
-        function validateStudent(name) {
+        function validateStudent(name, id) {
             const nameUpper = name.toUpperCase().trim();
+            const idTrimmed = id.trim();
 
-            // Strict validation - exact match only
+            // Strict validation by ID + name variant
             return AUTHORIZED_STUDENTS.find(student => {
-                const studentNameUpper = student.toUpperCase();
-                return studentNameUpper === nameUpper;
+                // First verify ID matches exactly
+                if (student.id !== idTrimmed) {
+                    return false;
+                }
+
+                // Then check if name matches any variant
+                return student.variants.some(variant => {
+                    const variantUpper = variant.toUpperCase();
+                    return variantUpper === nameUpper;
+                });
             });
         }
 
         async function submitAttendance() {
+            const studentName = document.getElementById('student-name').value.trim();
+            const studentId = document.getElementById('student-id').value.trim();
+
             const formData = {
                 token: token,
                 session: session,
-                studentName: document.getElementById('student-name').value.trim(),
+                studentName: studentName,
+                studentId: studentId,
                 timestamp: new Date().toISOString(),
                 ipAddress: await getClientIP(),
                 userAgent: navigator.userAgent
             };
 
             // Validate form
-            if (!formData.studentName || formData.studentName.length < 3) {
-                alert('Por favor, ingresa tu nombre completo.');
+            if (!studentName || studentName.length < 2) {
+                alert('Por favor, ingresa tu nombre.');
                 return;
             }
 
-            // Validate student is authorized - exact match only
-            const authorizedStudent = validateStudent(formData.studentName);
+            if (!studentId || studentId.length !== 4 || !/^\d{4}$/.test(studentId)) {
+                alert('Por favor, ingresa tu código de estudiante de 4 dígitos.');
+                return;
+            }
+
+            // Validate student is authorized by ID + name variant
+            const authorizedStudent = validateStudent(studentName, studentId);
             if (!authorizedStudent) {
-                alert('Estudiante no autorizado. Tu nombre debe coincidir exactamente con la lista autorizada:\n\n• BAI, MIAORUI\n• CHAFFIN, NATHANIEL HAYEN\n• DIAZ, ANGELA CLARICE\n• KEMPF, RYAN ELIZABETH\n• LANTER, WESLEY MITCHELL\n• MANCIPE, GABRIEL FELIPE\n• MIRANDA, MARISOL ESPERANZA\n• MOREY, GABRIELLE KAI\n• PORTZLINE, EVAN GRACE\n• SALAZAR, NATALIE');
+                alert('Acceso denegado. Verifica que:\n\n1. Tu código de estudiante sea correcto (4 dígitos)\n2. Tu nombre coincida con como estás registrado\n\nSi no recuerdas tu código, contacta al profesor.');
                 return;
             }
 
-            // Check if already registered today
+            // Check if already registered today (by ID, not name)
             const today = new Date().toDateString();
             const existingRecords = JSON.parse(localStorage.getItem('attendanceRecords') || '[]');
             const alreadyRegistered = existingRecords.some(record => {
                 const recordDate = new Date(record.timestamp).toDateString();
-                const recordName = record.studentName.toUpperCase();
-                const inputName = formData.studentName.toUpperCase();
-                return recordDate === today && recordName === inputName;
+                const recordId = record.studentId;
+                return recordDate === today && recordId === studentId;
             });
 
             if (alreadyRegistered) {
