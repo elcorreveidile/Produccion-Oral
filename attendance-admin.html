@@ -271,6 +271,15 @@
                 <button type="submit" class="btn btn-primary">
                     Acceder al Panel
                 </button>
+
+                <div style="margin-top: 15px; text-align: center;">
+                    <button type="button" class="btn btn-secondary" style="font-size: 12px; padding: 8px 16px;" onclick="resetSession()">
+                        🔄 Resetear Sesión
+                    </button>
+                    <div style="margin-top: 10px; font-size: 11px; color: #6b7280;">
+                        Contraseña: <code>ugr2024</code>
+                    </div>
+                </div>
             </form>
 
             <p style="text-align: center; color: #6b7280; font-size: 14px; margin-top: 20px;">
@@ -373,30 +382,58 @@
 
         function checkAuthentication() {
             const isAuthenticated = sessionStorage.getItem('adminAuthenticated');
+            console.log('🔍 Checking authentication, found:', isAuthenticated);
+
             if (isAuthenticated === 'true') {
+                console.log('✅ Already authenticated, showing admin panel');
                 showAdminPanel();
+            } else {
+                console.log('❌ Not authenticated, showing login');
             }
+        }
+
+        function resetSession() {
+            console.log('🔄 Resetting session');
+            sessionStorage.removeItem('adminAuthenticated');
+            localStorage.clear();
+            location.reload();
         }
 
         function handleLogin(e) {
             e.preventDefault();
             const password = document.getElementById('password').value;
 
+            console.log('🔑 Login attempt with password:', password);
+            console.log('🔑 Expected ADMIN_PASSWORD:', ADMIN_PASSWORD);
+            console.log('🔑 Password match:', password === ADMIN_PASSWORD);
+
             if (password === ADMIN_PASSWORD) {
+                console.log('✅ Login successful');
                 sessionStorage.setItem('adminAuthenticated', 'true');
                 showAdminPanel();
             } else {
-                alert('Contraseña incorrecta. Por favor, inténtalo de nuevo.');
+                console.log('❌ Login failed');
+                alert('Contraseña incorrecta. Por favor, inténtalo de nuevo.\n\nPista: ugr2024');
                 document.getElementById('password').value = '';
+                document.getElementById('password').focus();
             }
         }
 
         function showAdminPanel() {
+            console.log('🚪 Showing admin panel');
+
+            // Hide login, show admin
             loginContainer.style.display = 'none';
             adminContainer.style.display = 'block';
+
+            console.log('🚪 Admin panel displayed, loading data...');
+
+            // Load data
             loadAttendanceData();
             updateStatistics();
             displayRecords();
+
+            console.log('🚪 Admin panel fully loaded');
         }
 
         function loadAttendanceData() {
