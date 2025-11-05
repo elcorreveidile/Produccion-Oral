@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Sender - Student ID Distribution</title>
+    <title>Envío de Correos - Distribución de IDs de Estudiantes</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -266,20 +266,20 @@
     <div class="container">
         <div class="header">
             <img src="images/Logo-CLM-V1.jpg" alt="Logo CLM" class="logo">
-            <h1>Student ID Email Sender</h1>
+            <h1>Envío de IDs por Correo Electrónico</h1>
             <p class="subtitle">Producción Oral B2.1 - Universidad de Granada</p>
         </div>
 
         <div class="instructions">
-            <h3>📧 Instructions:</h3>
+            <h3>📧 Instrucciones:</h3>
             <ol>
-                <li><strong>Enter student emails</strong> in the fields below</li>
-                <li><strong>Preview personalized emails</strong> for each student</li>
-                <li><strong>Copy email content</strong> and send via your preferred email client</li>
-                <li><strong>Track sent status</strong> with the checkboxes</li>
+                <li><strong>Verifica los correos de los estudiantes</strong> ya precargados abajo</li>
+                <li><strong>Previsualiza los emails personalizados</strong> para cada estudiante</li>
+                <li><strong>Copia el contenido del email</strong> y envía vía tu cliente de correo preferido</li>
+                <li><strong>Marca como enviado</strong> con los checkboxes para llevar seguimiento</li>
             </ol>
             <p style="margin-top: 10px; color: #6b7280;">
-                <strong>Note:</strong> This system generates personalized emails that you can copy-paste into Gmail, Outlook, etc.
+                <strong>Nota:</strong> Este sistema genera emails personalizados que puedes copiar y pegar en Gmail, Outlook, etc.
             </p>
         </div>
 
@@ -288,21 +288,21 @@
         </div>
 
         <div class="success-message" id="successMessage">
-            ✅ All emails prepared successfully! You can now copy and send each email individually.
+            ✅ ¡Todos los emails preparados correctamente! Ahora puedes copiar y enviar cada email individualmente.
         </div>
 
         <div class="buttons">
             <button class="btn btn-primary" onclick="generateAllEmails()">
-                📧 Generate All Emails
+                📧 Generar Todos los Emails
             </button>
             <button class="btn btn-success" onclick="copyAllEmails()">
-                📋 Copy All Content
+                📋 Copiar Todo el Contenido
             </button>
             <button class="btn btn-secondary" onclick="window.open('attendance-admin.html', '_blank')">
-                📊 Go to Admin Panel
+                📊 Ir al Panel de Administración
             </button>
             <button class="btn btn-secondary" onclick="window.open('student-ids-reference.html', '_blank')">
-                🔍 View Student Reference
+                🔍 Ver Referencia de Estudiantes
             </button>
         </div>
     </div>
@@ -321,56 +321,66 @@
     </div>
 
     <script>
-        // Students data with IDs and variants
+        // Students data with IDs and variants - ORDERED ACCORDING TO PROFESSOR'S LIST
         const STUDENTS_DATA = [
-            {
-                id: '1523',
-                fullName: 'BAI, MIAORUI',
-                variants: ['Miaorui Bai', 'Miaorui', 'M. Bai', 'Bai']
-            },
             {
                 id: '2847',
                 fullName: 'CHAFFIN, NATHANIEL HAYEN',
+                email: 'nhchaf27@g.holycross.edu',
                 variants: ['Nathaniel Chaffin', 'Nathaniel', 'N. Chaffin', 'Nat', 'Chaffin']
             },
             {
-                id: '3915',
-                fullName: 'DIAZ, ANGELA CLARICE',
-                variants: ['Angela Diaz', 'Angela', 'A. Diaz', 'Diaz']
+                id: '1523',
+                fullName: 'BAI, MIAORUI',
+                email: 'A-ruui@outlook.com',
+                variants: ['Miaorui Bai', 'Miaorui', 'M. Bai', 'Bai']
             },
             {
-                id: '4602',
-                fullName: 'KEMPF, RYAN ELIZABETH',
-                variants: ['Ryan Kempf', 'Ryan', 'R. Kempf', 'Kempf']
+                id: '8901',
+                fullName: 'MOREY, GABRIELLE KAI',
+                email: 'gabkaimo@gmail.com',
+                variants: ['Gabrielle Morey', 'Gabrielle', 'G. Morey', 'Morey', 'Kai']
             },
             {
                 id: '5789',
                 fullName: 'LANTER, WESLEY MITCHELL',
+                email: 'wlanter3@gatech.edu',
                 variants: ['Wesley Lanter', 'Wesley', 'W. Lanter', 'Lanter']
             },
             {
                 id: '6134',
                 fullName: 'MANCIPE, GABRIEL FELIPE',
+                email: 'gafeli@unc.edu',
                 variants: ['Gabriel Mancipe', 'Gabriel', 'G. Mancipe', 'Mancipe']
             },
             {
                 id: '7256',
                 fullName: 'MIRANDA, MARISOL ESPERANZA',
+                email: 'marisol.e.miranda0301@gmail.com',
                 variants: ['Marisol Miranda', 'Marisol', 'M. Miranda', 'Miranda']
-            },
-            {
-                id: '8901',
-                fullName: 'MOREY, GABRIELLE KAI',
-                variants: ['Gabrielle Morey', 'Gabrielle', 'G. Morey', 'Morey', 'Kai']
             },
             {
                 id: '9467',
                 fullName: 'PORTZLINE, EVAN GRACE',
+                email: 'eportz30@gmail.com',
                 variants: ['Evan Portzline', 'Evan', 'E. Portzline', 'Portzline']
+            },
+            {
+                id: '4602',
+                fullName: 'KEMPF, RYAN ELIZABETH',
+                email: 'ryankpink@icloud.com',
+                variants: ['Ryan Kempf', 'Ryan', 'R. Kempf', 'Kempf']
+            },
+            {
+                id: '3915',
+                fullName: 'DIAZ, ANGELA CLARICE',
+                email: 'angela.diaz468@myci.csuci.edu',
+                variants: ['Angela Diaz', 'Angela', 'A. Diaz', 'Diaz']
             },
             {
                 id: '1089',
                 fullName: 'SALAZAR, NATALIE',
+                email: 'natalie.salazar427@myci.csuci.edu',
                 variants: ['Natalie Salazar', 'Natalie', 'N. Salazar', 'Salazar']
             }
         ];
@@ -388,31 +398,34 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="email-${index}">Student Email:</label>
-                        <input type="email" id="email-${index}" placeholder="student@ugr.es">
+                        <label for="email-${index}">Email del Estudiante:</label>
+                        <input type="email" id="email-${index}" value="${student.email}" placeholder="student@ugr.es">
                     </div>
 
                     <div class="form-group">
-                        <label>Email Preview:</label>
+                        <label>Vista Previa del Email:</label>
                         <div class="email-preview" id="preview-${index}">
-                            <div class="email-subject">Subject: Your Attendance ID for Spanish Oral Course B2.1</div>
-                            <em>Enter email address to see personalized content...</em>
+                            <div class="email-subject">Asunto: Tu ID de Asistencia - Curso de Español Oral B2.1</div>
+                            <em>El email personalizado aparecerá aquí...</em>
                         </div>
                     </div>
 
-                    <div style="display: flex; gap: 10px; align-items: center;">
+                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
                         <input type="checkbox" id="sent-${index}" onchange="updateProgress()">
-                        <label for="sent-${index}" style="margin: 0; font-size: 14px;">Email sent</label>
+                        <label for="sent-${index}" style="margin: 0; font-size: 14px;">Email enviado</label>
                         <button class="btn btn-primary" style="padding: 6px 12px; font-size: 14px;" onclick="previewEmail(${index})">
-                            👁️ Preview
+                            👁️ Vista Previa
                         </button>
                         <button class="btn btn-success" style="padding: 6px 12px; font-size: 14px;" onclick="copyEmail(${index})">
-                            📋 Copy
+                            📋 Copiar
                         </button>
                     </div>
                 `;
 
                 container.appendChild(card);
+
+                // Generate initial preview with preloaded email
+                generateEmailPreview(index);
 
                 // Add email input listener
                 document.getElementById(`email-${index}`).addEventListener('input', () => {
@@ -422,52 +435,70 @@
         }
 
         function generateEmailContent(student, email) {
-            const subject = `Your Attendance ID for Spanish Oral Course B2.1`;
+            const subject = `Tu ID de Asistencia - Curso de Español Oral B2.1 / Your Attendance ID for Spanish Oral Course B2.1`;
 
-            const body = `Dear ${student.fullName.split(',')[1] || student.fullName.split(',')[0]},
+            const firstName = student.fullName.split(',')[1] || student.fullName.split(',')[0];
 
+            const body = `¡Hola ${firstName.trim()}! / Hello ${firstName.trim()}!
+
+Bienvenido/a al curso de Producción Oral B2.1 en la Universidad de Granada!
 Welcome to the Spanish Oral Production Course B2.1 at Universidad de Granada!
 
-I'm writing to provide you with your personal attendance ID for our course. This ID will be used to register your attendance in class each day.
+Te escribo para proporcionarte tu ID personal de asistencia para nuestro curso.
+I'm writing to provide you with your personal attendance ID for our course.
 
-🎯 **Your Personal Information:**
-• Full Name: ${student.fullName}
-• Student ID: ${student.id}
-• Accepted Name Variants: ${student.variants.join(', ')}
+🎯 **Tus Datos Personales / Your Personal Information:**
+• Nombre completo / Full Name: ${student.fullName}
+• ID de Estudiante / Student ID: ${student.id}
+• Variantes de nombre aceptadas / Accepted Name Variants: ${student.variants.join(', ')}
 
-📱 **How to Register Your Attendance:**
+📱 **Cómo Registrar Tu Asistencia / How to Register Your Attendance:**
 
-1️⃣ **Scan the QR Code**:
+1️⃣ **Escanea el Código QR / Scan the QR Code:**
+   - Busca el código QR que se mostrará en clase
+   - Usa la cámara de tu móvil para escanearlo
    - Look for the QR code displayed in class
    - Use your phone's camera to scan it
-   - It will open the attendance page
 
-2️⃣ **Fill the Form**:
+2️⃣ **Rellena el Formulario / Fill the Form:**
+   - Escribe tu nombre (puedes usar cualquiera de las variantes listadas)
+   - Introduce tu ID de estudiante de 4 dígitos: ${student.id}
+   - Haz clic en "Registrar Asistencia"
    - Enter your name (you can use any of the variants listed above)
    - Enter your 4-digit Student ID: ${student.id}
    - Click "Registrar Asistencia"
 
-3️⃣ **Confirmation**:
+3️⃣ **Confirmación / Confirmation:**
+   - Verás un mensaje de éxito con los detalles de tu registro
+   - El sistema registra la hora exacta de tu llegada
+   - Solo puedes registrarte una vez al día
    - You'll see a success message with your registration details
    - The system records the exact time of your arrival
    - You can only register once per day
 
-⚠️ **Important Notes:**
+⚠️ **Notas Importantes / Important Notes:**
+• Tu ID es único y confidencial - no lo compartas con otros
 • Your ID is unique and confidential - don't share it with others
+• Debes usar AMBOS: tu nombre (cualquier variante aceptada) Y tu ID correcto
 • You must use BOTH your name (any accepted variant) AND your correct ID
+• El sistema funciona con datos móviles - no necesitas WiFi
 • The system works with mobile data - no WiFi needed
+• Regístrate cuando llegues a clase
 • Make sure to register when you arrive at class
 
-🔧 **If you have any issues:**
+🔧 **Si tienes problemas / If you have any issues:**
+- Verifica que estás usando el ID correcto de 4 dígitos
 - Double-check that you're using the correct 4-digit ID
+- Prueba usando una variante diferente de nombre de la lista
 - Try using a different name variant from the list above
+- Contáctame si necesitas ayuda
 - Contact me if you need assistance
 
-I look forward to seeing you in class!
+¡Espero verte en clase! / I look forward to seeing you in class!
 
-Best regards,
+Saludos cordiales / Best regards,
 Javier Benítez Láinez
-Spanish Language Professor
+Profesor de Español / Spanish Language Professor
 Centro de Lenguas Modernas
 Universidad de Granada`;
 
@@ -480,14 +511,14 @@ Universidad de Granada`;
             const student = STUDENTS_DATA[index];
 
             if (!email) {
-                preview.innerHTML = '<div class="email-subject">Subject: Your Attendance ID for Spanish Oral Course B2.1</div><em>Enter email address to see personalized content...</em>';
+                preview.innerHTML = '<div class="email-subject">Asunto: Tu ID de Asistencia - Curso de Español Oral B2.1</div><em>Introduce una dirección de email para ver el contenido personalizado...</em>';
                 return;
             }
 
             const { subject, body } = generateEmailContent(student, email);
 
             preview.innerHTML = `
-                <div class="email-subject">Subject: ${subject}</div>
+                <div class="email-subject">Asunto: ${subject}</div>
                 <div style="white-space: pre-line;">${body}</div>
             `;
         }
@@ -497,7 +528,7 @@ Universidad de Granada`;
             const student = STUDENTS_DATA[index];
 
             if (!email) {
-                alert('Please enter an email address first.');
+                alert('Por favor, introduce una dirección de email primero.');
                 return;
             }
 
@@ -505,15 +536,15 @@ Universidad de Granada`;
 
             document.getElementById('modalBody').innerHTML = `
                 <div style="margin-bottom: 20px;">
-                    <strong>To:</strong> ${email}<br>
-                    <strong>Subject:</strong> ${subject}
+                    <strong>Para / To:</strong> ${email}<br>
+                    <strong>Asunto / Subject:</strong> ${subject}
                 </div>
                 <div style="background: #f9fafb; padding: 20px; border-radius: 8px; white-space: pre-line; line-height: 1.6;">
                     ${body}
                 </div>
                 <div style="margin-top: 20px; text-align: center;">
                     <button class="btn btn-success" onclick="copyEmail(${index}); closeModal();">
-                        📋 Copy to Clipboard
+                        📋 Copiar al Portapapeles / Copy to Clipboard
                     </button>
                 </div>
             `;
@@ -526,22 +557,22 @@ Universidad de Granada`;
             const student = STUDENTS_DATA[index];
 
             if (!email) {
-                alert('Please enter an email address first.');
+                alert('Por favor, introduce una dirección de email primero.');
                 return;
             }
 
             const { subject, body } = generateEmailContent(student, email);
 
-            const emailContent = `To: ${email}
-Subject: ${subject}
+            const emailContent = `Para / To: ${email}
+Asunto / Subject: ${subject}
 
 ${body}`;
 
             navigator.clipboard.writeText(emailContent).then(() => {
-                alert('Email copied to clipboard! You can now paste it into your email client.');
+                alert('¡Email copiado al portapapeles! Ahora puedes pegarlo en tu cliente de correo.');
             }).catch(err => {
-                console.error('Failed to copy email: ', err);
-                alert('Failed to copy email. Please try again.');
+                console.error('Error al copiar email: ', err);
+                alert('Error al copiar email. Por favor, inténtalo de nuevo.');
             });
         }
 
@@ -567,8 +598,8 @@ ${body}`;
                 if (email) {
                     const { subject, body } = generateEmailContent(student, email);
                     allEmails += `=== EMAIL ${++emailCount} ===
-To: ${email}
-Subject: ${subject}
+Para / To: ${email}
+Asunto / Subject: ${subject}
 
 ${body}
 
@@ -580,10 +611,10 @@ ${body}
 
             if (allEmails) {
                 navigator.clipboard.writeText(allEmails).then(() => {
-                    alert(`${emailCount} emails copied to clipboard! You can now paste them into your email client.`);
+                    alert(`¡${emailCount} emails copiados al portapapeles! Ahora puedes pegarlos en tu cliente de correo.`);
                 });
             } else {
-                alert('Please enter at least one email address first.');
+                alert('Por favor, introduce al menos una dirección de email primero.');
             }
         }
 
