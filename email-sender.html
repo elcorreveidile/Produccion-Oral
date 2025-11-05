@@ -486,103 +486,77 @@
 如有问题请联系教授 / Contact professor if you have issues
 ` : '';
 
-            const body = `¡Hola ${firstNameTrimmed}!
+            const body = `Hola ${firstNameTrimmed},
 
-Bienvenido/a al curso de Producción Oral B2.1 en la Universidad de Granada.
+Quería compartir contigo tu código personal para el nuevo sistema de asistencia que vamos a usar en clase.
 
-Te escribo para proporcionarte tu ID personal de asistencia para nuestro curso.
-
-🎯 **Tus Datos Personales:**
-• Nombre completo: ${student.fullName}
+🎯 **Tus Datos:**
 • ID de Estudiante: ${student.id}
-• Variantes de nombre aceptadas: ${student.variants.join(', ')}
+• Nombre completo: ${student.fullName}
+• Puedes usar cualquier variante: ${student.variants.join(', ')}
 
-📱 **Cómo Registrar Tu Asistencia:**
+📱 **Cómo funciona el sistema de asistencia:**
 
-1️⃣ **Escanea el Código QR:**
-   - Busca el código QR que se mostrará en clase
-   - Usa la cámara de tu móvil para escanearlo
-   - Se abrirá automáticamente la página de asistencia
+1️⃣ **Escanea el QR:**
+   - Verás el código QR en clase
+   - Escanéalo con tu móvil (sin necesidad de WiFi)
 
-2️⃣ **Rellena el Formulario:**
-   - Escribe tu nombre (puedes usar cualquiera de las variantes listadas arriba)
-   - Introduce tu ID de estudiante de 4 dígitos: ${student.id}
-   - Haz clic en "Registrar Asistencia"
+2️⃣ **Rellena datos:**
+   - Tu nombre (como prefieras de las opciones)
+   - Tu ID: ${student.id}
+   - Pulsa "Registrar Asistencia"
 
-3️⃣ **Confirmación:**
-   - Verás un mensaje de éxito con los detalles de tu registro
-   - El sistema registra la hora exacta de tu llegada
-   - Solo puedes registrarte una vez al día
+3️⃣ **Listo:**
+   - Queda registrado tu llegada
+   - Una vez al día por estudiante
 
-⚠️ **Notas Importantes:**
-• Tu ID es único y confidencial - no lo compartas con otros
-• Debes usar AMBOS: tu nombre (cualquier variante aceptada) Y tu ID correcto
-• El sistema funciona con datos móviles - no necesitas WiFi
-• Regístrate cuando llegues a clase
+⚠️ **Importante:**
+• Tu ID es personal, no lo compartas
+• Funciona con datos móviles
+• Si tienes problemas, avísame
 
-🔧 **Si tienes problemas:**
-- Verifica que estás usando el ID correcto de 4 dígitos
-- Prueba usando una variante diferente de nombre de la lista
-- Contáctame si necesitas ayuda
+¡Nos vemos en clase!
 
-¡Espero verte en clase!
-
-Saludos cordiales,
-Javier Benítez Láinez
-Profesor de Español
-Centro de Lenguas Modernas
-Universidad de Granada${chineseSection}
+Un saludo,
+Javier${chineseSection}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Hello ${firstNameTrimmed}!
+Hi ${firstNameTrimmed},
 
-Welcome to the Spanish Oral Production Course B2.1 at Universidad de Granada.
+I wanted to share your personal code for our new attendance system that we'll be using in class.
 
-I'm writing to provide you with your personal attendance ID for our course.
-
-🎯 **Your Personal Information:**
-• Full Name: ${student.fullName}
+🎯 **Your Information:**
 • Student ID: ${student.id}
-• Accepted Name Variants: ${student.variants.join(', ')}
+• Full Name: ${student.fullName}
+• You can use any variant: ${student.variants.join(', ')}
 
-📱 **How to Register Your Attendance:**
+📱 **How the attendance system works:**
 
-1️⃣ **Scan the QR Code:**
-   - Look for the QR code displayed in class
-   - Use your phone's camera to scan it
-   - It will automatically open the attendance page
+1️⃣ **Scan the QR:**
+   - You'll see the QR code in class
+   - Scan it with your phone (no WiFi needed)
 
-2️⃣ **Fill the Form:**
-   - Enter your name (you can use any of the variants listed above)
-   - Enter your 4-digit Student ID: ${student.id}
+2️⃣ **Fill in details:**
+   - Your name (any preferred variant)
+   - Your ID: ${student.id}
    - Click "Registrar Asistencia"
 
-3️⃣ **Confirmation:**
-   - You'll see a success message with your registration details
-   - The system records the exact time of your arrival
-   - You can only register once per day
+3️⃣ **Done:**
+   - Your arrival is registered
+   - Once per day per student
 
-⚠️ **Important Notes:**
-• Your ID is unique and confidential - don't share it with others
-• You must use BOTH your name (any accepted variant) AND your correct ID
-• The system works with mobile data - no WiFi needed
-• Make sure to register when you arrive at class
+⚠️ **Important:**
+• Your ID is personal, don't share it
+• Works with mobile data
+• If you have any issues, let me know
 
-🔧 **If you have any issues:**
-- Double-check that you're using the correct 4-digit ID
-- Try using a different name variant from the list above
-- Contact me if you need assistance
+See you in class!
 
-I look forward to seeing you in class!
+Best,
+Javier`;
 
-Best regards,
-Javier Benítez Láinez
-Spanish Language Professor
-Centro de Lenguas Modernas
-Universidad de Granada`;
-
-            const subject = `Tu ID de Asistencia - Español B2.1 / Your Attendance ID - Spanish B2.1`;
+            const subject = `Tu ID personal para asistencia / Your personal attendance ID`;
 
             return { subject, body };
         }
