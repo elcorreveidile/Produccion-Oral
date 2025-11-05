@@ -82,6 +82,7 @@
     .viewer .content strong{color:#111827}
     @media (max-width:640px){ .viewer{inset:4% 2%} .viewer .btn{flex:1;justify-content:center;min-width:120px} #fileName{flex-basis:100%;font-size:1rem} .viewer .content{padding:1rem} }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
   <!-- NAV -->
@@ -126,6 +127,19 @@
       <div class="grid grid-3">
         <div class="card">
           <h3>Datos clave</h3>
+          <div id="qr-attendance" style="text-align: center; margin: 15px 0;">
+            <h4 style="color: var(--primary-color); margin-bottom: 10px;">📱 Asistencia del Día</h4>
+            <div id="qr-code-container" style="background: white; padding: 15px; border-radius: 8px; display: inline-block; border: 2px solid var(--border-color);">
+              <div id="qr-code"></div>
+            </div>
+            <div id="qr-timer" style="margin-top: 10px; font-weight: 600; color: var(--secondary-color);"></div>
+            <p style="font-size: 0.9rem; color: var(--muted-color); margin-top: 10px;">
+              Escanear con el móvil para registrar asistencia
+            </p>
+            <button id="generate-new-qr" style="margin-top: 10px; padding: 8px 16px; background: var(--secondary-color); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+              Generar Nuevo Código
+            </button>
+          </div>
           <ul class="list">
             <li>2024/2025</li>
             <li>1 octubre – 15 diciembre</li>
@@ -565,6 +579,92 @@
       document.body.removeChild(a);
     }
 
+    // Sistema de Asistencia QR
+    let qrTimer;
+    let currentToken;
+    let timeRemaining = 300; // 5 minutes
+
+    function generateToken() {
+      const timestamp = Date.now();
+      const random = Math.random().toString(36).substring(7);
+      return `${timestamp}-${random}`;
+    }
+
+    function generateQR() {
+      currentToken = generateToken();
+      const baseUrl = window.location.origin.replace(window.location.port, '8080') || 'https://elcorreveidile.github.io';
+      const attendanceUrl = `${baseUrl}/Produccion-Oral/attendance.html?token=${currentToken}&session=Sesión actual`;
+
+      // Clear previous QR
+      document.getElementById('qr-code').innerHTML = '';
+
+      // Generate new QR
+      new QRCode(document.getElementById('qr-code'), {
+        text: attendanceUrl,
+        width: 200,
+        height: 200,
+        colorDark: '#1e40af',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.H
+      });
+
+      // Reset timer
+      timeRemaining = 300;
+      startQRTimer();
+    }
+
+    function startQRTimer() {
+      // Clear existing timer
+      if (qrTimer) {
+        clearInterval(qrTimer);
+      }
+
+      const timerElement = document.getElementById('qr-timer');
+
+      qrTimer = setInterval(() => {
+        if (timeRemaining <= 0) {
+          clearInterval(qrTimer);
+          generateQR(); // Auto-refresh when expired
+          return;
+        }
+
+        const minutes = Math.floor(timeRemaining / 60);
+        const seconds = timeRemaining % 60;
+        timerElement.textContent = `Expira en: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+        // Change color when less than 1 minute
+        if (timeRemaining < 60) {
+          timerElement.style.color = '#dc2626';
+        } else {
+          timerElement.style.color = 'var(--secondary-color)';
+        }
+
+        timeRemaining--;
+      }, 1000);
+    }
+
+    function initQRSystem() {
+      const qrContainer = document.getElementById('qr-attendance');
+      const generateBtn = document.getElementById('generate-new-qr');
+
+      if (qrContainer) {
+        // Generate initial QR
+        generateQR();
+
+        // Setup manual refresh button
+        if (generateBtn) {
+          generateBtn.addEventListener('click', () => {
+            generateQR();
+          });
+        }
+
+        // Auto-refresh every 5 minutes
+        setInterval(() => {
+          generateQR();
+        }, 5 * 60 * 1000); // 5 minutes
+      }
+    }
+
     // Mostrar fecha actual
     function updateCurrentDate() {
       const dateElement = document.getElementById('current-date');
@@ -582,9 +682,9 @@
       }
     }
 
-    // Actualizar fecha cuando se carga la página
+    // Inicializar todo cuando se carga la página
     updateCurrentDate();
-
+    initQRSystem();
     renderGuiasS1();
   </script>
 </body>

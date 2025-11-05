@@ -1,0 +1,16 @@
+# Ignore attendance records and sensitive data
+attendance-records/
+*.log
+.env
+ATTENDANCE_DATA.json
+
+# Ignore temporary files
+temp/
+*.tmp
+.DS_Store
+
+# Ignore development files
+node_modules/
+package-lock.json
+
+# Keep this file tracked
