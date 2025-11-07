@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referencia de Códigos de Estudiantes - Producción Oral B2.1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: #1e40af;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .warning {
+            background: #fef3c7;
+            border: 1px solid #fcd34d;
+            color: #92400e;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .students-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .student-card {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.2s;
+        }
+
+        .student-card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+        }
+
+        .student-id {
+            display: inline-block;
+            background: #1e40af;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .student-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .student-variants {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .student-variants strong {
+            color: #374151;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #1e40af;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .students-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="images/Logo-CLM-V1.jpg" alt="Logo CLM" class="logo">
+            <h1>Referencia de Códigos de Estudiantes</h1>
+            <p class="subtitle">Producción Oral B2.1 - Universidad de Granada</p>
+        </div>
+
+        <div class="warning">
+            ⚠️ <strong>IMPORTANTE:</strong> Esta página es solo para el profesor. No compartas estos códigos públicamente.
+            Cada estudiante debe recibir únicamente su propio código personal.
+        </div>
+
+        <div class="students-grid" id="studentsGrid">
+            <!-- Student cards will be generated here -->
+        </div>
+
+        <div class="buttons">
+            <a href="attendance-admin.html" class="btn btn-primary">
+                📊 Panel de Asistencia
+            </a>
+            <button onclick="generatePDFReference()" class="btn btn-secondary">
+                📄 Descargar PDF para imprimir
+            </button>
+            <a href="index.html" class="btn btn-secondary">
+                🏠 Página Principal
+            </a>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        // Lista de estudiantes con sus IDs y variantes
+        const STUDENTS_DATA = [
+            {
+                id: '1523',
+                fullName: 'BAI, MIAORUI',
+                variants: ['Miaorui Bai', 'Miaorui', 'M. Bai', 'Bai']
+            },
+            {
+                id: '2847',
+                fullName: 'CHAFFIN, NATHANIEL HAYEN',
+                variants: ['Nathaniel Chaffin', 'Nathaniel', 'N. Chaffin', 'Nat', 'Chaffin']
+            },
+            {
+                id: '3915',
+                fullName: 'DIAZ, ANGELA CLARICE',
+                variants: ['Angela Diaz', 'Angela', 'A. Diaz', 'Diaz']
+            },
+            {
+                id: '4602',
+                fullName: 'KEMPF, RYAN ELIZABETH',
+                variants: ['Ryan Kempf', 'Ryan', 'R. Kempf', 'Kempf']
+            },
+            {
+                id: '5789',
+                fullName: 'LANTER, WESLEY MITCHELL',
+                variants: ['Wesley Lanter', 'Wesley', 'W. Lanter', 'Lanter']
+            },
+            {
+                id: '6134',
+                fullName: 'MANCIPE, GABRIEL FELIPE',
+                variants: ['Gabriel Mancipe', 'Gabriel', 'G. Mancipe', 'Mancipe']
+            },
+            {
+                id: '7256',
+                fullName: 'MIRANDA, MARISOL ESPERANZA',
+                variants: ['Marisol Miranda', 'Marisol', 'M. Miranda', 'Miranda']
+            },
+            {
+                id: '8901',
+                fullName: 'MOREY, GABRIELLE KAI',
+                variants: ['Gabrielle Morey', 'Gabrielle', 'G. Morey', 'Morey', 'Kai']
+            },
+            {
+                id: '9467',
+                fullName: 'PORTZLINE, EVAN GRACE',
+                variants: ['Evan Portzline', 'Evan', 'E. Portzline', 'Portzline']
+            },
+            {
+                id: '1089',
+                fullName: 'SALAZAR, NATALIE',
+                variants: ['Natalie Salazar', 'Natalie', 'N. Salazar', 'Salazar']
+            }
+        ];
+
+        function initializePage() {
+            const grid = document.getElementById('studentsGrid');
+
+            STUDENTS_DATA.forEach(student => {
+                const card = document.createElement('div');
+                card.className = 'student-card';
+
+                card.innerHTML = `
+                    <div class="student-id">Código: ${student.id}</div>
+                    <div class="student-name">${student.fullName}</div>
+                    <div class="student-variants">
+                        <strong>Variantes aceptadas:</strong><br>
+                        ${student.variants.join(', ')}
+                    </div>
+                `;
+
+                grid.appendChild(card);
+            });
+        }
+
+        function generatePDFReference() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF('p', 'mm', 'a4');
+
+            // Header
+            doc.setFontSize(16);
+            doc.setFont(undefined, 'bold');
+            doc.text('UNIVERSIDAD DE GRANADA', doc.internal.pageSize.width / 2, 20, { align: 'center' });
+            doc.text('CENTRO DE LENGUAS MODERNAS', doc.internal.pageSize.width / 2, 27, { align: 'center' });
+
+            doc.setFontSize(14);
+            doc.text('Producción Oral B2.1 - Códigos de Estudiantes', doc.internal.pageSize.width / 2, 35, { align: 'center' });
+
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'normal');
+            doc.text(`Fecha: ${new Date().toLocaleDateString('es-ES')}`, doc.internal.pageSize.width / 2, 45, { align: 'center' });
+
+            // Table headers
+            const headers = ['ID', 'Nombre Completo', 'Variantes Aceptadas'];
+            const students = STUDENTS_DATA.map(student => [
+                student.id,
+                student.fullName,
+                student.variants.join(', ')
+            ]);
+
+            // Generate table
+            doc.autoTable({
+                head: [headers],
+                body: students,
+                startY: 55,
+                theme: 'grid',
+                headStyles: {
+                    fillColor: [30, 64, 175],
+                    textColor: 255,
+                    fontStyle: 'bold'
+                },
+                columnStyles: {
+                    0: { cellWidth: 25 },  // ID
+                    1: { cellWidth: 60 },  // Name
+                    2: { cellWidth: 110 }  // Variants
+                },
+                styles: {
+                    fontSize: 10,
+                    cellPadding: 3
+                }
+            });
+
+            // Footer with note
+            const finalY = doc.lastAutoTable.finalY + 15;
+            doc.setFontSize(10);
+            doc.text('Nota: Cada estudiante debe usar únicamente su código personal. Los nombres pueden escribirse en cualquier variante listada.', 20, finalY);
+            doc.text(`Generado: ${new Date().toLocaleString('es-ES')}`, 20, finalY + 7);
+
+            // Save PDF
+            doc.save('codigos_estudiantes_b2.1.pdf');
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initializePage);
+    </script>
+</body>
+</html>

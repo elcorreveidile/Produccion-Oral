@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Producción e Interacción Oral en Español — Nivel 7 (B2.1)</title>
+  <title>Producción e Interacción Oral en Español — Nivel B2.1 (Avanzado Intermedio)</title>
   <style>
     :root{
       --fg:#1f2937; --bg:#ffffff; --border:#e5e7eb; --brand:#111827; --card:#ffffff;
@@ -17,7 +17,8 @@
     /* NAV */
     .nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--border)}
     .nav .inner{display:flex;gap:.5rem;align-items:center}
-    .brand{font-weight:800}
+    .brand{font-weight:800;display:flex;align-items:center;gap:.75rem}
+    .brand .logo{height:40px;width:auto;object-fit:contain}
     .spacer{flex:1}
     .links{display:flex;gap:.5rem;align-items:center}
     .links a{display:inline-block;padding:.5rem .75rem;border:1px solid var(--border);border-radius:9999px;background:#fff;white-space:nowrap}
@@ -71,14 +72,26 @@
     .viewer .top .spacer{flex:1}
     .viewer .btn{border-color:#334155;background:#fff;color:#0f172a;font-weight:600;padding:.45rem .8rem;border-radius:.65rem;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem}
     .viewer iframe{flex:1;border:0;border-bottom-left-radius:1rem;border-bottom-right-radius:1rem;background:#fff}
-    @media (max-width:640px){ .viewer{inset:4% 2%} .viewer .btn{flex:1;justify-content:center;min-width:120px} #fileName{flex-basis:100%;font-size:1rem} }
+    .viewer .content{flex:1;border-bottom-left-radius:1rem;border-bottom-right-radius:1rem;background:#fff;padding:2rem;overflow-y:auto;font-family:Georgia, serif;line-height:1.6;color:#1f2937}
+    .viewer .content pre{white-space:pre-wrap;font-family:inherit;margin:0}
+    .viewer .content h1{font-size:1.8rem;color:#111827;margin-bottom:1rem;border-bottom:2px solid #e5e7eb;padding-bottom:0.5rem}
+    .viewer .content h2{font-size:1.4rem;color:#374151;margin-top:1.5rem;margin-bottom:0.75rem}
+    .viewer .content h3{font-size:1.2rem;color:#4b5563;margin-top:1rem;margin-bottom:0.5rem}
+    .viewer .content ul{margin:0.5rem 0;padding-left:1.5rem}
+    .viewer .content li{margin:0.3rem 0}
+    .viewer .content strong{color:#111827}
+    @media (max-width:640px){ .viewer{inset:4% 2%} .viewer .btn{flex:1;justify-content:center;min-width:120px} #fileName{flex-basis:100%;font-size:1rem} .viewer .content{padding:1rem} }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
   <!-- NAV -->
   <div class="nav" id="nav">
     <div class="container inner">
-      <div class="brand">🗣️ Producción e Interacción Oral — Nivel 7 (B2.1)</div>
+      <div class="brand">
+    <img src="images/Logo-CLM-V1.jpg" alt="Logo CLM" class="logo">
+    🗣️ Producción e Interacción Oral — Nivel B2.1 (Avanzado)
+  </div>
       <div class="spacer"></div>
       <div class="links" aria-label="Menú principal">
         <a href="#s1">Guía</a>
@@ -109,25 +122,46 @@
   <!-- SECCIÓN 1: GUÍA -->
   <section class="section" id="s1">
     <div class="container">
+      <div id="current-date" style="text-align: center; font-size: 1.2rem; font-weight: 600; color: var(--primary-color); margin-bottom: 1rem;"></div>
       <h2>📘 Guía del curso</h2>
       <div class="grid grid-3">
         <div class="card">
           <h3>Datos clave</h3>
+          <div id="qr-attendance" style="text-align: center; margin: 15px 0;">
+            <h4 style="color: var(--primary-color); margin-bottom: 10px;">📱 Asistencia del Día</h4>
+            <div id="qr-code-container" style="background: white; padding: 15px; border-radius: 8px; display: inline-block; border: 2px solid var(--border-color);">
+              <div id="qr-code"></div>
+            </div>
+            <div id="qr-timer" style="margin-top: 10px; font-weight: 600; color: var(--secondary-color);"></div>
+            <p style="font-size: 0.9rem; color: var(--muted-color); margin-top: 10px;">
+              Escanear con el móvil para registrar asistencia
+            </p>
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 10px;">
+              <button id="generate-new-qr" style="padding: 8px 16px; background: var(--secondary-color); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+                Generar Nuevo Código
+              </button>
+              <button id="open-pdf-generator" style="padding: 8px 16px; background: #059669; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem;" onclick="window.open('attendance-pdf.html', '_blank')">
+                📄 Generar Hoja de Asistencia
+              </button>
+            </div>
+          </div>
           <ul class="list">
             <li>2024/2025</li>
-            <li>5 noviembre – 18 diciembre</li>
+            <li>1 octubre – 15 diciembre</li>
             <li>0701 · 45 h · 4,5 CTS · Optativa</li>
             <li>Lunes y miércoles · Aula A4</li>
             <li><b>Profesor:</b> Javier Benítez Láinez</li>
-            <li>L-X de 08:30 a 10:30</li>
+            <li>L-X de 12:30 a 14:30</li>
             <li><b>Requisitos:</b> Prueba de nivel + B1 acreditado</li>
           </ul>
         </div>
         <div class="card">
           <h3>Objetivo general</h3>
-          <p>Desarrollar la producción e interacción oral hasta un desempeño B2.1, con fluidez, precisión y registro adecuado en contextos reales.</p>
+          <p>Desarrollar la producción e interacción oral hasta un desempeño sólido B2.1, alcanzando fluidez natural, precisión comunicativa y dominio de registros variados en contextos reales y profesionales.</p>
+          <h3 style="margin-top:.75rem">Nivel del grupo: B2.1</h3>
+          <p>Marco Común Europeo de Referencia (MCER) - Usuario Intermedio Alto. Los estudiantes pueden comprender las ideas principales de textos complejos, interactuar con cierta fluidez y espontaneidad, y producir textos claros y detallados sobre temas diversos.</p>
           <h3 style="margin-top:.75rem">Metodología</h3>
-          <p>Aprendizaje por tareas, integración de destrezas, dinámica de grupo e inmersión (dentro y fuera del aula). Aula de Cine y proyectos de campo.</p>
+          <p>Aprendizaje por tareas, integración de destrezas, dinámica de grupo e inmersión total (dentro y fuera del aula). Enfoque comunicativo con proyectos de cine, mini serie y experiencias culturales auténticas.</p>
         </div>
         <div class="card">
           <h3>Guías de la sesión</h3>
@@ -333,9 +367,9 @@
     </div>
   </section>
 
-  <footer class="footer"><div class="container">© <span id="y"></span> Producción e Interacción Oral — Nivel 7 (B2.1) · Sitio simple (HTML+CSS+JS)</div></footer>
+  <footer class="footer"><div class="container">© <span id="y"></span> Producción e Interacción Oral — Nivel B2.1 (Avanzado) · Universidad de Granada</div></footer>
 
-  <!-- Visor PDF -->
+  <!-- Visor de Documentos -->
   <div class="overlay" id="overlay"></div>
   <div class="viewer" id="viewer">
     <div class="top">
@@ -345,7 +379,8 @@
       <a class="btn" id="download" download>Descargar</a>
       <button class="btn primary" id="closeViewer">Volver</button>
     </div>
-    <iframe id="frame" title="Visor PDF" src="about:blank"></iframe>
+    <iframe id="frame" title="Visor PDF" src="about:blank" style="display:none;"></iframe>
+    <div id="textcontent" class="content" style="display:none;"></div>
   </div>
 
   <script>
@@ -358,70 +393,303 @@
     hamb?.addEventListener('click', ()=> nav.classList.toggle('open'));
     document.querySelectorAll('#mobilePanel a').forEach(a=> a.addEventListener('click', ()=> nav.classList.remove('open')));
 
-    // Visor PDF
+    // Visor de Documentos
     const overlay = document.getElementById('overlay');
     const viewer = document.getElementById('viewer');
     const frame = document.getElementById('frame');
+    const textcontent = document.getElementById('textcontent');
     const openTab = document.getElementById('openTab');
     const download = document.getElementById('download');
     const fileName = document.getElementById('fileName');
     const closeViewer = document.getElementById('closeViewer');
 
-    function openPDF(path){
-      fileName.textContent = decodeURIComponent(path.split('/').pop());
-      frame.src = path; openTab.href = path; download.href = path;
-      overlay.classList.add('show'); viewer.style.display = 'flex';
-      document.body.style.overflow='hidden';
-    }
-    function closePDF(){
-      overlay.classList.remove('show'); viewer.style.display = 'none';
-      frame.src = 'about:blank'; document.body.style.overflow='';
-    }
-    overlay.addEventListener('click', closePDF);
-    closeViewer.addEventListener('click', closePDF);
+    function formatTextContent(text) {
+      // Convertir texto plano a HTML con formato
+      let formatted = text
+        .replace(/\n\n+/g, '</p><p>')
+        .replace(/^\S+/m, '<p>')
+        .replace(/([A-Z][A-ZÁ-Ú\s]+:)/g, '<strong>$1</strong>')
+        .replace(/SESIÓN (\d+):/g, '<h1>SESIÓN $1:')
+        .replace(/(\d+\.\s[^:]+:)/g, '<h2>$1</h2>')
+        .replace(/^•\s(.+)$/gm, '<li>$1</li>')
+        .replace(/^- (.+)$/gm, '<li>$1</li>');
 
-    // Delegación: cualquier [data-pdf] abre visor
+      // Envolver listas
+      formatted = formatted.replace(/(<li>.*?<\/li>)/gs, '<ul>$1</ul>');
+      formatted += '</p>';
+
+      return formatted;
+    }
+
+    async function openDocument(path){
+      fileName.textContent = decodeURIComponent(path.split('/').pop());
+      const extension = path.split('.').pop().toLowerCase();
+
+      openTab.href = path;
+      download.href = path;
+      overlay.classList.add('show');
+      viewer.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+
+      if (extension === 'pdf') {
+        // Mostrar PDF en iframe
+        frame.style.display = 'block';
+        textcontent.style.display = 'none';
+        frame.src = path;
+      } else if (extension === 'txt' || extension === 'rtf') {
+        // Mostrar texto con formato
+        frame.style.display = 'none';
+        textcontent.style.display = 'block';
+
+        try {
+          const response = await fetch(path);
+          if (!response.ok) throw new Error('No se pudo cargar el archivo');
+
+          let text = await response.text();
+
+          // Si es RTF, eliminar código RTF básico
+          if (extension === 'rtf') {
+            text = text.replace(/\\[^a-zA-Z]+\d*/g, '')
+                      .replace(/\{[^}]*\}/g, '')
+                      .replace(/\\par/g, '\n')
+                      .replace(/\\tab/g, '  ')
+                      .replace(/\\'d[0-9a-fA-F]{2}/g, '')
+                      .replace(/\\[a-zA-Z]+\s*/g, '');
+          }
+
+          textcontent.innerHTML = formatTextContent(text);
+        } catch (error) {
+          textcontent.innerHTML = `<p>Error al cargar el documento: ${error.message}</p>`;
+        }
+      } else {
+        // Para otros tipos, abrir en nueva pestaña
+        window.open(path, '_blank');
+        closeDocument();
+      }
+    }
+
+    function closeDocument(){
+      overlay.classList.remove('show');
+      viewer.style.display = 'none';
+      frame.src = 'about:blank';
+      textcontent.innerHTML = '';
+      document.body.style.overflow = '';
+    }
+
+    overlay.addEventListener('click', closeDocument);
+    closeViewer.addEventListener('click', closeDocument);
+
+    // Delegación: cualquier [data-pdf] o [data-doc] abre visor
     document.addEventListener('click', (e)=>{
-      const target = e.target.closest('[data-pdf]');
-      if(target){ e.preventDefault(); openPDF(target.getAttribute('data-pdf')); }
+      const target = e.target.closest('[data-pdf], [data-doc]');
+      if(target){
+        e.preventDefault();
+        const path = target.getAttribute('data-pdf') || target.getAttribute('data-doc');
+        openDocument(path);
+      }
     });
 
     // ===== GUÍAS POR SESIÓN (SECCIÓN 1) =====
     // Sube PDFs a materials/cuadernos/ con estos nombres o cámbialos aquí
     const GUIAS_S1 = [
-      { t: 'Sesión 1 · Presentaciones y situación inicial', href: 'materials/cuadernos/S1_Presentaciones_Inicial.rtf' },
-      { t: 'Sesión 2 · Debate: ¿Mudarse a España?', href: 'materials/cuadernos/S2_Debate_Mudarse.rtf' },
-      { t: 'Sesión 3 · Situación: Buscar piso en Granada', href: 'materials/cuadernos/S3_Buscar_Piso.rtf' },
-      { t: 'Sesión 4 · Debate: Cultura de tapas vs. comida rápida', href: 'materials/cuadernos/S4_Debate_Tapas.pdf' },
-      { t: 'Sesión 5 · Situación: En el mercado municipal', href: 'materials/cuadernos/S5_Mercado.pdf' },
-      { t: 'Sesión 6 · Debate: ¿Estudiar o trabajar en el extranjero?', href: 'materials/cuadernos/S6_Debate_Estudiar_Trabajar.pdf' },
-      { t: 'Sesión 7 · Situación: Problemas con el vecindario', href: 'materials/cuadernos/S7_Vecinos.pdf' },
-      { t: 'Sesión 8 · Debate: Tradición vs. modernidad en España', href: 'materials/cuadernos/S8_Debate_Tradicion.pdf' },
-      { t: 'Sesión 9 · Situación: Preparar una cena española', href: 'materials/cuadernos/S9_Cena_Espanola.pdf' },
-      { t: 'Sesión 10 · Debate: Turismo sostenible en Granada', href: 'materials/cuadernos/S10_Debate_Turismo.pdf' },
-      { t: 'Sesión 11 · Situación: Emergencia médica', href: 'materials/cuadernos/S11_Emergencia_Medica.pdf' },
-      { t: 'Sesión 12 · Debate: Redes sociales y relaciones', href: 'materials/cuadernos/S12_Debate_Redes_Sociales.pdf' },
-      { t: 'Sesión 13 · Presentación final: Proyecto mini serie', href: 'materials/cuadernos/S13_Presentacion_Final.pdf' },
+      { t: 'Sesión 1 · Poesía - Javier Egea (completada)', href: 'materials/cuadernos/S1_Produccion_Oral_Mejorado.pdf', type: 'pdf' },
+      { t: 'Sesión 2 · Ruta de tapas (completada)', href: 'materials/cuadernos/S2_Produccion_Oral_Mejorado.pdf', type: 'pdf' },
+      { t: 'Sesión 3 · Situación: Buscar piso en Granada', href: 'materials/cuadernos/S3_Produccion_Oral_Mejorado.pdf', type: 'pdf' },
+      { t: 'Sesión 4 · Debate: Cultura de tapas vs. comida rápida', href: 'materials/cuadernos/S4_Produccion_Oral_Mejorado.pdf', type: 'pdf' },
+      { t: 'Sesión 5 · Situación: En el mercado municipal', href: 'materials/cuadernos/S5_Produccion_Oral_Mejorado.pdf', type: 'pdf' },
+      { t: 'Sesión 6 · Debate: ¿Estudiar o trabajar en el extranjero?', href: 'materials/cuadernos/S6_Produccion_Oral_Mejorado.pdf', type: 'pdf' },
+      { t: 'Sesión 7 · Situación: Problemas con el vecindario', href: 'materials/cuadernos/S7_Produccion_Oral_Mejorado.pdf', type: 'pdf' },
+      { t: 'Sesión 8 · Debate: Tradición vs. modernidad en España', href: 'materials/cuadernos/S8_Produccion_Oral_Mejorado.pdf', type: 'pdf' },
+      { t: 'Sesión 9 · Situación: Preparar una cena española', href: 'materials/cuadernos/S9_Produccion_Oral_Mejorado.pdf', type: 'pdf' },
+      { t: 'Sesión 10 · Debate: Turismo sostenible en Granada', href: 'materials/cuadernos/S10_Produccion_Oral_Mejorado.pdf', type: 'pdf' },
+      { t: 'Sesión 11 · Situación: Emergencia médica', href: 'materials/cuadernos/S11_Produccion_Oral_Mejorado.pdf', type: 'pdf' },
+      { t: 'Sesión 12 · Debate: Redes sociales y relaciones', href: 'materials/cuadernos/S12_Produccion_Oral_Mejorado.pdf', type: 'pdf' },
+      { t: 'Sesión 13 · Presentación final: Proyecto mini serie', href: 'materials/cuadernos/S13_Produccion_Oral_Mejorado.pdf', type: 'pdf' },
+    ];
+
+    // Lista de sesiones que tienen PDFs generados (actualizado a 2025)
+    const SESSIONS_AVAILABLE = [
+      'S1_Produccion_Oral_Mejorado.pdf',
+      'S2_Produccion_Oral_Mejorado.pdf',
+      'S3_Produccion_Oral_Mejorado.pdf',
+      'S4_Produccion_Oral_Mejorado.pdf',
+      'S5_Produccion_Oral_Mejorado.pdf',
+      'S6_Produccion_Oral_Mejorado.pdf',
+      'S7_Produccion_Oral_Mejorado.pdf',
+      'S8_Produccion_Oral_Mejorado.pdf',
+      'S9_Produccion_Oral_Mejorado.pdf',
+      'S10_Produccion_Oral_Mejorado.pdf',
+      'S11_Produccion_Oral_Mejorado.pdf',
+      'S12_Produccion_Oral_Mejorado.pdf',
+      'S13_Produccion_Oral_Mejorado.pdf'
     ];
 
     function renderGuiasS1(){
       const chips = document.getElementById('chips-s1');
       const list = document.getElementById('lista-s1');
       chips.innerHTML = ''; list.innerHTML = '';
-      GUIAS_S1.forEach((s)=>{
+
+      GUIAS_S1.forEach((s) => {
         const span = document.createElement('span');
-        span.className = 'chip'; span.textContent = s.t;
-        span.onclick = ()=>{
+        span.className = 'chip';
+        span.textContent = s.t;
+
+        span.onclick = () => {
           document.querySelectorAll('#chips-s1 .chip').forEach(c=>c.classList.remove('active'));
           span.classList.add('active');
-          list.innerHTML = `<li><button class="btn primary" data-pdf="${s.href}">⬇️ Abrir/descargar (${s.t})</button></li>`;
+
+          // Verificar si el archivo está disponible usando la lista manual
+          const fileName = s.href.split('/').pop();
+          const fileExists = SESSIONS_AVAILABLE.includes(fileName);
+
+          if (fileExists) {
+            // Archivo existe - mostrar opciones de descarga/visualización
+            const isPDF = s.type === 'pdf' || s.href.endsWith('.pdf');
+            const fileIcon = isPDF ? '📄' : '📝';
+            const dataAttr = isPDF ? 'data-pdf' : 'data-doc';
+
+            list.innerHTML = `
+              <li><button class="btn primary" ${dataAttr}="${s.href}">${fileIcon} Ver en navegador (${s.t})</button></li>
+              <li><button class="btn" onclick="window.open('${s.href}', '_blank')">🔗 Abrir en nueva pestaña</button></li>
+              <li><button class="btn" onclick="downloadFile('${s.href}', '${s.t}.pdf')">💾 Descargar directamente</button></li>
+            `;
+          } else {
+            // Archivo no existe - mostrar mensaje informativo
+            list.innerHTML = `
+              <li class="muted">📝 ${s.t}</li>
+              <li class="muted" style="font-size: 0.9rem; margin-top: 10px;">
+                ⚠️ Este material estará disponible próximamente.<br>
+                Todas las sesiones 1-13 ya están disponibles en PDF de alta calidad.
+              </li>
+              ${s.href.includes('S1') || s.href.includes('S2') || s.href.includes('S3') ?
+                '<li><button class="btn" onclick="window.open(\'materials/cuadernos/' + s.href.split('/').pop().replace('Produccion_Oral', 'txt') + '\', \'_blank\')">📄 Ver versión original (.txt)</button></li>' :
+                ''}
+            `;
+          }
         };
         chips.appendChild(span);
       });
+
       if(GUIAS_S1[0]) setTimeout(()=> chips.querySelector('.chip')?.click(), 0);
       else list.innerHTML = '<li class="muted">No hay guías subidas todavía.</li>';
     }
 
+    // Función para descargar archivos directamente
+    function downloadFile(url, filename) {
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    // Sistema de Asistencia QR
+    let qrTimer;
+    let currentToken;
+    let timeRemaining = 300; // 5 minutes
+
+    function generateToken() {
+      const timestamp = Date.now();
+      const random = Math.random().toString(36).substring(7);
+      return `${timestamp}-${random}`;
+    }
+
+    function generateQR() {
+      currentToken = generateToken();
+      const baseUrl = window.location.origin.replace(window.location.port, '8080') || 'https://elcorreveidile.github.io';
+      const attendanceUrl = `${baseUrl}/Produccion-Oral/attendance.html?token=${currentToken}&session=Sesion actual`;
+
+      // Clear previous QR
+      document.getElementById('qr-code').innerHTML = '';
+
+      // Generate new QR
+      new QRCode(document.getElementById('qr-code'), {
+        text: attendanceUrl,
+        width: 200,
+        height: 200,
+        colorDark: '#1e40af',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.H
+      });
+
+      // Reset timer
+      timeRemaining = 300;
+      startQRTimer();
+    }
+
+    function startQRTimer() {
+      // Clear existing timer
+      if (qrTimer) {
+        clearInterval(qrTimer);
+      }
+
+      const timerElement = document.getElementById('qr-timer');
+
+      qrTimer = setInterval(() => {
+        if (timeRemaining <= 0) {
+          clearInterval(qrTimer);
+          generateQR(); // Auto-refresh when expired
+          return;
+        }
+
+        const minutes = Math.floor(timeRemaining / 60);
+        const seconds = timeRemaining % 60;
+        timerElement.textContent = `Expira en: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+        // Change color when less than 1 minute
+        if (timeRemaining < 60) {
+          timerElement.style.color = '#dc2626';
+        } else {
+          timerElement.style.color = 'var(--secondary-color)';
+        }
+
+        timeRemaining--;
+      }, 1000);
+    }
+
+    function initQRSystem() {
+      const qrContainer = document.getElementById('qr-attendance');
+      const generateBtn = document.getElementById('generate-new-qr');
+
+      if (qrContainer) {
+        // Generate initial QR
+        generateQR();
+
+        // Setup manual refresh button
+        if (generateBtn) {
+          generateBtn.addEventListener('click', () => {
+            generateQR();
+          });
+        }
+
+        // Auto-refresh every 5 minutes
+        setInterval(() => {
+          generateQR();
+        }, 5 * 60 * 1000); // 5 minutes
+      }
+    }
+
+    // Mostrar fecha actual
+    function updateCurrentDate() {
+      const dateElement = document.getElementById('current-date');
+      if (dateElement) {
+        const today = new Date();
+        const days = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+        const months = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+
+        const dayName = days[today.getDay()];
+        const day = today.getDate();
+        const monthName = months[today.getMonth()];
+        const year = today.getFullYear();
+
+        dateElement.textContent = `Hoy es ${dayName}, ${day} de ${monthName} de ${year}`;
+      }
+    }
+
+    // Inicializar todo cuando se carga la página
+    updateCurrentDate();
+    initQRSystem();
     renderGuiasS1();
   </script>
 </body>

@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador Profesional de PDFs - Producción Oral</title>
+    <style>
+        :root {
+            --primary-color: #1e40af;
+            --secondary-color: #dc2626;
+            --accent-color: #059669;
+            --bg-color: #ffffff;
+            --text-color: #111827;
+            --border-color: #e5e7eb;
+            --light-bg: #f9fafb;
+            --muted-color: #6b7280;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--bg-color);
+        }
+
+        /* Cabecera profesional */
+        .header {
+            text-align: center;
+            border-bottom: 3px solid var(--primary-color);
+            padding: 30px 0;
+            margin-bottom: 30px;
+            page-break-after: avoid;
+        }
+
+        .header h1 {
+            font-size: 18pt;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .header .subtitle {
+            font-size: 12pt;
+            color: var(--muted-color);
+            margin-bottom: 4px;
+        }
+
+        .header .session-title {
+            font-size: 16pt;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-top: 10px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .header .logo {
+            max-width: 120px;
+            height: auto;
+            margin-bottom: 15px;
+            page-break-inside: avoid;
+        }
+
+        /* Información de sesión */
+        .session-info {
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--primary-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+            page-break-inside: avoid;
+        }
+
+        .session-info h2 {
+            font-size: 14pt;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .session-info p {
+            margin: 4px 0;
+            font-size: 11pt;
+        }
+
+        /* Secciones principales */
+        .section-container {
+            page-break-inside: avoid;
+            margin: 30px 0;
+            min-height: 200px;
+        }
+
+        .section-header {
+            page-break-after: avoid;
+            margin-bottom: 20px;
+        }
+
+        .section-header h2 {
+            font-size: 16pt;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 5px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Objetivos */
+        .objectives-section {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-left: 5px solid #f59e0b;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+
+        .objectives-section h2 {
+            color: #92400e;
+            font-size: 14pt;
+            margin-bottom: 15px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Contenidos */
+        .content-section {
+            background: #e0f2fe;
+            border: 1px solid #0284c7;
+            border-left: 5px solid #0284c7;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+
+        .content-section h3 {
+            color: #075985;
+            font-size: 13pt;
+            margin: 15px 0 10px 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Actividades */
+        .activities-section {
+            background: #dcfce7;
+            border: 1px solid #16a34a;
+            border-left: 5px solid #16a34a;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+
+        .activities-section h2 {
+            color: #14532d;
+            font-size: 14pt;
+            margin-bottom: 15px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .activity {
+            background: white;
+            border: 1px solid #e5e7eb;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .activity h3 {
+            color: var(--primary-color);
+            font-size: 12pt;
+            margin-bottom: 8px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .activity .objective {
+            color: var(--muted-color);
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        /* Mini serie */
+        .mini-serie-section {
+            background: #fae8ff;
+            border: 1px solid #9333ea;
+            border-left: 5px solid #9333ea;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+
+        .mini-serie-section h2 {
+            color: #581c87;
+            font-size: 14pt;
+            margin-bottom: 15px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Diálogo */
+        .dialogue {
+            background: white;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .dialogue-line {
+            margin: 8px 0;
+        }
+
+        .dialogue-line strong {
+            color: var(--accent-color);
+        }
+
+        /* Tarea y Evaluación */
+        .task-section {
+            background: #dbeafe;
+            border: 1px solid #2563eb;
+            border-left: 5px solid #2563eb;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+            page-break-inside: avoid;
+        }
+
+        .task-section h2 {
+            color: #1e3a8a;
+            font-size: 14pt;
+            margin-bottom: 15px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .evaluation-section {
+            background: #fce7f3;
+            border: 1px solid #db2777;
+            border-left: 5px solid #db2777;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+
+        .evaluation-section h2 {
+            color: #831843;
+            font-size: 14pt;
+            margin-bottom: 15px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Listas */
+        ul {
+            margin: 8px 0;
+            padding-left: 25px;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        /* Saltos de página */
+        .page-break {
+            page-break-before: always;
+        }
+
+        .avoid-break {
+            page-break-inside: avoid;
+        }
+
+        /* Controles (no se imprimen) */
+        .controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 1000;
+            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+        }
+
+        .controls button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .controls button:hover {
+            background: #1d4ed8;
+        }
+
+        /* Estilos de impresión */
+        @media print {
+            .controls {
+                display: none;
+            }
+
+            body {
+                margin: 0;
+                font-size: 11pt;
+            }
+
+            .header {
+                padding: 20px 0;
+            }
+
+            .header h1 {
+                font-size: 16pt;
+            }
+
+            .header .subtitle {
+                font-size: 11pt;
+            }
+
+            .section-container {
+                margin: 20px 0;
+            }
+
+            /* Eliminar headers y footers del navegador */
+            @page {
+                size: A4;
+                margin: 2cm;
+                @top-center {
+                    content: "";
+                }
+                @bottom-center {
+                    content: "";
+                }
+                @top-right {
+                    content: "";
+                }
+                @bottom-right {
+                    content: "";
+                }
+            }
+        }
+
+        /* Grid para actividades */
+        .activity-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        /* Espaciado consistente */
+        .spacer {
+            height: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Controles (no se imprimen) -->
+    <div class="controls">
+        <button onclick="window.print()">🖨️ Imprimir PDF</button>
+        <button onclick="generatePDF()">📄 Generar PDF</button>
+    </div>
+
+    <!-- Contenido principal -->
+    <div id="main-content">
+        <!-- El contenido se generará dinámicamente -->
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        // Importar datos completos del generador original
+        const sessionData = {
+            'S1': {
+                title: 'Poesía - Javier Egea (sesión completada)',
+                date: 'Miércoles 01/10/2024',
+                time: '12:30 - 14:30',
+                objectives: [
+                    'Presentarse y presentar a compañeros usando estructuras variadas',
+                    'Establecer el nivel B2.1 como referencia',
+                    'Introducir el proyecto de mini serie "Para mudarse a España"',
+                    'Evaluar necesidades individuales de los estudiantes'
+                ],
+                content: {
+                    expressions: [
+                        '"Me llamo... y soy de..."',
+                        '"Vengo de... pero vivo en..."',
+                        '"Estoy estudiando/trabajando en..."',
+                        '"Lo que más me gusta de España es..."',
+                        '"Mi objetivo con este curso es..."'
+                    ],
+                    vocabulary: [
+                        'Nacionalidades y países',
+                        'Profesiones y estudios',
+                        'Aficiones e intereses',
+                        'Características personales'
+                    ],
+                    grammar: [
+                        'Uso de ser/estar en presentaciones',
+                        'Pretérito perfecto vs. indefinido',
+                        'Comparativos y superlativos',
+                        'Expresiones de frecuencia'
+                    ]
+                },
+                activities: [
+                    {
+                        name: '"Presentaciones en círculo" (20 minutos)',
+                        description: 'Cada estudiante se presenta usando 3 frases diferentes',
+                        objective: 'Fluidez y espontaneidad'
+                    },
+                    {
+                        name: '"Entrevista por parejas" (25 minutos)',
+                        description: 'En parejas, se entrevistan mutuamente',
+                        objective: 'Práctica de preguntas y respuestas'
+                    },
+                    {
+                        name: '"Mi personaje para la mini serie" (30 minutos)',
+                        description: 'Brainstorming individual: ¿Quién sería yo en "Para mudarse a España"?',
+                        objective: 'Introducción al proyecto final'
+                    }
+                ],
+                miniSerie: {
+                    scene: '"La llegada al aeropuerto"',
+                    characters: [
+                        'El estudiante extranjero (protagonista)',
+                        'El compañero de piso español',
+                        'El agente de inmobiliaria',
+                        'El dueño del bar de tapas'
+                    ],
+                    dialogue: [
+                        { speaker: 'A', text: '"¡Hola! ¿Eres [nombre]? Soy [nombre], tu compañero de piso."' },
+                        { speaker: 'B', text: '"¡Sí, por fin! El vuelvo tuvo un retraso terrible. ¿Cómo está el piso?"' },
+                        { speaker: 'A', text: '"Perfecto. Te va a encantar. Está en el centro, cerca de todo."' },
+                        { speaker: 'B', text: '"¿Y los vecinos? ¿son amables?"' },
+                        { speaker: 'A', text: '"Súper amables. Ayer mismo la vecina del 3º me invitó a unas tapas..."' }
+                    ]
+                },
+                task: [
+                    'Preparar una presentación de 2 minutos sobre "Mi experiencia en España"',
+                    'Grabar un audio de 1 minuto presentándose como personaje de la mini serie',
+                    'Investigar 3 expresiones coloquiales granadinas'
+                ],
+                evaluation: [
+                    'Participación activa en todas las actividades',
+                    'Uso adecuado de estructuras B2.1',
+                    'Fluidez en presentaciones espontáneas',
+                    'Creatividad en el desarrollo del personaje'
+                ]
+            },
+            'S2': {
+                title: 'Ruta de tapas (sesión completada)',
+                date: 'Lunes 06/10/2024',
+                time: '12:30 - 14:30',
+                objectives: [
+                    'Practicar estructuras para expresar opiniones y argumentos',
+                    'Desarrollar vocabulario relacionado con ventajas/desventajas',
+                    'Introducir conectores discursivos para debates',
+                    'Crear material para el capítulo 1 de la mini serie'
+                ],
+                content: {
+                    expressions: [
+                        '"Desde mi punto de vista..."',
+                        '"Me parece que..."',
+                        '"En mi opinión..."',
+                        '"Creo que..."',
+                        '"Estoy convencido/a de que..."'
+                    ],
+                    vocabulary: [
+                        'Ventajas: oportunidad, experiencia, crecimiento, enriquecimiento',
+                        'Desventajas: dificultad, adaptación, nostalgia, barreras',
+                        'Aspectos culturales: costumbres, tradiciones, gastronomía',
+                        'Aspectos prácticos: vivienda, trabajo, documentos, idioma'
+                    ],
+                    connectors: [
+                        'Para añadir: además, también, es más',
+                        'Para contrastar: sin embargo, no obstante, por otro lado',
+                        'Para concluir: en conclusión, finalmente, en resumen'
+                    ]
+                },
+                activities: [
+                    {
+                        name: '"Torbellino de ideas" (15 minutos)',
+                        description: 'En grupos de 4, escribir ventajas de mudarse a España',
+                        objective: 'Activar vocabulario y estructuras'
+                    },
+                    {
+                        name: '"Debate estructurado" (40 minutos)',
+                        description: 'Dividir la clase en dos grupos: A favor y en contra',
+                        objective: 'Práctica de conectores y expresiones de opinión'
+                    },
+                    {
+                        name: '"Mini-debates por parejas" (25 minutos)',
+                        description: 'Temas específicos: trabajo, estudios, vida social, costumbres',
+                        objective: 'Práctica espontánea y fluidez'
+                    }
+                ],
+                miniSerie: {
+                    scene: '"La decisión de mudarse"',
+                    characters: [
+                        'Protagonista (decidiendo mudarse)',
+                        'Amigo/a en país de origen (en contra)',
+                        'Amigo/a español (a favor)',
+                        'Familiar (neutral/preocupado)'
+                    ],
+                    dialogue: [
+                        { speaker: 'Amigo origen', text: '"¿Estás seguro/a? Es un cambio muy grande."' },
+                        { speaker: 'Protagonista', text: '"Sé que es difícil, pero es una oportunidad única."' },
+                        { speaker: 'Amigo español', text: '"España es increíble. La gente es muy acogedora."' },
+                        { speaker: 'Amigo origen', text: '"Pero ¿y el idioma? ¿y la cultura?"' },
+                        { speaker: 'Protagonista', text: '"Por eso quiero ir, para aprender y crecer."' }
+                    ]
+                },
+                task: [
+                    'Escribir un párrafo argumentando tu posición personal sobre mudarse a España',
+                    'Preparar 3 preguntas para una entrevista sobre experiencias de extranjeros en España',
+                    'Investigar sobre el proceso de búsqueda de vivienda en Granada'
+                ],
+                evaluation: [
+                    'Uso adecuado de expresiones de opinión',
+                    'Empleo correcto de conectores discursivos',
+                    'Fluidez en la argumentación',
+                    'Capacidad de escuchar y responder a argumentos contrarios'
+                ]
+            },
+            'S3': {
+                title: 'Situación: Buscar piso en Granada',
+                date: 'Miércoles 05/11/2025',
+                time: '12:30 - 14:30',
+                objectives: [
+                    'Practicar vocabulario relacionado con vivienda y alquiler',
+                    'Desarrollar habilidades para negociar y preguntar',
+                    'Simular situaciones reales de búsqueda de piso',
+                    'Crear escenas para la mini serie'
+                ],
+                content: {
+                    vocabulary: [
+                        'Tipos: piso, apartamento, estudio, ático, bajo',
+                        'Habitaciones: salón, dormitorio, cocina, baño, balcón, terraza',
+                        'Muebles: sofá, cama, mesa, sillas, armario, estantería',
+                        'Servicios: calefacción, aire acondicionado, internet, ascensor'
+                    ],
+                    expressions: [
+                        '"¿Cuánto es el alquiler?"',
+                        '"¿Qué gastos incluye?"',
+                        '"¿Está amueblado?"',
+                        '"¿Hay depósito?"',
+                        '"¿Cuándo puedo visitarla?"'
+                    ],
+                    grammar: [
+                        'Condicional para preguntas educadas: "¿Podría visitar...?"',
+                        'Comparativos: "más grande que", "menos caro que"',
+                        'Expresiones de necesidad: "necesito", "busco", "prefiero"'
+                    ]
+                },
+                activities: [
+                    {
+                        name: '"Vocabulario visual" (20 minutos)',
+                        description: 'Presentación de imágenes de diferentes tipos de viviendas',
+                        objective: 'Asegurar dominio del vocabulario básico'
+                    },
+                    {
+                        name: '"Llamadas telefónicas" (30 minutos)',
+                        description: 'Por parejas: uno es el casero/a, otro el inquilino/a',
+                        objective: 'Práctica de expresiones telefónicas y preguntas'
+                    },
+                    {
+                        name: '"Visita al piso" (35 minutos)',
+                        description: 'En grupos de 3: casero/a, inquilino/a, amigo/a',
+                        objective: 'Integración de todas las habilidades'
+                    }
+                ],
+                miniSerie: {
+                    scene: '"La primera visita al piso"',
+                    characters: [
+                        'Protagonista (buscando piso)',
+                        'Casero/a español/a',
+                        'Compañero/a de piso potencial',
+                        'Agente inmobiliario/a'
+                    ],
+                    dialogue: [
+                        { speaker: 'Casero', text: '"Este es el piso. Como puede ver, está muy bien ubicado."' },
+                        { speaker: 'Protagonista', text: '"Me encanta la luz. ¿Cuánto es el alquiler?"' },
+                        { speaker: 'Casero', text: '"Son 600 euros, más gastos. ¿Dónde trabaja?"' },
+                        { speaker: 'Protagonista', text: '"En la universidad. ¿Está bien comunicado?"' },
+                        { speaker: 'Casero', text: '"Perfecto. Hay autobús cada 10 minutos."' }
+                    ]
+                },
+                task: [
+                    'Preparar un anuncio de piso (real o imaginario)',
+                    'Investigar precios de alquiler en diferentes zonas de Granada',
+                    'Grabar un audio de 2 minutos describiendo tu piso ideal',
+                    'Preparar 5 preguntas para un casero/a'
+                ],
+                evaluation: [
+                    'Uso correcto del vocabulario de vivienda',
+                    'Fluidez en simulaciones de llamadas',
+                    'Capacidad de negociación',
+                    'Claridad en la descripción de espacios'
+                ],
+                granadaVocabulary: [
+                    '"Piso céntrico": en el centro',
+                    '"Cerca de la facultad": bien ubicado para estudiantes',
+                    '"Barrio tranquilo": zona residencial',
+                    '"Bien comunicado": con buen transporte público',
+                    '"Primera planta": piso bajo (fácil acceso)'
+                ]
+            },
+            'S4': {
+                title: 'Debate: Cultura de tapas vs. comida rápida',
+                date: 'Lunes 10/11/2025',
+                time: '12:30 - 14:30',
+                objectives: [
+                    'Practicar vocabulario gastronómico y cultural',
+                    'Desarrollar argumentos sobre tradición vs. modernidad',
+                    'Introducir expresiones para comparar y contrastar',
+                    'Crear material para escena de restaurante/bar'
+                ],
+                content: {
+                    vocabulary: [
+                        'Tapas: albóndigas, croquetas, jamón, tortilla, aceitunas',
+                        'Comida rápida:汉堡, pizza, kebab, comida precocinada',
+                        'Cultura tapeo: tapeo, ir de tapas, ración, media ración',
+                        'Adjetivos gastronómicos: artesanal, casero, típico, innovador'
+                    ],
+                    expressions: [
+                        '"Desde mi punto de vista, la cultura de tapas es..."',
+                        '"Por un lado..., por otro lado..."',
+                        '"Aunque es más rápido, prefiero..."',
+                        '"En mi opinión, lo importante es..."'
+                    ],
+                    grammar: [
+                        'Comparativos: más saludable que, menos tradicional que',
+                        'Condicional: me gustaría probar, preferiría comer',
+                        'Subjuntivo: es importante que se conserve, recomiendo que pruebes'
+                    ]
+                },
+                activities: [
+                    {
+                        name: '"Gastro-vocabulario" (15 minutos)',
+                        description: 'Presentación visual de tapas y comida rápida',
+                        objective: 'Dominar vocabulario gastronómico'
+                    },
+                    {
+                        name: '"Debate: Tradición vs. Conveniencia" (40 minutos)',
+                        description: 'Dividir clase: defensores de tapas vs. comida rápida',
+                        objective: 'Practicar argumentación y comparación'
+                    },
+                    {
+                        name: '"Rol-play: En el bar" (25 minutos)',
+                        description: 'Simular conversación en bar tapas vs. restaurante rápido',
+                        objective: 'Aplicar vocabulario en contexto real'
+                    }
+                ],
+                miniSerie: {
+                    scene: '"El primer encuentro gastronómico"',
+                    characters: [
+                        'Protagonista (descubriendo la comida local)',
+                        'Amigo español (defensor de la tapa)',
+                        'Amigo extranjero (prefiere opciones rápidas)',
+                        'Camarero/a'
+                    ],
+                    dialogue: [
+                        { speaker: 'Amigo español', text: '"¿Qué te apetece? Podemos ir de tapas."' },
+                        { speaker: 'Protagonista', text: '"¿De tapas? No estoy seguro/a de entender."' },
+                        { speaker: 'Amigo español', text: '"¡Es lo mejor! Probamos un poco de todo."' },
+                        { speaker: 'Amigo extranjero', text: '"¿Y si vamos a un sitio más rápido? Tengo hambre."' },
+                        { speaker: 'Protagonista', text: '"Me gusta la idea de probar cosas diferentes."' }
+                    ]
+                },
+                task: [
+                    'Investigar sobre 3 tipos de tapas tradicionales granadinas',
+                    'Preparar argumento sobre ventajas de la cultura de tapeo',
+                    'Grabar audio explicando tu comida favorita de tu país',
+                    'Escribir reseña de bar/restaurant en Granada'
+                ],
+                evaluation: [
+                    'Uso adecuado de vocabulario gastronómico',
+                    'Fluidez en expresión de preferencias',
+                    'Capacidad de comparar tradiciones culturales',
+                    'Creatividad en rol-plays gastronómicos'
+                ]
+            },
+            'S5': {
+                title: 'Situación: En el mercado municipal',
+                date: 'Miércoles 12/11/2025',
+                time: '12:30 - 14:30',
+                objectives: [
+                    'Practicar vocabulario de compras y alimentos',
+                    'Desarrollar habilidades para preguntar precios y cantidades',
+                    'Simular interacciones en mercado tradicional',
+                    'Crear escenas para mini serie de compra de alimentos'
+                ],
+                content: {
+                    vocabulary: [
+                        'Frutas: manzana, naranja, plátano, uvas, fresas',
+                        'Verduras: tomate, pimiento, cebolla, ajo, lechuga',
+                        'Cantidades: kilo, medio kilo, docena, puñado, unidad',
+                        'Calidad: fresco, maduro, ecológico, de temporada, artesanal'
+                    ],
+                    expressions: [
+                        '"¿Cuánto está el kilo de...?"',
+                        '"¿Me pone...?"',
+                        '"¿Está fresco esto?"',
+                        '"¿Me lo puede poner en una bolsa?"',
+                        '"¿Qué me recomienda?"'
+                    ],
+                    grammar: [
+                        'Demostrativos: este/esta, ese/esa, aquel/aquella',
+                        'Numerales: uno, dos, tres kilos, medio, cuarto',
+                        'Imperativo: deme, póngame, diga, traiga',
+                        'Tratamiento formal/informal: usted/tú'
+                    ]
+                },
+                activities: [
+                    {
+                        name: '"Vocabulario del mercado" (20 minutos)',
+                        description: 'Presentación visual de productos de mercado',
+                        objective: 'Dominar vocabulario de alimentos'
+                    },
+                    {
+                        name: '"Simulación de compra" (30 minutos)',
+                        description: 'Por parejas: vendedor y cliente en el mercado',
+                        objective: 'Practicar negociación y preguntas'
+                    },
+                    {
+                        name: '"Receta con compras" (25 minutos)',
+                        description: 'Comprar ingredientes para receta española',
+                        objective: 'Integrar vocabulario en contexto práctico'
+                    }
+                ],
+                miniSerie: {
+                    scene: '"La primera compra de alimentos"',
+                    characters: [
+                        'Protagonista (desorientado en el mercado)',
+                        'Vendedor/a experto/a del mercado',
+                        'Compañero/a de piso (conocido del lugar)',
+                        'Turista extranjero'
+                    ],
+                    dialogue: [
+                        { speaker: 'Vendedor', text: '"Buenos días. ¿Qué le apetece llevar hoy?"' },
+                        { speaker: 'Protagonista', text: '"No estoy seguro/a. ¿Qué recomienda que esté bueno?"' },
+                        { speaker: 'Vendedor', text: '"Los tomates están perfectos. Y estas naranjas son de aquí."' },
+                        { speaker: 'Protagonista', text: '"¿Y cuánto costaría medio kilo de cada uno?"' },
+                        { speaker: 'Vendedor', text: '"Le hago un buen precio si lleva los dos."' }
+                    ]
+                },
+                task: [
+                    'Hacer lista de compra para receta española tradicional',
+                    'Investigar precios de productos en mercados locales de Granada',
+                    'Grabar audio simulando compra en mercado',
+                    'Preparar 5 preguntas típicas para vendedores'
+                ],
+                evaluation: [
+                    'Uso correcto de vocabulario de alimentos',
+                    'Fluidez en interacciones de compra',
+                    'Capacidad de negociar precios',
+                    'Claridad en expresión de cantidades'
+                ]
+            },
+            'S6': {
+                title: 'Debate: ¿Estudiar o trabajar en el extranjero?',
+                date: 'Lunes 17/11/2025',
+                time: '12:30 - 14:30',
+                objectives: [
+                    'Practicar expresiones para hablar del futuro y planes',
+                    'Desarrollar vocabulario sobre educación y trabajo',
+                    'Introducir conectores para argumentar decisiones',
+                    'Crear material para escena de decisión profesional'
+                ],
+                content: {
+                    vocabulary: [
+                        'Educación: máster, doctorado, beca, intercambio, especialización',
+                        'Trabajo: contrato, puesto, carrera profesional, oportunidades',
+                        'Decisiones: dilemma, ventajas, inconvenientes, sacrificios, recompensas',
+                        'Experiencia: internacional, multicultural, crecimiento personal, desarrollo'
+                    ],
+                    expressions: [
+                        '"Si pudiera elegir, preferiría..."',
+                        '"Estoy considerando la posibilidad de..."',
+                        '"Por un lado..., pero por otro..."',
+                        '"A largo plazo, creo que..."',
+                        '"Mi mayor preocupación es..."'
+                    ],
+                    grammar: [
+                        'Futuro: haré, estudiaré, trabajaré, me mudaré',
+                        'Condicional: me gustaría, preferiría, podría, debería',
+                        'Subjuntivo: es importante que, recomiendo que, es necesario que',
+                        'Perífrasis verbales: ir a + infinitivo, llegar a + infinitivo'
+                    ]
+                },
+                activities: [
+                    {
+                        name: '"Planes futuros" (15 minutos)',
+                        description: 'Compartir planes académicos y profesionales',
+                        objective: 'Practicar estructuras de futuro'
+                    },
+                    {
+                        name: '"Debate: Estudios vs. Trabajo" (40 minutos)',
+                        description: 'Dividir clase: defensores de estudiar vs. trabajar en extranjero',
+                        objective: 'Desarrollar argumentación sobre decisiones vitales'
+                    },
+                    {
+                        name: '"Entrevista simulada" (25 minutos)',
+                        description: 'Entrevistas para programas académicos o trabajo',
+                        objective: 'Práctica de formalidad y persuasión'
+                    }
+                ],
+                miniSerie: {
+                    scene: '"La encrucijada profesional"',
+                    characters: [
+                        'Protagonista (recibiendo ofertas académicas y laborales)',
+                        'Consejero/a académico/a',
+                        'Amigo/a trabajando',
+                        'Familia preocupada'
+                    ],
+                    dialogue: [
+                        { speaker: 'Consejero', text: '"Tienes dos excelentes opciones. ¿Cuál te llama más la atención?"' },
+                        { speaker: 'Protagonista', text: '"No sé. El máster me abriría puertas, pero el trabajo es ahora mismo."' },
+                        { speaker: 'Amigo', text: '"Yo trabajaría primero. Ya puedes estudiar después."' },
+                        { speaker: 'Protagonista', text: '"Pero ¿y si pierdo la oportunidad de la beca?"' },
+                        { speaker: 'Consejero', text: '"Ambas tienen sus ventajas. ¿Qué es más importante para ti ahora?"' }
+                    ]
+                },
+                task: [
+                    'Investigar 3 programas de máster en Granada',
+                    'Preparar currículum simple en español',
+                    'Grabar video presentación profesional de 2 minutos',
+                    'Escribir ensayo sobre "Mi futuro profesional"'
+                ],
+                evaluation: [
+                    'Uso adecuado de estructuras de futuro y condicional',
+                    'Fluidez en expresión de planes y decisiones',
+                    'Capacidad de argumentar elecciones profesionales',
+                    'Claridad en comunicación formal'
+                ]
+            },
+            'S7': {
+                title: 'Situación: Problemas con el vecindario',
+                date: 'Miércoles 19/11/2025',
+                time: '12:30 - 14:30',
+                objectives: [
+                    'Practicar vocabulario de convivencia y problemas',
+                    'Desarrollar habilidades para quejarse educadamente',
+                    'Simular resoluciones de conflictos',
+                    'Crear escenas de tensión interpersonal'
+                ],
+                content: {
+                    vocabulary: [
+                        'Problemas: ruido, fiestas, basura, aparcamiento, mascotas',
+                        'Convivencia: respeto, tolerancia, comunicación, acuerdos',
+                        'Emociones: molesto/a, preocupado/a, enfadado/a, comprensivo/a',
+                        'Soluciones: hablar, negociar, mediar, comprometerse, resolver'
+                    ],
+                    expressions: [
+                        '"Perdone la molestia, pero..."',
+                        '"¿Podríamos hablar sobre...?"',
+                        '"Entiendo su punto de vista, pero..."',
+                        '"¿Qué le parecería si...?"',
+                        '"Me gustaría encontrar una solución..."'
+                    ],
+                    grammar: [
+                        'Imperativo negativo: no hagas ruido, no pongas música',
+                        'Condicional: debería, podría, sería mejor que',
+                        'Subjuntivo: es importante que, recomiendo que, preferiría que',
+                        'Expresiones de cortesía: por favor, agradecería, disculpe'
+                    ]
+                },
+                activities: [
+                    {
+                        name: '"Vocabulario de conflictos" (15 minutos)',
+                        description: 'Presentación de problemas de convivencia comunes',
+                        objective: 'Dominar vocabulario de conflictos vecinales'
+                    },
+                    {
+                        name: '"Rol-play: Quejas educadas" (35 minutos)',
+                        description: 'Simular conversaciones para resolver problemas',
+                        objective: 'Practicar comunicación asertiva'
+                    },
+                    {
+                        name: '"Mediación de conflictos" (20 minutos)',
+                        description: 'Un estudiante media entre dos vecinos',
+                        objective: 'Desarrollar habilidades de mediación'
+                    }
+                ],
+                miniSerie: {
+                    scene: '"Noches de ruido"',
+                    characters: [
+                        'Protagonista (con problemas de sueño)',
+                        'Vecino/a ruidoso/a',
+                        'Portero/a del edificio',
+                        'Otro vecino/a afectado/a'
+                    ],
+                    dialogue: [
+                        { speaker: 'Protagonista', text: '"Oiga, perdóneme que moleste a esta hora..."' },
+                        { speaker: 'Vecino', text: '"¿Qué pasa? ¿Sucedió algo?"' },
+                        { speaker: 'Protagonista', text: '"Es que hay mucho ruido y no puedo dormir..."' },
+                        { speaker: 'Vecino', text: '"¡Ah! Lo siento mucho. No me di cuenta."' },
+                        { speaker: 'Protagonista', text: '"¿Podrían bajar un poco la música, por favor?"' }
+                    ]
+                },
+                task: [
+                    'Investigar normativas municipales de ruido en Granada',
+                    'Preparar diálogo de queja educada sobre problema real',
+                    'Grabar audio resolviendo conflicto hipotético',
+                    'Escribir normas de convivencia para piso compartido'
+                ],
+                evaluation: [
+                    'Uso adecuado de expresiones de queja y cortesía',
+                    'Fluidez en negociación de conflictos',
+                    'Capacidad de proponer soluciones',
+                    'Manejo de register formal e informal'
+                ]
+            },
+            'S8': {
+                title: 'Debate: Tradición vs. modernidad en España',
+                date: 'Lunes 2/12/2024',
+                time: '12:30 - 14:30',
+                objectives: [
+                    'Explorar tensiones entre tradición y cambio en España',
+                    'Practicar vocabulario de cambio social y cultural',
+                    'Desarrollar argumentos sobre evolución cultural',
+                    'Crear material sobre identidad cultural española'
+                ],
+                content: {
+                    vocabulary: [
+                        'Tradiciones: fiestas, costumbres, folklore, artesanía, gastronomía',
+                        'Moderno: tecnología, globalización, innovación, tendencias, redes sociales',
+                        'Tensiones: pérdida, cambio, adaptación, fusión, transformación',
+                        'Identidad: raíces, herencia, legado, evolución, futuro'
+                    ],
+                    expressions: [
+                        '"Por un lado..., por otro lado..."',
+                        '"Es importante conservar pero también adaptar..."',
+                        '"En mi opinión, lo esencial es..."',
+                        '"Aunque entiendo los cambios, prefiero..."',
+                        '"La tradición evoluciona con el tiempo..."'
+                    ],
+                    grammar: [
+                        'Comparativos: más tradicional que, menos moderno que',
+                        'Conectores de contraste: sin embargo, no obstante, por otro lado',
+                        'Subjuntivo: es necesario que, es importante que, conviene que',
+                        'Pasado reciente: acabo de, he decidido, hemos cambiado'
+                    ]
+                },
+                activities: [
+                    {
+                        name: '"Tradiciones en debate" (20 minutos)',
+                        description: 'Identificar tradiciones españolas en cambio',
+                        objective: 'Analizar evolución cultural'
+                    },
+                    {
+                        name: '"Debate: ¿Qué conservar?" (35 minutos)',
+                        description: 'Argumentar sobre qué tradiciones son esenciales',
+                        objective: 'Practicar argumentación cultural'
+                    },
+                    {
+                        name: '"Fusión cultural" (15 minutos)',
+                        description: 'Crear propuestas de tradición modernizada',
+                        objective: 'Desarrollar creatividad cultural'
+                    }
+                ],
+                miniSerie: {
+                    scene: '"El festival que cambia"',
+                    characters: [
+                        'Protagonista (participando en fiesta tradicional)',
+                        'Organizador/a tradicionalista',
+                        'Jóvenes modernizadores',
+                        'Turista interesado/a'
+                    ],
+                    dialogue: [
+                        { speaker: 'Organizador', text: '"Esta fiesta se celebra así desde hace 200 años."' },
+                        { speaker: 'Joven', text: '"Pero si la modernizamos, más jóvenes participarán."' },
+                        { speaker: 'Protagonista', text: '"¿Qué opinas tú? ¿Cómo lo ves desde fuera?"' },
+                        { speaker: 'Turista', text: '"Me parece fascinante, pero podría ser más accesible."' },
+                        { speaker: 'Organizador', text: '"El problema es mantener la esencia y atraer nueva gente..."' }
+                    ]
+                },
+                task: [
+                    'Investigar evolución de una fiesta tradicional granadina',
+                    'Grabar audio explicando tradición de tu país y sus cambios',
+                    'Preparar propuesta de modernización respetuosa',
+                    'Escribir ensayo sobre "Tradición en el siglo XXI"'
+                ],
+                evaluation: [
+                    'Uso adecuado de vocabulario de cambio cultural',
+                    'Capacidad para argumentar posiciones culturales',
+                    'Fluidez en expresión de opiniones complejas',
+                    'Creatividad en propuestas de adaptación'
+                ]
+            },
+            'S9': {
+                title: 'Situación: Preparar una cena española',
+                date: 'Miércoles 4/12/2024',
+                time: '12:30 - 14:30',
+                objectives: [
+                    'Practicar vocabulario de cocina y preparación de alimentos',
+                    'Desarrollar instrucciones y pasos de recetas',
+                    'Simular preparación de cena española tradicional',
+                    'Crear escenas de cocina y convivencia'
+                ],
+                content: {
+                    vocabulary: [
+                        'Cocina: cortar, picar, freír, hervir, asar, mezclar',
+                        'Ingredientes: aceite, sal, pimienta, ajo, cebolla, especias',
+                        'Utensilios: sartén, olla, cuchillo, tabla, cuchara, plato',
+                        'Cena tradicional: paella, gazpacho, tortilla, jamón, queso, vino'
+                    ],
+                    expressions: [
+                        '"Primero, hay que..."',
+                        '"Después de cortar..., añade..."',
+                        '"¿Puedes pasarme...?"',
+                        '"¿Cuánto tiempo necesita?"',
+                        '"¡Cuidado! Está caliente"'
+                    ],
+                    grammar: [
+                        'Imperativo: corta, añade, mezcla, sirve',
+                        'Paso a paso: primero, luego, después, finalmente',
+                        'Consejos: deberías, es mejor, te recomiendo',
+                        'Preguntas: ¿cómo?, ¿cuánto?, ¿dónde?, ¿cuándo?'
+                    ]
+                },
+                activities: [
+                    {
+                        name: '"Vocabulario de cocina" (15 minutos)',
+                        description: 'Presentación visual de acciones y utensilios',
+                        objective: 'Dominar vocabulario culinario'
+                    },
+                    {
+                        name: '"Receta paso a paso" (25 minutos)',
+                        description: 'Explicar receta española tradicional',
+                        objective: 'Practicar instrucciones secuenciales'
+                    },
+                    {
+                        name: '"Cocina en equipo" (30 minutos)',
+                        description: 'Simular preparación de cena en grupo',
+                        objective: 'Práctica de comunicación en cocina'
+                    }
+                ],
+                miniSerie: {
+                    scene: '"La cena de bienvenida"',
+                    characters: [
+                        'Protagonista (cocinando por primera vez en España)',
+                        'Compañero/a experto/a en cocina',
+                        'Invitados extranjeros',
+                        'Vecino/a curioso/a'
+                    ],
+                    dialogue: [
+                        { speaker: 'Protagonista', text: '"Nunca he cocinado esto antes. ¿Puedes ayudarme?"' },
+                        { speaker: 'Compañero', text: '"¡Claro! Primero pica la cebolla muy fina."' },
+                        { speaker: 'Protagonista', text: '"¿Como esta? ¿Está bien así?"' },
+                        { speaker: 'Compañero', text: '"Perfecto. Ahora ponla en la sartén con aceite."' },
+                        { speaker: 'Vecino', text: '"¡Qué bien huele! ¿Qué están cocinando?"' }
+                    ]
+                },
+                task: [
+                    'Investigar receta tradicional granadina (tortilla, gazpacho, etc.)',
+                    'Preparar video tutorial de cocina simple en español',
+                    'Grabar audio explicando receta típica de tu país',
+                    'Crear menú para cena multicultural'
+                ],
+                evaluation: [
+                    'Uso correcto de vocabulario de cocina',
+                    'Claridad en instrucciones paso a paso',
+                    'Fluidez en comunicación en cocina',
+                    'Creatividad en explicaciones culinarias'
+                ]
+            },
+            'S10': {
+                title: 'Debate: Turismo sostenible en Granada',
+                date: 'Lunes 9/12/2024',
+                time: '12:30 - 14:30',
+                objectives: [
+                    'Practicar vocabulario de turismo y sostenibilidad',
+                    'Desarrollar argumentos sobre impacto turístico',
+                    'Explorar soluciones turísticas sostenibles',
+                    'Crear material sobre turismo responsable'
+                ],
+                content: {
+                    vocabulary: [
+                        'Turismo: visitantes, turistas, viajeros, turismo masivo, turismo cultural',
+                        'Sostenibilidad: medio ambiente, impacto, conservación, equilibrio',
+                        'Problemas: saturación, gentrificación, recursos, residuos, consumo',
+                        'Soluciones: turismo responsable, ecoturismo, temporada baja, cultura local'
+                    ],
+                    expressions: [
+                        '"Desde mi perspectiva, el turismo debería..."',
+                        '"Es fundamental encontrar un equilibrio entre..."',
+                        '"Por un lado..., pero por otro lado..."',
+                        '"En mi opinión, lo importante es..."',
+                        '"Deberíamos promover más..."'
+                    ],
+                    grammar: [
+                        'Condicional: debería, podría, sería necesario',
+                        'Conectores de causa: porque, ya que, debido a',
+                        'Subjuntivo: es importante que, conviene que, es necesario que',
+                        'Futuro: habrá, será, podrán, necesitaremos'
+                    ]
+                },
+                activities: [
+                    {
+                        name: '"Impacto turístico" (20 minutos)',
+                        description: 'Analizar efectos positivos y negativos del turismo',
+                        objective: 'Comprender complejidad del turismo'
+                    },
+                    {
+                        name: '"Debate: ¿Turismo sostenible?" (35 minutos)',
+                        description: 'Argumentar sobre límites y beneficios del turismo',
+                        objective: 'Practicar argumentación compleja'
+                    },
+                    {
+                        name: '"Propuestas turísticas" (15 minutos)',
+                        description: 'Crear iniciativas de turismo responsable',
+                        objective: 'Desarrollar soluciones creativas'
+                    }
+                ],
+                miniSerie: {
+                    scene: '"El tourista responsable"',
+                    characters: [
+                        'Protagonista (turista consciente)',
+                        'Guía turístico tradicional',
+                        'Activista medioambiental',
+                        'Local comerciante'
+                    ],
+                    dialogue: [
+                        { speaker: 'Guía', text: '"Y aquí está la Alhambra, el monumento más visitado..."' },
+                        { speaker: 'Activista', text: '"¿Pero cuál es el impacto real de tantos visitantes?"' },
+                        { speaker: 'Protagonista', text: '"Me preocupa mi impacto como turista. ¿Cómo puedo ser más responsable?"' },
+                        { speaker: 'Local', text: '"Apoyando negocios locales y respetando tradiciones."' },
+                        { speaker: 'Guía', text: '"También visitando en temporada baja y usando transporte público..."' }
+                    ]
+                },
+                task: [
+                    'Investigar impacto turístico en Granada y Albaicín',
+                    'Diseñar recorrido turístico sostenible por Granada',
+                    'Grabar audio con consejos para turismo responsable',
+                    'Escribir propuesta de mejora turística para la ciudad'
+                ],
+                evaluation: [
+                    'Uso adecuado de vocabulario de sostenibilidad',
+                    'Capacidad de argumentar sobre temas complejos',
+                    'Fluidez en expresión de opiniones matizadas',
+                    'Creatividad en propuestas turísticas'
+                ]
+            },
+            'S11': {
+                title: 'Situación: Emergencia médica',
+                date: 'Miércoles 03/12/2025',
+                time: '12:30 - 14:30',
+                objectives: [
+                    'Practicar vocabulario médico y de emergencias',
+                    'Desarrollar habilidades para explicar síntomas',
+                    'Simular llamadas y consultas médicas',
+                    'Crear escenas de urgencia médica'
+                ],
+                content: {
+                    vocabulary: [
+                        'Síntomas: dolor, fiebre, tos, mareo, náuseas, cansancio',
+                        'Emergencias: urgencia, hospital, ambulancia, médico/a, enfermero/a',
+                        'Partes cuerpo: cabeza, estómago, garganta, espalda, piernas',
+                        'Acciones: llamar, ir, esperar, explicar, describir, tomar'
+                    ],
+                    expressions: [
+                        '"Tengo dolor de..."',
+                        '"Me siento..."',
+                        '"¿Dónde está el hospital más cercano?"',
+                        '"Necesito ver a un médico/a urgentemente"',
+                        '"¿Podría ayudarme, por favor?"'
+                    ],
+                    grammar: [
+                        'Presente perfecto: me he lastimado, he tenido, me he sentido',
+                        'Imperativo: llame, vaya, espere, describa, tome',
+                        'Expresiones de tiempo: desde, hace, durante',
+                        'Comparativos: mejor que, peor que, más grave que'
+                    ]
+                },
+                activities: [
+                    {
+                        name: '"Vocabulario médico" (15 minutos)',
+                        description: 'Presentación de síntomas y situaciones médicas',
+                        objective: 'Dominar vocabulario de emergencias'
+                    },
+                    {
+                        name: '"Llamada de emergencia" (25 minutos)',
+                        description: 'Simular llamada al teléfono de emergencias',
+                        objective: 'Practicar comunicación clara bajo presión'
+                    },
+                    {
+                        name: '"Consulta médica" (30 minutos)',
+                        description: 'Simular visita al médico explicando síntomas',
+                        objective: 'Desarrollar habilidades de descripción médica'
+                    }
+                ],
+                miniSerie: {
+                    scene: '"La emergencia inesperada"',
+                    characters: [
+                        'Protagonista (con problema médico repentino)',
+                        'Amigo/a que ayuda',
+                        'Médico/a de urgencias',
+                        'Operador/a 112'
+                    ],
+                    dialogue: [
+                        { speaker: 'Protagonista', text: '"Me siento muy mal. Tengo dolor de estómago y mareo."' },
+                        { speaker: 'Amigo', text: '"¡No te preocupes! Te llevo al médico. ¿Necesitas que llame al 112?"' },
+                        { speaker: 'Operador', text: '"112. ¿Qué urgencia tiene? ¿Dónde se encuentra?"' },
+                        { speaker: 'Protagonista', text: '"Tengo fiebre y mucho dolor. Estoy en mi piso."' },
+                        { speaker: 'Médico', text: '"¿Desde cuándo se siente así? ¿Tiene otros síntomas?"' }
+                    ]
+                },
+                task: [
+                    'Investigar sistema sanitario español para extranjeros',
+                    'Preparar tarjeta médica básica en español',
+                    'Grabar audio simulando llamada de emergencia médica',
+                    'Escribir diálogo con médico explicando síntomas'
+                ],
+                evaluation: [
+                    'Uso correcto de vocabulario médico',
+                    'Claridad en descripción de síntomas',
+                    'Fluidez en comunicación de emergencias',
+                    'Capacidad de mantener calma y ser claro'
+                ]
+            },
+            'S12': {
+                title: 'Debate: Redes sociales y relaciones',
+                date: 'Lunes 08/12/2025',
+                time: '12:30 - 14:30',
+                objectives: [
+                    'Practicar vocabulario de redes sociales y comunicación digital',
+                    'Explorar impacto de redes en relaciones interpersonales',
+                    'Desarrollar argumentos sobre comunicación online vs. presencial',
+                    'Crear material sobre identidad digital'
+                ],
+                content: {
+                    vocabulary: [
+                        'Redes sociales: Instagram, WhatsApp, TikTok, Facebook, Twitter',
+                        'Comunicación: online, presencial, mensajería, videollamada',
+                        'Relaciones: amistad, pareja, familia, compañeros',
+                        'Conceptos: privacidad, identidad, conexión, aislamiento'
+                    ],
+                    expressions: [
+                        '"En mi opinión, las redes han cambiado..."',
+                        '"Por un lado conectan, por otro lado aíslan..."',
+                        '"Prefiero hablar en persona porque..."',
+                        '"Las redes son útiles para..."',
+                        '"Mi mayor preocupación es..."'
+                    ],
+                    grammar: [
+                        'Comparativos: más fácil que, menos personal que',
+                        'Conectores: sin embargo, aunque, además, por lo tanto',
+                        'Subjuntivo: es importante que, conviene que, es necesario que',
+                        'Futuro: cambiará, evolucionará, será necesario'
+                    ]
+                },
+                activities: [
+                    {
+                        name: '"Uso de redes" (15 minutos)',
+                        description: 'Compartir experiencias con redes sociales',
+                        objective: 'Explorar patrones de uso digital'
+                    },
+                    {
+                        name: '"Debate: ¿Conectados o aislados?" (35 minutos)',
+                        description: 'Argumentar sobre impacto social de redes',
+                        objective: 'Practicar argumentación compleja'
+                    },
+                    {
+                        name: '"Comunicación mixta" (20 minutos)',
+                        description: 'Simular conversación online que se vuelve presencial',
+                        objective: 'Explorar transición digital-presencial'
+                    }
+                ],
+                miniSerie: {
+                    scene: '"La cita que empezó online"',
+                    characters: [
+                        'Protagonista (conociendo gente en redes)',
+                        'Amigo/a conocido solo por redes',
+                        'Otro amigo/a escéptico/a',
+                        'Interés romántico/amistoso'
+                    ],
+                    dialogue: [
+                        { speaker: 'Protagonista', text: '"Hablamos mucho por WhatsApp, pero nunca en persona."' },
+                        { speaker: 'Amigo escéptico', text: '"¿Y si no es la misma persona cara a cara?"' },
+                        { speaker: 'Protagonista', text: '"Por eso quiero quedar. Necesito conocerlo/a de verdad."' },
+                        { speaker: 'Interés', text: '"Me encantaría conocerte. ¿Cuándo te viene bien?"' },
+                        { speaker: 'Amigo escéptico', text: '"Tienes razón. A veces la cara a cara es diferente..."' }
+                    ]
+                },
+                task: [
+                    'Analizar presencia digital personal y efectos en relaciones',
+                    'Grabar video sobre "Redes sociales en mi país"',
+                    'Preparar propuestas para uso saludable de redes',
+                    'Escribir ensayo sobre "Amistad en la era digital"'
+                ],
+                evaluation: [
+                    'Uso adecuado de vocabulario digital',
+                    'Capacidad de argumentar sobre temas complejos',
+                    'Fluidez en expresión de opiniones matizadas',
+                    'Reflexión crítica sobre tecnología'
+                ]
+            },
+            'S13': {
+                title: 'Presentación final: Proyecto mini serie',
+                date: 'Miércoles 10/12/2025',
+                time: '12:30 - 14:30',
+                objectives: [
+                    'Presentar proyectos finales de mini serie',
+                    'Evaluar progreso y logros del curso',
+                    'Reflexionar sobre aprendizaje y experiencia',
+                    'Celebrar logros y cierre del curso'
+                ],
+                content: {
+                    project: [
+                        'Presentación multimedia: 10-15 minutos por grupo',
+                        'Proyección de escenas grabadas',
+                        'Reflexión sobre proceso creativo',
+                        'Evaluación entre compañeros'
+                    ],
+                    evaluation: [
+                        'Autoevaluación: logros personales y áreas de mejora',
+                        'Evaluación del curso: metodología, contenidos, experiencia',
+                        'Feedback entre compañeros',
+                        'Sugerencias para futuros cursos'
+                    ]
+                },
+                activities: [
+                    {
+                        name: '"Proyección de mini series" (45 minutos)',
+                        description: 'Presentación de proyectos finales de grupos',
+                        objective: 'Compartir creaciones y logros'
+                    },
+                    {
+                        name: '"Reflexión final" (20 minutos)',
+                        description: 'Compartir experiencia y aprendizaje del curso',
+                        objective: 'Evaluar proceso y resultados'
+                    },
+                    {
+                        name: '"Celebración" (15 minutos)',
+                        description: 'Reconocimiento de logros y cierre',
+                        objective: 'Concluir curso positivamente'
+                    }
+                ],
+                celebration: {
+                    scene: '"El final del viaje"',
+                    message: 'Hemos completado together esta aventura de aprendizaje. Cada uno ha contribuido con su voz, experiencia y creatividad para crear algo único.',
+                    achievement: 'Desde presentaciones básicas hasta complejas escenas de mini serie, hemos crecido como comunicadores en español.',
+                    future: 'Este no es el final, sino el comienzo de nuevas aventuras en español. ¡El camino continúa!'
+                },
+                task: [
+                    'Preparar presentación final del proyecto mini serie',
+                    'Escribir reflexión personal sobre el curso (mínimo 300 palabras)',
+                    'Evaluar participación y progreso propio',
+                    'Preparar breve speech de agradecimiento y despedida'
+                ],
+                evaluation: [
+                    'Calidad y creatividad del proyecto final',
+                    'Participación activa durante todo el curso',
+                    'Progreso demostrado en habilidades comunicativas',
+                    'Reflexión crítica sobre propio aprendizaje'
+                ],
+                certificate: 'Todos los participantes recibirán certificado de aprovechamiento del curso Nivel B2.1'
+            }
+        }
+
+        function calculateDaysRemaining() {
+            const today = new Date();
+            const courseEnd = new Date('2025-12-15'); // Fin del curso
+            const diffTime = courseEnd - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            return diffDays > 0 ? diffDays : 0;
+        }
+
+        function generateSessionHTML(sessionKey) {
+            const session = sessionData[sessionKey];
+            if (!session) return '';
+
+            const currentDate = new Date().toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            });
+
+            const daysRemaining = calculateDaysRemaining();
+
+            return `
+                <div class="header avoid-break">
+                    <img src="images/Logo-CLM-V1.jpg" alt="Logo CLM" class="logo">
+                    <h1>Producción e Interacción Oral en Español</h1>
+                    <div class="subtitle">Nivel B2.1 (Avanzado Intermedio) - Universidad de Granada</div>
+                    <div class="subtitle">Centro de Lenguas Modernas</div>
+                    <div class="session-title">SESIÓN ${sessionKey.substring(1)}: ${session.title}</div>
+                    <div class="subtitle">${currentDate} • ${daysRemaining} días restantes para finalizar el curso</div>
+                </div>
+
+                <!-- Página 1: Información básica y objetivos -->
+                <div class="section-container">
+                    <div class="session-info avoid-break">
+                        <h2>Información de la sesión</h2>
+                        <p><strong>Fecha:</strong> ${session.date}</p>
+                        <p><strong>Horario:</strong> ${session.time}</p>
+                    </div>
+
+                    <div class="objectives-section avoid-break">
+                        <h2>OBJETIVOS DE LA SESIÓN</h2>
+                        <ul>
+                            ${session.objectives.map(obj => `<li>${obj}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Salto de página -->
+                <div class="page-break"></div>
+
+                <!-- Página 2: Contenidos -->
+                <div class="section-container">
+                    <div class="content-section avoid-break">
+                        <div class="section-header">
+                            <h2>CONTENIDOS</h2>
+                        </div>
+
+                        ${session.content.expressions ? `
+                        <h3>1. EXPRESIONES ÚTILES (Nivel B2.1)</h3>
+                        <ul>
+                            ${session.content.expressions.map(expr => `<li>${expr}</li>`).join('')}
+                        </ul>
+
+                        <h3>2. VOCABULARIO</h3>
+                        <ul>
+                            ${session.content.vocabulary.map(vocab => `<li>${vocab}</li>`).join('')}
+                        </ul>
+
+                        <h3>3. ESTRUCTURAS GRAMATICALES</h3>
+                        <ul>
+                            ${session.content.grammar.map(grammar => `<li>${grammar}</li>`).join('')}
+                        </ul>
+                    ` : session.content.project ? `
+                        <h3>1. PROYECTO FINAL</h3>
+                        <ul>
+                            ${session.content.project.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+
+                        <h3>2. EVALUACIÓN DEL CURSO</h3>
+                        <ul>
+                            ${session.content.evaluation.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    ` : ''}
+                    </div>
+                </div>
+
+                <!-- Salto de página -->
+                <div class="page-break"></div>
+
+                <!-- Página 3: Actividades y mini serie -->
+                <div class="section-container">
+                    <div class="activities-section avoid-break">
+                        <h2>ACTIVIDADES PRÁCTICAS EN CLASE</h2>
+                        <div class="activity-grid">
+                            ${session.activities.map((activity, index) => `
+                                <div class="activity avoid-break">
+                                    <h3>Actividad ${index + 1}: ${activity.name}</h3>
+                                    <p>${activity.description}</p>
+                                    <p class="objective"><strong>Objetivo:</strong> ${activity.objective}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    ${session.miniSerie ? `
+                        <div class="mini-serie-section avoid-break">
+                            <h2>SITUACIÓN DE HABLA PARA MINI SERIE</h2>
+                            <h3>ESCENA: ${session.miniSerie.scene}</h3>
+                            <p><strong>Personajes:</strong></p>
+                            <ul>
+                                ${session.miniSerie.characters.map(char => `<li>${char}</li>`).join('')}
+                            </ul>
+                            <p><strong>Diálogo modelo:</strong></p>
+                            <div class="dialogue avoid-break">
+                                ${session.miniSerie.dialogue.map(line =>
+                                    `<div class="dialogue-line"><strong>${line.speaker}:</strong> ${line.text}</div>`
+                                ).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+                </div>
+
+                <!-- Salto de página -->
+                <div class="page-break"></div>
+
+                <!-- Página 4: Tarea y evaluación -->
+                <div class="section-container">
+                    <div class="task-section avoid-break">
+                        <h2>TAREA PARA PRÓXIMA SESIÓN</h2>
+                        <ul>
+                            ${session.task.map(task => `<li>${task}</li>`).join('')}
+                        </ul>
+                    </div>
+
+                    <div class="evaluation-section avoid-break">
+                        <h2>EVALUACIÓN FORMATIVA</h2>
+                        <ul>
+                            ${session.evaluation.map(eval => `<li>${eval}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer" style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-color); color: var(--muted-color); font-size: 10pt;">
+                    <p>© 2024-2025 Universidad de Granada - Centro de Lenguas Modernas</p>
+                    <p>Producción e Interacción Oral — Nivel B2.1</p>
+                    <p>Profesor: Javier Benítez Láinez</p>
+                </div>
+            `;
+        }
+
+        function loadSession(sessionKey) {
+            const content = document.getElementById('main-content');
+            content.innerHTML = generateSessionHTML(sessionKey);
+        }
+
+        function generatePDF() {
+            const element = document.getElementById('main-content');
+            const opt = {
+                margin: [10, 10, 10, 10],
+                filename: `sesion_${getUrlParameter('session') || 'S1'}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: {
+                    scale: 2,
+                    useCORS: true,
+                    letterRendering: true,
+                    logging: false
+                },
+                jsPDF: {
+                    unit: 'mm',
+                    format: 'a4',
+                    orientation: 'portrait',
+                    compress: true
+                },
+                pagebreak: {
+                    mode: ['avoid-all', 'css', 'legacy'],
+                    before: '.page-break',
+                    after: '.avoid-break',
+                    avoid: '.avoid-break'
+                }
+            };
+
+            html2pdf().set(opt).from(element).save();
+        }
+
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Cargar sesión automáticamente
+        document.addEventListener('DOMContentLoaded', () => {
+            const session = getUrlParameter('session') || 'S1';
+            loadSession(session);
+        });
+
+        // Configurar impresión para eliminar headers
+        window.addEventListener('beforeprint', () => {
+            document.title = `Producción Oral B2.1 - Sesión ${getUrlParameter('session') || 'S1'}`;
+        });
+    </script>
+</body>
+</html>
