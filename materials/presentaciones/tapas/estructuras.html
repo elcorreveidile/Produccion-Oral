@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESTRUCTURAS GRAMATICALES</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f8f8;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #e63946;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .grammar-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            flex-grow: 1;
+        }
+        .grammar-row {
+            display: flex;
+            gap: 30px;
+            flex-grow: 1;
+        }
+        .grammar-card {
+            flex: 1;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+        }
+        .grammar-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .grammar-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(244, 162, 97, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+        }
+        .grammar-icon i {
+            font-size: 28px;
+            color: #f4a261;
+        }
+        .grammar-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #e63946;
+        }
+        .grammar-content {
+            flex-grow: 1;
+        }
+        .structure-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .structure-item {
+            display: flex;
+            align-items: flex-start;
+        }
+        .structure-bullet {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: rgba(230, 57, 70, 0.1);
+            color: #e63946;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+            margin-right: 12px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .structure-text {
+            font-size: 20px;
+            line-height: 1.4;
+        }
+        .highlight {
+            color: #e63946;
+            font-weight: 600;
+        }
+        .examples {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed rgba(244, 162, 97, 0.5);
+        }
+        .example-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #f4a261;
+            margin-bottom: 10px;
+        }
+        .example-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        .example-item:last-child {
+            margin-bottom: 0;
+        }
+        .example-icon {
+            color: #f4a261;
+            margin-right: 10px;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .example-text {
+            font-size: 18px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">ESTRUCTURAS GRAMATICALES</h1>
+        </div>
+        <div class="content">
+            <div class="grammar-sections">
+                <div class="grammar-row">
+                    <div class="grammar-card">
+                        <div class="grammar-header">
+                            <div class="grammar-icon">
+                                <i class="material-icons">compare</i>
+                            </div>
+                            <h2 class="grammar-title">Comparativos</h2>
+                        </div>
+                        <div class="grammar-content">
+                            <div class="structure-list">
+                                <div class="structure-item">
+                                    <div class="structure-bullet">+</div>
+                                    <div class="structure-text"><span class="highlight">más</span> saludable <span class="highlight">que</span></div>
+                                </div>
+                                <div class="structure-item">
+                                    <div class="structure-bullet">-</div>
+                                    <div class="structure-text"><span class="highlight">menos</span> tradicional <span class="highlight">que</span></div>
+                                </div>
+                                <div class="structure-item">
+                                    <div class="structure-bullet">=</div>
+                                    <div class="structure-text"><span class="highlight">tan</span> rápido <span class="highlight">como</span></div>
+                                </div>
+                                <div class="structure-item">
+                                    <div class="structure-bullet">=</div>
+                                    <div class="structure-text"><span class="highlight">igual de</span> conveniente <span class="highlight">que</span></div>
+                                </div>
+                            </div>
+                            <div class="examples">
+                                <h3 class="example-title">Ejemplos:</h3>
+                                <div class="example-item">
+                                    <i class="material-icons example-icon">restaurant</i>
+                                    <div class="example-text">Las tapas son <span class="highlight">más artesanales</span> que la comida rápida</div>
+                                </div>
+                                <div class="example-item">
+                                    <i class="material-icons example-icon">fastfood</i>
+                                    <div class="example-text">La comida rápida es <span class="highlight">menos saludable</span> que las tapas</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grammar-card">
+                        <div class="grammar-header">
+                            <div class="grammar-icon">
+                                <i class="material-icons">psychology</i>
+                            </div>
+                            <h2 class="grammar-title">Condicional</h2>
+                        </div>
+                        <div class="grammar-content">
+                            <div class="structure-list">
+                                <div class="structure-item">
+                                    <div class="structure-bullet">✓</div>
+                                    <div class="structure-text"><span class="highlight">Me gustaría</span> probar</div>
+                                </div>
+                                <div class="structure-item">
+                                    <div class="structure-bullet">✓</div>
+                                    <div class="structure-text"><span class="highlight">Preferiría</span> comer</div>
+                                </div>
+                                <div class="structure-item">
+                                    <div class="structure-bullet">✓</div>
+                                    <div class="structure-text"><span class="highlight">Me encantaría</span> visitar</div>
+                                </div>
+                            </div>
+                            <div class="examples">
+                                <h3 class="example-title">Ejemplos:</h3>
+                                <div class="example-item">
+                                    <i class="material-icons example-icon">restaurant</i>
+                                    <div class="example-text"><span class="highlight">Me gustaría probar</span> las tapas tradicionales de Granada</div>
+                                </div>
+                                <div class="example-item">
+                                    <i class="material-icons example-icon">fastfood</i>
+                                    <div class="example-text"><span class="highlight">Preferiría comer</span> algo rápido si tengo poco tiempo</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grammar-row">
+                    <div class="grammar-card">
+                        <div class="grammar-header">
+                            <div class="grammar-icon">
+                                <i class="material-icons">record_voice_over</i>
+                            </div>
+                            <h2 class="grammar-title">Subjuntivo</h2>
+                        </div>
+                        <div class="grammar-content">
+                            <div class="structure-list">
+                                <div class="structure-item">
+                                    <div class="structure-bullet">!</div>
+                                    <div class="structure-text"><span class="highlight">Es importante que</span> se conserve</div>
+                                </div>
+                                <div class="structure-item">
+                                    <div class="structure-bullet">!</div>
+                                    <div class="structure-text"><span class="highlight">Recomiendo que</span> pruebes</div>
+                                </div>
+                                <div class="structure-item">
+                                    <div class="structure-bullet">!</div>
+                                    <div class="structure-text"><span class="highlight">Es necesario que</span> valoremos</div>
+                                </div>
+                            </div>
+                            <div class="examples">
+                                <h3 class="example-title">Ejemplos:</h3>
+                                <div class="example-item">
+                                    <i class="material-icons example-icon">restaurant</i>
+                                    <div class="example-text"><span class="highlight">Es importante que se conserve</span> la cultura del tapeo</div>
+                                </div>
+                                <div class="example-item">
+                                    <i class="material-icons example-icon">fastfood</i>
+                                    <div class="example-text"><span class="highlight">Recomiendo que pruebes</span> las tapas granadinas</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
