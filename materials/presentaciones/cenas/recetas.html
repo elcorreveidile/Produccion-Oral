@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RECETAS ESPAÑOLAS TRADICIONALES</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #e63946;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .recipes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            flex-grow: 1;
+        }
+        .recipe-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+        .recipe-card:hover {
+            transform: translateY(-5px);
+        }
+        .recipe-image {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+        .recipe-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .recipe-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .recipe-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .recipe-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(244, 162, 97, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .recipe-icon i {
+            font-size: 28px;
+            color: #f4a261;
+        }
+        .recipe-title {
+            font-size: 26px;
+            font-weight: 600;
+            color: #e63946;
+        }
+        .recipe-description {
+            font-size: 20px;
+            color: #333;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+        .recipe-origin {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+            font-size: 18px;
+            color: #555;
+        }
+        .recipe-origin i {
+            color: #f4a261;
+            margin-right: 8px;
+            font-size: 20px;
+        }
+        .highlight {
+            color: #e63946;
+            font-weight: 600;
+        }
+        .footer-note {
+            margin-top: 25px;
+            background-color: rgba(244, 162, 97, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .footer-icon {
+            font-size: 36px;
+            color: #e63946;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        .footer-text {
+            font-size: 20px;
+            color: #333;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">RECETAS ESPAÑOLAS TRADICIONALES</h1>
+        </div>
+        <div class="content">
+            <div class="recipes-grid">
+                <div class="recipe-card">
+                    <div class="recipe-image">
+                        <img src="https://sfile.chatglm.cn/images-ppt/0950e75cb1ac.jpg" alt="Paella valenciana">
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-header">
+                            <div class="recipe-icon">
+                                <i class="material-icons">rice_bowl</i>
+                            </div>
+                            <h2 class="recipe-title">Paella</h2>
+                        </div>
+                        <p class="recipe-description">Plato de <span class="highlight">arroz</span> con mariscos o carnes</p>
+                        <div class="recipe-origin">
+                            <i class="material-icons">place</i>
+                            <span>Originario de Valencia</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recipe-card">
+                    <div class="recipe-image">
+                        <img src="https://sfile.chatglm.cn/images-ppt/22c566539b4b.png" alt="Gazpacho andaluz">
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-header">
+                            <div class="recipe-icon">
+                                <i class="material-icons">soup_kitchen</i>
+                            </div>
+                            <h2 class="recipe-title">Gazpacho</h2>
+                        </div>
+                        <p class="recipe-description">Sopa <span class="highlight">fría</span> de tomate, pimiento y vegetales</p>
+                        <div class="recipe-origin">
+                            <i class="material-icons">place</i>
+                            <span>Típico de Andalucía</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recipe-card">
+                    <div class="recipe-image">
+                        <img src="https://sfile.chatglm.cn/images-ppt/b82571cf9ca1.jpg" alt="Tortilla española">
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-header">
+                            <div class="recipe-icon">
+                                <i class="material-icons">egg</i>
+                            </div>
+                            <h2 class="recipe-title">Tortilla española</h2>
+                        </div>
+                        <p class="recipe-description">Tortilla de <span class="highlight">patatas</span> con cebolla</p>
+                        <div class="recipe-origin">
+                            <i class="material-icons">public</i>
+                            <span>Plato nacional español</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recipe-card">
+                    <div class="recipe-image">
+                        <img src="https://sfile.chatglm.cn/images-ppt/56dd6219706d.jpg" alt="Jamón ibérico">
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-header">
+                            <div class="recipe-icon">
+                                <i class="material-icons">restaurant</i>
+                            </div>
+                            <h2 class="recipe-title">Jamón ibérico</h2>
+                        </div>
+                        <p class="recipe-description">Curado de cerdo <span class="highlight">ibérico</span>, joya gastronómica</p>
+                        <div class="recipe-origin">
+                            <i class="material-icons">star</i>
+                            <span>Exquisito producto español</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-note">
+                <i class="material-icons footer-icon">restaurant_menu</i>
+                <div class="footer-text">
+                    La cocina española es un pilar fundamental de la <span class="highlight">identidad cultural</span> del país. Cada región tiene sus especialidades que reflejan su historia, geografía y tradiciones. Aprender a cocinar estos platos es una excelente forma de sumergirse en la cultura española.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
