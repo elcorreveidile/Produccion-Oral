@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAREA PARA PRÓXIMA SESIÓN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #e63946;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .tasks-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            flex-grow: 1;
+        }
+        .task-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+        .task-card:hover {
+            transform: translateY(-5px);
+        }
+        .task-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .task-number {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(230, 57, 70, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            font-size: 24px;
+            font-weight: 700;
+            color: #e63946;
+        }
+        .task-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(244, 162, 97, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .task-icon i {
+            font-size: 28px;
+            color: #f4a261;
+        }
+        .task-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #e63946;
+        }
+        .task-description {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        .task-tips {
+            background-color: rgba(244, 162, 97, 0.1);
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 18px;
+            color: #555;
+        }
+        .task-tips i {
+            color: #f4a261;
+            margin-right: 8px;
+            font-size: 20px;
+            vertical-align: middle;
+        }
+        .highlight {
+            color: #e63946;
+            font-weight: 600;
+        }
+        .deadline-container {
+            margin-top: 25px;
+            background-color: rgba(230, 57, 70, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .deadline-icon {
+            font-size: 36px;
+            color: #e63946;
+            margin-right: 15px;
+        }
+        .deadline-text {
+            font-size: 22px;
+            font-weight: 600;
+            color: #333;
+        }
+        .deadline-date {
+            color: #e63946;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">TAREA PARA PRÓXIMA SESIÓN</h1>
+        </div>
+        <div class="content">
+            <div class="tasks-container">
+                <div class="task-card">
+                    <div class="task-header">
+                        <div class="task-number">1</div>
+                        <div class="task-icon">
+                            <i class="material-icons">search</i>
+                        </div>
+                        <h2 class="task-title">Investigar receta tradicional</h2>
+                    </div>
+                    <p class="task-description">
+                        Receta granadina tradicional: <span class="highlight">tortilla</span>, <span class="highlight">gazpacho</span>, etc.
+                    </p>
+                    <div class="task-tips">
+                        <i class="material-icons">tips_and_updates</i>
+                        Busca recetas con ingredientes locales y técnicas tradicionales
+                    </div>
+                </div>
+                
+                <div class="task-card">
+                    <div class="task-header">
+                        <div class="task-number">2</div>
+                        <div class="task-icon">
+                            <i class="material-icons">videocam</i>
+                        </div>
+                        <h2 class="task-title">Video tutorial de cocina</h2>
+                    </div>
+                    <p class="task-description">
+                        Preparar video tutorial <span class="highlight">simple</span> en español
+                    </p>
+                    <div class="task-tips">
+                        <i class="material-icons">tips_and_updates</i>
+                        Usa vocabulario de la sesión y habla claramente
+                    </div>
+                </div>
+                
+                <div class="task-card">
+                    <div class="task-header">
+                        <div class="task-number">3</div>
+                        <div class="task-icon">
+                            <i class="material-icons">mic</i>
+                        </div>
+                        <h2 class="task-title">Audio explicativo</h2>
+                    </div>
+                    <p class="task-description">
+                        Grabar audio explicando receta <span class="highlight">típica</span> de tu país
+                    </p>
+                    <div class="task-tips">
+                        <i class="material-icons">tips_and_updates</i>
+                        Incluye ingredientes, pasos y curiosidades culturales
+                    </div>
+                </div>
+                
+                <div class="task-card">
+                    <div class="task-header">
+                        <div class="task-number">4</div>
+                        <div class="task-icon">
+                            <i class="material-icons">restaurant_menu</i>
+                        </div>
+                        <h2 class="task-title">Menú multicultural</h2>
+                    </div>
+                    <p class="task-description">
+                        Crear menú para cena <span class="highlight">multicultural</span>
+                    </p>
+                    <div class="task-tips">
+                        <i class="material-icons">tips_and_updates</i>
+                        Combina platos de diferentes culturas con explicaciones
+                    </div>
+                </div>
+            </div>
+            
+            <div class="deadline-container">
+                <i class="material-icons deadline-icon">event</i>
+                <div class="deadline-text">Fecha de entrega: <span class="deadline-date">lunes 8 de diciembre</span></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
