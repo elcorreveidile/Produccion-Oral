@@ -165,23 +165,9 @@
         </div>
         <div class="card">
           <h3>Guías de la sesión</h3>
-          <p class="hint">Pulsa la sesión para abrir su guía (RTF).</p>
+          <p class="hint">Pulsa la sesión para abrir su guía (PDF).</p>
 
-          <!-- ENLACE DIRECTO TEMPORAL SESIÓN 4 -->
-          <div style="margin-bottom: 1rem; padding: 1rem; background: #fef3c7; border-radius: 8px; border: 2px solid #f59e0b;">
-            <h4 style="color: #92400e; margin-bottom: 0.5rem;">🎯 Acceso Directo Sesión 4</h4>
-            <p style="margin-bottom: 0.5rem;"><strong>Debate: Cultura de tapas vs. comida rápida</strong></p>
-            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 0.5rem;">
-              <button class="btn primary" onclick="window.open('materials/cuadernos/S4_Produccion_Oral_Mejorado.pdf', '_blank')" style="background: #dc2626;">
-                📄 Abrir Sesión 4 (PDF)
-              </button>
-              <button class="btn primary" onclick="window.open('https://elcorreveidile.github.io/Produccion-Oral/materials/presentaciones/tapas/', '_blank')" style="background: #059669;">
-                🍺 Mini-Web de Tapas
-              </button>
-            </div>
-            <p style="font-size: 0.85rem; color: #92400e; margin: 0;">💡 Explora la cultura de tapas con esta presentación interactiva</p>
-          </div>
-
+    
           <div id="chips-s1"></div>
           <ul class="list" id="lista-s1"></ul>
         </div>
@@ -564,10 +550,15 @@
             const fileIcon = isPDF ? '📄' : '📝';
             const dataAttr = isPDF ? 'data-pdf' : 'data-doc';
 
+            // Añadir botón especial para la mini-web de tapas en S4
+            const tapasButton = s.t.includes('Sesión 4') || s.href.includes('S4') ?
+              `<li><button class="btn" onclick="window.open('https://elcorreveidile.github.io/Produccion-Oral/materials/presentaciones/tapas/', '_blank')" style="background: #059669; color: white;">🍺 Mini-Web de Tapas</button></li>` : '';
+
             list.innerHTML = `
               <li><button class="btn primary" ${dataAttr}="${s.href}">${fileIcon} Ver en navegador (${s.t})</button></li>
               <li><button class="btn" onclick="window.open('${s.href}', '_blank')">🔗 Abrir en nueva pestaña</button></li>
               <li><button class="btn" onclick="downloadFile('${s.href}', '${s.t}.pdf')">💾 Descargar directamente</button></li>
+              ${tapasButton}
             `;
           } else {
             // Archivo no existe - mostrar mensaje informativo
