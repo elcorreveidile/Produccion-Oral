@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESCENA: La cena de bienvenida</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #e63946;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .left-section {
+            flex: 1;
+            padding-right: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+        .right-section {
+            flex: 1;
+            padding-left: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+        .section-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #e63946;
+            display: flex;
+            align-items: center;
+        }
+        .section-title i {
+            margin-right: 12px;
+            font-size: 32px;
+        }
+        .characters-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 25px;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        .character-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            padding: 12px;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+        .character-item:hover {
+            transform: translateX(5px);
+            background-color: rgba(244, 162, 97, 0.1);
+        }
+        .character-item:last-child {
+            margin-bottom: 0;
+        }
+        .character-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(230, 57, 70, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .character-icon i {
+            font-size: 28px;
+            color: #e63946;
+        }
+        .character-content {
+            flex: 1;
+        }
+        .character-name {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .character-desc {
+            font-size: 18px;
+            color: #555;
+        }
+        .dialogue-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .dialogue-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            padding: 12px;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+        .dialogue-item:hover {
+            transform: translateX(5px);
+            background-color: rgba(244, 162, 97, 0.1);
+        }
+        .dialogue-item:last-child {
+            margin-bottom: 0;
+        }
+        .speaker {
+            font-weight: 600;
+            color: #e63946;
+            margin-right: 12px;
+            min-width: 100px;
+            font-size: 18px;
+        }
+        .speech {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.4;
+        }
+        .highlight {
+            color: #e63946;
+            font-weight: 600;
+        }
+        .image-container {
+            margin-top: 20px;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 12px;
+            position: relative;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: 10px;
+            color: white;
+            font-size: 16px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">ESCENA: La cena de bienvenida</h1>
+        </div>
+        <div class="content">
+            <div class="left-section">
+                <h2 class="section-title">
+                    <i class="material-icons">groups</i>
+                    <span>Personajes</span>
+                </h2>
+                <div class="characters-container">
+                    <div class="character-item">
+                        <div class="character-icon">
+                            <i class="material-icons">person</i>
+                        </div>
+                        <div class="character-content">
+                            <div class="character-name">Protagonista</div>
+                            <div class="character-desc">Cocinando por primera vez en España</div>
+                        </div>
+                    </div>
+                    <div class="character-item">
+                        <div class="character-icon">
+                            <i class="material-icons">restaurant</i>
+                        </div>
+                        <div class="character-content">
+                            <div class="character-name">Compañero/a experto/a</div>
+                            <div class="character-desc">Conocedor/a de la cocina tradicional</div>
+                        </div>
+                    </div>
+                    <div class="character-item">
+                        <div class="character-icon">
+                            <i class="material-icons">public</i>
+                        </div>
+                        <div class="character-content">
+                            <div class="character-name">Invitados extranjeros</div>
+                            <div class="character-desc">Interesados en la cultura española</div>
+                        </div>
+                    </div>
+                    <div class="character-item">
+                        <div class="character-icon">
+                            <i class="material-icons">home</i>
+                        </div>
+                        <div class="character-content">
+                            <div class="character-name">Vecino/a curioso/a</div>
+                            <div class="character-desc">Atraído/a por los aromas</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="image-container">
+                    <img src="https://sfile.chatglm.cn/images-ppt/b7b4339590ad.webp" alt="Cena con amigos en España">
+                    <div class="image-overlay">La cocina como punto de encuentro entre culturas</div>
+                </div>
+            </div>
+            
+            <div class="right-section">
+                <h2 class="section-title">
+                    <i class="material-icons">chat</i>
+                    <span>Diálogo Modelo</span>
+                </h2>
+                <div class="dialogue-container">
+                    <div class="dialogue-item">
+                        <div class="speaker">Protagonista:</div>
+                        <div class="speech">"<span class="highlight">Nunca</span> he cocinado esto antes. ¿Puedes ayudarme?"</div>
+                    </div>
+                    <div class="dialogue-item">
+                        <div class="speaker">Compañero:</div>
+                        <div class="speech">"¡Claro! <span class="highlight">Primero</span> pica la cebolla muy fina."</div>
+                    </div>
+                    <div class="dialogue-item">
+                        <div class="speaker">Protagonista:</div>
+                        <div class="speech">"¿Como esta? ¿Está <span class="highlight">bien</span> así?"</div>
+                    </div>
+                    <div class="dialogue-item">
+                        <div class="speaker">Compañero:</div>
+                        <div class="speech">"<span class="highlight">Perfecto</span>. Ahora ponla en la sartén con aceite."</div>
+                    </div>
+                    <div class="dialogue-item">
+                        <div class="speaker">Vecino:</div>
+                        <div class="speech">"¡Qué <span class="highlight">bien huele</span>! ¿Qué están cocinando?"</div>
+                    </div>
+                </div>
+                
+                <div class="image-container">
+                    <img src="https://sfile.chatglm.cn/images-ppt/1146958fcf2c.jpg" alt="Preparación de comida tradicional">
+                    <div class="image-overlay">El proceso de preparación como experiencia cultural compartida</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
