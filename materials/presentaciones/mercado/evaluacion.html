@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVALUACIÓN FORMATIVA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f8f8;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #e63946;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .evaluation-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            flex-grow: 1;
+        }
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            flex-grow: 1;
+        }
+        .criteria-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+        .criteria-card:hover {
+            transform: translateY(-5px);
+        }
+        .criteria-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .criteria-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(244, 162, 97, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        .criteria-icon i {
+            font-size: 32px;
+            color: #f4a261;
+        }
+        .criteria-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #e63946;
+        }
+        .criteria-description {
+            font-size: 20px;
+            color: #555;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+        .criteria-indicators {
+            display: flex;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        .indicator {
+            width: 40px;
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .indicator-filled {
+            height: 100%;
+            background-color: #f4a261;
+            border-radius: 4px;
+        }
+        .footer {
+            margin-top: 30px;
+            background-color: rgba(244, 162, 97, 0.1);
+            border-radius: 12px;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .footer-left {
+            display: flex;
+            align-items: center;
+        }
+        .footer-icon {
+            font-size: 36px;
+            color: #e63946;
+            margin-right: 20px;
+        }
+        .footer-text {
+            font-size: 18px;
+            color: #333;
+        }
+        .footer-right {
+            display: flex;
+            align-items: center;
+        }
+        .professor-info {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 8px;
+            padding: 10px 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        .professor-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(230, 57, 70, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+        }
+        .professor-icon i {
+            font-size: 22px;
+            color: #e63946;
+        }
+        .professor-text {
+            font-size: 18px;
+            color: #333;
+        }
+        .highlight {
+            color: #e63946;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">EVALUACIÓN FORMATIVA</h1>
+        </div>
+        <div class="content">
+            <div class="evaluation-container">
+                <div class="criteria-grid">
+                    <div class="criteria-card">
+                        <div class="criteria-header">
+                            <div class="criteria-icon">
+                                <i class="material-icons">shopping_cart</i>
+                            </div>
+                            <h2 class="criteria-title">Uso correcto de vocabulario de alimentos</h2>
+                        </div>
+                        <p class="criteria-description">Correcta aplicación de términos específicos relacionados con productos de mercado</p>
+                        <div class="criteria-indicators">
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 100%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 100%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 80%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 60%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 40%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="criteria-card">
+                        <div class="criteria-header">
+                            <div class="criteria-icon">
+                                <i class="material-icons">record_voice_over</i>
+                            </div>
+                            <h2 class="criteria-title">Fluidez en interacciones de compra</h2>
+                        </div>
+                        <p class="criteria-description">Capacidad para mantener conversaciones naturales con vendedores en el mercado</p>
+                        <div class="criteria-indicators">
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 100%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 90%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 70%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 50%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 30%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="criteria-card">
+                        <div class="criteria-header">
+                            <div class="criteria-icon">
+                                <i class="material-icons">euro_symbol</i>
+                            </div>
+                            <h2 class="criteria-title">Capacidad de negociar precios</h2>
+                        </div>
+                        <p class="criteria-description">Habilidad para utilizar expresiones de negociación al comprar productos</p>
+                        <div class="criteria-indicators">
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 100%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 85%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 65%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 45%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 25%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="criteria-card">
+                        <div class="criteria-header">
+                            <div class="criteria-icon">
+                                <i class="material-icons">scale</i>
+                            </div>
+                            <h2 class="criteria-title">Claridad en expresión de cantidades</h2>
+                        </div>
+                        <p class="criteria-description">Precisión al indicar cantidades y pesos al realizar compras</p>
+                        <div class="criteria-indicators">
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 100%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 95%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 75%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 55%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 35%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer">
+                    <div class="footer-left">
+                        <i class="material-icons footer-icon">school</i>
+                        <div class="footer-text">
+                            © 2024-2025 <span class="highlight">Universidad de Granada</span> - Centro de Lenguas Modernas<br>
+                            Producción e Interacción Oral — <span class="highlight">Nivel B2.1</span>
+                        </div>
+                    </div>
+                    <div class="footer-right">
+                        <div class="professor-info">
+                            <div class="professor-icon">
+                                <i class="material-icons">person</i>
+                            </div>
+                            <div class="professor-text">
+                                Profesor: <span class="highlight">Javier Benítez Láinez</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
