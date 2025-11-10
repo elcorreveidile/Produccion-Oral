@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EL MERCADO DE SAN AGUSTÍN DE GRANADA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f8f8;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #e63946;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .left-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding-right: 30px;
+        }
+        .right-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding-left: 30px;
+        }
+        .info-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            transition: transform 0.3s ease;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(244, 162, 97, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .info-icon i {
+            font-size: 28px;
+            color: #f4a261;
+        }
+        .info-content {
+            flex-grow: 1;
+        }
+        .info-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .info-text {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.4;
+        }
+        .image-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .image-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+            flex: 1;
+        }
+        .image-card:hover {
+            transform: translateY(-5px);
+        }
+        .image {
+            height: 180px;
+            overflow: hidden;
+        }
+        .image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .image-card:hover .image img {
+            transform: scale(1.05);
+        }
+        .image-caption {
+            padding: 15px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+        }
+        .highlight {
+            color: #e63946;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">EL MERCADO DE SAN AGUSTÍN DE GRANADA</h1>
+        </div>
+        <div class="content">
+            <div class="left-content">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="material-icons">history</i>
+                    </div>
+                    <div class="info-content">
+                        <h3 class="info-title">Historia</h3>
+                        <p class="info-text">Construido en <span class="highlight">1881</span> en el solar del antiguo Convento de San Agustín (1553-1593)</p>
+                    </div>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="material-icons">location_on</i>
+                    </div>
+                    <div class="info-content">
+                        <h3 class="info-title">Ubicación</h3>
+                        <p class="info-text">Centro de Granada, cerca de la <span class="highlight">Catedral</span> y la Plaza de la Romanilla</p>
+                    </div>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="material-icons">store</i>
+                    </div>
+                    <div class="info-content">
+                        <h3 class="info-title">Estructura</h3>
+                        <p class="info-text"><span class="highlight">60 puestos</span> en planta baja, calles interiores que conectan con el exterior a través de cinco puertas</p>
+                    </div>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="material-icons">schedule</i>
+                    </div>
+                    <div class="info-content">
+                        <h3 class="info-title">Horario e instalaciones</h3>
+                        <p class="info-text">Lunes a sábado de <span class="highlight">9:00 a 15:00</span>. Bar, aseos en planta baja y cámaras frigoríficas en planta superior</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="right-content">
+                <div class="image-container">
+                    <div class="image-card">
+                        <div class="image">
+                            <img src="https://sfile.chatglm.cn/images-ppt/513e38fda885.jpg" alt="Interior del Mercado de San Agustín">
+                        </div>
+                        <div class="image-caption">Puesto de jamones y embutidos</div>
+                    </div>
+                    
+                    <div class="image-card">
+                        <div class="image">
+                            <img src="https://sfile.chatglm.cn/images-ppt/795e04cf2b62.jpg" alt="Zona gastronómica del mercado">
+                        </div>
+                        <div class="image-caption">Zona gastronómica "San Agustín Gourmet"</div>
+                    </div>
+                    
+                    <div class="image-card">
+                        <div class="image">
+                            <img src="https://sfile.chatglm.cn/images-ppt/91ec4c01e7e6.jpg" alt="Pescadería del mercado">
+                        </div>
+                        <div class="image-caption">Pescadería con productos frescos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
