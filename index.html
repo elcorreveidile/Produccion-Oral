@@ -560,6 +560,9 @@
             const estudiosButton = s.t.includes('Sesión 6') || s.href.includes('S6') ?
               `<li><button class="btn" onclick="window.open('https://elcorreveidile.github.io/Produccion-Oral/materials/presentaciones/estudios/', '_blank')" style="background: #7c3aed; color: white;">📚 Mini-Web de Estudios</button></li>` : '';
 
+            const vecindarioButton = s.t.includes('Sesión 7') || s.href.includes('S7') ?
+              `<li><button class="btn" onclick="window.open('https://elcorreveidile.github.io/Produccion-Oral/materials/presentaciones/vecindario/', '_blank')" style="background: #ea580c; color: white;">🏘️ Mini-Web del Vecindario</button></li>` : '';
+
             list.innerHTML = `
               <li><button class="btn primary" ${dataAttr}="${s.href}">${fileIcon} Ver en navegador (${s.t})</button></li>
               <li><button class="btn" onclick="window.open('${s.href}', '_blank')">🔗 Abrir en nueva pestaña</button></li>
@@ -567,6 +570,7 @@
               ${tapasButton}
               ${mercadoButton}
               ${estudiosButton}
+              ${vecindarioButton}
             `;
           } else {
             // Archivo no existe - mostrar mensaje informativo
