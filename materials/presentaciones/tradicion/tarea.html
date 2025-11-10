@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarea para Próxima Sesión</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #e63946;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .left-section {
+            flex: 1;
+            padding-right: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+        .right-section {
+            flex: 1;
+            padding-left: 40px;
+            border-left: 2px solid #f8d56f;
+            display: flex;
+            flex-direction: column;
+        }
+        .tasks-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex-grow: 1;
+        }
+        .task-item {
+            background-color: rgba(230, 57, 70, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .task-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(230, 57, 70, 0.1);
+        }
+        .task-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #e63946;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: 600;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        .task-content {
+            flex: 1;
+        }
+        .task-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #212529;
+        }
+        .task-desc {
+            font-size: 18px;
+            color: #495057;
+            line-height: 1.4;
+        }
+        .deadline-container {
+            background-color: rgba(248, 213, 111, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .deadline-icon {
+            color: #f8d56f;
+            font-size: 32px;
+            margin-right: 15px;
+        }
+        .deadline-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #212529;
+        }
+        .deadline-date {
+            color: #e63946;
+            font-weight: 700;
+        }
+        .image-container {
+            margin-top: 20px;
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            border-radius: 12px;
+            position: relative;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: 15px;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+        }
+        .tips-container {
+            background-color: rgba(248, 213, 111, 0.15);
+            border-radius: 12px;
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .tips-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #e63946;
+            display: flex;
+            align-items: center;
+        }
+        .tips-title i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+        .tips-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+        }
+        .tip-icon {
+            color: #f8d56f;
+            margin-right: 12px;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+        .tip-text {
+            font-size: 18px;
+            line-height: 1.4;
+            color: #495057;
+        }
+        .highlight {
+            color: #e63946;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">TAREA PARA PRÓXIMA SESIÓN</h1>
+        </div>
+        <div class="content">
+            <div class="left-section">
+                <div class="tasks-container">
+                    <div class="task-item">
+                        <div class="task-number">1</div>
+                        <div class="task-content">
+                            <div class="task-title">Investigar evolución de una fiesta tradicional granadina</div>
+                            <div class="task-desc">Analiza cómo ha cambiado una fiesta local a lo largo del tiempo</div>
+                        </div>
+                    </div>
+                    
+                    <div class="task-item">
+                        <div class="task-number">2</div>
+                        <div class="task-content">
+                            <div class="task-title">Grabar audio explicando tradición de tu país</div>
+                            <div class="task-desc">Describe una tradición de tu cultura y sus transformaciones recientes</div>
+                        </div>
+                    </div>
+                    
+                    <div class="task-item">
+                        <div class="task-number">3</div>
+                        <div class="task-content">
+                            <div class="task-title">Preparar propuesta de modernización respetuosa</div>
+                            <div class="task-desc">Crea un plan para modernizar una tradición sin perder su esencia</div>
+                        </div>
+                    </div>
+                    
+                    <div class="task-item">
+                        <div class="task-number">4</div>
+                        <div class="task-content">
+                            <div class="task-title">Escribir ensayo sobre "Tradición en el siglo XXI"</div>
+                            <div class="task-desc">Reflexiona sobre el rol de las tradiciones en el mundo contemporáneo</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="deadline-container">
+                    <i class="material-icons deadline-icon">event</i>
+                    <div class="deadline-text">Fecha de entrega: <span class="deadline-date">miércoles 4 de diciembre</span></div>
+                </div>
+            </div>
+            
+            <div class="right-section">
+                <div class="tips-container">
+                    <div class="tips-title">
+                        <i class="material-icons">tips_and_updates</i>
+                        <span>Consejos para completar las tareas</span>
+                    </div>
+                    
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <i class="material-icons tip-icon">search</i>
+                            <div class="tip-text">Utiliza <span class="highlight">fuentes confiables</span> para investigar sobre las fiestas tradicionales</div>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <i class="material-icons tip-icon">mic</i>
+                            <div class="tip-text">En tu audio, incluye <span class="highlight">ejemplos personales</span> y utiliza el vocabulario de la sesión</div>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <i class="material-icons tip-icon">lightbulb</i>
+                            <div class="tip-text">Para la propuesta de modernización, considera <span class="highlight">diferentes perspectivas</span> (tradicionalistas, jóvenes, turistas)</div>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <i class="material-icons tip-icon">edit</i>
+                            <div class="tip-text">En el ensayo, aplica las <span class="highlight">estructuras gramaticales</span> vistas en clase (comparativos, conectores, subjuntivo)</div>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <i class="material-icons tip-icon">schedule</i>
+                            <div class="tip-text">Organiza tu tiempo para <span class="highlight">entregar todas las tareas</span> en la fecha establecida</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="image-container">
+                    <img src="https://sfile.chatglm.cn/images-ppt/713a4d28f26f.jpg" alt="Estudiantes investigando sobre tradiciones culturales">
+                    <div class="image-overlay">Investigando sobre la evolución de las tradiciones culturales</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
