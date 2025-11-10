@@ -550,15 +550,19 @@
             const fileIcon = isPDF ? '📄' : '📝';
             const dataAttr = isPDF ? 'data-pdf' : 'data-doc';
 
-            // Añadir botón especial para la mini-web de tapas en S4
+            // Añadir botones especiales para mini-webs
             const tapasButton = s.t.includes('Sesión 4') || s.href.includes('S4') ?
               `<li><button class="btn" onclick="window.open('https://elcorreveidile.github.io/Produccion-Oral/materials/presentaciones/tapas/', '_blank')" style="background: #059669; color: white;">🍺 Mini-Web de Tapas</button></li>` : '';
+
+            const mercadoButton = s.t.includes('Sesión 5') || s.href.includes('S5') ?
+              `<li><button class="btn" onclick="window.open('https://elcorreveidile.github.io/Produccion-Oral/materials/presentaciones/mercado/', '_blank')" style="background: #dc2626; color: white;">🛒 Mini-Web del Mercado</button></li>` : '';
 
             list.innerHTML = `
               <li><button class="btn primary" ${dataAttr}="${s.href}">${fileIcon} Ver en navegador (${s.t})</button></li>
               <li><button class="btn" onclick="window.open('${s.href}', '_blank')">🔗 Abrir en nueva pestaña</button></li>
               <li><button class="btn" onclick="downloadFile('${s.href}', '${s.t}.pdf')">💾 Descargar directamente</button></li>
               ${tapasButton}
+              ${mercadoButton}
             `;
           } else {
             // Archivo no existe - mostrar mensaje informativo
