@@ -138,57 +138,82 @@
         }
         .navigation {
             position: absolute;
-            bottom: 10px;
-            left: 0;
-            right: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            z-index: 1000;
+            background-color: #ffffff;
+            border: 3px solid #2c3e50;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .navigation-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #34495e;
+            padding-bottom: 8px;
+        }
+        .navigation-content {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 20px;
-            z-index: 1000;
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 15px 0;
-            border-radius: 25px 25px 0 0;
         }
         .nav-btn {
-            background-color: rgba(245, 197, 24, 0.9);
-            color: #000;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-size: 16px;
+            background-color: #3498db;
+            color: white;
+            border: 2px solid #2980b9;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: all 0.3s ease;
             text-decoration: none;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
         }
         .nav-btn:hover {
-            background-color: #f5c518;
-            transform: translateY(-2px);
+            background-color: #2980b9;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .nav-btn.prev {
-            background-color: rgba(52, 152, 219, 0.9);
-            color: white;
+            background-color: #e74c3c;
+            border-color: #c0392b;
         }
         .nav-btn.prev:hover {
-            background-color: #3498db;
+            background-color: #c0392b;
         }
         .nav-disabled {
             opacity: 0.5;
             cursor: not-allowed;
+            background-color: #95a5a6 !important;
+            border-color: #7f8c8d !important;
         }
         .nav-disabled:hover {
             transform: none;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
         }
         .slide-counter {
+            background-color: #2c3e50;
             color: white;
             font-size: 14px;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 8px 16px;
-            border-radius: 20px;
+            font-weight: 600;
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: 2px solid #34495e;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -276,15 +301,18 @@
 
         <!-- Navegación -->
         <div class="navigation">
-            <a href="actividades.html" class="nav-btn prev">
-                <i class="material-icons">arrow_back</i>
-                Anterior
-            </a>
-            <div class="slide-counter">11 / 12</div>
-            <a href="evaluacion.html" class="nav-btn">
-                Siguiente
-                <i class="material-icons">arrow_forward</i>
-            </a>
+            <div class="navigation-title">Navegación</div>
+            <div class="navigation-content">
+                <a href="actividades.html" class="nav-btn prev">
+                    <i class="material-icons">arrow_back</i>
+                    Anterior
+                </a>
+                <div class="slide-counter">11 / 12</div>
+                <a href="evaluacion.html" class="nav-btn">
+                    Siguiente
+                    <i class="material-icons">arrow_forward</i>
+                </a>
+            </div>
         </div>
     </div>
 </body>
