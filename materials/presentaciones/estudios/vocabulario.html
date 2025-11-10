@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOCABULARIO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f8f8;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #e63946;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 25px;
+            flex-grow: 1;
+        }
+        .vocab-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+        .vocab-section:hover {
+            transform: translateY(-5px);
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(244, 162, 97, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .section-icon i {
+            font-size: 28px;
+            color: #f4a261;
+        }
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #e63946;
+        }
+        .vocab-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            flex-grow: 1;
+        }
+        .vocab-item {
+            background-color: rgba(244, 162, 97, 0.08);
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 20px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+        .vocab-item:hover {
+            background-color: rgba(244, 162, 97, 0.2);
+            transform: scale(1.05);
+        }
+        .vocab-item i {
+            font-size: 20px;
+            color: #f4a261;
+            margin-right: 8px;
+        }
+        .highlight {
+            color: #e63946;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">VOCABULARIO</h1>
+        </div>
+        <div class="content">
+            <div class="vocab-grid">
+                <div class="vocab-section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="material-icons">school</i>
+                        </div>
+                        <h2 class="section-title">Educación</h2>
+                    </div>
+                    <div class="vocab-items">
+                        <div class="vocab-item">
+                            <i class="material-icons">menu_book</i>
+                            <span>Máster</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">workspace_premium</i>
+                            <span>Doctorado</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">card_giftcard</i>
+                            <span>Beca</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">swap_horiz</i>
+                            <span>Intercambio</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">psychology</i>
+                            <span>Especialización</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="vocab-section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="material-icons">work</i>
+                        </div>
+                        <h2 class="section-title">Trabajo</h2>
+                    </div>
+                    <div class="vocab-items">
+                        <div class="vocab-item">
+                            <i class="material-icons">description</i>
+                            <span>Contrato</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">business_center</i>
+                            <span>Puesto</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">trending_up</i>
+                            <span>Carrera profesional</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">explore</i>
+                            <span>Oportunidades</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="vocab-section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="material-icons">balance</i>
+                        </div>
+                        <h2 class="section-title">Decisiones</h2>
+                    </div>
+                    <div class="vocab-items">
+                        <div class="vocab-item">
+                            <i class="material-icons">help_outline</i>
+                            <span>Dilema</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">thumb_up</i>
+                            <span>Ventajas</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">thumb_down</i>
+                            <span>Inconvenientes</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">favorite_border</i>
+                            <span>Sacrificios</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">emoji_events</i>
+                            <span>Recompensas</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="vocab-section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="material-icons">public</i>
+                        </div>
+                        <h2 class="section-title">Experiencia</h2>
+                    </div>
+                    <div class="vocab-items">
+                        <div class="vocab-item">
+                            <i class="material-icons">language</i>
+                            <span>Internacional</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">diversity_3</i>
+                            <span>Multicultural</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">self_improvement</i>
+                            <span>Crecimiento personal</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">trending_up</i>
+                            <span>Desarrollo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
