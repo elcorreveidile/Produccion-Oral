@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIPOS DE TAPAS TRADICIONALES</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f8f8;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #e63946;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .tapas-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 20px;
+            flex-grow: 1;
+        }
+        .tapa-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+        .tapa-card:hover {
+            transform: translateY(-5px);
+        }
+        .tapa-image {
+            height: 160px;
+            overflow: hidden;
+            position: relative;
+        }
+        .tapa-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .tapa-card:hover .tapa-image img {
+            transform: scale(1.05);
+        }
+        .tapa-info {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .tapa-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #e63946;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        .tapa-name i {
+            font-size: 18px;
+            margin-right: 8px;
+            color: #f4a261;
+        }
+        .tapa-description {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.3;
+        }
+        .highlight {
+            color: #e63946;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">TIPOS DE TAPAS TRADICIONALES</h1>
+        </div>
+        <div class="content">
+            <div class="tapas-grid">
+                <div class="tapa-card">
+                    <div class="tapa-image">
+                        <img src="https://sfile.chatglm.cn/images-ppt/c3431a228709.jpg" alt="Tortilla española">
+                    </div>
+                    <div class="tapa-info">
+                        <h3 class="tapa-name">
+                            <i class="material-icons">breakfast_dining</i>
+                            Tortilla española
+                        </h3>
+                        <p class="tapa-description">Huevo, patata y cebolla</p>
+                    </div>
+                </div>
+                <div class="tapa-card">
+                    <div class="tapa-image">
+                        <img src="https://sfile.chatglm.cn/images-ppt/d12eb45af414.jpg" alt="Patatas bravas">
+                    </div>
+                    <div class="tapa-info">
+                        <h3 class="tapa-name">
+                            <i class="material-icons">local_fire_department</i>
+                            Patatas bravas
+                        </h3>
+                        <p class="tapa-description">Patatas fritas con salsa picante</p>
+                    </div>
+                </div>
+                <div class="tapa-card">
+                    <div class="tapa-image">
+                        <img src="https://sfile.chatglm.cn/images-ppt/f161b35a649b.jpg" alt="Jamón ibérico">
+                    </div>
+                    <div class="tapa-info">
+                        <h3 class="tapa-name">
+                            <i class="material-icons">kebab_dining</i>
+                            Jamón ibérico
+                        </h3>
+                        <p class="tapa-description">Curado de cerdo ibérico</p>
+                    </div>
+                </div>
+                <div class="tapa-card">
+                    <div class="tapa-image">
+                        <img src="https://sfile.chatglm.cn/images-ppt/fb8758546662.jpg" alt="Croquetas">
+                    </div>
+                    <div class="tapa-info">
+                        <h3 class="tapa-name">
+                            <i class="material-icons">lunch_dining</i>
+                            Croquetas
+                        </h3>
+                        <p class="tapa-description">Bechamel con jamón o pollo</p>
+                    </div>
+                </div>
+                <div class="tapa-card">
+                    <div class="tapa-image">
+                        <img src="https://sfile.chatglm.cn/images-ppt/844f9ba79005.jpg" alt="Pulpo a la gallega">
+                    </div>
+                    <div class="tapa-info">
+                        <h3 class="tapa-name">
+                            <i class="material-icons">set_meal</i>
+                            Pulpo a la gallega
+                        </h3>
+                        <p class="tapa-description">Pulpo cocido con pimentón</p>
+                    </div>
+                </div>
+                <div class="tapa-card">
+                    <div class="tapa-image">
+                        <img src="https://sfile.chatglm.cn/images-ppt/ca073e432e18.jpg" alt="Pan tumaca">
+                    </div>
+                    <div class="tapa-info">
+                        <h3 class="tapa-name">
+                            <i class="material-icons">bakery_dining</i>
+                            Pan tumaca
+                        </h3>
+                        <p class="tapa-description">Pan con tomate y aceite de oliva</p>
+                    </div>
+                </div>
+                <div class="tapa-card">
+                    <div class="tapa-image">
+                        <img src="https://sfile.chatglm.cn/images-ppt/b6b1377e5108.png" alt="Huevos rotos">
+                    </div>
+                    <div class="tapa-info">
+                        <h3 class="tapa-name">
+                            <i class="material-icons">egg</i>
+                            Huevos rotos
+                        </h3>
+                        <p class="tapa-description">Huevos fritos sobre patatas</p>
+                    </div>
+                </div>
+                <div class="tapa-card">
+                    <div class="tapa-image">
+                        <img src="https://sfile.chatglm.cn/images-ppt/196c3fe14fb2.png" alt="Pescaíto frito">
+                    </div>
+                    <div class="tapa-info">
+                        <h3 class="tapa-name">
+                            <i class="material-icons">set_meal</i>
+                            Pescaíto frito
+                        </h3>
+                        <p class="tapa-description">Pescado rebozado y frito</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
