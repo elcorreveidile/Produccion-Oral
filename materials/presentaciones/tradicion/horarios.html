@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horarios Españoles y su Racionalización</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #e63946;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .left-section {
+            flex: 1;
+            padding-right: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+        .right-section {
+            flex: 1;
+            padding-left: 40px;
+            border-left: 2px solid #f8d56f;
+            display: flex;
+            flex-direction: column;
+        }
+        .section-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #e63946;
+        }
+        .schedule-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            flex-grow: 1;
+        }
+        .schedule-item {
+            background-color: rgba(230, 57, 70, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .schedule-icon {
+            color: #e63946;
+            margin-right: 15px;
+            font-size: 28px;
+        }
+        .schedule-content {
+            flex: 1;
+        }
+        .schedule-name {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #212529;
+        }
+        .schedule-desc {
+            font-size: 18px;
+            color: #495057;
+        }
+        .vocab-container {
+            background-color: rgba(248, 213, 111, 0.15);
+            border-radius: 8px;
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .vocab-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #212529;
+        }
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            flex-grow: 1;
+        }
+        .vocab-item {
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+        }
+        .vocab-item i {
+            color: #f8d56f;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        .image-container {
+            margin-top: 20px;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 8px;
+            position: relative;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: 10px;
+            color: white;
+            font-size: 16px;
+            text-align: center;
+        }
+        .quote {
+            font-style: italic;
+            color: #495057;
+            margin-top: 15px;
+            font-size: 18px;
+            text-align: center;
+        }
+        .highlight {
+            color: #e63946;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">Horarios Españoles y su Racionalización</h1>
+        </div>
+        <div class="content">
+            <div class="left-section">
+                <h2 class="section-title">El Debate sobre los Horarios</h2>
+                <div class="schedule-container">
+                    <div class="schedule-item">
+                        <i class="material-icons schedule-icon">history</i>
+                        <div class="schedule-content">
+                            <div class="schedule-name">Origen del Problema</div>
+                            <div class="schedule-desc">En 1940, Franco adelantó una hora los relojes para coordinar con Alemania</div>
+                        </div>
+                    </div>
+                    <div class="schedule-item">
+                        <i class="material-icons schedule-icon">schedule</i>
+                        <div class="schedule-content">
+                            <div class="schedule-name">Consecuencias</div>
+                            <div class="schedule-desc">Los españoles cenan <span class="highlight">dos horas más tarde</span> que en el resto del mundo</div>
+                            <div class="schedule-desc">Trabajan más horas pero son <span class="highlight">menos productivos</span></div>
+                        </div>
+                    </div>
+                    <div class="schedule-item">
+                        <i class="material-icons schedule-icon">lightbulb</i>
+                        <div class="schedule-content">
+                            <div class="schedule-name">Propuestas de Cambio</div>
+                            <div class="schedule-desc">Terminar jornada laboral a las 6 pm</div>
+                            <div class="schedule-desc">Reducir pausas innecesarias</div>
+                            <div class="schedule-desc">Recuperar huso horario geográfico</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="image-container">
+                    <img src="https://sfile.chatglm.cn/images-ppt/0133e3b86d79.jpg" alt="Contraste entre horarios tradicionales y modernos">
+                    <div class="image-overlay">El debate sobre la racionalización de horarios en España</div>
+                </div>
+                <p class="quote">"No se trata de renunciar a nuestro carácter latino, sino de hacer las mismas cosas, antes"</p>
+            </div>
+            <div class="right-section">
+                <h2 class="section-title">Argumentos y Vocabulario del Debate</h2>
+                <div class="vocab-container">
+                    <div class="vocab-title">Argumentos en Contra</div>
+                    <div class="vocab-grid">
+                        <div class="vocab-item">
+                            <i class="material-icons">sentiment_very_dissatisfied</i>
+                            <span>Pérdida de identidad cultural</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">change_circle</i>
+                            <span>Resistencia al cambio</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">sync_problem</i>
+                            <span>Requiere cambios coordinados</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">psychology</i>
+                            <span>Hábitos arraigados</span>
+                        </div>
+                    </div>
+                    
+                    <div class="vocab-title" style="margin-top: 20px;">Argumentos a Favor</div>
+                    <div class="vocab-grid">
+                        <div class="vocab-item">
+                            <i class="material-icons">sentiment_very_satisfied</i>
+                            <span>Mejora del bienestar</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">family_restroom</i>
+                            <span>Mayor conciliación familiar</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">trending_up</i>
+                            <span>Aumento de productividad</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">public</i>
+                            <span>Mejor coordinación europea</span>
+                        </div>
+                    </div>
+                    
+                    <div class="vocab-title" style="margin-top: 20px;">Vocabulario del Cambio Social</div>
+                    <div class="vocab-grid">
+                        <div class="vocab-item">
+                            <i class="material-icons">devices</i>
+                            <span>Tecnología</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">language</i>
+                            <span>Globalización</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">emoji_objects</i>
+                            <span>Innovación</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">balance</i>
+                            <span>Conciliación</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">trending_up</i>
+                            <span>Productividad</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">spa</i>
+                            <span>Bienestar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
