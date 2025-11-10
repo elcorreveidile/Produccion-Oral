@@ -468,26 +468,38 @@
 
         function saveAttendanceRecord(record) {
             console.log('💾 SIMPLE SAVE: Saving attendance record:', record);
+            console.log('💾 localStorage available:', typeof Storage !== 'undefined');
+            console.log('💾 Current localStorage contents:');
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                console.log(`  - ${key}: ${localStorage.getItem(key)?.substring(0, 100)}...`);
+            }
 
             try {
                 // SIMPLE: Just save to localStorage
                 const existingRecords = JSON.parse(localStorage.getItem('attendanceRecords') || '[]');
                 console.log('💾 Existing records before:', existingRecords.length);
+                console.log('💾 Existing records sample:', existingRecords.slice(0, 2));
 
                 existingRecords.push(record);
                 console.log('💾 Records after adding:', existingRecords.length);
+                console.log('💾 New record added to array:', record);
 
                 // Save to localStorage
                 const dataToSave = JSON.stringify(existingRecords);
+                console.log('💾 Data to save length:', dataToSave.length);
                 localStorage.setItem('attendanceRecords', dataToSave);
+                console.log('💾 localStorage.setItem called successfully');
 
                 // Verify it was saved
                 const verification = localStorage.getItem('attendanceRecords');
                 console.log('💾 Verification - saved data length:', verification ? verification.length : 'null');
                 console.log('💾 Verification - data matches:', verification === dataToSave);
+                console.log('💾 Verification - parsed record count:', verification ? JSON.parse(verification).length : 0);
 
                 if (verification === dataToSave) {
                     console.log('✅ SUCCESS: Attendance record saved to localStorage');
+                    console.log('✅ Total records now in localStorage:', JSON.parse(localStorage.getItem('attendanceRecords')).length);
 
                     // Show success to user
                     showSaveConfirmation(['localStorage']);
@@ -498,11 +510,14 @@
                     return true;
                 } else {
                     console.error('❌ FAILED: Data verification failed');
+                    console.error('❌ Expected length:', dataToSave.length);
+                    console.error('❌ Actual length:', verification?.length);
                     alert('❌ Error al guardar el registro. Por favor, intenta de nuevo.');
                     return false;
                 }
             } catch (err) {
                 console.error('💥 CRITICAL ERROR in saveAttendanceRecord:', err);
+                console.error('💥 Error stack:', err.stack);
                 alert('💥 Error crítico al guardar. Por favor, toma una captura de pantalla.');
                 return false;
             }
@@ -541,21 +556,39 @@
 
         function forceAdminPanelRefresh() {
             console.log('🔄 Forcing admin panel refresh...');
+            console.log('🔄 Current localStorage data for attendanceRecords:', localStorage.getItem('attendanceRecords')?.substring(0, 200));
 
-            // Simple refresh - reload the admin panel if open
-            const adminUrl = 'https://elcorreveidile.github.io/Produccion-Oral/attendance-admin.html';
+            try {
+                // Simple refresh - reload the admin panel if open
+                const adminUrl = 'https://elcorreveidile.github.io/Produccion-Oral/attendance-admin.html';
+                console.log('🔄 Admin URL:', adminUrl);
 
-            // Create storage event to force refresh
-            const refreshEvent = new StorageEvent('storage', {
-                key: 'attendanceRecords',
-                newValue: localStorage.getItem('attendanceRecords'),
-                oldValue: null,
-                url: window.location.href
-            });
+                // Create storage event to force refresh
+                const currentValue = localStorage.getItem('attendanceRecords');
+                console.log('🔄 Storage event - current value length:', currentValue?.length);
 
-            window.dispatchEvent(refreshEvent);
+                const refreshEvent = new StorageEvent('storage', {
+                    key: 'attendanceRecords',
+                    newValue: currentValue,
+                    oldValue: null,
+                    url: window.location.href,
+                    storageArea: localStorage
+                });
 
-            console.log('🔄 Storage event dispatched');
+                console.log('🔄 Dispatching storage event...');
+                window.dispatchEvent(refreshEvent);
+
+                // Also try to trigger via localStorage change
+                const tempKey = 'forceRefresh_' + Date.now();
+                localStorage.setItem(tempKey, 'refresh');
+                localStorage.removeItem(tempKey);
+
+                console.log('🔄 Storage event dispatched successfully');
+                console.log('🔄 All localStorage keys after refresh:', Object.keys(localStorage));
+
+            } catch (error) {
+                console.error('🔄 Error in forceAdminPanelRefresh:', error);
+            }
         }
 
         function notifyAdminPanel(record) {

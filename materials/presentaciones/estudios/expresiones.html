@@ -109,6 +109,50 @@
             font-size: 18px;
             color: #555;
         }
+        .minimal-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .nav-btn {
+            background-color: rgba(52, 152, 219, 0.8);
+            color: white;
+            border: 1px solid #2980b9;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+        }
+        .nav-btn:hover {
+            background-color: rgba(41, 128, 185, 0.9);
+            transform: translateY(-1px);
+        }
+        .nav-btn.prev {
+            background-color: rgba(231, 76, 60, 0.8);
+            border-color: #c0392b;
+        }
+        .nav-btn.prev:hover {
+            background-color: rgba(192, 57, 43, 0.9);
+        }
+        .nav-disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background-color: rgba(149, 165, 166, 0.8) !important;
+            border-color: rgba(127, 140, 141, 0.8) !important;
+        }
+        .nav-disabled:hover {
+            transform: none;
+        }
     </style>
 </head>
 <body>
@@ -173,6 +217,18 @@
                 <i class="material-icons tip-icon">lightbulb</i>
                 <p class="tip-text">Estas expresiones son especialmente útiles en debates sobre decisiones profesionales y académicas, ya que permiten expresar matices y argumentos complejos.</p>
             </div>
+        </div>
+
+        <!-- Minimal Navigation -->
+        <div class="minimal-nav">
+            <a href="vocabulario.html" class="nav-btn prev">
+                <i class="material-icons">arrow_back</i>
+                Anterior
+            </a>
+            <a href="situacion.html" class="nav-btn">
+                Siguiente
+                <i class="material-icons">arrow_forward</i>
+            </a>
         </div>
     </div>
 </body>

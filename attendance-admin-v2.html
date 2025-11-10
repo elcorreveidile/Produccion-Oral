@@ -240,6 +240,36 @@
             margin: 0 auto;
         }
 
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: border-color 0.2s;
+            max-width: 300px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
         .session-info {
             font-size: 18px;
             font-weight: 600;
@@ -279,12 +309,46 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <img src="images/Logo-CLM-V1.jpg" alt="Logo CLM" class="logo">
-            <h1>Panel de Asistencia</h1>
-            <p class="subtitle">Producción Oral B2.1 - Universidad de Granada</p>
+    <!-- Login Screen -->
+    <div class="login-container" id="loginContainer">
+        <div class="container">
+            <div class="header">
+                <img src="images/Logo-CLM-V1.jpg" alt="Logo CLM" class="logo">
+                <h1>Panel Profesor</h1>
+                <p class="subtitle">Acceso al Sistema de Asistencia</p>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="password">Contraseña de acceso</label>
+                    <input type="password" id="password" required placeholder="Ingresa tu contraseña">
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    Acceder al Panel
+                </button>
+
+                <div style="margin-top: 15px; text-align: center;">
+                    <div style="margin-top: 10px; font-size: 11px; color: #6b7280;">
+                        Contraseña: <code>ugr2024</code>
+                    </div>
+                </div>
+            </form>
+
+            <p style="text-align: center; color: #6b7280; font-size: 14px; margin-top: 20px;">
+                Sistema de asistencia - Producción Oral B2.1
+            </p>
         </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-container" id="adminContainer" style="display: none;">
+        <div class="container">
+            <div class="header">
+                <img src="images/Logo-CLM-V1.jpg" alt="Logo CLM" class="logo">
+                <h1>Panel de Asistencia</h1>
+                <p class="subtitle">Producción Oral B2.1 - Universidad de Granada</p>
+            </div>
 
         <!-- QR Generation Section -->
         <div class="qr-section">
@@ -637,22 +701,49 @@
 
         // Initialize application
         async function init() {
+            console.log('🚀 Iniciando aplicación...');
             try {
+                console.log('📊 Inicializando base de datos...');
                 await initDB();
+
+                console.log('📱 Generando QR...');
                 generateNewQR();
+
+                console.log('📋 Construyendo tabla...');
                 buildTable();
 
                 // Auto-refresh every 30 seconds
                 setInterval(buildTable, 30000);
 
+                console.log('✅ Aplicación inicializada correctamente');
+
             } catch (error) {
                 console.error('Error initializing application:', error);
-                alert('Error al inicializar la aplicación');
+                alert('Error al inicializar la aplicación: ' + error.message);
             }
         }
 
+        // Login functionality
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = document.getElementById('password').value;
+
+            if (password === 'ugr2024') {
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('adminContainer').style.display = 'block';
+                // Initialize the main application after login
+                init();
+            } else {
+                alert('Contraseña incorrecta. Intenta de nuevo.');
+                document.getElementById('password').value = '';
+            }
+        });
+
         // Start application when page loads
-        document.addEventListener('DOMContentLoaded', init);
+        document.addEventListener('DOMContentLoaded', function() {
+            // Don't initialize immediately, wait for login
+            console.log('Panel listo. Inicia sesión para continuar.');
+        });
     </script>
 </body>
 </html>

@@ -443,6 +443,20 @@
 
         function loadAttendanceData() {
             console.log('🔍 LOADING ATTENDANCE DATA FROM ALL SOURCES');
+            console.log('🔍 localStorage available:', typeof Storage !== 'undefined');
+            console.log('🔍 Complete localStorage contents:');
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                const value = localStorage.getItem(key);
+                console.log(`  - ${key}: ${value?.substring(0, 150)}${value?.length > 150 ? '...' : ''}`);
+            }
+
+            console.log('🔍 Complete sessionStorage contents:');
+            for (let i = 0; i < sessionStorage.length; i++) {
+                const key = sessionStorage.key(i);
+                const value = sessionStorage.getItem(key);
+                console.log(`  - ${key}: ${value?.substring(0, 150)}${value?.length > 150 ? '...' : ''}`);
+            }
 
             let allRecords = [];
             let sources = [];
@@ -450,24 +464,35 @@
             // SOURCE 1: localStorage (primary) - SIMPLIFIED
             try {
                 const stored = localStorage.getItem('attendanceRecords');
+                console.log('🔍 localStorage attendanceRecords raw value:', stored);
                 if (stored) {
                     const parsed = JSON.parse(stored);
+                    console.log('🔍 localStorage parsed records:', parsed);
+                    console.log('🔍 localStorage parsed records count:', parsed.length);
+                    console.log('🔍 localStorage first record sample:', parsed[0]);
                     allRecords.push(...parsed);
                     sources.push(`localStorage (${parsed.length} records)`);
                     console.log('✅ localStorage loaded:', parsed.length, 'records');
+                } else {
+                    console.log('⚠️ localStorage has no attendanceRecords key');
                 }
             } catch (err) {
                 console.error('❌ localStorage error:', err);
+                console.error('❌ localStorage error stack:', err.stack);
             }
 
             // SOURCE 2: sessionStorage (backup) - SIMPLIFIED
             try {
                 const sessionStored = sessionStorage.getItem('attendanceSession');
+                console.log('🔍 sessionStorage attendanceSession raw value:', sessionStored);
                 if (sessionStored) {
                     const sessionParsed = JSON.parse(sessionStored);
+                    console.log('🔍 sessionStorage parsed records:', sessionParsed);
                     allRecords.push(...sessionParsed);
                     sources.push(`sessionStorage (${sessionParsed.length} records)`);
                     console.log('✅ sessionStorage loaded:', sessionParsed.length, 'records');
+                } else {
+                    console.log('⚠️ sessionStorage has no attendanceSession key');
                 }
             } catch (err) {
                 console.error('❌ sessionStorage error:', err);
@@ -751,6 +776,91 @@
                 refreshData();
             }
         }, 10000);
+
+        // Comprehensive debugging function
+        function debugCompleteSystem() {
+            console.log('=== 🔍 COMPREHENSIVE SYSTEM DEBUG ===');
+            console.log('🔍 localStorage available:', typeof Storage !== 'undefined');
+            console.log('🔍 sessionStorage available:', typeof sessionStorage !== 'undefined');
+
+            console.log('\n=== LOCALSTORAGE CONTENTS ===');
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                const value = localStorage.getItem(key);
+                console.log(`${key}: ${value?.substring(0, 200)}${value?.length > 200 ? '...' : ''} (${value?.length} chars)`);
+            }
+
+            console.log('\n=== SESSIONSTORAGE CONTENTS ===');
+            for (let i = 0; i < sessionStorage.length; i++) {
+                const key = sessionStorage.key(i);
+                const value = sessionStorage.getItem(key);
+                console.log(`${key}: ${value?.substring(0, 200)}${value?.length > 200 ? '...' : ''} (${value?.length} chars)`);
+            }
+
+            console.log('\n=== ATTENDANCE RECORDS ANALYSIS ===');
+            const attendanceData = localStorage.getItem('attendanceRecords');
+            if (attendanceData) {
+                try {
+                    const parsed = JSON.parse(attendanceData);
+                    console.log('✅ attendanceRecords found and parsed');
+                    console.log('📊 Total records:', parsed.length);
+                    console.log('📊 First 3 records:', parsed.slice(0, 3));
+                    console.log('📊 Last 3 records:', parsed.slice(-3));
+
+                    // Check record structure
+                    if (parsed.length > 0) {
+                        console.log('📋 Record structure sample:', Object.keys(parsed[0]));
+                    }
+                } catch (e) {
+                    console.error('❌ Failed to parse attendanceRecords:', e);
+                }
+            } else {
+                console.log('❌ No attendanceRecords found in localStorage');
+            }
+
+            console.log('\n=== UI ELEMENTS CHECK ===');
+            const elements = ['todayCount', 'weekCount', 'totalCount', 'attendanceRate', 'recordsTable'];
+            elements.forEach(id => {
+                const element = document.getElementById(id);
+                console.log(`${id}: ${element ? '✅ Found' : '❌ Missing'} ${element ? '- Content: ' + element.textContent : ''}`);
+            });
+
+            console.log('\n=== CURRENT SYSTEM STATE ===');
+            console.log('📊 attendanceRecords variable length:', attendanceRecords.length);
+            console.log('📊 attendanceRecords variable content:', attendanceRecords.slice(0, 3));
+            console.log('🎯 Admin panel visible:', adminContainer.style.display !== 'none');
+
+            console.log('\n=== MANUAL TEST FUNCTION ===');
+            console.log('💡 To manually test attendance registration, run: testAddRecord()');
+        }
+
+        function testAddRecord() {
+            console.log('🧪 TESTING: Adding manual attendance record...');
+            const testRecord = {
+                studentName: 'TEST STUDENT',
+                studentId: '9999',
+                timestamp: new Date().toISOString(),
+                session: 'Sesión de prueba',
+                ip: '127.0.0.1'
+            };
+
+            try {
+                const existing = JSON.parse(localStorage.getItem('attendanceRecords') || '[]');
+                existing.push(testRecord);
+                localStorage.setItem('attendanceRecords', JSON.stringify(existing));
+                console.log('✅ Test record added successfully');
+                console.log('🔄 Refreshing data...');
+                loadAttendanceData();
+                updateStatistics();
+                displayRecords();
+            } catch (error) {
+                console.error('❌ Failed to add test record:', error);
+            }
+        }
+
+        // Make debug functions available globally
+        window.debugCompleteSystem = debugCompleteSystem;
+        window.testAddRecord = testAddRecord;
 
         // Also refresh when window gets focus (user switches back to admin tab)
         window.addEventListener('focus', () => {

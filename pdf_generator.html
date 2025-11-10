@@ -527,6 +527,7 @@
                 title: 'Debate: Cultura de tapas vs. comida rápida',
                 date: 'Lunes 17/11/2025',
                 time: '08:30 - 10:30',
+                presentationUrl: 'https://elcorreveidile.github.io/Produccion-Oral/materials/presentaciones/tapas/',
                 objectives: [
                     'Practicar vocabulario gastronómico y cultural',
                     'Desarrollar argumentos sobre tradición vs. modernidad',
@@ -536,7 +537,7 @@
                 content: {
                     vocabulary: [
                         'Tapas: albóndigas, croquetas, jamón, tortilla, aceitunas',
-                        'Comida rápida:汉堡, pizza, kebab, comida precocinada',
+                        'Comida rápida: hamburguesa, pizza, kebab, comida precocinada',
                         'Cultura tapeo: tapeo, ir de tapas, ración, media ración',
                         'Adjetivos gastronómicos: artesanal, casero, típico, innovador'
                     ],
@@ -1301,6 +1302,7 @@
                     <h2>Información de la sesión</h2>
                     <p><strong>Fecha:</strong> ${session.date}</p>
                     <p><strong>Horario:</strong> ${session.time}</p>
+                    ${session.presentationUrl ? `<p><strong>📊 Presentación Interactiva:</strong> <a href="${session.presentationUrl}" style="color: #1e40af; text-decoration: underline;">${session.presentationUrl}</a></p>` : ''}
                 </div>
 
                 <div class="objectives avoid-break">

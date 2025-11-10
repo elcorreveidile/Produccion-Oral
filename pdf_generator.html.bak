@@ -536,7 +536,7 @@
                 content: {
                     vocabulary: [
                         'Tapas: albóndigas, croquetas, jamón, tortilla, aceitunas',
-                        'Comida rápida:汉堡, pizza, kebab, comida precocinada',
+                        'Comida rápida: hamburguesa, pizza, kebab, comida precocinada',
                         'Cultura tapeo: tapeo, ir de tapas, ración, media ración',
                         'Adjetivos gastronómicos: artesanal, casero, típico, innovador'
                     ],

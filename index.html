@@ -557,12 +557,16 @@
             const mercadoButton = s.t.includes('Sesión 5') || s.href.includes('S5') ?
               `<li><button class="btn" onclick="window.open('https://elcorreveidile.github.io/Produccion-Oral/materials/presentaciones/mercado/', '_blank')" style="background: #dc2626; color: white;">🛒 Mini-Web del Mercado</button></li>` : '';
 
+            const estudiosButton = s.t.includes('Sesión 6') || s.href.includes('S6') ?
+              `<li><button class="btn" onclick="window.open('https://elcorreveidile.github.io/Produccion-Oral/materials/presentaciones/estudios/', '_blank')" style="background: #7c3aed; color: white;">📚 Mini-Web de Estudios</button></li>` : '';
+
             list.innerHTML = `
               <li><button class="btn primary" ${dataAttr}="${s.href}">${fileIcon} Ver en navegador (${s.t})</button></li>
               <li><button class="btn" onclick="window.open('${s.href}', '_blank')">🔗 Abrir en nueva pestaña</button></li>
               <li><button class="btn" onclick="downloadFile('${s.href}', '${s.t}.pdf')">💾 Descargar directamente</button></li>
               ${tapasButton}
               ${mercadoButton}
+              ${estudiosButton}
             `;
           } else {
             // Archivo no existe - mostrar mensaje informativo
