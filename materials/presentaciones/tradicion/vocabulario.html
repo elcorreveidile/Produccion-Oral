@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOCABULARIO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f8f8;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #e63946;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 25px;
+            flex-grow: 1;
+        }
+        .vocab-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+        .vocab-section:hover {
+            transform: translateY(-5px);
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(244, 162, 97, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .section-icon i {
+            font-size: 28px;
+            color: #f4a261;
+        }
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #e63946;
+        }
+        .vocab-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            flex-grow: 1;
+        }
+        .vocab-item {
+            background-color: rgba(244, 162, 97, 0.08);
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 20px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+        .vocab-item:hover {
+            background-color: rgba(244, 162, 97, 0.2);
+            transform: scale(1.05);
+        }
+        .vocab-item i {
+            font-size: 20px;
+            color: #f4a261;
+            margin-right: 8px;
+        }
+        .highlight {
+            color: #e63946;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">VOCABULARIO</h1>
+        </div>
+        <div class="content">
+            <div class="vocab-grid">
+                <div class="vocab-section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="material-icons">history</i>
+                        </div>
+                        <h2 class="section-title">Tradiciones</h2>
+                    </div>
+                    <div class="vocab-items">
+                        <div class="vocab-item">
+                            <i class="material-icons">restaurant</i>
+                            <span>Fiestas</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">event</i>
+                            <span>Costumbres</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">public</i>
+                            <span>Folklore</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">handyman</i>
+                            <span>Artesanía</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="vocab-section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="material-icons">trending_up</i>
+                        </div>
+                        <h2 class="section-title">Modernidad</h2>
+                    </div>
+                    <div class="vocab-items">
+                        <div class="vocab-item">
+                            <i class="material-icons">devices</i>
+                            <span>Tecnología</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">public</i>
+                            <span>Globalización</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">lightbulb</i>
+                            <span>Innovación</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">share</i>
+                            <span>Tendencias sociales</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="vocab-section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="material-icons">psychology</i>
+                        </div>
+                        <h2 class="section-title">Tensiones</h2>
+                    </div>
+                    <div class="vocab-items">
+                        <div class="vocab-item">
+                            <i class="material-icons">trending_down</i>
+                            <span>Pérdida</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">swap_horiz</i>
+                            <span>Cambio</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">sync</i>
+                            <span>Adaptación</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">merge_type</i>
+                            <span>Fusión</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="vocab-section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="material-icons">account_balance</i>
+                        </div>
+                        <h2 class="section-title">Identidad</h2>
+                    </div>
+                    <div class="vocab-items">
+                        <div class="vocab-item">
+                            <i class="material-icons">history</i>
+                            <span>Raíces</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">diversity_3</i>
+                            <span>Herencia</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">school</i>
+                            <span>Legado</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">update</i>
+                            <span>Evolución</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
