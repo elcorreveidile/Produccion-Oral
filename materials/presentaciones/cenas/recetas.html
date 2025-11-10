@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RECETAS ESPAÑOLAS - Cena Española</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f8f8;
+            overflow-x: hidden;
+        }
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background: linear-gradient(135deg, #264653, #2a9d8f);
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 40px 70px;
+        }
+        .recipes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .recipe-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-top: 5px solid #2a9d8f;
+        }
+        .recipe-header {
+            background: linear-gradient(135deg, rgba(42, 157, 143, 0.1), rgba(38, 70, 83, 0.05));
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .recipe-icon {
+            width: 50px;
+            height: 50px;
+            background: #2a9d8f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .recipe-title {
+            flex: 1;
+        }
+        .recipe-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #264653;
+            margin-bottom: 5px;
+        }
+        .recipe-time {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #636e72;
+            font-size: 0.9rem;
+        }
+        .recipe-content {
+            padding: 20px;
+        }
+        .ingredients {
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-weight: 600;
+            color: #264653;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .ingredient-list {
+            display: grid;
+            gap: 8px;
+        }
+        .ingredient-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+        .ingredient-item::before {
+            content: "•";
+            color: #2a9d8f;
+            font-weight: bold;
+        }
+        .steps {
+            margin-top: 15px;
+        }
+        .step-list {
+            display: grid;
+            gap: 12px;
+        }
+        .step-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .step-number {
+            width: 24px;
+            height: 24px;
+            background: #2a9d8f;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .step-text {
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        .highlight {
+            color: #2a9d8f;
+            font-weight: 600;
+        }
+        .minimal-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .nav-btn {
+            background-color: rgba(52, 152, 219, 0.8);
+            color: white;
+            border: 1px solid #2980b9;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+        }
+        .nav-btn:hover {
+            background-color: rgba(41, 128, 185, 0.9);
+            transform: translateY(-1px);
+        }
+        .nav-btn.prev {
+            background-color: rgba(231, 76, 60, 0.8);
+            border-color: #c0392b;
+        }
+        .nav-btn.prev:hover {
+            background-color: rgba(192, 57, 43, 0.9);
+        }
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            .recipes-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .minimal-nav {
+                bottom: 10px;
+                left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">RECETAS ESPAÑOLAS TRADICIONALES</h1>
+        </div>
+        <div class="content">
+            <div class="recipes-grid">
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <div class="recipe-icon">
+                            <i class="material-icons">dinner_dining</i>
+                        </div>
+                        <div class="recipe-title">
+                            <div class="recipe-name">Tortilla Española</div>
+                            <div class="recipe-time">
+                                <i class="material-icons" style="font-size: 16px;">schedule</i>
+                                30 minutos
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="ingredients">
+                            <div class="section-title">
+                                <i class="material-icons" style="font-size: 18px;">shopping_basket</i>
+                                Ingredientes
+                            </div>
+                            <div class="ingredient-list">
+                                <div class="ingredient-item">6 huevos</div>
+                                <div class="ingredient-item">3 patatas grandes</div>
+                                <div class="ingredient-item">1 cebolla</div>
+                                <div class="ingredient-item">Aceite de oliva</div>
+                                <div class="ingredient-item">Sal</div>
+                            </div>
+                        </div>
+                        <div class="steps">
+                            <div class="section-title">
+                                <i class="material-icons" style="font-size: 18px;">format_list_numbered</i>
+                                Preparación
+                            </div>
+                            <div class="step-list">
+                                <div class="step-item">
+                                    <div class="step-number">1</div>
+                                    <div class="step-text"><span class="highlight">Pelar y cortar</span> las patatas en rodajas finas</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">2</div>
+                                    <div class="step-text"><span class="highlight">Freír</span> las patatas con aceite abundante</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">3</div>
+                                    <div class="step-text"><span class="highlight">Añadir</span> la cebolla y cocinar hasta dorar</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">4</div>
+                                    <div class="step-text"><span class="highlight">Batir</span> los huevos y mezclar con las patatas</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <div class="recipe-icon">
+                            <i class="material-icons">set_meal</i>
+                        </div>
+                        <div class="recipe-title">
+                            <div class="recipe-name">Gazpacho Andaluz</div>
+                            <div class="recipe-time">
+                                <i class="material-icons" style="font-size: 16px;">schedule</i>
+                                15 minutos
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="ingredients">
+                            <div class="section-title">
+                                <i class="material-icons" style="font-size: 18px;">shopping_basket</i>
+                                Ingredientes
+                            </div>
+                            <div class="ingredient-list">
+                                <div class="ingredient-item">1 kg tomates maduros</div>
+                                <div class="ingredient-item">1 pimiento verde</div>
+                                <div class="ingredient-item">1 pepino</div>
+                                <div class="ingredient-item">1 cebolla</div>
+                                <div class="ingredient-item">2 dientes de ajo</div>
+                                <div class="ingredient-item">Aceite de oliva virgen</div>
+                                <div class="ingredient-item">Vinagre</div>
+                            </div>
+                        </div>
+                        <div class="steps">
+                            <div class="section-title">
+                                <i class="material-icons" style="font-size: 18px;">format_list_numbered</i>
+                                Preparación
+                            </div>
+                            <div class="step-list">
+                                <div class="step-item">
+                                    <div class="step-number">1</div>
+                                    <div class="step-text"><span class="highlight">Lavar</span> todas las verduras</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">2</div>
+                                    <div class="step-text"><span class="highlight">Triturar</span> en la batidora hasta obtener crema</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">3</div>
+                                    <div class="step-text"><span class="highlight">Añadir</span> aceite, vinagre y sal al gusto</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">4</div>
+                                    <div class="step-text"><span class="highlight">Refrigerar</span> al menos 2 horas antes de servir</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <div class="recipe-icon">
+                            <i class="material-icons">restaurant</i>
+                        </div>
+                        <div class="recipe-title">
+                            <div class="recipe-name">Croquetas de Jamón</div>
+                            <div class="recipe-time">
+                                <i class="material-icons" style="font-size: 16px;">schedule</i>
+                                45 minutos
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="ingredients">
+                            <div class="section-title">
+                                <i class="material-icons" style="font-size: 18px;">shopping_basket</i>
+                                Ingredientes
+                            </div>
+                            <div class="ingredient-list">
+                                <div class="ingredient-item">100g jamón serrano</div>
+                                <div class="ingredient-item">50g mantequilla</div>
+                                <div class="ingredient-item">50g harina</div>
+                                <div class="ingredient-item">500ml leche</div>
+                                <div class="ingredient-item">Nuez moscada</div>
+                                <div class="ingredient-item">Pan rallado</div>
+                                <div class="ingredient-item">2 huevos</div>
+                            </div>
+                        </div>
+                        <div class="steps">
+                            <div class="section-title">
+                                <i class="material-icons" style="font-size: 18px;">format_list_numbered</i>
+                                Preparación
+                            </div>
+                            <div class="step-list">
+                                <div class="step-item">
+                                    <div class="step-number">1</div>
+                                    <div class="step-text"><span class="highlight">Hacer</span> una bechamel con mantequilla y harina</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">2</div>
+                                    <div class="step-text"><span class="highlight">Añadir</span> jamón picado y nuez moscada</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">3</div>
+                                    <div class="step-text"><span class="highlight">Dejar enfriar</span> y formar las croquetas</div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-number">4</div>
+                                    <div class="step-text"><span class="highlight">Pasar</span> por huevo y pan rallado, freír</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Minimal Navigation -->
+        <div class="minimal-nav">
+            <a href="vocabulario.html" class="nav-btn prev">
+                <i class="material-icons">arrow_back</i>
+                Anterior
+            </a>
+            <a href="situacion.html" class="nav-btn">
+                Siguiente
+                <i class="material-icons">arrow_forward</i>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

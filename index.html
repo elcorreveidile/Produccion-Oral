@@ -566,6 +566,9 @@
             const tradicionButton = s.t.includes('Sesión 8') || s.href.includes('S8') ?
               `<li><button class="btn" onclick="window.open('https://elcorreveidile.github.io/Produccion-Oral/materials/presentaciones/tradicion/', '_blank')" style="background: #0891b2; color: white;">🎭 Mini-Web de Tradición</button></li>` : '';
 
+            const cenasButton = s.t.includes('Sesión 9') || s.href.includes('S9') ?
+              `<li><button class="btn" onclick="window.open('https://elcorreveidile.github.io/Produccion-Oral/materials/presentaciones/cenas/', '_blank')" style="background: #dc2626; color: white;">🍽️ Mini-Web de Cenas</button></li>` : '';
+
             list.innerHTML = `
               <li><button class="btn primary" ${dataAttr}="${s.href}">${fileIcon} Ver en navegador (${s.t})</button></li>
               <li><button class="btn" onclick="window.open('${s.href}', '_blank')">🔗 Abrir en nueva pestaña</button></li>
@@ -575,6 +578,7 @@
               ${estudiosButton}
               ${vecindarioButton}
               ${tradicionButton}
+              ${cenasButton}
             `;
           } else {
             // Archivo no existe - mostrar mensaje informativo

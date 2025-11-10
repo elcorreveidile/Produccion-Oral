@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SITUACIÓN - Cena Española</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f8f8;
+            overflow-x: hidden;
+        }
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background: linear-gradient(135deg, #e63946, #d62828);
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 40px 70px;
+            gap: 30px;
+        }
+        .situation-intro {
+            background: linear-gradient(135deg, rgba(230, 57, 70, 0.1), rgba(214, 40, 40, 0.05));
+            border-radius: 12px;
+            padding: 30px;
+            border-left: 5px solid #e63946;
+            text-align: center;
+        }
+        .intro-text {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            line-height: 1.6;
+            color: #2d3436;
+            margin-bottom: 20px;
+        }
+        .highlight {
+            color: #e63946;
+            font-weight: 600;
+        }
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .role-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            border-top: 4px solid #e63946;
+            transition: transform 0.2s ease;
+        }
+        .role-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+        .role-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .role-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #e63946, #d62828);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .role-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2d3436;
+        }
+        .responsibility-list {
+            display: grid;
+            gap: 12px;
+        }
+        .responsibility-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+        .responsibility-item i {
+            color: #e63946;
+            font-size: 18px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .dialogue-examples {
+            background: linear-gradient(135deg, rgba(230, 57, 70, 0.08), rgba(214, 40, 40, 0.03));
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+        .examples-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2d3436;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .example-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 3px solid #e63946;
+        }
+        .speaker {
+            font-weight: 600;
+            color: #e63946;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .dialogue-text {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #2d3436;
+            font-style: italic;
+        }
+        .task-section {
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(39, 174, 96, 0.05));
+            border-radius: 12px;
+            padding: 25px;
+            border-left: 5px solid #2ecc71;
+            margin-top: 20px;
+        }
+        .task-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #27ae60;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .task-list {
+            display: grid;
+            gap: 12px;
+        }
+        .task-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 1rem;
+        }
+        .task-item i {
+            color: #27ae60;
+            font-size: 18px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .minimal-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .nav-btn {
+            background-color: rgba(52, 152, 219, 0.8);
+            color: white;
+            border: 1px solid #2980b9;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+        }
+        .nav-btn:hover {
+            background-color: rgba(41, 128, 185, 0.9);
+            transform: translateY(-1px);
+        }
+        .nav-btn.prev {
+            background-color: rgba(231, 76, 60, 0.8);
+            border-color: #c0392b;
+        }
+        .nav-btn.prev:hover {
+            background-color: rgba(192, 57, 43, 0.9);
+        }
+        .nav-btn.complete {
+            background-color: rgba(46, 204, 113, 0.8);
+            border-color: #27ae60;
+        }
+        .nav-btn.complete:hover {
+            background-color: rgba(39, 174, 96, 0.9);
+        }
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            .roles-grid {
+                grid-template-columns: 1fr;
+            }
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+            .minimal-nav {
+                bottom: 10px;
+                left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">SITUACIÓN: PREPARAR UNA CENA ESPAÑOLA</h1>
+        </div>
+        <div class="content">
+            <div class="situation-intro">
+                <p class="intro-text">
+                    Vais a <span class="highlight">organizar una cena española tradicional</span> para vuestros amigos internacionales.
+                    Trabajad en grupos de 3-4 personas para planificar, preparar y disfrutar de una auténtica cena española.
+                </p>
+            </div>
+
+            <div class="roles-grid">
+                <div class="role-card">
+                    <div class="role-header">
+                        <div class="role-icon">
+                            <i class="material-icons">restaurant_menu</i>
+                        </div>
+                        <h3 class="role-title">Chef Principal</h3>
+                    </div>
+                    <div class="responsibility-list">
+                        <div class="responsibility-item">
+                            <i class="material-icons">check_circle</i>
+                            <span>Planificar el menú completo</span>
+                        </div>
+                        <div class="responsibility-item">
+                            <i class="material-icons">check_circle</i>
+                            <span>Coordinar la preparación</span>
+                        </div>
+                        <div class="responsibility-item">
+                            <i class="material-icons">check_circle</i>
+                            <span>Explicar las recetas</span>
+                        </div>
+                        <div class="responsibility-item">
+                            <i class="material-icons">check_circle</i>
+                            <span>Supervisar la cocina</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="role-card">
+                    <div class="role-header">
+                        <div class="role-icon">
+                            <i class="material-icons">shopping_cart</i>
+                        </div>
+                        <h3 class="role-title">Compras y Logística</h3>
+                    </div>
+                    <div class="responsibility-list">
+                        <div class="responsibility-item">
+                            <i class="material-icons">check_circle</i>
+                            <span>Hacer la lista de la compra</span>
+                        </div>
+                        <div class="responsibility-item">
+                            <i class="material-icons">check_circle</i>
+                            <span>Buscar precios y calidad</span>
+                        </div>
+                        <div class="responsibility-item">
+                            <i class="material-icons">check_circle</i>
+                            <span>Organizar el presupuesto</span>
+                        </div>
+                        <div class="responsibility-item">
+                            <i class="material-icons">check_circle</i>
+                            <span>Preparar la mesa</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="role-card">
+                    <div class="role-header">
+                        <div class="role-icon">
+                            <i class="material-icons">wine_bar</i>
+                        </div>
+                        <h3 class="role-title">Anfitrión/a</h3>
+                    </div>
+                    <div class="responsibility-list">
+                        <div class="responsibility-item">
+                            <i class="material-icons">check_circle</i>
+                            <span>Recibir a los invitados</span>
+                        </div>
+                        <div class="responsibility-item">
+                            <i class="material-icons">check_circle</i>
+                            <span>Explicar costumbres españolas</span>
+                        </div>
+                        <div class="responsibility-item">
+                            <i class="material-icons">check_circle</i>
+                            <span>Preparar bebidas</span>
+                        </div>
+                        <div class="responsibility-item">
+                            <i class="material-icons">check_circle</i>
+                            <span>Mantener la conversación</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dialogue-examples">
+                <h3 class="examples-title">
+                    <i class="material-icons">chat</i>
+                    Ejemplos de Diálogos
+                </h3>
+                <div class="examples-grid">
+                    <div class="example-card">
+                        <div class="speaker">
+                            <i class="material-icons" style="font-size: 16px;">person</i>
+                            Chef Principal
+                        </div>
+                        <p class="dialogue-text">
+                            "Para la paella necesitamos que alguien <span class="highlight">corte las verduras</span> mientras yo preparo el caldo.
+                            ¿Quién se encarga del sofrito?"
+                        </p>
+                    </div>
+
+                    <div class="example-card">
+                        <div class="speaker">
+                            <i class="material-icons" style="font-size: 16px;">person</i>
+                            Compras y Logística
+                        </div>
+                        <p class="dialogue-text">
+                            "He encontrado <span class="highlight">aceite de oliva virgen extra</span> de muy buena calidad por 6€.
+                            ¿Compro dos botellas?"
+                        </p>
+                    </div>
+
+                    <div class="example-card">
+                        <div class="speaker">
+                            <i class="material-icons" style="font-size: 16px;">person</i>
+                            Anfitrión/a
+                        </div>
+                        <p class="dialogue-text">
+                            "En España, <span class="highlight">cenamos muy tarde</span>, sobre las 9 o 10 de la noche.
+                            Nuestros invitados están acostumbrados a cenar a las 6."
+                        </p>
+                    </div>
+
+                    <div class="example-card">
+                        <div class="speaker">
+                            <i class="material-icons" style="font-size: 16px;">groups</i>
+                            Diálogo en Grupo
+                        </div>
+                        <p class="dialogue-text">
+                            "¿Preferimos <span class="highlight">tortilla española o gazpacho</span> como entrante?
+                            Tenemos que considerar que algunos invitados no comen picante."
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-section">
+                <h3 class="task-title">
+                    <i class="material-icons">assignment</i>
+                    Tarea Final
+                </h3>
+                <div class="task-list">
+                    <div class="task-item">
+                        <i class="material-icons">groups</i>
+                        <span><strong>Formar grupos</strong> de 3-4 personas y asignar roles</span>
+                    </div>
+                    <div class="task-item">
+                        <i class="material-icons">menu_book</i>
+                        <span><strong>Diseñar un menú</strong> completo (entrante, principal, postre, bebidas)</span>
+                    </div>
+                    <div class="task-item">
+                        <i class="material-icons">calculate</i>
+                        <span><strong>Calcular presupuesto</strong> y lista de la compra detallada</span>
+                    </div>
+                    <div class="task-item">
+                        <i class="material-icons">schedule</i>
+                        <span><strong>Crear cronograma</strong> de preparación (¿qué se hace primero?)</span>
+                    </div>
+                    <div class="task-item">
+                        <i class="material-icons">record_voice_over</i>
+                        <span><strong>Presentar</strong> vuestra cena española a la clase (5 minutos por grupo)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Minimal Navigation -->
+        <div class="minimal-nav">
+            <a href="recetas.html" class="nav-btn prev">
+                <i class="material-icons">arrow_back</i>
+                Anterior
+            </a>
+            <a href="index.html" class="nav-btn complete">
+                <i class="material-icons">home</i>
+                Inicio
+            </a>
+        </div>
+    </div>
+</body>
+</html>

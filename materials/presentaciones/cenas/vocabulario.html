@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOCABULARIO CULINARIO - Cena Española</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f8f8;
+            overflow-x: hidden;
+        }
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background: linear-gradient(135deg, #f4a261, #e76f51);
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 40px 70px;
+        }
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .vocab-category {
+            background: linear-gradient(135deg, rgba(244, 162, 97, 0.1), rgba(231, 111, 81, 0.05));
+            border-radius: 12px;
+            padding: 25px;
+            border-left: 5px solid #f4a261;
+        }
+        .category-title {
+            display: flex;
+            align-items: center;
+            font-size: clamp(1.3rem, 2vw, 1.6rem);
+            font-weight: 600;
+            color: #e76f51;
+            margin-bottom: 20px;
+        }
+        .category-title i {
+            margin-right: 12px;
+            font-size: 28px;
+        }
+        .word-list {
+            display: grid;
+            gap: 12px;
+        }
+        .word-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(244, 162, 97, 0.2);
+        }
+        .word-item:last-child {
+            border-bottom: none;
+        }
+        .spanish {
+            font-weight: 600;
+            color: #2d3436;
+            font-size: 1.1rem;
+        }
+        .english {
+            color: #636e72;
+            font-style: italic;
+        }
+        .example {
+            font-size: 0.9rem;
+            color: #636e72;
+            margin-top: 4px;
+            font-style: italic;
+        }
+        .highlight {
+            color: #e76f51;
+            font-weight: 600;
+        }
+        .minimal-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .nav-btn {
+            background-color: rgba(52, 152, 219, 0.8);
+            color: white;
+            border: 1px solid #2980b9;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+        }
+        .nav-btn:hover {
+            background-color: rgba(41, 128, 185, 0.9);
+            transform: translateY(-1px);
+        }
+        .nav-btn.prev {
+            background-color: rgba(231, 76, 60, 0.8);
+            border-color: #c0392b;
+        }
+        .nav-btn.prev:hover {
+            background-color: rgba(192, 57, 43, 0.9);
+        }
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            .vocab-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .vocab-category {
+                padding: 20px;
+            }
+            .minimal-nav {
+                bottom: 10px;
+                left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">VOCABULARIO CULINARIO ESPAÑOL</h1>
+        </div>
+        <div class="content">
+            <div class="vocab-grid">
+                <div class="vocab-category">
+                    <div class="category-title">
+                        <i class="material-icons">restaurant_menu</i>
+                        Ingredientes Principales
+                    </div>
+                    <div class="word-list">
+                        <div class="word-item">
+                            <div>
+                                <div class="spanish">Aceite de oliva</div>
+                                <div class="example">Necesito <span class="highlight">aceite de oliva virgen extra</span></div>
+                            </div>
+                            <div class="english">Olive oil</div>
+                        </div>
+                        <div class="word-item">
+                            <div>
+                                <div class="spanish">Ajo</div>
+                                <div class="example">Pica <span class="highlight">dos ajos</span> muy finos</div>
+                            </div>
+                            <div class="english">Garlic</div>
+                        </div>
+                        <div class="word-item">
+                            <div>
+                                <div class="spanish">Jamón serrano</div>
+                                <div class="example">Sirve el <span class="highlight">jamón serrano</span> en taquitos</div>
+                            </div>
+                            <div class="english">Cured ham</div>
+                        </div>
+                        <div class="word-item">
+                            <div>
+                                <div class="spanish">Queso manchego</div>
+                                <div class="example">Corta el <span class="highlight">queso manchego</span> en dados</div>
+                            </div>
+                            <div class="english">Manchego cheese</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vocab-category">
+                    <div class="category-title">
+                        <i class="material-icons">set_meal</i>
+                        Platos Típicos
+                    </div>
+                    <div class="word-list">
+                        <div class="word-item">
+                            <div>
+                                <div class="spanish">Paella</div>
+                                <div class="example">Vamos a preparar <span class="highlight">paella valenciana</span></div>
+                            </div>
+                            <div class="english">Paella</div>
+                        </div>
+                        <div class="word-item">
+                            <div>
+                                <div class="spanish">Tortilla española</div>
+                                <div class="example">La <span class="highlight">tortilla española</span> lleva patatas</div>
+                            </div>
+                            <div class="english">Spanish omelette</div>
+                        </div>
+                        <div class="word-item">
+                            <div>
+                                <div class="spanish">Gazpacho</div>
+                                <div class="example">En verano tomamos <span class="highlight">gazpacho</span> frío</div>
+                            </div>
+                            <div class="english">Cold soup</div>
+                        </div>
+                        <div class="word-item">
+                            <div>
+                                <div class="spanish">Pisto</div>
+                                <div class="example">El <span class="highlight">pisto</span> es como las ratatouille</div>
+                            </div>
+                            <div class="english">Vegetable stew</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vocab-category">
+                    <div class="category-title">
+                        <i class="material-icons">restaurant</i>
+                        Acciones en la Cocina
+                    </div>
+                    <div class="word-list">
+                        <div class="word-item">
+                            <div>
+                                <div class="spanish">Cortar en dados</div>
+                                <div class="example"><span class="highlight">Corta en dados</span> el pimiento</div>
+                            </div>
+                            <div class="english">To dice</div>
+                        </div>
+                        <div class="word-item">
+                            <div>
+                                <div class="spanish">Sofreír</div>
+                                <div class="example"><span class="highlight">Sofreír</span> la cebolla hasta dorar</div>
+                            </div>
+                            <div class="english">To sauté</div>
+                        </div>
+                        <div class="word-item">
+                            <div>
+                                <div class="spanish">Hornear</div>
+                                <div class="example"><span class="highlight">Hornea</span> durante 30 minutos</div>
+                            </div>
+                            <div class="english">To bake</div>
+                        </div>
+                        <div class="word-item">
+                            <div>
+                                <div class="spanish">Aderezar</div>
+                                <div class="example"><span class="highlight">Adereza</span> con sal y pimienta</div>
+                            </div>
+                            <div class="english">To season</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vocab-category">
+                    <div class="category-title">
+                        <i class="material-icons">wine_bar</i>
+                        Bebidas y Postres
+                    </div>
+                    <div class="word-list">
+                        <div class="word-item">
+                            <div>
+                                <div class="spanish">Sangría</div>
+                                <div class="example">Prepara <span class="highlight">sangría</span> con frutas</div>
+                            </div>
+                            <div class="english">Sangria</div>
+                        </div>
+                        <div class="word-item">
+                            <div>
+                                <div class="spanish">Tinto de verano</div>
+                                <div class="example">Tomamos <span class="highlight">tinto de verano</span></div>
+                            </div>
+                            <div class="english">Summer wine</div>
+                        </div>
+                        <div class="word-item">
+                            <div>
+                                <div class="spanish">Flan</div>
+                                <div class="example">El <span class="highlight">flan</span> es mi postre favorito</div>
+                            </div>
+                            <div class="english">Flan/custard</div>
+                        </div>
+                        <div class="word-item">
+                            <div>
+                                <div class="spanish">Turrón</div>
+                                <div class="example">En Navidad comemos <span class="highlight">turrón</span></div>
+                            </div>
+                            <div class="english">Nougat</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Minimal Navigation -->
+        <div class="minimal-nav">
+            <a href="objetivos.html" class="nav-btn prev">
+                <i class="material-icons">arrow_back</i>
+                Anterior
+            </a>
+            <a href="recetas.html" class="nav-btn">
+                Siguiente
+                <i class="material-icons">arrow_forward</i>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
