@@ -14,16 +14,17 @@
         }
         body {
             font-family: 'Source Sans Pro', sans-serif;
-            overflow: hidden;
+            overflow-x: hidden;
         }
         .slide {
-            width: 1280px;
-            height: 720px;
+            width: 100%;
+            min-height: 100vh;
             position: relative;
-            overflow: hidden;
+            overflow-y: auto;
             background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://sfile.chatglm.cn/images-ppt/f1d3997cedf0.jpg');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             color: white;
             display: flex;
             flex-direction: column;
