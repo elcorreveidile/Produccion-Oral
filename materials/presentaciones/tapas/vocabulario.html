@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOCABULARIO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f8f8;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #e63946;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .vocab-sections {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+        .vocab-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .vocab-title {
+            font-size: 26px;
+            font-weight: 600;
+            color: #e63946;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .vocab-title i {
+            margin-right: 12px;
+            font-size: 30px;
+        }
+        .vocab-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .vocab-item {
+            display: flex;
+            align-items: center;
+            background-color: rgba(244, 162, 97, 0.1);
+            border-radius: 8px;
+            padding: 12px 15px;
+        }
+        .vocab-item i {
+            color: #f4a261;
+            margin-right: 10px;
+            font-size: 22px;
+        }
+        .vocab-text {
+            font-size: 20px;
+        }
+        .additional-vocab {
+            display: flex;
+            gap: 40px;
+        }
+        .additional-section {
+            flex: 1;
+            background-color: rgba(230, 57, 70, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .additional-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #e63946;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .additional-title i {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+        .additional-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .additional-item {
+            background-color: white;
+            border-left: 3px solid #f4a261;
+            padding: 8px 15px;
+            border-radius: 0 6px 6px 0;
+            font-size: 18px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">VOCABULARIO</h1>
+        </div>
+        <div class="content">
+            <div class="vocab-sections">
+                <div class="vocab-column">
+                    <h2 class="vocab-title">
+                        <i class="material-icons">restaurant</i>
+                        Tapas
+                    </h2>
+                    <div class="vocab-list">
+                        <div class="vocab-item">
+                            <i class="material-icons">lunch_dining</i>
+                            <span class="vocab-text">Albóndigas</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">lunch_dining</i>
+                            <span class="vocab-text">Croquetas</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">kebab_dining</i>
+                            <span class="vocab-text">Jamón</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">breakfast_dining</i>
+                            <span class="vocab-text">Tortilla</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">spa</i>
+                            <span class="vocab-text">Aceitunas</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">local_fire_department</i>
+                            <span class="vocab-text">Patatas bravas</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">set_meal</i>
+                            <span class="vocab-text">Pulpo a la gallega</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">bakery_dining</i>
+                            <span class="vocab-text">Pan tumaca</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">egg</i>
+                            <span class="vocab-text">Huevos rotos</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">set_meal</i>
+                            <span class="vocab-text">Pescaíto frito</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="vocab-column">
+                    <h2 class="vocab-title">
+                        <i class="material-icons">fastfood</i>
+                        Comida rápida
+                    </h2>
+                    <div class="vocab-list">
+                        <div class="vocab-item">
+                            <i class="material-icons">lunch_dining</i>
+                            <span class="vocab-text">Hamburguesa</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">local_pizza</i>
+                            <span class="vocab-text">Pizza</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">kebab_dining</i>
+                            <span class="vocab-text">Kebab</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">microwave</i>
+                            <span class="vocab-text">Comida precocinada</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">local_fire_department</i>
+                            <span class="vocab-text">Patatas fritas</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">lunch_dining</i>
+                            <span class="vocab-text">Nuggets</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">hot_dog</i>
+                            <span class="vocab-text">Perrito caliente</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">lunch_dining</i>
+                            <span class="vocab-text">Sandwich</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="additional-vocab">
+                <div class="additional-section">
+                    <h3 class="additional-title">
+                        <i class="material-icons">local_bar</i>
+                        Cultura tapeo
+                    </h3>
+                    <div class="additional-list">
+                        <div class="additional-item">Tapeo</div>
+                        <div class="additional-item">Ir de tapas</div>
+                        <div class="additional-item">Ración</div>
+                        <div class="additional-item">Media ración</div>
+                    </div>
+                </div>
+                <div class="additional-section">
+                    <h3 class="additional-title">
+                        <i class="material-icons">label</i>
+                        Adjetivos gastronómicos
+                    </h3>
+                    <div class="additional-list">
+                        <div class="additional-item">Artesanal</div>
+                        <div class="additional-item">Casero</div>
+                        <div class="additional-item">Típico</div>
+                        <div class="additional-item">Innovador</div>
+                        <div class="additional-item">Rápido</div>
+                        <div class="additional-item">Conveniente</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
