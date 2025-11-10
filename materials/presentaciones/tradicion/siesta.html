@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Siesta y su Adaptación al Mundo Laboral Moderno</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #e63946;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .left-section {
+            flex: 1;
+            padding-right: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+        .right-section {
+            flex: 1;
+            padding-left: 40px;
+            border-left: 2px solid #f8d56f;
+            display: flex;
+ flex-direction: column;
+        }
+        .section-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #e63946;
+        }
+        .siesta-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            flex-grow: 1;
+        }
+        .siesta-item {
+            background-color: rgba(230, 57, 70, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .siesta-icon {
+            color: #e63946;
+            margin-right: 15px;
+            font-size: 28px;
+        }
+        .siesta-content {
+            flex: 1;
+        }
+        .siesta-name {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #212529;
+        }
+        .siesta-desc {
+            font-size: 18px;
+            color: #495057;
+        }
+        .highlight {
+            color: #e63946;
+            font-weight: 600;
+        }
+        .vocab-container {
+            background-color: rgba(248, 213, 111, 0.15);
+            border-radius: 8px;
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .vocab-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #212529;
+        }
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            flex-grow: 1;
+        }
+        .vocab-item {
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+        }
+        .vocab-item i {
+            color: #f8d56f;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        .image-container {
+            margin-top: 20px;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 8px;
+            position: relative;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: 10px;
+            color: white;
+            font-size: 16px;
+            text-align: center;
+        }
+        .quote {
+            font-style: italic;
+            color: #495057;
+            margin-top: 15px;
+            font-size: 18px;
+            text-align: center;
+        }
+        .stat-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #e63946;
+        }
+        .stat-label {
+            font-size: 16px;
+            color: #495057;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">La Siesta y su Adaptación al Mundo Laboral Moderno</h1>
+        </div>
+        <div class="content">
+            <div class="left-section">
+                <h2 class="section-title">Mito vs. Realidad de la Siesta</h2>
+                <div class="siesta-container">
+                    <div class="siesta-item">
+                        <i class="material-icons siesta-icon">fact_check</i>
+                        <div class="siesta-content">
+                            <div class="siesta-name">Estadísticas Sorprendentes</div>
+                            <div class="siesta-desc"><span class="highlight">60%</span> de los españoles nunca duermen siesta</div>
+                            <div class="siesta-desc">Los españoles trabajan <span class="highlight">más horas</span> que otros europeos</div>
+                        </div>
+                    </div>
+                    <div class="stat-container">
+                        <div class="stat-item">
+                            <div class="stat-number">1.691</div>
+                            <div class="stat-label">España (horas/año)</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">1.674</div>
+                            <div class="stat-label">Reino Unido (horas/año)</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">1.371</div>
+                            <div class="stat-label">Alemania (horas/año)</div>
+                        </div>
+                    </div>
+                    <div class="siesta-item">
+                        <i class="material-icons siesta-icon">history</i>
+                        <div class="siesta-content">
+                            <div class="siesta-name">Origen Inesperado</div>
+                            <div class="siesta-desc">No viene de España, sino de Italia (latín "sexta")</div>
+                            <div class="siesta-desc">Los romanos se detenían en la sexta hora del día</div>
+                        </div>
+                    </div>
+                    <div class="siesta-item">
+                        <i class="material-icons siesta-icon">trending_up</i>
+                        <div class="siesta-content">
+                            <div class="siesta-name">Adaptación Moderna</div>
+                            <div class="siesta-desc">Cápsulas para dormir en estaciones</div>
+                            <div class="siesta-desc">Aplicaciones como SiestAPP</div>
+                            <div class="siesta-desc">Propuestas para integrarla en entornos laborales</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="image-container">
+                    <img src="https://sfile.chatglm.cn/images-ppt/67b7e1acdb7a.jpg" alt="Espacio de descanso moderno">
+                    <div class="image-overlay">Espacios de descanso adaptados al mundo laboral contemporáneo</div>
+                </div>
+            </div>
+            <div class="right-section">
+                <h2 class="section-title">Beneficios y Vocabulario</h2>
+                <div class="vocab-container">
+                    <div class="vocab-title">Beneficios de la Siesta</div>
+                    <div class="vocab-grid">
+                        <div class="vocab-item">
+                            <i class="material-icons">spa</i>
+                            <span>Alivia el estrés</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">health_and_safety</i>
+                            <span>Fortalece sistema inmunológico</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">trending_up</i>
+                            <span>Mejora el rendimiento</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">psychology</i>
+                            <span>Aumenta la creatividad</span>
+                        </div>
+                    </div>
+                    
+                    <div class="vocab-title" style="margin-top: 20px;">Vocabulario del Cambio</div>
+                    <div class="vocab-grid">
+                        <div class="vocab-item">
+                            <i class="material-icons">hotel</i>
+                            <span>Descanso</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">sentiment_satisfied</i>
+                            <span>Bienestar</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">speed</i>
+                            <span>Productividad</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">balance</i>
+                            <span>Equilibrio</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">settings_suggest</i>
+                            <span>Adaptación</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">lightbulb</i>
+                            <span>Innovación</span>
+                        </div>
+                    </div>
+                    
+                    <div class="vocab-title" style="margin-top: 20px;">Estructuras Gramaticales</div>
+                    <div class="vocab-grid">
+                        <div class="vocab-item">
+                            <i class="material-icons">compare_arrows</i>
+                            <span>Más tradicional que...</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">compare</i>
+                            <span>Menos moderno que...</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">link</i>
+                            <span>Sin embargo...</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">call_split</i>
+                            <span>No obstante...</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="quote">"La siesta no debe ser incompatible con la vida laboral actual, ni siquiera en el lugar de trabajo"</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
