@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESTRUCTURAS GRAMATICALES</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f8f8;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #e63946;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .grammar-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 25px;
+            flex-grow: 1;
+        }
+        .grammar-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+        .grammar-card:hover {
+            transform: translateY(-5px);
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(244, 162, 97, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .card-icon i {
+            font-size: 28px;
+            color: #f4a261;
+        }
+        .card-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #e63946;
+        }
+        .grammar-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            flex-grow: 1;
+        }
+        .grammar-item {
+            display: flex;
+            align-items: center;
+        }
+        .grammar-bullet {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: rgba(230, 57, 70, 0.1);
+            color: #e63946;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        .grammar-text {
+            font-size: 20px;
+            line-height: 1.4;
+        }
+        .example {
+            background-color: rgba(244, 162, 97, 0.08);
+            border-left: 3px solid #f4a261;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 10px;
+        }
+        .example-text {
+            font-size: 18px;
+            color: #555;
+        }
+        .highlight {
+            color: #e63946;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">ESTRUCTURAS GRAMATICALES</h1>
+        </div>
+        <div class="content">
+            <div class="grammar-grid">
+                <div class="grammar-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="material-icons">update</i>
+                        </div>
+                        <h2 class="card-title">Futuro</h2>
+                    </div>
+                    <div class="grammar-content">
+                        <div class="grammar-item">
+                            <div class="grammar-bullet">+</div>
+                            <div class="grammar-text"><span class="highlight">Haré</span>, <span class="highlight">estudiaré</span>, <span class="highlight">trabajaré</span>, <span class="highlight">me mudaré</span></div>
+                        </div>
+                        <div class="example">
+                            <p class="example-text">"Si trabajo en el extranjero, <span class="highlight">aprenderé</span> mucho"</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grammar-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="material-icons">psychology</i>
+                        </div>
+                        <h2 class="card-title">Condicional</h2>
+                    </div>
+                    <div class="grammar-content">
+                        <div class="grammar-item">
+                            <div class="grammar-bullet">?</div>
+                            <div class="grammar-text"><span class="highlight">Me gustaría</span>, <span class="highlight">preferiría</span>, <span class="highlight">podría</span>, <span class="highlight">debería</span></div>
+                        </div>
+                        <div class="example">
+                            <p class="example-text">"<span class="highlight">Me gustaría estudiar</span> un máster en otro país"</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grammar-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="material-icons">record_voice_over</i>
+                        </div>
+                        <h2 class="card-title">Subjuntivo</h2>
+                    </div>
+                    <div class="grammar-content">
+                        <div class="grammar-item">
+                            <div class="grammar-bullet">!</div>
+                            <div class="grammar-text"><span class="highlight">Es importante que</span>, <span class="highlight">recomiendo que</span>, <span class="highlight">es necesario que</span></div>
+                        </div>
+                        <div class="example">
+                            <p class="example-text">"<span class="highlight">Es importante que practique</span> el idioma"</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grammar-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="material-icons">trending_up</i>
+                        </div>
+                        <h2 class="card-title">Perífrasis verbales</h2>
+                    </div>
+                    <div class="grammar-content">
+                        <div class="grammar-item">
+                            <div class="grammar-bullet">→</div>
+                            <div class="grammar-text"><span class="highlight">Ir a + infinitivo</span>, <span class="highlight">llegar a + infinitivo</span></div>
+                        </div>
+                        <div class="example">
+                            <p class="example-text">"<span class="highlight">Voy a buscar</span> oportunidades profesionales"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
