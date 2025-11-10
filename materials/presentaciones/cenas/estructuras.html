@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESTRUCTURAS GRAMATICALES</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #e63946;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .grammar-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            flex-grow: 1;
+        }
+        .grammar-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+        .grammar-card:hover {
+            transform: translateY(-5px);
+        }
+        .grammar-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .grammar-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(244, 162, 97, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        .grammar-icon i {
+            font-size: 32px;
+            color: #f4a261;
+        }
+        .grammar-title {
+            font-size: 26px;
+            font-weight: 600;
+            color: #e63946;
+        }
+        .examples-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+            flex-grow: 1;
+        }
+        .example-item {
+            background-color: rgba(244, 162, 97, 0.1);
+            border-radius: 8px;
+            padding: 12px 18px;
+            font-size: 20px;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+        .example-item i {
+            color: #f4a261;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        .highlight {
+            color: #e63946;
+            font-weight: 600;
+        }
+        .image-container {
+            margin-top: 30px;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 12px;
+            position: relative;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: 15px;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">ESTRUCTURAS GRAMATICALES</h1>
+        </div>
+        <div class="content">
+            <div class="grammar-grid">
+                <div class="grammar-card">
+                    <div class="grammar-header">
+                        <div class="grammar-icon">
+                            <i class="material-icons">record_voice_over</i>
+                        </div>
+                        <h2 class="grammar-title">Imperativo</h2>
+                    </div>
+                    <div class="examples-container">
+                        <div class="example-item">
+                            <i class="material-icons">content_cut</i>
+                            <span><span class="highlight">corta</span> las verduras</span>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">add</i>
+                            <span><span class="highlight">añade</span> la sal</span>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">loop</i>
+                            <span><span class="highlight">mezcla</span> bien</span>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">restaurant</i>
+                            <span><span class="highlight">sirve</span> caliente</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grammar-card">
+                    <div class="grammar-header">
+                        <div class="grammar-icon">
+                            <i class="material-icons">format_list_numbered</i>
+                        </div>
+                        <h2 class="grammar-title">Paso a paso</h2>
+                    </div>
+                    <div class="examples-container">
+                        <div class="example-item">
+                            <i class="material-icons">looks_one</i>
+                            <span><span class="highlight">primero</span>, prepara los ingredientes</span>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">looks_two</i>
+                            <span><span class="highlight">luego</span>, calienta el aceite</span>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">looks_3</i>
+                            <span><span class="highlight">después</span>, añade la cebolla</span>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">looks_4</i>
+                            <span><span class="highlight">finalmente</span>, sirve</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grammar-card">
+                    <div class="grammar-header">
+                        <div class="grammar-icon">
+                            <i class="material-icons">lightbulb</i>
+                        </div>
+                        <h2 class="grammar-title">Consejos</h2>
+                    </div>
+                    <div class="examples-container">
+                        <div class="example-item">
+                            <i class="material-icons">thumb_up</i>
+                            <span><span class="highlight">deberías</span> usar aceite de oliva</span>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">star</i>
+                            <span><span class="highlight">es mejor</span> cocinar a fuego lento</span>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">recommend</i>
+                            <span><span class="highlight">te recomiendo</span> añadir perejil</span>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">tips_and_updates</i>
+                            <span><span class="highlight">sugiero</span> probar antes de servir</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grammar-card">
+                    <div class="grammar-header">
+                        <div class="grammar-icon">
+                            <i class="material-icons">help</i>
+                        </div>
+                        <h2 class="grammar-title">Preguntas</h2>
+                    </div>
+                    <div class="examples-container">
+                        <div class="example-item">
+                            <i class="material-icons">settings</i>
+                            <span><span class="highlight">¿cómo?</span> se prepara</span>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">scale</i>
+                            <span><span class="highlight">¿cuánto?</span> tiempo necesita</span>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">place</i>
+                            <span><span class="highlight">¿dónde?</span> encuentro los ingredientes</span>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">schedule</i>
+                            <span><span class="highlight">¿cuándo?</span> se sirve</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="image-container">
+                <img src="https://sfile.chatglm.cn/images-ppt/f492d9277ad9.png" alt="Receta con instrucciones paso a paso">
+                <div class="image-overlay">Instrucciones claras son clave para una receta exitosa</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
