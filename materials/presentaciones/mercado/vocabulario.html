@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOCABULARIO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f8f8;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #e63946;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 25px;
+            flex-grow: 1;
+        }
+        .vocab-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+        .vocab-section:hover {
+            transform: translateY(-5px);
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(244, 162, 97, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .section-icon i {
+            font-size: 28px;
+            color: #f4a261;
+        }
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #e63946;
+        }
+        .vocab-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            flex-grow: 1;
+        }
+        .vocab-item {
+            background-color: rgba(244, 162, 97, 0.08);
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 20px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+        .vocab-item:hover {
+            background-color: rgba(244, 162, 97, 0.2);
+            transform: scale(1.05);
+        }
+        .vocab-item i {
+            font-size: 20px;
+            color: #f4a261;
+            margin-right: 8px;
+        }
+        .highlight {
+            color: #e63946;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">VOCABULARIO</h1>
+        </div>
+        <div class="content">
+            <div class="vocab-grid">
+                <div class="vocab-section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="material-icons">nutrition</i>
+                        </div>
+                        <h2 class="section-title">Frutas</h2>
+                    </div>
+                    <div class="vocab-items">
+                        <div class="vocab-item">
+                            <i class="material-icons">eco</i>
+                            <span>Manzana</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">eco</i>
+                            <span>Naranja</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">eco</i>
+                            <span>Plátano</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">eco</i>
+                            <span>Uvas</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">eco</i>
+                            <span>Fresas</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="vocab-section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="material-icons">grass</i>
+                        </div>
+                        <h2 class="section-title">Verduras</h2>
+                    </div>
+                    <div class="vocab-items">
+                        <div class="vocab-item">
+                            <i class="material-icons">eco</i>
+                            <span>Tomate</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">eco</i>
+                            <span>Pimiento</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">eco</i>
+                            <span>Cebolla</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">eco</i>
+                            <span>Ajo</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">eco</i>
+                            <span>Lechuga</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="vocab-section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="material-icons">scale</i>
+                        </div>
+                        <h2 class="section-title">Cantidades</h2>
+                    </div>
+                    <div class="vocab-items">
+                        <div class="vocab-item">
+                            <i class="material-icons">monitor_weight</i>
+                            <span>Kilo</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">monitor_weight</i>
+                            <span>Medio kilo</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">grid_view</i>
+                            <span>Docena</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">pan_tool</i>
+                            <span>Puñado</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">looks_one</i>
+                            <span>Unidad</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="vocab-section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="material-icons">verified</i>
+                        </div>
+                        <h2 class="section-title">Calidad</h2>
+                    </div>
+                    <div class="vocab-items">
+                        <div class="vocab-item">
+                            <i class="material-icons">new_releases</i>
+                            <span>Fresco</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">timelapse</i>
+                            <span>Maduro</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">spa</i>
+                            <span>Ecológico</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">event_available</i>
+                            <span>De temporada</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">handyman</i>
+                            <span>Artesanal</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
