@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ESTRUCTURAS GRAMATICALES</title>
+    <title>Estructuras Gramaticales para el Debate</title>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
@@ -14,7 +14,9 @@
         }
         body {
             font-family: 'Source Sans Pro', sans-serif;
-            background-color: #f8f8f8;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            color: #212529;
         }
         .slide {
             width: 1280px;
@@ -35,90 +37,59 @@
         }
         .content {
             display: flex;
-            flex-direction: column;
             flex-grow: 1;
             padding: 30px 70px;
         }
         .grammar-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
             gap: 25px;
+            width: 100%;
             flex-grow: 1;
         }
         .grammar-card {
-            background-color: white;
+            background-color: rgba(230, 57, 70, 0.05);
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             padding: 25px;
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s ease;
+            border-left: 4px solid #e63946;
         }
-        .grammar-card:hover {
-            transform: translateY(-5px);
-        }
-        .card-header {
+        .grammar-header {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
-        .card-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: rgba(244, 162, 97, 0.15);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .grammar-icon {
+            color: #e63946;
+            font-size: 32px;
             margin-right: 15px;
-            flex-shrink: 0;
         }
-        .card-icon i {
-            font-size: 28px;
-            color: #f4a261;
-        }
-        .card-title {
-            font-size: 24px;
+        .grammar-title {
+            font-size: 26px;
             font-weight: 600;
             color: #e63946;
         }
-        .grammar-content {
+        .example-container {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
             flex-grow: 1;
         }
-        .grammar-item {
+        .example-item {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
         }
-        .grammar-bullet {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background-color: rgba(230, 57, 70, 0.1);
-            color: #e63946;
-            display: flex;
-            justify-content: center;
-            font-weight: 600;
+        .example-bullet {
+            color: #f8d56f;
+            font-size: 22px;
             margin-right: 12px;
             flex-shrink: 0;
         }
-        .grammar-text {
+        .example-text {
             font-size: 20px;
             line-height: 1.4;
-        }
-        .example {
-            background-color: rgba(244, 162, 97, 0.08);
-            border-left: 3px solid #f4a261;
-            padding: 12px 15px;
-            border-radius: 0 8px 8px 0;
-            margin-top: 10px;
-        }
-        .example-text {
-            font-size: 18px;
-            color: #555;
         }
         .highlight {
             color: #e63946;
@@ -129,118 +100,93 @@
 <body>
     <div class="slide">
         <div class="header">
-            <h1 class="title">ESTRUCTURAS GRAMATICALES</h1>
+            <h1 class="title">Estructuras Gramaticales para el Debate</h1>
         </div>
         <div class="content">
             <div class="grammar-grid">
                 <div class="grammar-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="material-icons">compare</i>
-                        </div>
-                        <h2 class="card-title">Comparativos</h2>
+                    <div class="grammar-header">
+                        <i class="material-icons grammar-icon">compare_arrows</i>
+                        <h2 class="grammar-title">Comparativos</h2>
                     </div>
-                    <div class="grammar-content">
-                        <div class="grammar-item">
-                            <div class="grammar-bullet">+</div>
-                            <div class="grammar-text"><span class="highlight">más tradicional que</span>, <span class="highlight">menos moderno que</span></div>
+                    <div class="example-container">
+                        <div class="example-item">
+                            <span class="example-bullet">•</span>
+                            <span class="example-text">Las fiestas tradicionales son <span class="highlight">más importantes</span> que las nuevas celebraciones</span>
                         </div>
-                        <div class="grammar-item">
-                            <div class="grammar-bullet">=</div>
-                            <div class="grammar-text"><span class="highlight">tan tradicional como</span>, <span class="highlight">igual de tradicional que</span></div>
+                        <div class="example-item">
+                            <span class="example-bullet">•</span>
+                            <span class="example-text">La gastronomía moderna es <span class="highlight">menos auténtica</span> que la tradicional</span>
                         </div>
-                        <div class="example">
-                            <p class="example-text">"<span class="highlight">Las tradiciones son más auténticas</span> que la comida rápida"</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="grammar-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="material-icons">link</i>
-                        </div>
-                        <h2 class="card-title">Conectores de contraste</h2>
-                    </div>
-                    <div class="grammar-content">
-                        <div class="grammar-item">
-                            <div class="grammar-bullet">→</div>
-                            <div class="grammar-text"><span class="highlight">Sin embargo</span>, <span class="highlight">no obstante</span></div>
-                        </div>
-                        <div class="grammar-item">
-                            <div class="grammar-bullet">→</div>
-                            <div class="grammar-text"><span class="highlight">Por un lado...</span>, <span class="highlight">por otro lado...</span></div>
-                        </div>
-                        <div class="grammar-item">
-                            <div class="grammar-bullet">→</div>
-                            <div class="grammar-text"><span class="highlight">A pesar de...</span>, <span class="highlight">a pesar de...</span></div>
-                        </div>
-                        <div class="example">
-                            <p class="example-text">"<span class="highlight">A pesar de</span> las ventajas de la comida rápida, las tradiciones son <span class="highlight">culturalmente valiosas</span></p>
+                        <div class="example-item">
+                            <span class="example-bullet">•</span>
+                            <span class="example-text">El flamenco es <span class="highlight">más popular</span> ahora que hace 50 años</span>
                         </div>
                     </div>
                 </div>
+                
                 <div class="grammar-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="material-icons">record_voice_over</i>
-                        </div>
-                        <h2 class="card-title">Subjuntivo</h2>
+                    <div class="grammar-header">
+                        <i class="material-icons grammar-icon">link</i>
+                        <h2 class="grammar-title">Conectores de Contraste</h2>
                     </div>
-                    <div class="grammar-content">
-                        <div class="grammar-item">
-                            <div class="grammar-bullet">!</div>
-                            <div class="grammar-text"><span class="highlight">Es importante que</span>, <span class="highlight">es necesario que</span>, <span class="highlight">conserve</span></div>
+                    <div class="example-container">
+                        <div class="example-item">
+                            <span class="example-bullet">•</span>
+                            <span class="example-text">El flamenco es una tradición centenaria; <span class="highlight">sin embargo</span>, ha evolucionado mucho</span>
                         </div>
-                        <div class="grammar-item">
-                            <div class="grammar-bullet">!</div>
-                            <div class="grammar-text"><span class="highlight">Recomiendo que</span>, <span class="highlight">preferiría que</span></div>
+                        <div class="example-item">
+                            <span class="example-bullet">•</span>
+                            <span class="example-text">Los horarios españoles son atípicos; <span class="highlight">no obstante</span>, forman parte de nuestra identidad</span>
                         </div>
-                        <div class="example">
-                            <p class="example-text">"<span class="highlight">Es importante que</span> <span class="highlight">se conserve</span> la cultura gastronómica tradicional</p></p>
+                        <div class="example-item">
+                            <span class="example-bullet">•</span>
+                            <span class="example-text">La siesta tradicional ha desaparecido; <span class="highlight">por otro lado</span>, existen nuevas formas de descanso</span>
                         </div>
                     </div>
                 </div>
+                
                 <div class="grammar-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="material-icons">psychology</i>
-                        </div>
-                        <h2 class="card-title">Condicional</h2>
+                    <div class="grammar-header">
+                        <i class="material-icons grammar-icon">priority_high</i>
+                        <h2 class="grammar-title">Subjuntivo</h2>
                     </div>
-                    <div class="grammar-content">
-                        <div class="grammar-item">
-                            <div class="grammar-bullet">?</div>
-                            <div class="grammar-text"><span class="highlight">Me gustaría</span>, <span class="highlight">preferiría</span>, <span class="highlight">podría</span>, <span class="highlight">debería</span></div>
+                    <div class="example-container">
+                        <div class="example-item">
+                            <span class="example-bullet">•</span>
+                            <span class="example-text"><span class="highlight">Es necesario que</span> las tradiciones se adapten a los tiempos</span>
                         </div>
-                        <div class="example">
-                            <p class="example-text">"<span class="highlight">Me gustaría</span> <span class="highlight">probar</span> platos tradicionales</p></p>
+                        <div class="example-item">
+                            <span class="example-bullet">•</span>
+                            <span class="example-text"><span class="highlight">Es importante que</span> conservemos nuestra herencia cultural</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="example-bullet">•</span>
+                            <span class="example-text"><span class="highlight">Conviene que</span> los jóvenes participen en las festividades tradicionales</span>
                         </div>
                     </div>
                 </div>
+                
                 <div class="grammar-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="material-icons">trending_up</i>
-                        </div>
-                        <h2 class="card-title">Expresiones de cambio</h2>
+                    <div class="grammar-header">
+                        <i class="material-icons grammar-icon">access_time</i>
+                        <h2 class="grammar-title">Pasado Reciente</h2>
                     </div>
-                    <div class="grammar-content">
-                        <div class="grammar-item">
-                            <div class="grammar-bullet">→</div>
-                            <div class="grammar-text"><span class="highlight">Estoy cambiando</span>, <span class="highlight">estoy adaptando</span></div>
+                    <div class="example-container">
+                        <div class="example-item">
+                            <span class="example-bullet">•</span>
+                            <span class="example-text"><span class="highlight">Acabo de</span> investigar sobre la evolución de las Fallas</span>
                         </div>
-                        <div class="grammar-item">
-                            <div class="grammar-bullet">→</div>
-                            <div class="grammar-text"><span class="highlight">Estoy pasando</span>, <span class="highlight">estoy modernizándome</span></div>
+                        <div class="example-item">
+                            <span class="example-bullet">•</span>
+                            <span class="example-text"><span class="highlight">Hemos cambiado</span> nuestra forma de celebrar las fiestas</span>
                         </div>
-                        <div class="grammar-item">
-                            <div class="grammar-bullet">→</div>
-                            <span class="grammar-text"><span class="highlight">Estoy aprendiendo</span>, <span class="highlight">estoy evolucionando</span></div>
-                        </div>
-                        <div class="example">
-                            <p class="example-text">"<span class="highlight">Estoy cambiando</span> mis costumbres para ser más flexible</p></p>
+                        <div class="example-item">
+                            <span class="example-bullet">•</span>
+                            <span class="example-text"><span class="highlight">He decidido</span> participar en la modernización de las tradiciones</span>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>
