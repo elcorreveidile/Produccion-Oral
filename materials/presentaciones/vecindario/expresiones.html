@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXPRESIONES ÚTILES (Nivel B2.1)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f8f8;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #e63946;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .expressions-container {
+            display: flex;
+            gap: 30px;
+            flex-grow: 1;
+        }
+        .left-column, .right-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .section-title {
+            font-size: 26px;
+            font-weight: 600;
+            color: #e63946;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .section-title i {
+            margin-right: 12px;
+            font-size: 30px;
+        }
+        .expression-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+        .expression-card:hover {
+            transform: translateY(-5px);
+        }
+        .expression-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(244, 162, 97, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .expression-icon i {
+            font-size: 28px;
+            color: #f4a261;
+        }
+        .expression-text {
+            font-size: 20px;
+            line-height: 1.4;
+        }
+        .highlight {
+            color: #e63946;
+            font-weight: 600;
+        }
+        .tip-box {
+            background-color: rgba(244, 162, 97, 0.1);
+            border-left: 4px solid #f4a261;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .tip-icon {
+            font-size: 24px;
+            color: #f4a261;
+            margin-right: 15px;
+        }
+        .tip-text {
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">EXPRESIONES ÚTILES (Nivel B2.1)</h1>
+        </div>
+        <div class="content">
+            <div class="expressions-container">
+                <div class="left-column">
+                    <h2 class="section-title">
+                        <i class="material-icons">forum</i>
+                        Para expresar molestias
+                    </h2>
+                    <div class="expression-card">
+                        <div class="expression-icon">
+                            <i class="material-icons">sentiment_dissatisfied</i>
+                        </div>
+                        <div class="expression-text">
+                            <span class="highlight">Perdona la molestia, pero...</span>
+                        </div>
+                    </div>
+                    <div class="expression-card">
+                        <div class="expression-icon">
+                            <i class="material-icons">record_voice_over</i>
+                        </div>
+                        <div class="expression-text">
+                            <span class="highlight">¿Podríamos hablar sobre...?</span>
+                        </div>
+                    </div>
+                    <div class="expression-card">
+                        <div class="expression-icon">
+                            <i class="material-icons">psychology</i>
+                        </div>
+                        <div class="expression-text">
+                            <span class="highlight">Entiendo tu punto de vista, pero...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-column">
+                    <h2 class="section-title">
+                        <i class="material-icons">handshake</i>
+                        Para buscar soluciones
+                    </h2>
+                    <div class="expression-card">
+                        <div class="expression-icon">
+                            <i class="material-icons">help_outline</i>
+                        </div>
+                        <div class="expression-text">
+                            <span class="highlight">¿Qué te parecería si...?</span>
+                        </div>
+                    </div>
+                    <div class="expression-card">
+                        <div class="expression-icon">
+                            <i class="material-icons">lightbulb</i>
+                        </div>
+                        <div class="expression-text">
+                            <span class="highlight">Me gustaría encontrar una solución...</span>
+                        </div>
+                    </div>
+                    <div class="expression-card">
+                        <div class="expression-icon">
+                            <i class="material-icons">balance</i>
+                        </div>
+                        <div class="expression-text">
+                            <span class="highlight">Podríamos llegar a un acuerdo...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tip-box">
+                <i class="material-icons tip-icon">tips_and_updates</i>
+                <p class="tip-text">Estas expresiones son especialmente útiles para resolver conflictos de forma asertiva pero respetuosa, manteniendo siempre un tono educado y colaborativo.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
