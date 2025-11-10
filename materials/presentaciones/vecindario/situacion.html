@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SITUACIÓN DE HABLA PARA MINI SERIE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f8f8;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #e63946;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .scene-container {
+            display: flex;
+            gap: 30px;
+            flex-grow: 1;
+        }
+        .scene-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        .dialogue-container {
+            flex: 1.5;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+        .scene-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #e63946;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+        .scene-title i {
+            margin-right: 12px;
+            font-size: 32px;
+            color: #f4a261;
+        }
+        .scene-subtitle {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .characters-section {
+            background-color: rgba(244, 162, 97, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+        }
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #e63946;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .section-title i {
+            margin-right: 10px;
+            font-size: 24px;
+            color: #f4a261;
+        }
+        .characters-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .character-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        .character-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: rgba(230, 57, 70, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .character-icon i {
+            font-size: 24px;
+            color: #e63946;
+        }
+        .character-info {
+            flex-grow: 1;
+        }
+        .character-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+        .character-description {
+            font-size: 16px;
+            color: #666;
+        }
+        .dialogue-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #e63946;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .dialogue-title i {
+            margin-right: 10px;
+            font-size: 24px;
+            color: #f4a261;
+        }
+        .dialogue-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .dialogue-item {
+            display: flex;
+            align-items: flex-start;
+        }
+        .dialogue-speaker {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(244, 162, 97, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .dialogue-speaker i {
+            font-size: 24px;
+            color: #f4a261;
+        }
+        .dialogue-bubble {
+            background-color: #f8f8f8;
+            border-radius: 12px;
+            padding: 15px;
+            flex-grow: 1;
+            position: relative;
+        }
+        .dialogue-bubble::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 15px;
+            border-width: 10px 10px 10px 0;
+            border-style: solid;
+            border-color: transparent #f8f8f8 transparent transparent;
+        }
+        .dialogue-text {
+            font-size: 18px;
+            line-height: 1.4;
+        }
+        .speaker-name {
+            font-weight: 600;
+            color: #e63946;
+            margin-bottom: 5px;
+        }
+        .highlight {
+            color: #e63946;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">SITUACIÓN DE HABLA PARA MINI SERIE</h1>
+        </div>
+        <div class="content">
+            <div class="scene-container">
+                <div class="scene-info">
+                    <div>
+                        <h2 class="scene-title">
+                            <i class="material-icons">movie</i>
+                            ESCENA
+                        </h2>
+                        <h3 class="scene-subtitle">"Noches de ruido"</h3>
+                    </div>
+                    
+                    <div class="characters-section">
+                        <h3 class="section-title">
+                            <i class="material-icons">people_alt</i>
+                            Personajes
+                        </h3>
+                        <div class="characters-grid">
+                            <div class="character-card">
+                                <div class="character-icon">
+                                    <i class="material-icons">person</i>
+                                </div>
+                                <div class="character-info">
+                                    <div class="character-name">Protagonista</div>
+                                    <div class="character-description">Con problemas de sueño</div>
+                                </div>
+                            </div>
+                            <div class="character-card">
+                                <div class="character-icon">
+                                    <i class="material-icons">volume_up</i>
+                                </div>
+                                <div class="character-info">
+                                    <div class="character-name">Vecino/a ruidoso/a</div>
+                                    <div class="character-description">Organizando fiesta</div>
+                                </div>
+                            </div>
+                            <div class="character-card">
+                                <div class="character-icon">
+                                    <i class="material-icons">security</i>
+                                </div>
+                                <div class="character-info">
+                                    <div class="character-name">Portero/a del edificio</div>
+                                    <div class="character-description">Recibiendo quejas</div>
+                                </div>
+                            </div>
+                            <div class="character-card">
+                                <div class="character-icon">
+                                    <i class="material-icons">sentiment_very_dissatisfied</i>
+                                </div>
+                                <div class="character-info">
+                                    <div class="character-name">Otro vecino/a afectado/a</div>
+                                    <div class="character-description">Intentando dormir</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dialogue-container">
+                    <h3 class="dialogue-title">
+                        <i class="material-icons">chat</i>
+                        Diálogo modelo
+                    </h3>
+                    <div class="dialogue-content">
+                        <div class="dialogue-item">
+                            <div class="dialogue-speaker">
+                                <i class="material-icons">person</i>
+                            </div>
+                            <div class="dialogue-bubble">
+                                <div class="speaker-name">Protagonista</div>
+                                <div class="dialogue-text"><span class="highlight">Oiga, perdóneme que moleste</span> a esta hora...</div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item">
+                            <div class="dialogue-speaker">
+                                <i class="material-icons">volume_up</i>
+                            </div>
+                            <div class="dialogue-bubble">
+                                <div class="speaker-name">Vecino/a</div>
+                                <div class="dialogue-text"><span class="highlight">¿Qué pasa? ¿Sucedió algo?</span></div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item">
+                            <div class="dialogue-speaker">
+                                <i class="material-icons">person</i>
+                            </div>
+                            <div class="dialogue-bubble">
+                                <div class="speaker-name">Protagonista</div>
+                                <div class="dialogue-text">Es que <span class="highlight">hay mucho ruido y no puedo dormir</span>...</div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item">
+                            <div class="dialogue-speaker">
+                                <i class="material-icons">volume_up</i>
+                            </div>
+                            <div class="dialogue-bubble">
+                                <div class="speaker-name">Vecino/a</div>
+                                <div class="dialogue-text"><span class="highlight">¡Ah! Lo siento mucho</span>. No me di cuenta.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item">
+                            <div class="dialogue-speaker">
+                                <i class="material-icons">person</i>
+                            </div>
+                            <div class="dialogue-bubble">
+                                <div class="speaker-name">Protagonista</div>
+                                <div class="dialogue-text"><span class="highlight">¿Podrían bajar un poco la música</span>, por favor?</div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item">
+                            <div class="dialogue-speaker">
+                                <i class="material-icons">volume_up</i>
+                            </div>
+                            <div class="dialogue-bubble">
+                                <div class="speaker-name">Vecino/a</div>
+                                <div class="dialogue-text"><span class="highlight">Claro, no hay problema</span>. Lo apago inmediatamente.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
