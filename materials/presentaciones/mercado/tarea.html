@@ -136,6 +136,57 @@
             color: #e63946;
             font-weight: 600;
         }
+        .navigation {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            z-index: 1000;
+        }
+        .nav-btn {
+            background-color: rgba(245, 197, 24, 0.9);
+            color: #000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .nav-btn:hover {
+            background-color: #f5c518;
+            transform: translateY(-2px);
+        }
+        .nav-btn.prev {
+            background-color: rgba(52, 152, 219, 0.9);
+            color: white;
+        }
+        .nav-btn.prev:hover {
+            background-color: #3498db;
+        }
+        .nav-disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .nav-disabled:hover {
+            transform: none;
+        }
+        .slide-counter {
+            color: white;
+            font-size: 14px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
     </style>
 </head>
 <body>
@@ -218,6 +269,19 @@
                 <i class="material-icons deadline-icon">event</i>
                 <p class="deadline-text">Fecha de entrega: <span class="highlight">Próxima clase</span> | Recuerda subir tus tareas a la plataforma del curso antes del inicio de la sesión</p>
             </div>
+        </div>
+
+        <!-- Navegación -->
+        <div class="navigation">
+            <a href="actividades.html" class="nav-btn prev">
+                <i class="material-icons">arrow_back</i>
+                Anterior
+            </a>
+            <div class="slide-counter">11 / 12</div>
+            <a href="evaluacion.html" class="nav-btn">
+                Siguiente
+                <i class="material-icons">arrow_forward</i>
+            </a>
         </div>
     </div>
 </body>
