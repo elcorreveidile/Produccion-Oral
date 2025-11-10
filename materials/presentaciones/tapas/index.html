@@ -3,104 +3,617 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sesión 4: Debate: Cultura de tapas vs. comida rápida</title>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Cultura de Tapas vs Comida Rápida - Presentación</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
-            font-family: 'Source Sans Pro', sans-serif;
-            background-color: #f5f5f5;
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #2c1810 0%, #8B4513 50%, #A0522D 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
-        .slide {
-            width: 1280px;
-            height: 720px;
+
+        .presentation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             position: relative;
-            overflow: hidden;
-            background-image: url('https://sfile.chatglm.cn/images-ppt/d8c1104a7e8d.jpg');
-            background-size: cover;
-            background-position: center;
         }
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.65);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
+
+        .slide {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 2px solid #c9a97e;
+            animation: slideIn 0.5s ease-out;
         }
-        .content {
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            color: #f8f5f0;
             text-align: center;
-            color: #ffffff;
-            max-width: 90%;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
-        .title {
-            font-size: 60px;
-            font-weight: 700;
-            margin-bottom: 30px;
-            line-height: 1.2;
-            color: #ffffff;
+
+        .slide h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            color: #c9a97e;
+            text-align: center;
+            margin-bottom: 2rem;
         }
-        .subtitle {
-            font-size: 24px;
+
+        .slide h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            color: #f8f5f0;
+            margin-bottom: 1rem;
+        }
+
+        .slide p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            color: #e8e0d5;
+        }
+
+        .highlight {
+            color: #c9a97e;
             font-weight: 600;
-            margin-bottom: 40px;
-            color: #f5c518;
         }
-        .info {
+
+        .university-info {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #c9a97e;
+            color: #b8a698;
+            font-size: 0.9rem;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 40px;
-            font-size: 20px;
+            gap: 1rem;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid #c9a97e;
         }
-        .info-item {
+
+        .nav-btn {
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(45deg, #8B4513, #D2691E);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-btn:hover {
+            background: linear-gradient(45deg, #D2691E, #8B4513);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.4);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            color: #c9a97e;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 1px solid #c9a97e;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .content-card {
+            background: rgba(201, 169, 126, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid #c9a97e;
+        }
+
+        .vs-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            margin: 2rem 0;
+            gap: 2rem;
         }
-        .material-icons {
-            color: #f5c518;
+
+        .vs-item {
+            flex: 1;
+            text-align: center;
+            padding: 2rem;
+            background: rgba(201, 169, 126, 0.1);
+            border-radius: 15px;
+            border: 1px solid #c9a97e;
         }
-        .highlight {
-            color: #f5c518;
-            font-weight: 600;
+
+        .vs-divider {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #c9a97e;
+        }
+
+        @media (max-width: 768px) {
+            .slide h1 {
+                font-size: 2rem;
+            }
+            .slide h2 {
+                font-size: 1.5rem;
+            }
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            .vs-container {
+                flex-direction: column;
+            }
+            .navigation {
+                bottom: 1rem;
+                padding: 0.8rem;
+            }
+            .nav-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="slide">
-        <div class="overlay">
-            <div class="content">
-                <h1 class="title">Sesión 4: Debate<br>Cultura de tapas vs. comida rápida</h1>
-                <h2 class="subtitle">Producción e Interacción Oral en Español Nivel B2.1</h2>
-                
-                <div class="info">
-                    <div class="info-item">
-                        <i class="material-icons">school</i>
-                        <span>Universidad de Granada - Centro de Lenguas Modernas</span>
-                    </div>
-                    <div class="info-item">
-                        <i class="material-icons">event</i>
-                        <span>Fecha: <span class="highlight">12/11/2025</span></span>
-                    </div>
-                    <div class="info-item">
-                        <i class="material-icons">person</i>
-                        <span>Profesor: <span class="highlight">Javier Benítez Láinez</span></span>
-                    </div>
+    <div class="presentation-container">
+        <!-- Slide 1: Título -->
+        <div class="slide" id="slide1">
+            <h1>Cultura de Tapas vs Comida Rápida</h1>
+            <h2>Un Debate Gastronómico</h2>
+            <p style="text-align: center; font-size: 1.2rem; color: #c9a97e;">
+                Análisis comparativo de dos tradiciones culinarias opuestas
+            </p>
+            <div class="university-info">
+                <p><strong>Universidad de Granada</strong></p>
+                <p><strong>Producción e Interacción Oral - Nivel B2.1</strong></p>
+                <p><strong>Profesor:</strong> Javier Benítez Láinez</p>
+                <p><strong>Noviembre 2025</strong></p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Introducción -->
+        <div class="slide hidden" id="slide2">
+            <h1>Introducción al Debate</h1>
+            <p>La gastronomía española se enfrenta a un dilema moderno: la tradición del <span class="highlight">tapeo</span> frente a la influencia de la <span class="highlight">comida rápida</span> internacional.</p>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>Cultura de Tapas</h3>
+                    <p>• Tradición centenaria<br>
+                    • Comida social y compartida<br>
+                    • Productos locales y artesanales<br>
+                    • Experiencia gastronómica</p>
+                </div>
+                <div class="content-card">
+                    <h3>Comida Rápida</h3>
+                    <p>• Influencia global<br>
+                    • Comida individual y rápida<br>
+                    • Estandarización industrial<br>
+                    • Eficiencia y conveniencia</p>
                 </div>
             </div>
         </div>
+
+        <!-- Slide 3: Historia de las Tapas -->
+        <div class="slide hidden" id="slide3">
+            <h1>La Historia de las Tapas</h1>
+            <h3>Un Legado Cultural</h3>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>📜 Orígenes</h3>
+                    <p>Las tapas nacieron en la España medieval cuando los taberneros cubrían las copas con rebanadas de pan o jamón para proteger la bebida de insectos.</p>
+                </div>
+                <div class="content-card">
+                    <h3>🍺 Evolución</h3>
+                    <p>Con el tiempo, esta práctica se convirtió en un elemento fundamental de la cultura gastronómica española.</p>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 2rem; font-size: 1.1rem;">
+                <span class="highlight">"De tapa" significa "cubierta"</span> - una protección que se convirtió en tradición
+            </p>
+        </div>
+
+        <!-- Slide 4: El Fenómeno de la Comida Rápida -->
+        <div class="slide hidden" id="slide4">
+            <h1>El Fenómeno de la Comida Rápida</h1>
+            <h3>Globalización Gastronómica</h3>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>🌍 Origen y Expansión</h3>
+                    <p>Surgió en Estados Unidos en la década de 1950 y se expandió globalmente después de la Segunda Guerra Mundial.</p>
+                </div>
+                <div class="content-card">
+                    <h3>⚡ Características</h3>
+                    <p>• Servicio rápido<br>
+                    • Menús estandarizados<br>
+                    • Producción en cadena<br>
+                    • Precios competitivos</p>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 2rem; font-size: 1.1rem;">
+                España recibió la primera hamburguesería en <span class="highlight">1972</span>
+            </p>
+        </div>
+
+        <!-- Slide 5: Comparación Directa -->
+        <div class="slide hidden" id="slide5">
+            <h1>Tapas vs Comida Rápida</h1>
+            <h3>Confrontación Cultural</h3>
+
+            <div class="vs-container">
+                <div class="vs-item">
+                    <h3>🍤 TAPAS</h3>
+                    <p>• <strong>Social:</strong> Compartir y conversar<br>
+                    • <strong>Tiempo:</strong> Disfrutar el momento<br>
+                    • <strong>Calidad:</strong> Productos frescos<br>
+                    • <strong>Cultura:</strong> Tradición local<br>
+                    • <strong>Salud:</strong> Porciones equilibradas</p>
+                </div>
+
+                <div class="vs-divider">VS</div>
+
+                <div class="vs-item">
+                    <h3>🍔 FAST FOOD</h3>
+                    <p>• <strong>Individual:</strong> Comer rápido<br>
+                    • <strong>Tiempo:</strong> Eficiencia máxima<br>
+                    • <strong>Calidad:</strong> Estandarización<br>
+                    • <strong>Cultura:</strong> Globalización<br>
+                    • <strong>Salud:</strong> Altas calorías</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Aspectos Sociales -->
+        <div class="slide hidden" id="slide6">
+            <h1>Impacto Social</h1>
+            <h3>Cómo Modelan nuestras Relaciones</h3>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>👥 Tapeo</h3>
+                    <p>• Fomenta la conversación<br>
+                    • Crea comunidad<br>
+                    • Fortalece lazos sociales<br>
+                    • Promueve el turismo local<br>
+                    • Identidad cultural</p>
+                </div>
+                <div class="content-card">
+                    <h3>🏃 Comida Rápida</h3>
+                    <p>• Individualismo<br>
+                    • Comodidad y practicidad<br>
+                    • Estilo de vida acelerado<br>
+                    • Consumo masivo<br>
+                    • Cultura global</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Aspectos Económicos -->
+        <div class="slide hidden" id="slide7">
+            <h1>Impacto Económico</h1>
+            <h3>Dos Modelos de Negocio</h3>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>💰 Economía de Tapas</h3>
+                    <p>• Apoya a pequeños negocios<br>
+                    • Productos locales<br>
+                    • Empleo cualificado<br>
+                    • Turismo gastronómico<br>
+                    • Precios variables</p>
+                </div>
+                <div class="content-card">
+                    <h3>🏭 Industria Fast Food</h3>
+                    <p>• Grandes corporaciones<br>
+                    • Cadena de suministro global<br>
+                    • Empleo estandarizado<br>
+                    • Franquias internacionales<br>
+                    • Precios fijos</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Salud y Nutrición -->
+        <div class="slide hidden" id="slide8">
+            <h1>Salud y Nutrición</h1>
+            <h3>Consecuencias para la Salud</h3>
+
+            <div class="vs-container">
+                <div class="vs-item">
+                    <h3>🥗 TAPAS</h3>
+                    <p><strong>✅ Ventajas:</strong><br>
+                    • Porciones controladas<br>
+                    • Ingredientes frescos<br>
+                    • Dieta mediterránea<br>
+                    • Variedad de nutrientes</p>
+                </div>
+
+                <div class="vs-divider">VS</div>
+
+                <div class="vs-item">
+                    <h3>🍟 FAST FOOD</h3>
+                    <p><strong>⚠️ Riesgos:</strong><br>
+                    • Altas calorías<br>
+                    • Grasas saturadas<br>
+                    • Exceso de sal<br>
+                    • Procesados industriales</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Situación Actual en España -->
+        <div class="slide hidden" id="slide9">
+            <h1>La Realidad Española Actual</h1>
+            <h3>Convivencia de dos Culturas</h3>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>📈 Datos Actuales</h3>
+                    <p>• <strong>70%</strong> de españoles practican el tapeo semanalmente<br>
+                    • <strong>45%</strong> consume comida rápida al menos una vez al mes<br>
+                    • <strong>85%</strong> prefiere la cocina tradicional<br>
+                    • <strong>€3.200</strong> es el gasto anual medio por persona en restauración</p>
+                </div>
+                <div class="content-card">
+                    <h3>🔄 Híbridos Modernos</h3>
+                    <p>• "Gastro-bares" que fusionan ambos mundos<br>
+                    • Tapas con influencia internacional<br>
+                    • Comida rápida con ingredientes locales<br>
+                    • Nuevos conceptos de servicio rápido tradicional</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: El Futuro -->
+        <div class="slide hidden" id="slide10">
+            <h1>El Futuro de la Gastronomía</h1>
+            <h3>Tendencias y Predicciones</h3>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>🚀 Tendencias Emergentes</h3>
+                    <p>• Fusión de tradición y modernidad<br>
+                    • Comida rápida saludable<br>
+                    • Sostenibilidad y proximidad<br>
+                    • Experiencias gastronómicas únicas<br>
+                    • Digitalización del sector</p>
+                </div>
+                <div class="content-card">
+                    <h3>🌱 Futuro Sostenible</h3>
+                    <p>• Productos locales y de temporada<br>
+                    • Reducción del desperdicio alimentario<br>
+                    • Alternativas vegetales<br>
+                    • Comercio justo<br>
+                    • Gastronomía circular</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Conclusión -->
+        <div class="slide hidden" id="slide11">
+            <h1>Conclusión</h1>
+            <h3>Un Equilibrio Posible</h3>
+
+            <p style="text-align: center; font-size: 1.3rem; margin-bottom: 2rem;">
+                La cultura de tapas y la comida rápida no tienen por qué ser enemigas.
+                Pueden <span class="highlight">coexistir y complementarse</span> en la sociedad moderna.
+            </p>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>🎯 Lo Esencial del Tapeo</h3>
+                    <p>• Socialización<br>
+                    • Calidad<br>
+                    • Tradición<br>
+                    • Disfrute</p>
+                </div>
+                <div class="content-card">
+                    <h3>⚡ Lo Útil del Fast Food</h3>
+                    <p>• Comodidad<br>
+                    • Accesibilidad<br>
+                    • Rapidez<br>
+                    • Consistencia</p>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 2rem; font-size: 1.2rem; color: #c9a97e;">
+                <strong>La clave está en el equilibrio y la elección consciente</strong>
+            </p>
+        </div>
+
+        <!-- Slide 12: Preguntas para el Debate -->
+        <div class="slide hidden" id="slide12">
+            <h1>Preguntas para el Debate</h1>
+            <h3>Reflexión y Discusión</h3>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>❓ Preguntas Individuales</h3>
+                    <p>1. ¿Prefieres tapeo o comida rápida? ¿Por qué?<br>
+                    2. ¿Cómo ha cambiado tu forma de comer en los últimos 10 años?<br>
+                    3. ¿Crees que perdemos algo con la comida rápida?</p>
+                </div>
+                <div class="content-card">
+                    <h3>🗣️ Preguntas de Grupo</h3>
+                    <p>1. ¿Es posible combinar tradición y modernidad?<br>
+                    2. ¿Qué futuro espera la gastronomía española?<br>
+                    3. ¿Cómo fomentar la cultura del tapeo en jóvenes?</p>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 2rem; font-size: 1.2rem; color: #c9a97e;">
+                <strong>¡A debatir!</strong> 🎤
+            </p>
+        </div>
     </div>
+
+    <!-- Navegación -->
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="previousSlide()" disabled>
+            ← Anterior
+        </button>
+        <button class="nav-btn" onclick="firstSlide()">
+            ⏮️ Inicio
+        </button>
+        <button class="nav-btn" onclick="lastSlide()">
+            Fin ⏭️
+        </button>
+        <button class="nav-btn" id="nextBtn" onclick="nextSlide()">
+            Siguiente →
+        </button>
+    </div>
+
+    <!-- Contador de diapositivas -->
+    <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">12</span>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 12;
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            updateSlideDisplay();
+
+            // Navegación con teclado
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowLeft') previousSlide();
+                if (e.key === 'ArrowRight') nextSlide();
+                if (e.key === 'Home') firstSlide();
+                if (e.key === 'End') lastSlide();
+            });
+
+            // Navegación táctil para móviles
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            document.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+
+            document.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+
+            function handleSwipe() {
+                if (touchEndX < touchStartX - 50) nextSlide();
+                if (touchEndX > touchStartX + 50) previousSlide();
+            }
+        });
+
+        function showSlide(n) {
+            // Ocultar todas las diapositivas
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.add('hidden');
+            });
+
+            // Mostrar diapositiva actual
+            document.getElementById('slide' + n).classList.remove('hidden');
+
+            // Actualizar contadores
+            currentSlide = n;
+            updateSlideDisplay();
+        }
+
+        function updateSlideDisplay() {
+            // Actualizar contador
+            document.getElementById('currentSlide').textContent = currentSlide;
+            document.getElementById('totalSlides').textContent = totalSlides;
+
+            // Actualizar botones
+            document.getElementById('prevBtn').disabled = currentSlide === 1;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlide > 1) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        function firstSlide() {
+            showSlide(1);
+        }
+
+        function lastSlide() {
+            showSlide(totalSlides);
+        }
+    </script>
 </body>
 </html>
