@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equilibrio entre Tradición y Modernidad</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #e63946;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .reflection-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            flex-grow: 1;
+        }
+        .reflection-item {
+            background-color: rgba(230, 57, 70, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .reflection-icon {
+            color: #e63946;
+            margin-right: 20px;
+            font-size: 32px;
+            flex-shrink: 0;
+        }
+        .reflection-content {
+            flex: 1;
+        }
+        .reflection-text {
+            font-size: 22px;
+            color: #495057;
+            line-height: 1.4;
+        }
+        .highlight {
+            color: #e63946;
+            font-weight: 600;
+        }
+        .question-box {
+            background-color: rgba(248, 213, 111, 0.2);
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 10px;
+            border-left: 5px solid #f8d56f;
+            display: flex;
+            align-items: center;
+        }
+        .question-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-right: 20px;
+            color: #212529;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+        .question-title i {
+            color: #f8d56f;
+            margin-right: 12px;
+            font-size: 28px;
+        }
+        .question-text {
+            font-size: 22px;
+            color: #495057;
+            font-style: italic;
+            line-height: 1.4;
+        }
+        .image-container {
+            margin-top: 30px;
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+            border-radius: 12px;
+            position: relative;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: 15px;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+        }
+        .identity-section {
+            background-color: rgba(230, 57, 70, 0.08);
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 20px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .identity-icon {
+            color: #e63946;
+            font-size: 32px;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        .identity-content {
+            flex: 1;
+        }
+        .identity-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #e63946;
+        }
+        .identity-points {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .identity-point {
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+        }
+        .identity-point i {
+            color: #f8d56f;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">Conclusión: Equilibrio entre Tradición y Modernidad</h1>
+        </div>
+        <div class="content">
+            <div class="reflection-container">
+                <div class="reflection-item">
+                    <i class="material-icons reflection-icon">autorenew</i>
+                    <div class="reflection-content">
+                        <div class="reflection-text">La cultura española <span class="highlight">no es estática</span> sino en constante evolución</div>
+                    </div>
+                </div>
+                <div class="reflection-item">
+                    <i class="material-icons reflection-icon">balance</i>
+                    <div class="reflection-content">
+                        <div class="reflection-text">El desafío es encontrar <span class="highlight">equilibrio</span> entre conservar la esencia y adaptarse a los tiempos</div>
+                    </div>
+                </div>
+                <div class="reflection-item">
+                    <i class="material-icons reflection-icon">forum</i>
+                    <div class="reflection-content">
+                        <div class="reflection-text">La identidad cultural del siglo XXI se construye en el <span class="highlight">diálogo</span> entre raíces y futuro</div>
+                    </div>
+                </div>
+                
+                <div class="identity-section">
+                    <i class="material-icons identity-icon">psychology</i>
+                    <div class="identity-content">
+                        <div class="identity-title">Identidad Cultural Española del Siglo XXI</div>
+                        <div class="identity-points">
+                            <div class="identity-point">
+                                <i class="material-icons">diversity_3</i>
+                                <span>Diálogo entre generaciones</span>
+                            </div>
+                            <div class="identity-point">
+                                <i class="material-icons">public</i>
+                                <span>Globalización con identidad</span>
+                            </div>
+                            <div class="identity-point">
+                                <i class="material-icons">history_edu</i>
+                                <span>Herencia reinterpretada</span>
+                            </div>
+                            <div class="identity-point">
+                                <i class="material-icons">auto_awesome</i>
+                                <span>Creatividad en la tradición</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="question-box">
+                    <div class="question-title">
+                        <i class="material-icons">help_outline</i>
+                        <span>Para el Debate</span>
+                    </div>
+                    <div class="question-text">¿Qué elementos de la tradición española consideras esenciales conservar y cuáles podrían adaptarse o transformarse?</div>
+                </div>
+            </div>
+            
+            <div class="image-container">
+                <img src="https://sfile.chatglm.cn/images-ppt/25e4c3aa38a4.jpg" alt="Fusión entre tradición y modernidad en España">
+                <div class="image-overlay">La arquitectura española: diálogo entre historia y contemporaneidad</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

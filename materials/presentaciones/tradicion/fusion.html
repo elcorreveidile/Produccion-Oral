@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gastronomía Tradicional y Cocina de Fusión</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #e63946;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .left-section {
+            flex: 1;
+            padding-right: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+        .right-section {
+            flex: 1;
+            padding-left: 40px;
+            border-left: 2px solid #f8d56f;
+            display: flex;
+            flex-direction: column;
+        }
+        .section-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #e63946;
+        }
+        .dishes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex-grow: 1;
+        }
+        .dish-item {
+            background-color: rgba(230, 57, 70, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .dish-icon {
+            color: #e63946;
+            margin-right: 15px;
+            font-size: 28px;
+        }
+        .dish-content {
+            flex: 1;
+        }
+        .dish-name {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #212529;
+        }
+        .dish-desc {
+            font-size: 18px;
+            color: #495057;
+        }
+        .vocab-container {
+            background-color: rgba(248, 213, 111, 0.15);
+            border-radius: 8px;
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .vocab-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #212529;
+        }
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            flex-grow: 1;
+        }
+        .vocab-item {
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+        }
+        .vocab-item i {
+            color: #f8d56f;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        .image-container {
+            margin-top: 20px;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 8px;
+            position: relative;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: 10px;
+            color: white;
+            font-size: 16px;
+            text-align: center;
+        }
+        .quote {
+            font-style: italic;
+            color: #495057;
+            margin-top: 15px;
+            font-size: 18px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">Gastronomía Tradicional y Cocina de Fusión</h1>
+        </div>
+        <div class="content">
+            <div class="left-section">
+                <h2 class="section-title">Platos Reinterpretados</h2>
+                <div class="dishes-container">
+                    <div class="dish-item">
+                        <i class="material-icons dish-icon">restaurant</i>
+                        <div class="dish-content">
+                            <div class="dish-name">Croquetas de jamón ibérico y queso azul</div>
+                            <div class="dish-desc">Fusión de lo tradicional español con un toque francés</div>
+                        </div>
+                    </div>
+                    <div class="dish-item">
+                        <i class="material-icons dish-icon">set_meal</i>
+                        <div class="dish-content">
+                            <div class="dish-name">Ceviche de salmón con mango y aguacate</div>
+                            <div class="dish-desc">Adaptación peruana con ingredientes tropicales</div>
+                        </div>
+                    </div>
+                    <div class="dish-item">
+                        <i class="material-icons dish-icon">icecream</i>
+                        <div class="dish-content">
+                            <div class="dish-name">Arroz con leche y coco</div>
+                            <div class="dish-desc">Postre tradicional con toque exótico asiático</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="image-container">
+                    <img src="https://sfile.chatglm.cn/images-ppt/f492d9277ad9.png" alt="Plato de fusión gourmet">
+                    <div class="image-overlay">Gastronomía tradicional con toque contemporáneo</div>
+                </div>
+                <p class="quote">"La cocina fusión busca el equilibrio y la armonía entre sabores, aromas y texturas"</p>
+            </div>
+            <div class="right-section">
+                <h2 class="section-title">Vocabulario de Innovación Culinaria</h2>
+                <div class="vocab-container">
+                    <div class="vocab-title">Conceptos Clave</div>
+                    <div class="vocab-grid">
+                        <div class="vocab-item">
+                            <i class="material-icons">lightbulb</i>
+                            <span>Innovación</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">trending_up</i>
+                            <span>Tendencias</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">public</i>
+                            <span>Globalización</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">autorenew</i>
+                            <span>Reinterpretar</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">update</i>
+                            <span>Actualizar</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">balance</i>
+                            <span>Equilibrar</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">all_inclusive</i>
+                            <span>Armonizar</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">diversity_3</i>
+                            <span>Diversidad cultural</span>
+                        </div>
+                    </div>
+                    
+                    <div class="vocab-title" style="margin-top: 20px;">Estructuras Gramaticales</div>
+                    <div class="vocab-grid">
+                        <div class="vocab-item">
+                            <i class="material-icons">compare_arrows</i>
+                            <span>Más tradicional que...</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">compare</i>
+                            <span>Menos moderno que...</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">link</i>
+                            <span>Sin embargo...</span>
+                        </div>
+                        <div class="vocab-item">
+                            <i class="material-icons">call_split</i>
+                            <span>No obstante...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
