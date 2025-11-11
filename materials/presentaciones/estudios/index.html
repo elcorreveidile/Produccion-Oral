@@ -17,8 +17,8 @@
             background-color: #f5f5f5;
         }
         .slide {
-            width: 1280px;
-            height: 720px;
+            width: 100%;
+            min-height: 100vh;
             position: relative;
             overflow: hidden;
             background-image: url('https://sfile.chatglm.cn/images-ppt/847df7ef038f.jpg');
@@ -44,14 +44,14 @@
             max-width: 90%;
         }
         .title {
-            font-size: 60px;
+            font-size: clamp(2rem, 5vw, 3.75rem);
             font-weight: 700;
             margin-bottom: 30px;
             line-height: 1.2;
             color: #ffffff;
         }
         .subtitle {
-            font-size: 24px;
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
             font-weight: 600;
             margin-bottom: 40px;
             color: #f5c518;
@@ -61,7 +61,7 @@
             flex-direction: column;
             gap: 12px;
             margin-top: 40px;
-            font-size: 20px;
+            font-size: clamp(1rem, 2vw, 1.25rem);
         }
         .info-item {
             display: flex;
@@ -119,6 +119,23 @@
         }
         .nav-disabled:hover {
             transform: none;
+        }
+        @media (max-width: 768px) {
+            .content {
+                max-width: 95%;
+                padding: 20px;
+            }
+            .overlay {
+                padding: 20px;
+            }
+            .minimal-nav {
+                bottom: 10px;
+                left: 10px;
+            }
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
         }
     </style>
 </head>
