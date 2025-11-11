@@ -31,7 +31,7 @@
             color: white;
         }
         .title {
-            font-size: 40px;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
             font-weight: 700;
         }
         .content {
@@ -80,7 +80,7 @@
             color: #f4a261;
         }
         .section-title {
-            font-size: 24px;
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
             font-weight: 600;
             color: #e63946;
         }
@@ -156,6 +156,33 @@
         }
         .nav-disabled:hover {
             transform: none;
+        }
+    
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+            .content {
+                flex-direction: column;
+                padding: 20px;
+                gap: 20px;
+            }
+            .left-content, .right-content {
+                margin-left: 0;
+                margin-right: 0;
+            }
+            .right-content {
+                padding: 20px;
+            }
+            .minimal-nav {
+                bottom: 10px;
+                left: 10px;
+                flex-wrap: wrap;
+            }
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
         }
     </style>
 </head>

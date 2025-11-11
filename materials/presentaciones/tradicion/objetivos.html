@@ -31,7 +31,7 @@
             color: white;
         }
         .title {
-            font-size: 40px;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
             font-weight: 700;
         }
         .content {
@@ -70,14 +70,14 @@
             font-size: 28px;
         }
         .objective-text {
-            font-size: 22px;
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
             line-height: 1.4;
         }
         .info-box {
             text-align: center;
         }
         .info-title {
-            font-size: 24px;
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
             font-weight: 600;
             color: #e63946;
             margin-bottom: 20px;
@@ -87,7 +87,7 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 15px;
-            font-size: 20px;
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
         }
         .info-item:last-child {
             margin-bottom: 0;
@@ -143,6 +143,33 @@
         }
         .nav-disabled:hover {
             transform: none;
+        }
+    
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+            .content {
+                flex-direction: column;
+                padding: 20px;
+                gap: 20px;
+            }
+            .left-content, .right-content {
+                margin-left: 0;
+                margin-right: 0;
+            }
+            .right-content {
+                padding: 20px;
+            }
+            .minimal-nav {
+                bottom: 10px;
+                left: 10px;
+                flex-wrap: wrap;
+            }
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
         }
     </style>
 </head>
