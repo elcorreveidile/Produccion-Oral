@@ -119,50 +119,23 @@
             padding: 20px 30px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-        }
-        .footer-left {
-            display: flex;
-            align-items: center;
+            justify-content: center;
         }
         .footer-icon {
-            font-size: 36px;
+            font-size: 24px;
             color: #dc2626;
-            margin-right: 20px;
+            margin: 0 15px;
         }
         .footer-text {
             font-size: 18px;
             color: #333;
+            text-align: center;
         }
-        .footer-right {
-            display: flex;
-            align-items: center;
-        }
-        .professor-info {
-            display: flex;
-            align-items: center;
-            background-color: white;
-            border-radius: 8px;
-            padding: 10px 20px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-        }
-        .professor-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: rgba(220, 38, 38, 0.1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-right: 15px;
-        }
-        .professor-icon i {
-            font-size: 22px;
+        .footer-text i {
+            font-size: 24px;
             color: #dc2626;
-        }
-        .professor-text {
-            font-size: 18px;
-            color: #333;
+            margin: 0 10px;
+            vertical-align: middle;
         }
         .highlight {
             color: #dc2626;
@@ -342,23 +315,13 @@
                 </div>
 
                 <div class="footer">
-                    <div class="footer-left">
-                        <i class="material-icons footer-icon">school</i>
-                        <div class="footer-text">
-                            © 2024-2025 <span class="highlight">Universidad de Granada</span> - Centro de Lenguas Modernas<br>
-                            Producción e Interacción Oral — <span class="highlight">Nivel B2.1</span>
-                        </div>
-                    </div>
-                    <div class="footer-right">
-                        <div class="professor-info">
-                            <div class="professor-icon">
-                                <i class="material-icons">person</i>
-                            </div>
-                            <div class="professor-text">
-                                Profesor: <span class="highlight">Javier Benítez Láinez</span>
-                            </div>
-                        </div>
-                    </div>
+                    <i class="material-icons footer-icon">school</i>
+                    <span class="footer-text">
+                        © 2024-2025 <span class="highlight">Universidad de Granada</span> - Centro de Lenguas Modernas
+                        Producción e Interacción Oral — <span class="highlight">Nivel B2.1</span>
+                        <i class="material-icons footer-icon">person</i>
+                        Profesor: <span class="highlight">Javier Benítez Láinez</span>
+                    </span>
                 </div>
             </div>
         </div>
