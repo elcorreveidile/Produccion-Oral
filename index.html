@@ -575,6 +575,9 @@
             const emergenciaButton = s.t.includes('Sesión 11') || s.href.includes('S11') ?
               `<li><button class="btn" onclick="window.open('https://elcorreveidile.github.io/Produccion-Oral/materials/presentaciones/emergencia-medica/', '_blank')" style="background: #dc2626; color: white;">🚨 Mini-Web de Emergencia Médica</button></li>` : '';
 
+            const redesButton = s.t.includes('Sesión 12') || s.href.includes('S12') ?
+              `<li><button class="btn" onclick="window.open('https://elcorreveidile.github.io/Produccion-Oral/materials/presentaciones/redes-sociales/', '_blank')" style="background: #6366f1; color: white;">📱 Mini-Web de Redes Sociales</button></li>` : '';
+
             list.innerHTML = `
               <li><button class="btn primary" ${dataAttr}="${s.href}">${fileIcon} Ver en navegador (${s.t})</button></li>
               <li><button class="btn" onclick="window.open('${s.href}', '_blank')">🔗 Abrir en nueva pestaña</button></li>
@@ -587,6 +590,7 @@
               ${cenasButton}
               ${turismoButton}
               ${emergenciaButton}
+              ${redesButton}
             `;
           } else {
             // Archivo no existe - mostrar mensaje informativo
