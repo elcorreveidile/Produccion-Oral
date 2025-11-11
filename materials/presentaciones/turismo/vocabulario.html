@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOCABULARIO ESPECIALIZADO - Turismo Sostenible</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            overflow-x: hidden;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #4ecdc4;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            flex-grow: 1;
+        }
+        .vocab-category {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+        .vocab-category:hover {
+            transform: translateY(-5px);
+        }
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(78, 205, 196, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        .category-icon i {
+            font-size: 32px;
+            color: #4ecdc4;
+        }
+        .category-title {
+            font-size: 26px;
+            font-weight: 600;
+            color: #4ecdc4;
+        }
+        .vocab-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            flex-grow: 1;
+        }
+        .vocab-item {
+            display: flex;
+            align-items: center;
+            background-color: rgba(247, 183, 49, 0.1);
+            border-radius: 8px;
+            padding: 12px;
+            transition: transform 0.2s;
+        }
+        .vocab-item:hover {
+            transform: translateX(5px);
+            background-color: rgba(78, 205, 196, 0.1);
+        }
+        .vocab-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: rgba(247, 183, 49, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        .vocab-icon i {
+            font-size: 18px;
+            color: #f7b731;
+        }
+        .vocab-text {
+            font-size: 18px;
+            color: #333;
+            font-weight: 500;
+        }
+        .highlight {
+            color: #4ecdc4;
+            font-weight: 600;
+        }
+        .image-container {
+            margin-top: 25px;
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            border-radius: 12px;
+            position: relative;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: 15px;
+            color: white;
+            font-size: 16px;
+            text-align: center;
+        }
+        .minimal-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .nav-btn {
+            background-color: rgba(52, 152, 219, 0.8);
+            color: white;
+            border: 1px solid #2980b9;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+        }
+        .nav-btn:hover {
+            background-color: rgba(41, 128, 185, 0.9);
+            transform: translateY(-1px);
+        }
+        .nav-btn.prev {
+            background-color: rgba(231, 76, 60, 0.8);
+            border-color: #c0392b;
+        }
+        .nav-btn.prev:hover {
+            background-color: rgba(192, 57, 43, 0.9);
+        }
+        @media (max-width: 768px) {
+            .vocab-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .vocab-list {
+                grid-template-columns: 1fr;
+            }
+            .minimal-nav {
+                bottom: 10px;
+                left: 10px;
+            }
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">VOCABULARIO ESPECIALIZADO</h1>
+        </div>
+        <div class="content">
+            <div class="vocab-grid">
+                <div class="vocab-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="material-icons">travel_explore</i>
+                        </div>
+                        <h2 class="category-title">Tipos de Turismo</h2>
+                    </div>
+                    <div class="vocab-list">
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">groups</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Turismo masivo</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">museum</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Turismo cultural</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">eco</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Ecoturismo</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">hiking</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Turismo rural</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">restaurant</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Turismo gastronómico</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">history_edu</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Turismo histórico</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vocab-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="material-icons">nature</i>
+                        </div>
+                        <h2 class="category-title">Sostenibilidad Ambiental</h2>
+                    </div>
+                    <div class="vocab-list">
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">co2</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Huella de carbono</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">water_drop</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Conservación del agua</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">energy_savings_leaf</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Energías renovables</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">delete</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Gestión de residuos</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">park</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Protección ecosistemas</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">cyclone</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Economía circular</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vocab-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="material-icons">people</i>
+                        </div>
+                        <h2 class="category-title">Impacto Social</h2>
+                    </div>
+                    <div class="vocab-list">
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">home</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Gentrificación</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">trending_up</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Especulación inmobiliaria</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">diversity_3</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Identidad cultural</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">store</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Comercio local</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">work</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Empleo local</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">diversity_1</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Convivencia</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vocab-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="material-icons">lightbulb</i>
+                        </div>
+                        <h2 class="category-title">Soluciones Sostenibles</h2>
+                    </div>
+                    <div class="vocab-list">
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">calendar_month</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Temporada baja</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">directions_bus</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Transporte público</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">apartment</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Alojamientos locales</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">local_activity</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Experiencias auténticas</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">volunteer_activism</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Turismo responsable</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">school</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Educación ambiental</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="https://sfile.chatglm.cn/images-ppt/sustainable-tourism-granada.jpg" alt="Turismo sostenible en Granada">
+                <div class="image-overlay">Granada: equilibrio entre conservación patrimonial y desarrollo turístico</div>
+            </div>
+        </div>
+
+        <!-- Minimal Navigation -->
+        <div class="minimal-nav">
+            <a href="expresiones.html" class="nav-btn prev">
+                <i class="material-icons">arrow_back</i>
+                Anterior
+            </a>
+            <a href="estructuras.html" class="nav-btn">
+                Siguiente
+                <i class="material-icons">arrow_forward</i>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
