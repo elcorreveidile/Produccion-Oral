@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Situación: Emergencia médica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            overflow: hidden;
+        }
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(rgba(220, 38, 38, 0.8), rgba(185, 28, 28, 0.8)), linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .content {
+            text-align: center;
+            max-width: 80%;
+            z-index: 2;
+        }
+        .title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #ffffff;
+            line-height: 1.2;
+        }
+        .subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #fbbf24;
+        }
+        .session-info {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            margin-top: 40px;
+            color: #ffffff;
+            line-height: 1.5;
+        }
+        .highlight {
+            color: #fbbf24;
+            font-weight: 600;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%);
+            z-index: 1;
+        }
+        .minimal-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .nav-btn {
+            background-color: rgba(52, 152, 219, 0.8);
+            color: white;
+            border: 1px solid #2980b9;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+        }
+        .nav-btn:hover {
+            background-color: rgba(41, 128, 185, 0.9);
+            transform: translateY(-1px);
+        }
+        .nav-btn.prev {
+            background-color: rgba(231, 76, 60, 0.8);
+            border-color: #c0392b;
+        }
+        .nav-btn.prev:hover {
+            background-color: rgba(192, 57, 43, 0.9);
+        }
+        .nav-disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background-color: rgba(149, 165, 166, 0.8) !important;
+            border-color: rgba(127, 140, 141, 0.8) !important;
+        }
+        .nav-disabled:hover {
+            transform: none;
+        }
+        @media (max-width: 768px) {
+            .content {
+                max-width: 90%;
+                padding: 20px;
+            }
+            .minimal-nav {
+                bottom: 10px;
+                left: 10px;
+            }
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="overlay"></div>
+        <div class="content">
+            <h1 class="title">Situación: Emergencia médica</h1>
+            <h2 class="subtitle">Producción e Interacción Oral en Español Nivel B2.1</h2>
+            <div class="session-info">
+                <p>Universidad de Granada - Centro de Lenguas Modernas</p>
+                <p>SESIÓN 11: <span class="highlight">Miércoles 10/12/2025</span></p>
+                <p>Horario: 12:30 - 14:30</p>
+            </div>
+        </div>
+
+        <!-- Minimal Navigation -->
+        <div class="minimal-nav">
+            <a href="objetivos.html" class="nav-btn">
+                Siguiente
+                <i class="material-icons">arrow_forward</i>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

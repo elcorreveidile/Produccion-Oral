@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expresiones Útiles y Vocabulario</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            overflow-x: hidden;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #dc2626;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .left-section {
+            flex: 1;
+            padding-right: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+        .right-section {
+            flex: 1;
+            padding-left: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+        .section-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #dc2626;
+            display: flex;
+            align-items: center;
+        }
+        .section-title i {
+            margin-right: 12px;
+            font-size: 32px;
+        }
+        .expressions-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 25px;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        .expression-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+            padding: 10px;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+        .expression-item:hover {
+            transform: translateX(5px);
+            background-color: rgba(220, 38, 38, 0.1);
+        }
+        .expression-item:last-child {
+            margin-bottom: 0;
+        }
+        .expression-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(220, 38, 38, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .expression-icon i {
+            font-size: 20px;
+            color: #dc2626;
+        }
+        .expression-text {
+            font-size: 20px;
+            color: #333;
+        }
+        .highlight {
+            color: #dc2626;
+            font-weight: 600;
+        }
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            flex-grow: 1;
+        }
+        .vocab-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .vocab-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .vocab-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(251, 191, 36, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        .vocab-icon i {
+            font-size: 20px;
+            color: #fbbf24;
+        }
+        .vocab-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #dc2626;
+        }
+        .vocab-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .vocab-item {
+            background-color: rgba(251, 191, 36, 0.1);
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 18px;
+            color: #333;
+        }
+        .image-container {
+            margin-top: 20px;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 12px;
+            position: relative;
+        }
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: 10px;
+            color: white;
+            font-size: 16px;
+            text-align: center;
+        }
+        .minimal-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .nav-btn {
+            background-color: rgba(52, 152, 219, 0.8);
+            color: white;
+            border: 1px solid #2980b9;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+        }
+        .nav-btn:hover {
+            background-color: rgba(41, 128, 185, 0.9);
+            transform: translateY(-1px);
+        }
+        .nav-btn.prev {
+            background-color: rgba(231, 76, 60, 0.8);
+            border-color: #c0392b;
+        }
+        .nav-btn.prev:hover {
+            background-color: rgba(192, 57, 43, 0.9);
+        }
+        @media (max-width: 768px) {
+            .minimal-nav {
+                bottom: 10px;
+                left: 10px;
+            }
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">EXPRESIONES ÚTILES Y VOCABULARIO</h1>
+        </div>
+        <div class="content">
+            <div class="left-section">
+                <h2 class="section-title">
+                    <i class="material-icons">chat</i>
+                    <span>Expresiones Útiles</span>
+                </h2>
+                <div class="expressions-container">
+                    <div class="expression-item">
+                        <div class="expression-icon">
+                            <i class="material-icons">healing</i>
+                        </div>
+                        <div class="expression-text"><span class="highlight">Tengo dolor de...</span></div>
+                    </div>
+                    <div class="expression-item">
+                        <div class="expression-icon">
+                            <i class="material-icons">sentiment_dissatisfied</i>
+                        </div>
+                        <div class="expression-text"><span class="highlight">Me siento...</span></div>
+                    </div>
+                    <div class="expression-item">
+                        <div class="expression-icon">
+                            <i class="material-icons">location_on</i>
+                        </div>
+                        <div class="expression-text">¿<span class="highlight">Dónde está</span> el hospital más cercano?</div>
+                    </div>
+                    <div class="expression-item">
+                        <div class="expression-icon">
+                            <i class="material-icons">medical_services</i>
+                        </div>
+                        <div class="expression-text"><span class="highlight">Necesito ver</span> a un médico/a urgentemente</div>
+                    </div>
+                    <div class="expression-item">
+                        <div class="expression-icon">
+                            <i class="material-icons">help</i>
+                        </div>
+                        <div class="expression-text">¿<span class="highlight">Podría ayudarme</span>, por favor?</div>
+                    </div>
+                </div>
+
+                <div class="image-container" style="background: linear-gradient(135deg, #dc2626, #fbbf24); display: flex; align-items: center; justify-content: center;">
+                    <div style="text-align: center; color: white; padding: 20px;">
+                        <i class="material-icons" style="font-size: 48px; margin-bottom: 10px;">emergency</i>
+                        <h3 style="font-size: 24px; margin-bottom: 10px;">Comunicación Urgente</h3>
+                        <p>Expresiones claras para situaciones médicas</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-section">
+                <h2 class="section-title">
+                    <i class="material-icons">medical_services</i>
+                    <span>Vocabulario</span>
+                </h2>
+                <div class="vocab-grid">
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-icon">
+                                <i class="material-icons">sick</i>
+                            </div>
+                            <div class="vocab-title">Síntomas</div>
+                        </div>
+                        <div class="vocab-items">
+                            <div class="vocab-item">dolor</div>
+                            <div class="vocab-item">fiebre</div>
+                            <div class="vocab-item">tos</div>
+                            <div class="vocab-item">mareo</div>
+                            <div class="vocab-item">náuseas</div>
+                            <div class="vocab-item">cansancio</div>
+                        </div>
+                    </div>
+
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-icon">
+                                <i class="material-icons">local_hospital</i>
+                            </div>
+                            <div class="vocab-title">Emergencias</div>
+                        </div>
+                        <div class="vocab-items">
+                            <div class="vocab-item">urgencia</div>
+                            <div class="vocab-item">hospital</div>
+                            <div class="vocab-item">ambulancia</div>
+                            <div class="vocab-item">médico/a</div>
+                            <div class="vocab-item">enfermero/a</div>
+                            <div class="vocab-item">112</div>
+                        </div>
+                    </div>
+
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-icon">
+                                <i class="material-icons">accessibility</i>
+                            </div>
+                            <div class="vocab-title">Partes cuerpo</div>
+                        </div>
+                        <div class="vocab-items">
+                            <div class="vocab-item">cabeza</div>
+                            <div class="vocab-item">estómago</div>
+                            <div class="vocab-item">garganta</div>
+                            <div class="vocab-item">espalda</div>
+                            <div class="vocab-item">piernas</div>
+                            <div class="vocab-item">brazos</div>
+                        </div>
+                    </div>
+
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-icon">
+                                <i class="material-icons">directions_run</i>
+                            </div>
+                            <div class="vocab-title">Acciones</div>
+                        </div>
+                        <div class="vocab-items">
+                            <div class="vocab-item">llamar</div>
+                            <div class="vocab-item">ir</div>
+                            <div class="vocab-item">esperar</div>
+                            <div class="vocab-item">explicar</div>
+                            <div class="vocab-item">describir</div>
+                            <div class="vocab-item">tomar</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- Minimal Navigation -->
+        <div class="minimal-nav">
+            <a href="objetivos.html" class="nav-btn prev">
+                <i class="material-icons">arrow_back</i>
+                Anterior
+            </a>
+            <a href="vocabulario.html" class="nav-btn">
+                Siguiente
+                <i class="material-icons">arrow_forward</i>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

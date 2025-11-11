@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOCABULARIO MÉDICO ESPECIALIZADO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            overflow-x: hidden;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #dc2626;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            flex-grow: 1;
+        }
+        .vocab-category {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+        .vocab-category:hover {
+            transform: translateY(-5px);
+        }
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(220, 38, 38, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        .category-icon i {
+            font-size: 32px;
+            color: #dc2626;
+        }
+        .category-title {
+            font-size: 26px;
+            font-weight: 600;
+            color: #dc2626;
+        }
+        .vocab-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            flex-grow: 1;
+        }
+        .vocab-item {
+            display: flex;
+            align-items: center;
+            background-color: rgba(251, 191, 36, 0.1);
+            border-radius: 8px;
+            padding: 12px;
+            transition: transform 0.2s;
+        }
+        .vocab-item:hover {
+            transform: translateX(5px);
+            background-color: rgba(220, 38, 38, 0.1);
+        }
+        .vocab-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: rgba(251, 191, 36, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        .vocab-icon i {
+            font-size: 18px;
+            color: #fbbf24;
+        }
+        .vocab-text {
+            font-size: 18px;
+            color: #333;
+            font-weight: 500;
+        }
+        .highlight {
+            color: #dc2626;
+            font-weight: 600;
+        }
+        .image-container {
+            margin-top: 25px;
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            border-radius: 12px;
+            position: relative;
+        }
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: 15px;
+            color: white;
+            font-size: 16px;
+            text-align: center;
+        }
+        .minimal-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .nav-btn {
+            background-color: rgba(52, 152, 219, 0.8);
+            color: white;
+            border: 1px solid #2980b9;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+        }
+        .nav-btn:hover {
+            background-color: rgba(41, 128, 185, 0.9);
+            transform: translateY(-1px);
+        }
+        .nav-btn.prev {
+            background-color: rgba(231, 76, 60, 0.8);
+            border-color: #c0392b;
+        }
+        .nav-btn.prev:hover {
+            background-color: rgba(192, 57, 43, 0.9);
+        }
+        @media (max-width: 768px) {
+            .vocab-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .vocab-list {
+                grid-template-columns: 1fr;
+            }
+            .minimal-nav {
+                bottom: 10px;
+                left: 10px;
+            }
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">VOCABULARIO MÉDICO ESPECIALIZADO</h1>
+        </div>
+        <div class="content">
+            <div class="vocab-grid">
+                <div class="vocab-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="material-icons">sick</i>
+                        </div>
+                        <h2 class="category-title">Síntomas Comunes</h2>
+                    </div>
+                    <div class="vocab-list">
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">whatshot</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Fiebre alta</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">healing</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Dolor agudo</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">air</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Dificultad respiratoria</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">mood_bad</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Malestar general</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">coronavirus</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Tos persistente</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">opacity</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Sudoración excesiva</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vocab-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="material-icons">local_hospital</i>
+                        </div>
+                        <h2 class="category-title">Lugares Médicos</h2>
+                    </div>
+                    <div class="vocab-list">
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">emergency</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Urgencias</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">local_hospital</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Hospital</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">medical_services</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Consultorio médico</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">store</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Farmacia</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">apartment</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Clínica privada</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">monitor_heart</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">UCI/Reanimación</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vocab-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="material-icons">people</i>
+                        </div>
+                        <h2 class="category-title">Personal Sanitario</h2>
+                    </div>
+                    <div class="vocab-list">
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">person</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Médico/a</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">nurse</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Enfermero/a</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">science</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Técnico/a</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">support</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Auxiliar</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">psychology</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Psicólogo/a</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">biotech</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Analista</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vocab-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="material-icons">medication</i>
+                        </div>
+                        <h2 class="category-title">Tratamientos</h2>
+                    </div>
+                    <div class="vocab-list">
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">medication</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Medicamento</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">vaccines</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Vacuna</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">water_drop</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Intravenoso</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">local_pharmacy</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Receta médica</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">healing</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Tratamiento</span></div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-icon">
+                                <i class="material-icons">monitor_weight</i>
+                            </div>
+                            <div class="vocab-text"><span class="highlight">Diagnóstico</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="image-container" style="background: linear-gradient(135deg, #dc2626, #fbbf24); display: flex; align-items: center; justify-content: center;">
+                <div style="text-align: center; color: white; padding: 20px;">
+                    <i class="material-icons" style="font-size: 48px; margin-bottom: 10px;">health_and_safety</i>
+                    <h3 style="font-size: 24px; margin-bottom: 10px;">Vocabulario Esencial</h3>
+                    <Herramientas fundamentales para comunicación médica efectiva></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Minimal Navigation -->
+        <div class="minimal-nav">
+            <a href="expresiones.html" class="nav-btn prev">
+                <i class="material-icons">arrow_back</i>
+                Anterior
+            </a>
+            <a href="estructuras.html" class="nav-btn">
+                Siguiente
+                <i class="material-icons">arrow_forward</i>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

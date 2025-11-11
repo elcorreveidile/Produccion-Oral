@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAREA PARA PRÓXIMA SESIÓN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            overflow-x: hidden;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #dc2626;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .tasks-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            flex-grow: 1;
+        }
+        .task-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+        .task-card:hover {
+            transform: translateY(-5px);
+        }
+        .task-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .task-number {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(220, 38, 38, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            font-size: 24px;
+            font-weight: 700;
+            color: #dc2626;
+        }
+        .task-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(251, 191, 36, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .task-icon i {
+            font-size: 28px;
+            color: #fbbf24;
+        }
+        .task-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #dc2626;
+        }
+        .task-description {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        .task-tips {
+            background-color: rgba(251, 191, 36, 0.1);
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 18px;
+            color: #555;
+        }
+        .task-tips i {
+            color: #fbbf24;
+            margin-right: 8px;
+            font-size: 20px;
+            vertical-align: middle;
+        }
+        .highlight {
+            color: #dc2626;
+            font-weight: 600;
+        }
+        .deadline-container {
+            margin-top: 25px;
+            background-color: rgba(220, 38, 38, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .deadline-icon {
+            font-size: 36px;
+            color: #dc2626;
+            margin-right: 15px;
+        }
+        .deadline-text {
+            font-size: 22px;
+            font-weight: 600;
+            color: #333;
+        }
+        .deadline-date {
+            color: #dc2626;
+            font-weight: 700;
+        }
+        .minimal-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .nav-btn {
+            background-color: rgba(52, 152, 219, 0.8);
+            color: white;
+            border: 1px solid #2980b9;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+        }
+        .nav-btn:hover {
+            background-color: rgba(41, 128, 185, 0.9);
+            transform: translateY(-1px);
+        }
+        .nav-btn.prev {
+            background-color: rgba(231, 76, 60, 0.8);
+            border-color: #c0392b;
+        }
+        .nav-btn.prev:hover {
+            background-color: rgba(192, 57, 43, 0.9);
+        }
+        @media (max-width: 768px) {
+            .tasks-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .minimal-nav {
+                bottom: 10px;
+                left: 10px;
+            }
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">TAREA PARA PRÓXIMA SESIÓN</h1>
+        </div>
+        <div class="content">
+            <div class="tasks-container">
+                <div class="task-card">
+                    <div class="task-header">
+                        <div class="task-number">1</div>
+                        <div class="task-icon">
+                            <i class="material-icons">search</i>
+                        </div>
+                        <h2 class="task-title">Sistema sanitario español</h2>
+                    </div>
+                    <p class="task-description">
+                        Investigar <span class="highlight">sistema sanitario español</span> para extranjeros
+                    </p>
+                    <div class="task-tips">
+                        <i class="material-icons">tips_and_updates</i>
+                        Busca información sobre tarjeta sanitaria, acceso a servicios, etc.
+                    </div>
+                </div>
+
+                <div class="task-card">
+                    <div class="task-header">
+                        <div class="task-number">2</div>
+                        <div class="task-icon">
+                            <i class="material-icons">badge</i>
+                        </div>
+                        <h2 class="task-title">Tarjeta médica básica</h2>
+                    </div>
+                    <p class="task-description">
+                        Preparar <span class="highlight">tarjeta médica básica</span> en español
+                    </p>
+                    <div class="task-tips">
+                        <i class="material-icons">tips_and_updates</i>
+                        Incluye datos personales, alergias, medicamentos, contacto de emergencia
+                    </div>
+                </div>
+
+                <div class="task-card">
+                    <div class="task-header">
+                        <div class="task-number">3</div>
+                        <div class="task-icon">
+                            <i class="material-icons">mic</i>
+                        </div>
+                        <h2 class="task-title">Llamada de emergencia</h2>
+                    </div>
+                    <p class="task-description">
+                        Grabar audio simulando <span class="highlight">llamada de emergencia médica</span>
+                    </p>
+                    <div class="task-tips">
+                        <i class="material-icons">tips_and_updates</i>
+                        Usa vocabulario médico y estructuras gramaticales vistas en clase
+                    </div>
+                </div>
+
+                <div class="task-card">
+                    <div class="task-header">
+                        <div class="task-number">4</div>
+                        <div class="task-icon">
+                            <i class="material-icons">chat</i>
+                        </div>
+                        <h2 class="task-title">Diálogo con médico</h2>
+                    </div>
+                    <p class="task-description">
+                        Escribir diálogo con médico <span class="highlight">explicando síntomas</span>
+                    </p>
+                    <div class="task-tips">
+                        <i class="material-icons">tips_and_updates</i>
+                        Incluye preguntas, respuestas y recomendaciones médicas
+                    </div>
+                </div>
+            </div>
+
+            <div class="deadline-container">
+                <i class="material-icons deadline-icon">event</i>
+                <div class="deadline-text">Fecha de entrega: <span class="deadline-date">miércoles 17 de diciembre</span></div>
+            </div>
+        </div>
+
+        <!-- Minimal Navigation -->
+        <div class="minimal-nav">
+            <a href="situacion.html" class="nav-btn prev">
+                <i class="material-icons">arrow_back</i>
+                Anterior
+            </a>
+            <a href="evaluacion.html" class="nav-btn">
+                Siguiente
+                <i class="material-icons">arrow_forward</i>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

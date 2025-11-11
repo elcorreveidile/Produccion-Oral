@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESTRUCTURAS GRAMATICALES - Emergencia Médica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            overflow-x: hidden;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #dc2626;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .grammar-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            flex-grow: 1;
+        }
+        .grammar-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+        .grammar-card:hover {
+            transform: translateY(-5px);
+        }
+        .grammar-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .grammar-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(220, 38, 38, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        .grammar-icon i {
+            font-size: 32px;
+            color: #dc2626;
+        }
+        .grammar-title {
+            font-size: 26px;
+            font-weight: 600;
+            color: #dc2626;
+        }
+        .examples-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+            flex-grow: 1;
+        }
+        .example-item {
+            background-color: rgba(251, 191, 36, 0.1);
+            border-radius: 8px;
+            padding: 12px 18px;
+            font-size: 20px;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+        .example-item i {
+            color: #fbbf24;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        .highlight {
+            color: #dc2626;
+            font-weight: 600;
+        }
+        .image-container {
+            margin-top: 30px;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 12px;
+            position: relative;
+        }
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: 15px;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+        }
+        .minimal-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .nav-btn {
+            background-color: rgba(52, 152, 219, 0.8);
+            color: white;
+            border: 1px solid #2980b9;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+        }
+        .nav-btn:hover {
+            background-color: rgba(41, 128, 185, 0.9);
+            transform: translateY(-1px);
+        }
+        .nav-btn.prev {
+            background-color: rgba(231, 76, 60, 0.8);
+            border-color: #c0392b;
+        }
+        .nav-btn.prev:hover {
+            background-color: rgba(192, 57, 43, 0.9);
+        }
+        @media (max-width: 768px) {
+            .grammar-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .minimal-nav {
+                bottom: 10px;
+                left: 10px;
+            }
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">ESTRUCTURAS GRAMATICALES</h1>
+        </div>
+        <div class="content">
+            <div class="grammar-grid">
+                <div class="grammar-card">
+                    <div class="grammar-header">
+                        <div class="grammar-icon">
+                            <i class="material-icons">history</i>
+                        </div>
+                        <h2 class="grammar-title">Presente Perfecto</h2>
+                    </div>
+                    <div class="examples-container">
+                        <div class="example-item">
+                            <i class="material-icons">arrow_right_alt</i>
+                            <span><span class="highlight">Me he lastimado</span> la pierna</span>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">arrow_right_alt</i>
+                            <span><span class="highlight">He tenido</span> fiebre toda la noche</span>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">arrow_right_alt</i>
+                            <span><span class="highlight">Me he sentido</span> muy débil</span>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">arrow_right_alt</i>
+                            <span><span class="highlight">Hemos llamado</span> a la ambulancia</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grammar-card">
+                    <div class="grammar-header">
+                        <div class="grammar-icon">
+                            <i class="material-icons">priority_high</i>
+                        </div>
+                        <h2 class="grammar-title">Imperativo</h2>
+                    </div>
+                    <div class="examples-container">
+                        <div class="example-item">
+                            <i class="material-icons">call</i>
+                            <span><span class="highlight">Llame</span> al médico urgentemente</span>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">directions_walk</i>
+                            <span><span class="highlight">Vaya</span> a urgencias inmediatamente</span>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">hourglass_empty</i>
+                            <span><span class="highlight">Espere</span> aquí un momento</span>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">description</i>
+                            <span><span class="highlight">Describa</span> sus síntomas claramente</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grammar-card">
+                    <div class="grammar-header">
+                        <div class="grammar-icon">
+                            <i class="material-icons">schedule</i>
+                        </div>
+                        <h2 class="grammar-title">Expresiones de Tiempo</h2>
+                    </div>
+                    <div class="examples-container">
+                        <div class="example-item">
+                            <i class="material-icons">history</i>
+                            <span><span class="highlight">Desde</span> ayer por la noche</span>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">timer</i>
+                            <span><span class="highlight">Hace</span> dos días que me siento mal</span>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">hourglass_top</i>
+                            <span><span class="highlight">Durante</span> tres horas</span>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">update</i>
+                            <span><span class="highlight">Hasta</span> mañana por la mañana</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grammar-card">
+                    <div class="grammar-header">
+                        <div class="grammar-icon">
+                            <i class="material-icons">compare_arrows</i>
+                        </div>
+                        <h2 class="grammar-title">Comparativos</h2>
+                    </div>
+                    <div class="examples-container">
+                        <div class="example-item">
+                            <i class="material-icons">trending_up</i>
+                            <span><span class="highlight">Mejor que</span> ayer</span>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">trending_down</i>
+                            <span><span class="highlight">Peor que</span> antes</span>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">warning</i>
+                            <span><span class="highlight">Más grave que</span> pensaba</span>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">trending_flat</i>
+                            <span><span class="highlight">Tan fuerte como</span> el día anterior</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="image-container" style="background: linear-gradient(135deg, #dc2626, #fbbf24); display: flex; align-items: center; justify-content: center;">
+                <div style="text-align: center; color: white; padding: 20px;">
+                    <i class="material-icons" style="font-size: 48px; margin-bottom: 10px;">medical_services</i>
+                    <h3 style="font-size: 24px; margin-bottom: 10px;">Comunicación Médica Efectiva</h3>
+                    <p>Dominar estas estructuras para describir situaciones de emergencia con claridad y precisión</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Minimal Navigation -->
+        <div class="minimal-nav">
+            <a href="vocabulario.html" class="nav-btn prev">
+                <i class="material-icons">arrow_back</i>
+                Anterior
+            </a>
+            <a href="actividades.html" class="nav-btn">
+                Siguiente
+                <i class="material-icons">arrow_forward</i>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

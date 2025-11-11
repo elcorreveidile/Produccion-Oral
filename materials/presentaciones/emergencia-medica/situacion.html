@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SITUACIÓN DE HABLA - La emergencia inesperada</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            overflow-x: hidden;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #dc2626;
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .left-section {
+            flex: 1;
+            padding-right: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+        .right-section {
+            flex: 1;
+            padding-left: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+        .section-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #dc2626;
+            display: flex;
+            align-items: center;
+        }
+        .section-title i {
+            margin-right: 12px;
+            font-size: 32px;
+        }
+        .characters-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 25px;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        .character-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            padding: 12px;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+        .character-item:hover {
+            transform: translateX(5px);
+            background-color: rgba(220, 38, 38, 0.1);
+        }
+        .character-item:last-child {
+            margin-bottom: 0;
+        }
+        .character-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(220, 38, 38, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .character-icon i {
+            font-size: 28px;
+            color: #dc2626;
+        }
+        .character-content {
+            flex: 1;
+        }
+        .character-name {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .character-desc {
+            font-size: 18px;
+            color: #555;
+        }
+        .dialogue-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .dialogue-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            padding: 12px;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+        .dialogue-item:hover {
+            transform: translateX(5px);
+            background-color: rgba(220, 38, 38, 0.1);
+        }
+        .dialogue-item:last-child {
+            margin-bottom: 0;
+        }
+        .speaker {
+            font-weight: 600;
+            color: #dc2626;
+            margin-right: 12px;
+            min-width: 120px;
+            font-size: 18px;
+        }
+        .speech {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.4;
+        }
+        .highlight {
+            color: #dc2626;
+            font-weight: 600;
+        }
+        .image-container {
+            margin-top: 20px;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 12px;
+            position: relative;
+        }
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: 10px;
+            color: white;
+            font-size: 16px;
+            text-align: center;
+        }
+        .minimal-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .nav-btn {
+            background-color: rgba(52, 152, 219, 0.8);
+            color: white;
+            border: 1px solid #2980b9;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+        }
+        .nav-btn:hover {
+            background-color: rgba(41, 128, 185, 0.9);
+            transform: translateY(-1px);
+        }
+        .nav-btn.prev {
+            background-color: rgba(231, 76, 60, 0.8);
+            border-color: #c0392b;
+        }
+        .nav-btn.prev:hover {
+            background-color: rgba(192, 57, 43, 0.9);
+        }
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+                padding: 20px;
+            }
+            .left-section {
+                padding-right: 0;
+                margin-bottom: 20px;
+            }
+            .right-section {
+                padding-left: 0;
+            }
+            .speaker {
+                min-width: 100px;
+                font-size: 16px;
+            }
+            .speech {
+                font-size: 16px;
+            }
+            .minimal-nav {
+                bottom: 10px;
+                left: 10px;
+            }
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">SITUACIÓN DE HABLA: La emergencia inesperada</h1>
+        </div>
+        <div class="content">
+            <div class="left-section">
+                <h2 class="section-title">
+                    <i class="material-icons">groups</i>
+                    <span>Personajes</span>
+                </h2>
+                <div class="characters-container">
+                    <div class="character-item">
+                        <div class="character-icon">
+                            <i class="material-icons">person</i>
+                        </div>
+                        <div class="character-content">
+                            <div class="character-name">Protagonista</div>
+                            <div class="character-desc">Con problema médico repentino</div>
+                        </div>
+                    </div>
+                    <div class="character-item">
+                        <div class="character-icon">
+                            <i class="material-icons">favorite</i>
+                        </div>
+                        <div class="character-content">
+                            <div class="character-name">Amigo/a que ayuda</div>
+                            <div class="character-desc">Brinda apoyo y asistencia</div>
+                        </div>
+                    </div>
+                    <div class="character-item">
+                        <div class="character-icon">
+                            <i class="material-icons">medical_services</i>
+                        </div>
+                        <div class="character-content">
+                            <div class="character-name">Médico/a de urgencias</div>
+                            <div class="character-desc">Profesional que atiende la emergencia</div>
+                        </div>
+                    </div>
+                    <div class="character-item">
+                        <div class="character-icon">
+                            <i class="material-icons">call</i>
+                        </div>
+                        <div class="character-content">
+                            <div class="character-name">Operador/a 112</div>
+                            <div class="character-desc">Coordina la respuesta de emergencia</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="image-container" style="background: linear-gradient(135deg, #dc2626, #fbbf24); display: flex; align-items: center; justify-content: center;">
+                    <div style="text-align: center; color: white; padding: 20px;">
+                        <i class="material-icons" style="font-size: 48px; margin-bottom: 10px;">emergency</i>
+                        <h3 style="font-size: 24px; margin-bottom: 10px;">Respuesta Médica Inmediata</h3>
+                        <p>La colaboración y comunicación clara en emergencias médicas</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-section">
+                <h2 class="section-title">
+                    <i class="material-icons">chat</i>
+                    <span>Diálogo Modelo</span>
+                </h2>
+                <div class="dialogue-container">
+                    <div class="dialogue-item">
+                        <div class="speaker">Protagonista:</div>
+                        <div class="speech">"<span class="highlight">Me siento muy mal</span>. Tengo dolor de estómago y mareo."</div>
+                    </div>
+                    <div class="dialogue-item">
+                        <div class="speaker">Amigo/a:</div>
+                        <div class="speech">"<span class="highlight">¡No te preocupes!</span> Te llevo al médico. ¿Necesitas que llame al 112?"</div>
+                    </div>
+                    <div class="dialogue-item">
+                        <div class="speaker">Operador:</div>
+                        <div class="speech">"112. <span class="highlight">¿Qué urgencia tiene?</span> ¿Dónde se encuentra?"</div>
+                    </div>
+                    <div class="dialogue-item">
+                        <div class="speaker">Protagonista:</div>
+                        <div class="speech">"<span class="highlight">Tengo fiebre</span> y mucho dolor. Estoy en mi piso."</div>
+                    </div>
+                    <div class="dialogue-item">
+                        <div class="speaker">Médico:</div>
+                        <div class="speech">"<span class="highlight">¿Desde cuándo</span> se siente así? ¿Tiene otros síntomas?"</div>
+                    </div>
+                </div>
+
+                <div class="image-container" style="background: linear-gradient(135deg, #fbbf24, #dc2626); display: flex; align-items: center; justify-content: center;">
+                    <div style="text-align: center; color: white; padding: 20px;">
+                        <i class="material-icons" style="font-size: 48px; margin-bottom: 10px;">healing</i>
+                        <h3 style="font-size: 24px; margin-bottom: 10px">Diálogo Claro y Preciso</h3>
+                        <p>La comunicación efectiva es fundamental en emergencias médicas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Minimal Navigation -->
+        <div class="minimal-nav">
+            <a href="actividades.html" class="nav-btn prev">
+                <i class="material-icons">arrow_back</i>
+                Anterior
+            </a>
+            <a href="tarea.html" class="nav-btn">
+                Siguiente
+                <i class="material-icons">arrow_forward</i>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

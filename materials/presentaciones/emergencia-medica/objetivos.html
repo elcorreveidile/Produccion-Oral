@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBJETIVOS DE LA SESIÓN - Emergencia Médica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f8f8;
+            overflow-x: hidden;
+        }
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-grow: 1;
+            padding: 40px 70px;
+            gap: 40px;
+        }
+        .left-content {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .right-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.15), rgba(251, 191, 36, 0.1));
+            border-radius: 12px;
+            padding: 30px;
+        }
+        .objective {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        .objective:last-child {
+            margin-bottom: 0;
+        }
+        .objective i {
+            color: #dc2626;
+            margin-right: 15px;
+            font-size: 28px;
+        }
+        .objective-text {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            line-height: 1.4;
+        }
+        .info-box {
+            text-align: center;
+        }
+        .info-title {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            font-weight: 600;
+            color: #dc2626;
+            margin-bottom: 20px;
+        }
+        .info-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+        }
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+        .info-item i {
+            color: #fbbf24;
+            margin-right: 10px;
+        }
+        .highlight {
+            font-weight: 600;
+            color: #dc2626;
+        }
+        .minimal-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .nav-btn {
+            background-color: rgba(52, 152, 219, 0.8);
+            color: white;
+            border: 1px solid #2980b9;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+        }
+        .nav-btn:hover {
+            background-color: rgba(41, 128, 185, 0.9);
+            transform: translateY(-1px);
+        }
+        .nav-btn.prev {
+            background-color: rgba(231, 76, 60, 0.8);
+            border-color: #c0392b;
+        }
+        .nav-btn.prev:hover {
+            background-color: rgba(192, 57, 43, 0.9);
+        }
+        .nav-disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background-color: rgba(149, 165, 166, 0.8) !important;
+            border-color: rgba(127, 140, 141, 0.8) !important;
+        }
+        .nav-disabled:hover {
+            transform: none;
+        }
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+                padding: 20px;
+            }
+            .right-content {
+                margin-left: 0;
+                margin-top: 20px;
+            }
+            .minimal-nav {
+                bottom: 10px;
+                left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">OBJETIVOS DE LA SESIÓN</h1>
+        </div>
+        <div class="content">
+            <div class="left-content">
+                <div class="objective">
+                    <i class="material-icons">medical_services</i>
+                    <div class="objective-text">Practicar vocabulario médico y de emergencias</div>
+                </div>
+                <div class="objective">
+                    <i class="material-icons">description</i>
+                    <div class="objective-text">Desarrollar habilidades para explicar síntomas</div>
+                </div>
+                <div class="objective">
+                    <i class="material-icons">call</i>
+                    <div class="objective-text">Simular llamadas y consultas médicas</div>
+                </div>
+                <div class="objective">
+                    <i class="material-icons">local_hospital</i>
+                    <div class="objective-text">Crear escenas de urgencia médica</div>
+                </div>
+            </div>
+            <div class="right-content">
+                <div class="info-box">
+                    <h3 class="info-title">Información de la Sesión</h3>
+                    <div class="info-item">
+                        <i class="material-icons">calendar_today</i>
+                        <span>Fecha: <span class="highlight">Miércoles 10/12/2025</span></span>
+                    </div>
+                    <div class="info-item">
+                        <i class="material-icons">schedule</i>
+                        <span>Horario: <span class="highlight">12:30 - 14:30</span></span>
+                    </div>
+                    <div class="info-item">
+                        <i class="material-icons">emergency</i>
+                        <span>Tema: <span class="highlight">Emergencia médica</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Minimal Navigation -->
+        <div class="minimal-nav">
+            <a href="index.html" class="nav-btn prev">
+                <i class="material-icons">arrow_back</i>
+                Anterior
+            </a>
+            <a href="expresiones.html" class="nav-btn">
+                Siguiente
+                <i class="material-icons">arrow_forward</i>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
