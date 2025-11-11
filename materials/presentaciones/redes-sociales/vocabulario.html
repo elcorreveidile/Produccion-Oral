@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOCABULARIO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+            overflow-x: hidden;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .vocab-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            flex-grow: 1;
+        }
+        .vocab-category {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+        .vocab-category:hover {
+            transform: translateY(-5px);
+        }
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(99, 102, 241, 0.1);
+        }
+        .category-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .category-icon i {
+            font-size: 28px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .category-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #6366f1;
+        }
+        .vocab-words {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            flex-grow: 1;
+        }
+        .word-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            background-color: rgba(99, 102, 241, 0.02);
+        }
+        .word-item:hover {
+            background-color: rgba(99, 102, 241, 0.1);
+            transform: translateX(3px);
+        }
+        .word-bullet {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        .word-text {
+            font-size: 18px;
+            color: #333;
+        }
+        .highlight {
+            color: #6366f1;
+            font-weight: 600;
+        }
+        .practice-section {
+            margin-top: 25px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        .practice-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #6366f1;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .practice-title i {
+            margin-right: 8px;
+            font-size: 24px;
+        }
+        .practice-text {
+            font-size: 18px;
+            color: #555;
+        }
+        .minimal-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .nav-btn {
+            background-color: rgba(99, 102, 241, 0.8);
+            color: white;
+            border: 1px solid #4f46e5;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+        }
+        .nav-btn:hover {
+            background-color: rgba(79, 70, 229, 0.9);
+            transform: translateY(-1px);
+        }
+        .nav-btn.prev {
+            background-color: rgba(239, 68, 68, 0.8);
+            border-color: #dc2626;
+        }
+        .nav-btn.prev:hover {
+            background-color: rgba(220, 38, 38, 0.9);
+        }
+        @media (max-width: 768px) {
+            .vocab-container {
+                grid-template-columns: 1fr;
+            }
+            .vocab-words {
+                grid-template-columns: 1fr;
+            }
+            .minimal-nav {
+                bottom: 10px;
+                left: 10px;
+            }
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">VOCABULARIO</h1>
+        </div>
+        <div class="content">
+            <div class="vocab-container">
+                <div class="vocab-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="material-icons">apps</i>
+                        </div>
+                        <h2 class="category-title">Redes sociales</h2>
+                    </div>
+                    <div class="vocab-words">
+                        <div class="word-item">
+                            <div class="word-bullet"></div>
+                            <div class="word-text"><span class="highlight">Instagram</span> - fotos y stories</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word-bullet"></div>
+                            <div class="word-text"><span class="highlight">WhatsApp</span> - mensajería instantánea</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word-bullet"></div>
+                            <div class="word-text"><span class="highlight">TikTok</span> - videos cortos</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word-bullet"></div>
+                            <div class="word-text"><span class="highlight">Facebook</span> - amigos y familiares</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word-bullet"></div>
+                            <div class="word-text"><span class="highlight">Twitter/X</span> - noticias y tendencias</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word-bullet"></div>
+                            <div class="word-text"><span class="highlight">LinkedIn</span> - contactos profesionales</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vocab-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="material-icons">chat</i>
+                        </div>
+                        <h2 class="category-title">Comunicación</h2>
+                    </div>
+                    <div class="vocab-words">
+                        <div class="word-item">
+                            <div class="word-bullet"></div>
+                            <div class="word-text"><span class="highlight">Online</span> - conectado a internet</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word-bullet"></div>
+                            <div class="word-text"><span class="highlight">Presencial</span> - cara a cara</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word-bullet"></div>
+                            <div class="word-text"><span class="highlight">Mensajería</span> - intercambio de mensajes</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word-bullet"></div>
+                            <div class="word-text"><span class="highlight">Videollamada</span> - llamada con video</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word-bullet"></div>
+                            <div class="word-text"><span class="highlight">Chat</span> - conversación escrita</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word-bullet"></div>
+                            <div class="word-text"><span class="highlight">Notificación</span> - aviso digital</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vocab-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="material-icons">people</i>
+                        </div>
+                        <h2 class="category-title">Relaciones</h2>
+                    </div>
+                    <div class="vocab-words">
+                        <div class="word-item">
+                            <div class="word-bullet"></div>
+                            <div class="word-text"><span class="highlight">Amistad</span> - vínculo entre amigos</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word-bullet"></div>
+                            <div class="word-text"><span class="highlight">Pareja</span> - relación romántica</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word-bullet"></div>
+                            <div class="word-text"><span class="highlight">Familia</span> - parientes cercanos</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word-bullet"></div>
+                            <div class="word-text"><span class="highlight">Compañeros</span> - colegas, amigos</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word-bullet"></div>
+                            <div class="word-text"><span class="highlight">Seguidores</span> - fans en redes</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word-bullet"></div>
+                            <div class="word-text"><span class="highlight">Contactos</span> - conocidos digitales</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vocab-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="material-icons">psychology</i>
+                        </div>
+                        <h2 class="category-title">Conceptos</h2>
+                    </div>
+                    <div class="vocab-words">
+                        <div class="word-item">
+                            <div class="word-bullet"></div>
+                            <div class="word-text"><span class="highlight">Privacidad</span> - protección de datos</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word-bullet"></div>
+                            <div class="word-text"><span class="highlight">Identidad</span> - quién eres en línea</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word-bullet"></div>
+                            <div class="word-text"><span class="highlight">Conexión</span> - vínculo digital</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word-bullet"></div>
+                            <div class="word-text"><span class="highlight">Aislamiento</span> - soledad digital</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word-bullet"></div>
+                            <div class="word-text"><span class="highlight">Influencer</span> - creador de contenido</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word-bullet"></div>
+                            <div class="word-text"><span class="highlight">Trending</span> - tendencias populares</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <h3 class="practice-title">
+                    <i class="material-icons">emoji_objects</i>
+                    Práctica recomendada
+                </h3>
+                <p class="practice-text">
+                    Usa este vocabulario para describir tus experiencias con redes sociales y cómo afectan tus relaciones personales
+                </p>
+            </div>
+        </div>
+
+        <!-- Minimal Navigation -->
+        <div class="minimal-nav">
+            <a href="expresiones.html" class="nav-btn prev">
+                <i class="material-icons">arrow_back</i>
+                Anterior
+            </a>
+            <a href="estructuras.html" class="nav-btn">
+                Siguiente
+                <i class="material-icons">arrow_forward</i>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

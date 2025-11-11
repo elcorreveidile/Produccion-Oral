@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAREA PARA PRÓXIMA SESIÓN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            overflow-x: hidden;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .tasks-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            flex-grow: 1;
+        }
+        .task-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+        .task-card:hover {
+            transform: translateY(-5px);
+        }
+        .task-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .task-number {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+        .task-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(251, 191, 36, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .task-icon i {
+            font-size: 28px;
+            color: #fbbf24;
+        }
+        .task-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #6366f1;
+        }
+        .task-description {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        .task-tips {
+            background-color: rgba(251, 191, 36, 0.1);
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 18px;
+            color: #555;
+        }
+        .task-tips i {
+            color: #fbbf24;
+            margin-right: 8px;
+            font-size: 20px;
+            vertical-align: middle;
+        }
+        .highlight {
+            color: #6366f1;
+            font-weight: 600;
+        }
+        .deadline-container {
+            margin-top: 25px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .deadline-icon {
+            font-size: 36px;
+            color: #6366f1;
+            margin-right: 15px;
+        }
+        .deadline-text {
+            font-size: 22px;
+            font-weight: 600;
+            color: #333;
+        }
+        .deadline-date {
+            color: #6366f1;
+            font-weight: 700;
+        }
+        .minimal-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .nav-btn {
+            background-color: rgba(99, 102, 241, 0.8);
+            color: white;
+            border: 1px solid #4f46e5;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+        }
+        .nav-btn:hover {
+            background-color: rgba(79, 70, 229, 0.9);
+            transform: translateY(-1px);
+        }
+        .nav-btn.prev {
+            background-color: rgba(239, 68, 68, 0.8);
+            border-color: #dc2626;
+        }
+        .nav-btn.prev:hover {
+            background-color: rgba(220, 38, 38, 0.9);
+        }
+        @media (max-width: 768px) {
+            .tasks-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .minimal-nav {
+                bottom: 10px;
+                left: 10px;
+            }
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">TAREA PARA PRÓXIMA SESIÓN</h1>
+        </div>
+        <div class="content">
+            <div class="tasks-container">
+                <div class="task-card">
+                    <div class="task-header">
+                        <div class="task-number">1</div>
+                        <div class="task-icon">
+                            <i class="material-icons">analytics</i>
+                        </div>
+                        <h2 class="task-title">Análisis digital personal</h2>
+                    </div>
+                    <p class="task-description">
+                        Analizar <span class="highlight">presencia digital personal</span> y efectos en relaciones
+                    </p>
+                    <div class="task-tips">
+                        <i class="material-icons">tips_and_updates</i>
+                        Reflexiona sobre cómo usas redes y cómo afectan tus relaciones reales
+                    </div>
+                </div>
+
+                <div class="task-card">
+                    <div class="task-header">
+                        <div class="task-number">2</div>
+                        <div class="task-icon">
+                            <i class="material-icons">videocam</i>
+                        </div>
+                        <h2 class="task-title">Video sobre redes sociales</h2>
+                    </div>
+                    <p class="task-description">
+                        Grabar video sobre <span class="highlight">"Redes sociales en mi país"</span>
+                    </p>
+                    <div class="task-tips">
+                        <i class="material-icons">tips_and_updates</i>
+                        Compara uso cultural de redes en tu país vs. España
+                    </div>
+                </div>
+
+                <div class="task-card">
+                    <div class="task-header">
+                        <div class="task-number">3</div>
+                        <div class="task-icon">
+                            <i class="material-icons">lightbulb</i>
+                        </div>
+                        <h2 class="task-title">Propuestas saludables</h2>
+                    </div>
+                    <p class="task-description">
+                        Preparar <span class="highlight">propuestas para uso saludable</span> de redes
+                    </p>
+                    <div class="task-tips">
+                        <i class="material-icons">tips_and_updates</i>
+                        Crea recomendaciones prácticas para equilibrio digital
+                    </div>
+                </div>
+
+                <div class="task-card">
+                    <div class="task-header">
+                        <div class="task-number">4</div>
+                        <div class="task-icon">
+                            <i class="material-icons">edit</i>
+                        </div>
+                        <h2 class="task-title">Ensayo sobre amistad digital</h2>
+                    </div>
+                    <p class="task-description">
+                        Escribir ensayo sobre <span class="highlight">"Amistad en la era digital"</span>
+                    </p>
+                    <div class="task-tips">
+                        <i class="material-icons">tips_and_updates</i>
+                        Incluye ejemplos personales y reflexiones críticas
+                    </div>
+                </div>
+            </div>
+
+            <div class="deadline-container">
+                <i class="material-icons deadline-icon">event</i>
+                <div class="deadline-text">Fecha de entrega: <span class="deadline-date">viernes 19 de diciembre</span></div>
+            </div>
+        </div>
+
+        <!-- Minimal Navigation -->
+        <div class="minimal-nav">
+            <a href="situacion.html" class="nav-btn prev">
+                <i class="material-icons">arrow_back</i>
+                Anterior
+            </a>
+            <a href="evaluacion.html" class="nav-btn">
+                Siguiente
+                <i class="material-icons">arrow_forward</i>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXPRESIONES ÚTILES (Nivel B2.1)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+            overflow-x: hidden;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .expressions-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex-grow: 1;
+        }
+        .expression-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        .expression-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        }
+        .expression-number {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            font-weight: 700;
+        }
+        .expression-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 25px;
+            flex-shrink: 0;
+        }
+        .expression-icon i {
+            font-size: 36px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .expression-content {
+            flex: 1;
+        }
+        .expression-phrase {
+            font-size: 24px;
+            font-weight: 600;
+            color: #6366f1;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+        .explanation {
+            font-size: 20px;
+            color: #555;
+            line-height: 1.4;
+        }
+        .usage-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(139, 92, 246, 0.1);
+            color: #8b5cf6;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .context-section {
+            margin-top: 30px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
+            border-radius: 12px;
+            padding: 25px;
+            border-left: 4px solid #6366f1;
+        }
+        .context-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #6366f1;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .context-title i {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+        .context-examples {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .example-item {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 18px;
+            color: #333;
+            border-left: 3px solid #8b5cf6;
+        }
+        .highlight {
+            color: #6366f1;
+            font-weight: 600;
+        }
+        .minimal-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .nav-btn {
+            background-color: rgba(99, 102, 241, 0.8);
+            color: white;
+            border: 1px solid #4f46e5;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+        }
+        .nav-btn:hover {
+            background-color: rgba(79, 70, 229, 0.9);
+            transform: translateY(-1px);
+        }
+        .nav-btn.prev {
+            background-color: rgba(239, 68, 68, 0.8);
+            border-color: #dc2626;
+        }
+        .nav-btn.prev:hover {
+            background-color: rgba(220, 38, 38, 0.9);
+        }
+        @media (max-width: 768px) {
+            .context-examples {
+                grid-template-columns: 1fr;
+            }
+            .expression-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+            .expression-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            .minimal-nav {
+                bottom: 10px;
+                left: 10px;
+            }
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">EXPRESIONES ÚTILES (Nivel B2.1)</h1>
+        </div>
+        <div class="content">
+            <div class="expressions-container">
+                <div class="expression-card">
+                    <div class="expression-number">1</div>
+                    <div class="expression-icon">
+                        <i class="material-icons">forum</i>
+                    </div>
+                    <div class="expression-content">
+                        <div class="expression-phrase">"En mi opinión, las redes han cambiado..."</div>
+                        <div class="explanation">Para expresar una opinión personal sobre el impacto de las redes sociales</div>
+                    </div>
+                    <div class="usage-tag">Opinión</div>
+                </div>
+
+                <div class="expression-card">
+                    <div class="expression-number">2</div>
+                    <div class="expression-icon">
+                        <i class="material-icons">balance</i>
+                    </div>
+                    <div class="expression-content">
+                        <div class="expression-phrase">"Por un lado conectan, por otro lado aíslan..."</div>
+                        <div class="explanation">Estructura para presentar argumentos contrapuestos sobre redes sociales</div>
+                    </div>
+                    <div class="usage-tag">Contraste</div>
+                </div>
+
+                <div class="expression-card">
+                    <div class="expression-number">3</div>
+                    <div class="expression-icon">
+                        <i class="material-icons">people</i>
+                    </div>
+                    <div class="expression-content">
+                        <div class="expression-phrase">"Prefiero hablar en persona porque..."</div>
+                        <div class="explanation">Para expresar preferencia por comunicación presencial vs digital</div>
+                    </div>
+                    <div class="usage-tag">Preferencia</div>
+                </div>
+
+                <div class="expression-card">
+                    <div class="expression-number">4</div>
+                    <div class="expression-icon">
+                        <i class="material-icons">lightbulb</i>
+                    </div>
+                    <div class="expression-content">
+                        <div class="expression-phrase">"Las redes son útiles para..."</div>
+                        <div class="explanation">Para destacar los beneficios o utilidades de las redes sociales</div>
+                    </div>
+                    <div class="usage-tag">Utilidad</div>
+                </div>
+
+                <div class="expression-card">
+                    <div class="expression-number">5</div>
+                    <div class="expression-icon">
+                        <i class="material-icons">warning</i>
+                    </div>
+                    <div class="expression-content">
+                        <div class="expression-phrase">"Mi mayor preocupación es..."</div>
+                        <div class="explanation">Para expresar preocupaciones sobre el uso de redes sociales</div>
+                    </div>
+                    <div class="usage-tag">Preocupación</div>
+                </div>
+            </div>
+
+            <div class="context-section">
+                <h3 class="context-title">
+                    <i class="material-icons">format_quote</i>
+                    Ejemplos en contexto
+                </h3>
+                <div class="context-examples">
+                    <div class="example-item">
+                        <span class="highlight">En mi opinión, las redes han cambiado</span> completamente la forma en que hacemos amistades, especialmente entre los más jóvenes.
+                    </div>
+                    <div class="example-item">
+                        <span class="highlight">Por un lado conectan</span> a personas que están lejos, <span class="highlight">por otro lado aíslan</span> a quienes están cerca físicamente.
+                    </div>
+                    <div class="example-item">
+                        <span class="highlight">Prefiero hablar en persona porque</span> puedo ver el lenguaje corporal y las emociones reales de la otra persona.
+                    </div>
+                    <div class="example-item">
+                        <span class="highlight">Las redes son útiles para</span> mantener contacto con familiares que viven en otros países y compartir momentos importantes.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Minimal Navigation -->
+        <div class="minimal-nav">
+            <a href="objetivos.html" class="nav-btn prev">
+                <i class="material-icons">arrow_back</i>
+                Anterior
+            </a>
+            <a href="vocabulario.html" class="nav-btn">
+                Siguiente
+                <i class="material-icons">arrow_forward</i>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

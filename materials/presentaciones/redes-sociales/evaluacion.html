@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVALUACIÓN FORMATIVA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f8f8;
+            overflow-x: hidden;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 30px 70px;
+        }
+        .evaluation-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            flex-grow: 1;
+        }
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            flex-grow: 1;
+        }
+        .criteria-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+        .criteria-card:hover {
+            transform: translateY(-5px);
+        }
+        .criteria-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .criteria-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(99, 102, 241, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        .criteria-icon i {
+            font-size: 32px;
+            color: #6366f1;
+        }
+        .criteria-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #6366f1;
+        }
+        .criteria-description {
+            font-size: 20px;
+            color: #555;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+        .criteria-indicators {
+            display: flex;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        .indicator {
+            width: 40px;
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .indicator-filled {
+            height: 100%;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 4px;
+        }
+        .footer {
+            margin-top: 30px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            border-radius: 12px;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .footer-icon {
+            font-size: 24px;
+            color: #6366f1;
+            margin: 0 15px;
+        }
+        .footer-text {
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+        }
+        .footer-text i {
+            font-size: 24px;
+            color: #6366f1;
+            margin: 0 10px;
+            vertical-align: middle;
+        }
+        .highlight {
+            color: #6366f1;
+            font-weight: 600;
+        }
+        .minimal-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .nav-btn {
+            background-color: rgba(99, 102, 241, 0.8);
+            color: white;
+            border: 1px solid #4f46e5;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+        }
+        .nav-btn:hover {
+            background-color: rgba(79, 70, 229, 0.9);
+            transform: translateY(-1px);
+        }
+        .nav-btn.prev {
+            background-color: rgba(239, 68, 68, 0.8);
+            border-color: #dc2626;
+        }
+        .nav-btn.prev:hover {
+            background-color: rgba(220, 38, 38, 0.9);
+        }
+        @media (max-width: 768px) {
+            .criteria-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .footer {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            .minimal-nav {
+                bottom: 10px;
+                left: 10px;
+            }
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">EVALUACIÓN FORMATIVA</h1>
+        </div>
+        <div class="content">
+            <div class="evaluation-container">
+                <div class="criteria-grid">
+                    <div class="criteria-card">
+                        <div class="criteria-header">
+                            <div class="criteria-icon">
+                                <i class="material-icons">translate</i>
+                            </div>
+                            <h2 class="criteria-title">Uso adecuado de vocabulario digital</h2>
+                        </div>
+                        <p class="criteria-description">Aplicación correcta de términos de redes sociales y comunicación online</p>
+                        <div class="criteria-indicators">
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 100%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 100%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 80%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 60%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 40%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="criteria-card">
+                        <div class="criteria-header">
+                            <div class="criteria-icon">
+                                <i class="material-icons">psychology</i>
+                            </div>
+                            <h2 class="criteria-title">Capacidad de argumentar sobre temas complejos</h2>
+                        </div>
+                        <p class="criteria-description">Habilidad para construir y defender opiniones sobre impacto social de redes</p>
+                        <div class="criteria-indicators">
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 100%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 90%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 70%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 50%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 30%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="criteria-card">
+                        <div class="criteria-header">
+                            <div class="criteria-icon">
+                                <i class="material-icons">record_voice_over</i>
+                            </div>
+                            <h2 class="criteria-title">Fluidez en expresión de opiniones matizadas</h2>
+                        </div>
+                        <p class="criteria-description">Naturalidad al expresar puntos de vista complejos sobre comunicación digital</p>
+                        <div class="criteria-indicators">
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 100%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 85%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 65%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 45%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 25%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="criteria-card">
+                        <div class="criteria-header">
+                            <div class="criteria-icon">
+                                <i class="material-icons">lightbulb</i>
+                            </div>
+                            <h2 class="criteria-title">Reflexión crítica sobre tecnología</h2>
+                        </div>
+                        <p class="criteria-description">Análisis profundo y balanceado del rol de las redes en la sociedad actual</p>
+                        <div class="criteria-indicators">
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 100%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 95%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 75%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 55%;"></div>
+                            </div>
+                            <div class="indicator">
+                                <div class="indicator-filled" style="width: 35%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <i class="material-icons footer-icon">school</i>
+                    <span class="footer-text">
+                        © 2024-2025 <span class="highlight">Universidad de Granada</span> - Centro de Lenguas Modernas
+                        Producción e Interacción Oral — <span class="highlight">Nivel B2.1</span>
+                        <i class="material-icons footer-icon">person</i>
+                        Profesor: <span class="highlight">Javier Benítez Láinez</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Minimal Navigation -->
+        <div class="minimal-nav">
+            <a href="tarea.html" class="nav-btn prev">
+                <i class="material-icons">arrow_back</i>
+                Anterior
+            </a>
+            <a href="index.html" class="nav-btn">
+                <i class="material-icons">home</i>
+                Inicio
+            </a>
+        </div>
+    </div>
+</body>
+</html>
