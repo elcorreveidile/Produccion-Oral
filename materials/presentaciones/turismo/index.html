@@ -112,6 +112,37 @@
         .nav-disabled:hover {
             transform: none;
         }
+        .hidden {
+            display: none !important;
+        }
+        .impact-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #4ecdc4;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px auto;
+            max-width: 900px;
+            backdrop-filter: blur(10px);
+        }
+        .impact-list {
+            text-align: left;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+        .impact-list li {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            margin: 15px 0;
+            line-height: 1.6;
+            list-style: none;
+        }
+        .call-to-action {
+            background: rgba(247, 183, 49, 0.2);
+            border: 2px solid #f7b731;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 700px;
+        }
         @media (max-width: 768px) {
             .content {
                 max-width: 90%;
@@ -129,7 +160,8 @@
     </style>
 </head>
 <body>
-    <div class="slide">
+    <!-- Slide 1: Portada -->
+    <div class="slide" id="slide1">
         <div class="overlay"></div>
         <div class="content">
             <h1 class="title">Debate: Turismo sostenible en Granada</h1>
@@ -140,14 +172,83 @@
                 <p>Horario: 15:30 - 19:30</p>
             </div>
         </div>
+    </div>
 
-        <!-- Minimal Navigation -->
-        <div class="minimal-nav">
-            <a href="objetivos.html" class="nav-btn">
-                Siguiente
-                <i class="material-icons">arrow_forward</i>
-            </a>
+    <!-- Slide 2: El problema del plástico -->
+    <div class="slide hidden" id="slide2">
+        <div class="overlay"></div>
+        <div class="content">
+            <div class="impact-box">
+                <h1 class="title" style="font-size: clamp(1.8rem, 4vw, 2.8rem);">🌊 ¿Sabías que cada minuto llega al océano el equivalente a un camión lleno de plástico?</h1>
+                <p style="font-size: clamp(1.1rem, 2vw, 1.4rem); margin-top: 15px;">No es un dato lejano: pasa ahora mismo.</p>
+            </div>
+
+            <h2 class="subtitle" style="margin-top: 40px; margin-bottom: 25px;">Por qué reciclar plástico importa de verdad:</h2>
+
+            <ul class="impact-list">
+                <li><strong style="color: #4ecdc4;">1. Protege vidas reales 🐢:</strong> tortugas, peces y aves confunden plásticos con comida. Reciclar reduce lo que acaba en su plato.</li>
+                <li><strong style="color: #4ecdc4;">2. Cuida tu futuro 🧠:</strong> el plástico se rompe en microplásticos que ya están en el agua, en los peces… y en nosotros.</li>
+                <li><strong style="color: #4ecdc4;">3. Mantiene océanos vivos 💙:</strong> menos plástico significa mares más limpios, playas que disfrutar y ecosistemas que respiran.</li>
+            </ul>
+
+            <div class="call-to-action">
+                <h3 style="color: #f7b731; font-size: clamp(1.3rem, 2.5vw, 1.8rem); margin-bottom: 15px;">Tu movimiento cuenta 🚀</h3>
+                <p style="font-size: clamp(1rem, 2vw, 1.2rem); line-height: 1.6;">
+                    Separar una botella hoy puede evitar que llegue al mar mañana. No es cambiar el mundo de golpe: es sumar gestos. Empieza tú. El océano lo nota. 🌍✨
+                </p>
+            </div>
         </div>
     </div>
+
+    <!-- Minimal Navigation -->
+    <div class="minimal-nav">
+        <button class="nav-btn prev" id="prevBtn" onclick="changeSlide(-1)">
+            <i class="material-icons">arrow_back</i>
+            Anterior
+        </button>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">
+            Siguiente
+            <i class="material-icons">arrow_forward</i>
+        </button>
+        <a href="objetivos.html" class="nav-btn" style="background-color: rgba(46, 204, 113, 0.8); border-color: #27ae60;">
+            Continuar al curso
+            <i class="material-icons">arrow_forward</i>
+        </a>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 2;
+
+        function showSlide(n) {
+            // Ocultar todas las diapositivas
+            for (let i = 1; i <= totalSlides; i++) {
+                document.getElementById('slide' + i).classList.add('hidden');
+            }
+
+            // Mostrar la diapositiva actual
+            document.getElementById('slide' + n).classList.remove('hidden');
+
+            // Actualizar botones de navegación
+            document.getElementById('prevBtn').classList.toggle('nav-disabled', n === 1);
+            document.getElementById('nextBtn').classList.toggle('nav-disabled', n === totalSlides);
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide < 1) currentSlide = 1;
+            if (currentSlide > totalSlides) currentSlide = totalSlides;
+            showSlide(currentSlide);
+        }
+
+        // Navegación con teclado
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+
+        // Inicializar
+        showSlide(1);
+    </script>
 </body>
 </html>
