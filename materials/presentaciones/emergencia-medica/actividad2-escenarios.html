@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escenarios de Emergencia - Actividad 2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f8f8;
+            overflow-x: hidden;
+        }
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: clamp(2rem, 3vw, 2.5rem);
+            font-weight: 700;
+        }
+        .content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            padding: 40px 70px;
+        }
+        .scenario-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .scenario-card:hover {
+            transform: translateY(-5px);
+        }
+        .scenario-header {
+            background: linear-gradient(135deg, #dc2626, #fbbf24);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .scenario-number {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .scenario-type {
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+            opacity: 0.9;
+        }
+        .scenario-body {
+            padding: 25px;
+        }
+        .scenario-situation {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.05), rgba(251, 191, 36, 0.05));
+            border-left: 4px solid #dc2626;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        .situation-label {
+            font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+            color: #dc2626;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        .situation-label i {
+            margin-right: 8px;
+        }
+        .situation-text {
+            font-size: clamp(0.95rem, 1.4vw, 1.2rem);
+            color: #333;
+            line-height: 1.5;
+        }
+        .details-list {
+            list-style: none;
+            padding: 0;
+        }
+        .details-list li {
+            font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+            color: #555;
+            margin-bottom: 10px;
+            padding-left: 30px;
+            position: relative;
+        }
+        .details-list li::before {
+            content: "•";
+            position: absolute;
+            left: 10px;
+            color: #dc2626;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        .highlight {
+            color: #dc2626;
+            font-weight: 600;
+        }
+        .minimal-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .nav-btn {
+            background-color: rgba(52, 152, 219, 0.8);
+            color: white;
+            border: 1px solid #2980b9;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+        }
+        .nav-btn:hover {
+            background-color: rgba(41, 128, 185, 0.9);
+            transform: translateY(-1px);
+        }
+        .nav-btn.prev {
+            background-color: rgba(231, 76, 60, 0.8);
+            border-color: #c0392b;
+        }
+        .nav-btn.prev:hover {
+            background-color: rgba(192, 57, 43, 0.9);
+        }
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">Escenarios de Emergencia - Actividad 2</h1>
+        </div>
+        <div class="content">
+            <!-- Escenario 1 -->
+            <div class="scenario-card">
+                <div class="scenario-header">
+                    <div class="scenario-number">ESCENARIO 1</div>
+                    <div class="scenario-type">Pareja A</div>
+                </div>
+                <div class="scenario-body">
+                    <div class="scenario-situation">
+                        <p class="situation-label">
+                            <i class="material-icons">emergency</i>
+                            SITUACIÓN
+                        </p>
+                        <p class="situation-text">
+                            Tu amigo se ha caído de una bicicleta en el parque y no puede mover el brazo. Está sangrando y tiene mucho dolor.
+                        </p>
+                    </div>
+                    <ul class="details-list">
+                        <li><span class="highlight">Ubicación:</span> Parque Federico García Lorca</li>
+                        <li><span class="highlight">Síntomas:</span> Dolor intenso, sangrado, imposibilidad de mover el brazo</li>
+                        <li><span class="highlight">Estado:</span> Consciente pero muy dolorido</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Escenario 2 -->
+            <div class="scenario-card">
+                <div class="scenario-header">
+                    <div class="scenario-number">ESCENARIO 2</div>
+                    <div class="scenario-type">Pareja B</div>
+                </div>
+                <div class="scenario-body">
+                    <div class="scenario-situation">
+                        <p class="situation-label">
+                            <i class="material-icons">emergency</i>
+                            SITUACIÓN
+                        </p>
+                        <p class="situation-text">
+                            Tu vecina tiene dificultad para respirar y dolor en el pecho. Está sudando mucho y tiene náuseas.
+                        </p>
+                    </div>
+                    <ul class="details-list">
+                        <li><span class="highlight">Ubicación:</span> Calle Recogidas, 45, 3º izquierda</li>
+                        <li><span class="highlight">Síntomas:</span> Dolor de pecho, dificultad respiratoria, sudoración, náuseas</li>
+                        <li><span class="highlight">Estado:</span> Consciente, muy asustada</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Escenario 3 -->
+            <div class="scenario-card">
+                <div class="scenario-header">
+                    <div class="scenario-number">ESCENARIO 3</div>
+                    <div class="scenario-type">Pareja C</div>
+                </div>
+                <div class="scenario-body">
+                    <div class="scenario-situation">
+                        <p class="situation-label">
+                            <i class="material-icons">emergency</i>
+                            SITUACIÓN
+                        </p>
+                        <p class="situation-text">
+                            Un compañero de clase está teniendo una reacción alérgica grave. Tiene la cara hinchada y dificultad para respirar.
+                        </p>
+                    </div>
+                    <ul class="details-list">
+                        <li><span class="highlight">Ubicación:</span> Centro de Lenguas Modernas, aula 203</li>
+                        <li><span class="highlight">Síntomas:</span> Hinchazón facial, dificultad para respirar, picor intenso</li>
+                        <li><span class="highlight">Estado:</span> Consciente, muy nervioso</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Escenario 4 -->
+            <div class="scenario-card">
+                <div class="scenario-header">
+                    <div class="scenario-number">ESCENARIO 4</div>
+                    <div class="scenario-type">Rotación - Todos</div>
+                </div>
+                <div class="scenario-body">
+                    <div class="scenario-situation">
+                        <p class="situation-label">
+                            <i class="material-icons">emergency</i>
+                            SITUACIÓN
+                        </p>
+                        <p class="situation-text">
+                            Estás en la Alhambra y una turista se ha desmayado. Hace mucho calor y no ha bebido agua en horas.
+                        </p>
+                    </div>
+                    <ul class="details-list">
+                        <li><span class="highlight">Ubicación:</span> Alhambra, Palacios Nazaríes</li>
+                        <li><span class="highlight">Síntomas:</span> Desmayo, piel caliente y seca, respiración rápida</li>
+                        <li><span class="highlight">Estado:</span> Inconsciente</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Minimal Navigation -->
+        <div class="minimal-nav">
+            <a href="actividad2-llamada.html" class="nav-btn prev">
+                <i class="material-icons">arrow_back</i>
+                Anterior
+            </a>
+            <a href="actividad3-consulta.html" class="nav-btn">
+                Siguiente
+                <i class="material-icons">arrow_forward</i>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
