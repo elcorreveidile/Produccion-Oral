@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACTIVIDAD 3: Consulta Médica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f8f8;
+            overflow-x: hidden;
+        }
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            padding: 25px 70px;
+            color: white;
+        }
+        .title {
+            font-size: clamp(2rem, 3vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            color: #fbbf24;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            padding: 40px 70px;
+            gap: 30px;
+        }
+        .instruction-box {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 30px;
+            border-left: 5px solid #dc2626;
+        }
+        .instruction-title {
+            font-size: clamp(1.3rem, 2vw, 1.6rem);
+            color: #dc2626;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .instruction-title i {
+            margin-right: 12px;
+            font-size: 32px;
+        }
+        .instruction-text {
+            font-size: clamp(1rem, 1.5vw, 1.3rem);
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .roles-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+        .role-card {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(251, 191, 36, 0.1));
+            border-radius: 12px;
+            padding: 25px;
+            border: 2px solid #dc2626;
+        }
+        .role-title {
+            font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+            color: #dc2626;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .role-title i {
+            margin-right: 10px;
+            font-size: 32px;
+        }
+        .role-text {
+            font-size: clamp(0.95rem, 1.4vw, 1.2rem);
+            color: #555;
+            line-height: 1.5;
+        }
+        .steps-list {
+            list-style: none;
+            padding: 0;
+        }
+        .steps-list li {
+            margin-bottom: 15px;
+            padding-left: 40px;
+            position: relative;
+            font-size: clamp(1rem, 1.5vw, 1.3rem);
+            color: #333;
+        }
+        .steps-list li::before {
+            content: attr(data-number);
+            position: absolute;
+            left: 0;
+            width: 30px;
+            height: 30px;
+            background-color: #dc2626;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .highlight {
+            color: #dc2626;
+            font-weight: 600;
+        }
+        .time-badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: #fbbf24;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: clamp(0.95rem, 1.4vw, 1.2rem);
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        .time-badge i {
+            margin-right: 8px;
+        }
+        .tip-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #fbbf24;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .tip-box i {
+            color: #fbbf24;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        .tip-text {
+            font-size: clamp(1rem, 1.5vw, 1.3rem);
+            color: #333;
+            display: inline;
+        }
+        .phrases-box {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 25px;
+            border: 2px solid #fbbf24;
+        }
+        .phrases-title {
+            font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+            color: #dc2626;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .phrases-title i {
+            margin-right: 10px;
+        }
+        .phrases-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .phrase-item {
+            font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+            color: #555;
+            padding: 8px;
+            background-color: rgba(251, 191, 36, 0.1);
+            border-radius: 6px;
+        }
+        .minimal-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .nav-btn {
+            background-color: rgba(52, 152, 219, 0.8);
+            color: white;
+            border: 1px solid #2980b9;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+        }
+        .nav-btn:hover {
+            background-color: rgba(41, 128, 185, 0.9);
+            transform: translateY(-1px);
+        }
+        .nav-btn.prev {
+            background-color: rgba(231, 76, 60, 0.8);
+            border-color: #c0392b;
+        }
+        .nav-btn.prev:hover {
+            background-color: rgba(192, 57, 43, 0.9);
+        }
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            .roles-container {
+                grid-template-columns: 1fr;
+            }
+            .phrases-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">ACTIVIDAD 3: Consulta Médica</h1>
+            <p class="subtitle">Simulación de visita al médico</p>
+        </div>
+        <div class="content">
+            <div class="instruction-box">
+                <h2 class="instruction-title">
+                    <i class="material-icons">assignment</i>
+                    Instrucciones
+                </h2>
+                <p class="instruction-text">
+                    Trabajarán en <span class="highlight">parejas o grupos de 3</span>. Simularán una consulta médica completa.
+                </p>
+                <ul class="steps-list">
+                    <li data-number="1">Lean el caso médico asignado</li>
+                    <li data-number="2">Preparen el diálogo (3-4 minutos)</li>
+                    <li data-number="3">Representen la consulta médica</li>
+                    <li data-number="4">El grupo de 3 puede incluir un <span class="highlight">familiar acompañante</span></li>
+                </ul>
+                <span class="time-badge">
+                    <i class="material-icons">schedule</i>
+                    30 minutos
+                </span>
+            </div>
+
+            <div class="roles-container">
+                <div class="role-card">
+                    <h3 class="role-title">
+                        <i class="material-icons">person</i>
+                        ROL A: Paciente
+                    </h3>
+                    <p class="role-text">
+                        • Describe tus síntomas con detalle<br>
+                        • Responde a las preguntas del médico<br>
+                        • Pregunta sobre el tratamiento<br>
+                        • Expresa tus preocupaciones
+                    </p>
+                </div>
+
+                <div class="role-card">
+                    <h3 class="role-title">
+                        <i class="material-icons">medical_services</i>
+                        ROL B: Médico/a
+                    </h3>
+                    <p class="role-text">
+                        • Pregunta sobre los síntomas<br>
+                        • Realiza preguntas específicas<br>
+                        • Explica el diagnóstico<br>
+                        • Receta tratamiento y da consejos
+                    </p>
+                </div>
+            </div>
+
+            <div class="phrases-box">
+                <h3 class="phrases-title">
+                    <i class="material-icons">record_voice_over</i>
+                    Frases útiles para la consulta
+                </h3>
+                <div class="phrases-list">
+                    <div class="phrase-item">"¿Desde cuándo tiene estos síntomas?"</div>
+                    <div class="phrase-item">"Me duele mucho cuando..."</div>
+                    <div class="phrase-item">"¿Ha tenido fiebre?"</div>
+                    <div class="phrase-item">"Los síntomas empezaron hace..."</div>
+                    <div class="phrase-item">"Voy a recetarle..."</div>
+                    <div class="phrase-item">"¿Es grave, doctor/a?"</div>
+                    <div class="phrase-item">"Debe tomar esto cada..."</div>
+                    <div class="phrase-item">"¿Necesito análisis?"</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <i class="material-icons">tips_and_updates</i>
+                <span class="tip-text">
+                    <strong>Organización:</strong> 3 parejas realizan consultas simultáneamente. El estudiante 7º se une a una pareja como <span class="highlight">familiar</span> que acompaña al paciente y hace preguntas adicionales.
+                </span>
+            </div>
+        </div>
+
+        <!-- Minimal Navigation -->
+        <div class="minimal-nav">
+            <a href="actividad2-escenarios.html" class="nav-btn prev">
+                <i class="material-icons">arrow_back</i>
+                Anterior
+            </a>
+            <a href="actividad3-casos.html" class="nav-btn">
+                Siguiente
+                <i class="material-icons">arrow_forward</i>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

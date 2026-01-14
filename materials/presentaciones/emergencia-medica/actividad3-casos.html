@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casos Médicos - Actividad 3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f8f8;
+            overflow-x: hidden;
+        }
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: clamp(2rem, 3vw, 2.5rem);
+            font-weight: 700;
+        }
+        .content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            padding: 40px 70px;
+        }
+        .case-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .case-card:hover {
+            transform: translateY(-5px);
+        }
+        .case-header {
+            background: linear-gradient(135deg, #dc2626, #fbbf24);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .case-number {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .case-type {
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+            opacity: 0.9;
+        }
+        .case-body {
+            padding: 25px;
+        }
+        .patient-info {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.05), rgba(251, 191, 36, 0.05));
+            border-left: 4px solid #dc2626;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        .info-label {
+            font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+            color: #dc2626;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        .info-label i {
+            margin-right: 8px;
+        }
+        .info-text {
+            font-size: clamp(0.95rem, 1.4vw, 1.2rem);
+            color: #333;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        .symptoms-section {
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-size: clamp(1rem, 1.5vw, 1.3rem);
+            color: #dc2626;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+        .section-title i {
+            margin-right: 8px;
+        }
+        .symptoms-list {
+            list-style: none;
+            padding: 0;
+        }
+        .symptoms-list li {
+            font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+            color: #555;
+            margin-bottom: 8px;
+            padding-left: 30px;
+            position: relative;
+        }
+        .symptoms-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 10px;
+            color: #dc2626;
+            font-weight: 600;
+        }
+        .context-box {
+            background-color: #fff3cd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        .context-text {
+            font-size: clamp(0.85rem, 1.2vw, 1rem);
+            color: #666;
+            font-style: italic;
+        }
+        .highlight {
+            color: #dc2626;
+            font-weight: 600;
+        }
+        .minimal-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .nav-btn {
+            background-color: rgba(52, 152, 219, 0.8);
+            color: white;
+            border: 1px solid #2980b9;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+        }
+        .nav-btn:hover {
+            background-color: rgba(41, 128, 185, 0.9);
+            transform: translateY(-1px);
+        }
+        .nav-btn.prev {
+            background-color: rgba(231, 76, 60, 0.8);
+            border-color: #c0392b;
+        }
+        .nav-btn.prev:hover {
+            background-color: rgba(192, 57, 43, 0.9);
+        }
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">Casos Médicos - Actividad 3</h1>
+        </div>
+        <div class="content">
+            <!-- Caso 1 -->
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-number">CASO 1</div>
+                    <div class="case-type">Pareja/Grupo A</div>
+                </div>
+                <div class="case-body">
+                    <div class="patient-info">
+                        <p class="info-label">
+                            <i class="material-icons">person</i>
+                            PERFIL DEL PACIENTE
+                        </p>
+                        <p class="info-text">
+                            Estudiante universitario, 22 años. Lleva tres días sin poder dormir bien.
+                        </p>
+                    </div>
+                    <div class="symptoms-section">
+                        <h3 class="section-title">
+                            <i class="material-icons">healing</i>
+                            Síntomas principales
+                        </h3>
+                        <ul class="symptoms-list">
+                            <li>Dolor de garganta intenso</li>
+                            <li>Dificultad para tragar</li>
+                            <li>Fiebre de 38.5°C</li>
+                            <li>Ganglios inflamados</li>
+                            <li>Cansancio extremo</li>
+                        </ul>
+                    </div>
+                    <div class="context-box">
+                        <p class="context-text">
+                            El paciente tiene examen final la próxima semana y está preocupado por no poder estudiar.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Caso 2 -->
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-number">CASO 2</div>
+                    <div class="case-type">Pareja/Grupo B</div>
+                </div>
+                <div class="case-body">
+                    <div class="patient-info">
+                        <p class="info-label">
+                            <i class="material-icons">person</i>
+                            PERFIL DEL PACIENTE
+                        </p>
+                        <p class="info-text">
+                            Turista de 35 años. Llegó a Granada hace dos días y ayer comió en un restaurante.
+                        </p>
+                    </div>
+                    <div class="symptoms-section">
+                        <h3 class="section-title">
+                            <i class="material-icons">healing</i>
+                            Síntomas principales
+                        </h3>
+                        <ul class="symptoms-list">
+                            <li>Dolor abdominal fuerte</li>
+                            <li>Diarrea frecuente</li>
+                            <li>Náuseas y vómitos</li>
+                            <li>Dolor de cabeza</li>
+                            <li>Debilidad general</li>
+                        </ul>
+                    </div>
+                    <div class="context-box">
+                        <p class="context-text">
+                            El paciente está preocupado porque tiene que viajar en tres días y no sabe si podrá hacerlo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Caso 3 -->
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-number">CASO 3</div>
+                    <div class="case-type">Pareja/Grupo C (con familiar)</div>
+                </div>
+                <div class="case-body">
+                    <div class="patient-info">
+                        <p class="info-label">
+                            <i class="material-icons">person</i>
+                            PERFIL DEL PACIENTE
+                        </p>
+                        <p class="info-text">
+                            Deportista aficionado, 28 años. Corrió una maratón hace una semana.
+                        </p>
+                    </div>
+                    <div class="symptoms-section">
+                        <h3 class="section-title">
+                            <i class="material-icons">healing</i>
+                            Síntomas principales
+                        </h3>
+                        <ul class="symptoms-list">
+                            <li>Dolor intenso en la rodilla derecha</li>
+                            <li>Inflamación visible</li>
+                            <li>No puede subir escaleras</li>
+                            <li>Dolor al caminar</li>
+                            <li>La rodilla hace ruidos extraños</li>
+                        </ul>
+                    </div>
+                    <div class="context-box">
+                        <p class="context-text">
+                            El paciente viene con su pareja, quien está muy preocupada. Tienen un viaje de senderismo planeado para el próximo mes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Minimal Navigation -->
+        <div class="minimal-nav">
+            <a href="actividad3-consulta.html" class="nav-btn prev">
+                <i class="material-icons">arrow_back</i>
+                Anterior
+            </a>
+            <a href="tarea.html" class="nav-btn">
+                Siguiente
+                <i class="material-icons">arrow_forward</i>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACTIVIDAD 1: Vocabulario Médico</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f8f8;
+            overflow-x: hidden;
+        }
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            padding: 25px 70px;
+            color: white;
+        }
+        .title {
+            font-size: clamp(2rem, 3vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            color: #fbbf24;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            padding: 40px 70px;
+            gap: 30px;
+        }
+        .instruction-box {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 30px;
+            border-left: 5px solid #dc2626;
+        }
+        .instruction-title {
+            font-size: clamp(1.3rem, 2vw, 1.6rem);
+            color: #dc2626;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .instruction-title i {
+            margin-right: 12px;
+            font-size: 32px;
+        }
+        .instruction-text {
+            font-size: clamp(1rem, 1.5vw, 1.3rem);
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .groups-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .group-card {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(251, 191, 36, 0.1));
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid #dc2626;
+        }
+        .group-title {
+            font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+            color: #dc2626;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .group-title i {
+            margin-right: 8px;
+        }
+        .group-text {
+            font-size: clamp(0.95rem, 1.4vw, 1.2rem);
+            color: #555;
+            line-height: 1.5;
+        }
+        .steps-list {
+            list-style: none;
+            padding: 0;
+        }
+        .steps-list li {
+            margin-bottom: 15px;
+            padding-left: 40px;
+            position: relative;
+            font-size: clamp(1rem, 1.5vw, 1.3rem);
+            color: #333;
+        }
+        .steps-list li::before {
+            content: attr(data-number);
+            position: absolute;
+            left: 0;
+            width: 30px;
+            height: 30px;
+            background-color: #dc2626;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .highlight {
+            color: #dc2626;
+            font-weight: 600;
+        }
+        .time-badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: #fbbf24;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: clamp(0.95rem, 1.4vw, 1.2rem);
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        .time-badge i {
+            margin-right: 8px;
+        }
+        .minimal-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .nav-btn {
+            background-color: rgba(52, 152, 219, 0.8);
+            color: white;
+            border: 1px solid #2980b9;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+        }
+        .nav-btn:hover {
+            background-color: rgba(41, 128, 185, 0.9);
+            transform: translateY(-1px);
+        }
+        .nav-btn.prev {
+            background-color: rgba(231, 76, 60, 0.8);
+            border-color: #c0392b;
+        }
+        .nav-btn.prev:hover {
+            background-color: rgba(192, 57, 43, 0.9);
+        }
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            .groups-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">ACTIVIDAD 1: Vocabulario Médico</h1>
+            <p class="subtitle">Tarjetas de situaciones médicas</p>
+        </div>
+        <div class="content">
+            <div class="instruction-box">
+                <h2 class="instruction-title">
+                    <i class="material-icons">assignment</i>
+                    Instrucciones
+                </h2>
+                <p class="instruction-text">
+                    Trabajarán en <span class="highlight">3 grupos</span> (2 parejas y 1 grupo de 3 personas)
+                </p>
+                <ul class="steps-list">
+                    <li data-number="1">Cada grupo recibe <span class="highlight">tarjetas con imágenes</span> de síntomas o situaciones médicas</li>
+                    <li data-number="2">Describan los síntomas usando el <span class="highlight">vocabulario médico</span> aprendido</li>
+                    <li data-number="3">Imaginen qué podría causar esos síntomas</li>
+                    <li data-number="4">Compartan con la clase y discutan</li>
+                </ul>
+                <span class="time-badge">
+                    <i class="material-icons">schedule</i>
+                    15 minutos
+                </span>
+            </div>
+
+            <div class="groups-container">
+                <div class="group-card">
+                    <h3 class="group-title">
+                        <i class="material-icons">group</i>
+                        Grupo 1 (2 personas)
+                    </h3>
+                    <p class="group-text">
+                        Tarjetas: Dolor de cabeza intenso, fiebre alta, mareos
+                    </p>
+                </div>
+
+                <div class="group-card">
+                    <h3 class="group-title">
+                        <i class="material-icons">group</i>
+                        Grupo 2 (2 personas)
+                    </h3>
+                    <p class="group-text">
+                        Tarjetas: Dolor de estómago, náuseas, vómitos
+                    </p>
+                </div>
+
+                <div class="group-card">
+                    <h3 class="group-title">
+                        <i class="material-icons">group</i>
+                        Grupo 3 (3 personas)
+                    </h3>
+                    <p class="group-text">
+                        Tarjetas: Dificultad para respirar, dolor en el pecho, palpitaciones
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Minimal Navigation -->
+        <div class="minimal-nav">
+            <a href="actividades.html" class="nav-btn prev">
+                <i class="material-icons">arrow_back</i>
+                Anterior
+            </a>
+            <a href="actividad1-tarjetas.html" class="nav-btn">
+                Siguiente
+                <i class="material-icons">arrow_forward</i>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjetas de Síntomas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f8f8;
+            overflow-x: hidden;
+        }
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            padding: 20px 70px;
+            color: white;
+        }
+        .title {
+            font-size: clamp(2rem, 3vw, 2.5rem);
+            font-weight: 700;
+        }
+        .content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            padding: 40px 70px;
+        }
+        .card-group {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .card-header {
+            text-align: center;
+            background: linear-gradient(135deg, #dc2626, #fbbf24);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            font-weight: 600;
+        }
+        .symptom-card {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.05), rgba(251, 191, 36, 0.05));
+            border-radius: 8px;
+            padding: 20px;
+            border: 2px solid #dc2626;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .symptom-card:hover {
+            transform: scale(1.05);
+        }
+        .symptom-icon {
+            font-size: 48px;
+            color: #dc2626;
+            margin-bottom: 10px;
+        }
+        .symptom-text {
+            font-size: clamp(1rem, 1.5vw, 1.3rem);
+            color: #333;
+            font-weight: 600;
+        }
+        .minimal-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .nav-btn {
+            background-color: rgba(52, 152, 219, 0.8);
+            color: white;
+            border: 1px solid #2980b9;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+        }
+        .nav-btn:hover {
+            background-color: rgba(41, 128, 185, 0.9);
+            transform: translateY(-1px);
+        }
+        .nav-btn.prev {
+            background-color: rgba(231, 76, 60, 0.8);
+            border-color: #c0392b;
+        }
+        .nav-btn.prev:hover {
+            background-color: rgba(192, 57, 43, 0.9);
+        }
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1 class="title">Tarjetas de Síntomas - Actividad 1</h1>
+        </div>
+        <div class="content">
+            <!-- Grupo 1 -->
+            <div class="card-group">
+                <div class="card-header">GRUPO 1</div>
+                <div class="symptom-card">
+                    <i class="material-icons symptom-icon">sick</i>
+                    <p class="symptom-text">Dolor de cabeza intenso</p>
+                </div>
+                <div class="symptom-card">
+                    <i class="material-icons symptom-icon">thermostat</i>
+                    <p class="symptom-text">Fiebre alta</p>
+                </div>
+                <div class="symptom-card">
+                    <i class="material-icons symptom-icon">360</i>
+                    <p class="symptom-text">Mareos</p>
+                </div>
+            </div>
+
+            <!-- Grupo 2 -->
+            <div class="card-group">
+                <div class="card-header">GRUPO 2</div>
+                <div class="symptom-card">
+                    <i class="material-icons symptom-icon">sentiment_very_dissatisfied</i>
+                    <p class="symptom-text">Dolor de estómago</p>
+                </div>
+                <div class="symptom-card">
+                    <i class="material-icons symptom-icon">mood_bad</i>
+                    <p class="symptom-text">Náuseas</p>
+                </div>
+                <div class="symptom-card">
+                    <i class="material-icons symptom-icon">health_and_safety</i>
+                    <p class="symptom-text">Vómitos</p>
+                </div>
+            </div>
+
+            <!-- Grupo 3 -->
+            <div class="card-group">
+                <div class="card-header">GRUPO 3</div>
+                <div class="symptom-card">
+                    <i class="material-icons symptom-icon">air</i>
+                    <p class="symptom-text">Dificultad para respirar</p>
+                </div>
+                <div class="symptom-card">
+                    <i class="material-icons symptom-icon">favorite</i>
+                    <p class="symptom-text">Dolor en el pecho</p>
+                </div>
+                <div class="symptom-card">
+                    <i class="material-icons symptom-icon">monitor_heart</i>
+                    <p class="symptom-text">Palpitaciones</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Minimal Navigation -->
+        <div class="minimal-nav">
+            <a href="actividad1-vocabulario.html" class="nav-btn prev">
+                <i class="material-icons">arrow_back</i>
+                Anterior
+            </a>
+            <a href="actividad2-llamada.html" class="nav-btn">
+                Siguiente
+                <i class="material-icons">arrow_forward</i>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
