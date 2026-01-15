@@ -11,7 +11,7 @@
     }
     html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial}
     a{color:inherit;text-decoration:none}
-    .container{max-width:1100px;margin:0 auto;padding:1rem}
+    .container{max-width:1200px;margin:0 auto;padding:1rem}
     :target{scroll-margin-top:72px}
 
     /* NAV */
@@ -20,8 +20,8 @@
     .brand{font-weight:800;display:flex;align-items:center;gap:.75rem}
     .brand .logo{height:40px;width:auto;object-fit:contain}
     .spacer{flex:1}
-    .links{display:flex;gap:.5rem;align-items:center}
-    .links a{display:inline-block;padding:.5rem .75rem;border:1px solid var(--border);border-radius:9999px;background:#fff;white-space:nowrap}
+    .links{display:flex;gap:.3rem;align-items:center;flex-wrap:wrap}
+    .links a{display:inline-block;padding:.4rem .7rem;border:1px solid var(--border);border-radius:9999px;background:#fff;white-space:nowrap;font-size:0.85rem}
     .hamb{display:none;appearance:none;border:1px solid var(--border);background:#fff;border-radius:.75rem;padding:.5rem .6rem}
     .mobile-panel{display:none;position:fixed;top:56px;left:0;right:0;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 6px 20px rgba(0,0,0,.06)}
     .mobile-panel .row{display:flex;overflow-x:auto;gap:.5rem;padding:.75rem 1rem}
@@ -50,11 +50,22 @@
     .card{background:rgba(255,255,255,.92);border:1px solid var(--border);border-radius:1rem;padding:1rem}
     @media(max-width:899px){.card{background:rgba(255,255,255,.96)}}
     .grid{display:grid;gap:1rem}
-    @media(min-width:900px){.grid-3{grid-template-columns: 1fr 1fr 1fr;}}
+    @media(min-width:900px){.grid-2{grid-template-columns: 1fr 1fr;} .grid-3{grid-template-columns: 1fr 1fr 1fr;} .grid-4{grid-template-columns: repeat(4, 1fr);}}
     .chip{display:inline-block;padding:.25rem .6rem;border:1px solid var(--border);border-radius:9999px;margin:.15rem .25rem;background:#fff;cursor:pointer}
     .chip.active{background:#c62828;color:#fff;border-color:#c62828}
     .highlight{background:#fff8e1;padding:1rem;border-left:4px solid #ffc107;margin:.5rem 0}
     .emoji-large{font-size:2.5rem}
+    .tag{display:inline-block;padding:.2rem .5rem;background:#f3f4f6;border-radius:4px;font-size:0.8rem;margin:.2rem .2rem .2rem 0}
+    .ccaa-grid{display:grid;gap:.75rem;grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));}
+    .ccaa-card{background:rgba(255,255,255,.95);border:1px solid var(--border);border-radius:1rem;padding:1rem;transition:transform 0.2s, box-shadow 0.2s}
+    .ccaa-card:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.1)}
+    .ccaa-card h4{margin:0 0 .5rem 0;color:#c62828;font-size:1.1rem}
+    .ccaa-card .capital{color:#6b7280;font-size:0.9rem;margin-bottom:.5rem}
+    .ccaa-card .provincias{font-size:0.85rem;color:#374151}
+    .timeline{position:relative;padding-left:2rem}
+    .timeline::before{content:"";position:absolute;left:.5rem;top:0;bottom:0;width:2px;background:#e5e7eb}
+    .timeline-item{position:relative;margin-bottom:1.5rem}
+    .timeline-item::before{content:"";position:absolute;left:-1.6rem;top:.3rem;width:12px;height:12px;background:#c62828;border-radius:50%;border:3px solid #fff}
 
     @media (max-width:899px){.links{display:none}.hamb{display:inline-block}.container{padding:.75rem 1rem}.section{padding:2rem 0}}
     .nav.open .mobile-panel{display:block}
@@ -76,8 +87,9 @@
         <a href="#s1">Constitución</a>
         <a href="#s2">Cortes</a>
         <a href="#s3">Gobierno</a>
-        <a href="#s4">Territorial</a>
-        <a href="#s5">Unión Europea</a>
+        <a href="#s4">CCAA</a>
+        <a href="#s5">Fondos</a>
+        <a href="#s6">Unión Europea</a>
       </div>
       <button class="hamb" id="hamb" aria-label="Abrir menú">☰</button>
     </div>
@@ -86,8 +98,9 @@
         <a href="#s1">Constitución</a>
         <a href="#s2">Cortes</a>
         <a href="#s3">Gobierno</a>
-        <a href="#s4">Territorial</a>
-        <a href="#s5">Unión Europea</a>
+        <a href="#s4">CCAA</a>
+        <a href="#s5">Fondos</a>
+        <a href="#s6">Unión Europea</a>
       </div>
     </div>
   </div>
@@ -117,7 +130,7 @@
               <li>Año: 1978</li>
               <li>Fecha: 6 de diciembre (Día de la Constitución)</li>
               <li>Artículos: 169</li>
-              <li>Título: Constitución Española</li>
+              <li>Referéndum: 87,8% aprobación</li>
             </ul>
           </div>
         </div>
@@ -133,8 +146,8 @@
           <p>Establece los principios básicos: la soberanía nacional, la forma política del Estado español (monarquía parlamentaria) y los valores superiores del ordenamiento jurídico.</p>
         </div>
         <div class="card">
-          <h3>Valores superiores</h3>
-          <p>El artículo 1.1 establece los valores que inspiran el ordenamiento jurídico español:</p>
+          <h3>Valores superiores (Art. 1.1)</h3>
+          <p>Los valores que inspiran el ordenamiento jurídico español:</p>
           <div class="highlight" style="background:#e8f5e9;border-left-color:#4caf50">
             <strong style="color:#2e7d32">Libertad</strong> — Los ciudadanos pueden actuar sin restricciones arbitrarias<br><br>
             <strong style="color:#1565c0">Justicia</strong> — Dar a cada uno lo que le corresponde<br><br>
@@ -145,7 +158,7 @@
       </div>
 
       <h3 style="margin-top:2rem">📖 Estructura de la Constitución</h3>
-      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; margin-top: 1rem;">
         <div class="card">
           <h4>Título Preliminar</h4>
           <p class="muted">Principios básicos del Estado</p>
@@ -191,6 +204,30 @@
           <p class="muted">Reforma constitucional (arts. 166-169)</p>
         </div>
       </div>
+
+      <h3 style="margin-top:2rem">⏱️ Historia de la Constitución de 1978</h3>
+      <div class="card">
+        <div class="timeline">
+          <div class="timeline-item">
+            <strong>Noviembre 1975 - Muerte de Franco</strong>
+            <p class="muted">Fin de la dictadura franquista</p>
+          </div>
+          <div class="timeline-item">
+            <strong>1977 - Elecciones Generales</strong>
+            <p class="muted">Victoria de UCD. Adolfo Suárez Presidente</p>
+          </div>
+          <div class="timeline-item">
+            <strong>Agosto 1977 - Ley para la Reforma Política</strong>
+            <p class="muted">Hito para la democracia</p>
+          </div>
+          <div class="timeline-item">
+            <strong>1978 - Constitución Española</strong>
+            <p class="muted">6 de diciembre: Referéndum (87,8% sí)</p>
+            <p class="muted">27 de diciembre: Sanción y promulgación</p>
+            <p class="muted">29 de diciembre: Publicación en BOE</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -208,12 +245,13 @@
             <li><strong>350 diputados</strong> elegidos por sufragio universal</li>
             <li>Legislatura de <strong>4 años</strong></li>
             <li>Cámara de representación <strong>popular</strong></li>
-            <li>Sede en Madrid (Palacio del Congreso)</li>
+            <li>Sede: Palacio del Congreso (Madrid)</li>
+            <li>Predomina en el proceso legislativo</li>
           </ul>
           <h4 style="margin-top:1rem">Funciones principales:</h4>
           <ul class="list">
             <li>Aprobar leyes y presupuestos</li>
-            <li>Control al Gobierno</li>
+            <li>Control al Gobierno (preguntas, interpelaciones)</li>
             <li>Votar investidura del Presidente</li>
             <li>Mociones de censura y confianza</li>
           </ul>
@@ -225,15 +263,16 @@
           <ul class="list">
             <li>Cámara de <strong>representación territorial</strong></li>
             <li><strong>266 senadores</strong> en total</li>
-            <li>Elegidos por circunscripciones provinciales</li>
             <li>Cada provincia elige <strong>4 senadores</strong></li>
+            <li>Ceuta y Melilla: 2 senadores cada una</li>
+            <li>Segunda cámara de lectura</li>
           </ul>
           <h4 style="margin-top:1rem">Composición:</h4>
           <ul class="list">
             <li>208 senadores por elección directa</li>
             <li>58 senadores designados por las CC.AA.</li>
             <li>Segunda lectura de leyes</li>
-            <li>Representa territorios y entidades</li>
+            <li>Representa territorios y entidades locales</li>
           </ul>
         </div>
 
@@ -241,9 +280,10 @@
           <h3>El proceso legislativo</h3>
           <h4>¿Cómo se crea una ley?</h4>
           <ol class="list">
-            <li><strong>Iniciativa:</strong> Presentación del proyecto</li>
-            <li><strong>Debate:</strong> Congreso la aprueba o modifica</li>
+            <li><strong>Iniciativa:</strong> Presentación del proyecto (Gobierno, Congreso, Senado, CC.AA., ciudadanos)</li>
+            <li><strong>Congreso:</strong> Debate, enmiendas y votación</li>
             <li><strong>Senado:</strong> Segunda lectura (enmiendas)</li>
+            <li><strong>Congreso:</strong> Aprobación definitiva</li>
             <li><strong>Sanción:</strong> El Rey firma la ley</li>
             <li><strong>Publicación:</strong> BOE (Boletín Oficial del Estado)</li>
           </ol>
@@ -254,23 +294,24 @@
       </div>
 
       <h3 style="margin-top:2rem">📊 El sistema electoral español</h3>
-      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
         <div class="card">
           <h4>Circunscripciones electorales</h4>
           <ul class="list">
             <li>Cada provincia es una circunscripción</li>
-            <li>Ciudades autónomas (Ceuta, Melilla)</li>
-            <li>Se aplica la Ley D'Hondt</li>
-            <li>Se requiere 3% de votos para entrar</li>
+            <li>Ciudades autónomas: Ceuta y Melilla</li>
+            <li>Se aplica la <strong>Ley D'Hondt</strong></li>
+            <li>Cerradas y listas bloqueadas</li>
+            <li>3% de votos en la circunscripción para obtener escaño</li>
           </ul>
         </div>
         <div class="card">
           <h4>Voto de los españoles en el extranjero</h4>
           <ul class="list">
+            <li>Censo de Residentes Ausentes (CERA)</li>
             <li>Deben solicitar el voto antes</li>
             <li>Voto por correo</li>
-            <li>Embajadas y consulados</li>
-            <li>Censos de residentes (CERA)</li>
+            <li>Embajadas y consulados habilitados</li>
           </ul>
         </div>
         <div class="card">
@@ -279,7 +320,32 @@
             <li>Sufragio universal, libre, igual, directo y secreto</li>
             <li>Mayores de 18 años</li>
             <li>Nacionalidad española</li>
-            <li>No estar privado de derechos</li>
+            <li>No estar privado de derechos (sentencia judicial)</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 style="margin-top:2rem">🗳️ Elecciones Generales</h3>
+      <div class="grid grid-2">
+        <div class="card">
+          <h4>Elecciones al Congreso</h4>
+          <ul class="list">
+            <li><strong>350 escaños</strong> en total</li>
+            <li>Circunscripción provincial</li>
+            <li>Ceuta y Melilla: 1 diputado cada una</li>
+            <li>La provincia de Madrid: 37 escaños</li>
+            <li>La provincia de Barcelona: 32 escaños</li>
+            <li>Soria: 2 escaños (la menos poblada)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Elecciones al Senado</h4>
+          <ul class="list">
+            <li>Cada provincia elige <strong>4 senadores</strong></li>
+            <li>Ceuta y Melilla: 2 senadores</li>
+            <li>208 senadores por elección directa</li>
+            <li>58 senadores designados por CC.AA.</li>
+            <li>Listas abiertas</li>
           </ul>
         </div>
       </div>
@@ -298,25 +364,27 @@
           <ul class="list">
             <li><strong>Jefe del Estado</strong></li>
             <li>Símbolo de la unidad y permanencia</li>
-            <li>Árbitro y moderador del funcionamiento</li>
+            <li>Árbitro y moderador del funcionamiento institucional</li>
             <li>No tiene poder político directo</li>
           </ul>
           <h4 style="margin-top:1rem">Funciones:</h4>
           <ul class="list">
             <li>Sancionar y promulgar leyes</li>
             <li>Convocar y disolver las Cortes</li>
-            <li>Nombrar candidatos a Presidente</li>
-            <li>Mandato de confianza investidura</li>
+            <li>Convocar referéndums</li>
+            <li>Nombrar candidatos a Presidente del Gobierno</li>
+            <li>Mandato de confianza tras investidura</li>
           </ul>
           <div class="highlight" style="margin-top:1rem">
-            <strong>Rey actual:</strong> Felipe VI (desde 2014)
+            <strong>Rey actual:</strong> Felipe VI (desde 2014)<br>
+            <strong>Proclamación:</strong> 19 de junio de 2014
           </div>
         </div>
 
         <div class="card">
           <h3>El Gobierno</h3>
           <p style="font-size:3rem;text-align:center;margin:0.5rem 0">🏛️</p>
-          <p>El Gobierno dirige la política interior y exterior, la administración civil y militar, y la defensa del Estado.</p>
+          <p>El Gobierno dirige la política interior y exterior, la administración civil y militar, y la defensa del Estado (Art. 97).</p>
           <h4>Composición:</h4>
           <ul class="list">
             <li><strong>Presidente del Gobierno</strong></li>
@@ -324,20 +392,20 @@
             <li>Ministros y ministras</li>
             <li>Órganos de apoyo (Gabinetes)</li>
           </ul>
-          <h4 style="margin-top:1rem">Nombramiento:</h4>
+          <h4 style="margin-top:1rem">Nombramiento del Presidente:</h4>
           <ol class="list">
-            <li>El Rey propone un candidato</li>
+            <li>El Rey propone un candidato tras consultar partidos</li>
             <li>Debate de investidura en el Congreso</li>
-            <li>Mayoría absoluta o simple</li>
+            <li>Mayoría absoluta (primera votación) o simple (segunda)</li>
             <li>El Rey lo nombra Presidente</li>
-            <li>El Rey nombra ministros propuesta</li>
+            <li>El Rey nombra ministros a propuesta del Presidente</li>
           </ol>
         </div>
 
         <div class="card">
           <h3>Poder Judicial</h3>
           <p style="font-size:3rem;text-align:center;margin:0.5rem 0">⚖️</p>
-          <p>El poder judicial ejerce las funciones jurisdiccionales en nombre del Rey.</p>
+          <p>El poder judicial ejerce las funciones jurisdiccionales en nombre del Rey (Art. 117).</p>
           <h4>Órganos principales:</h4>
           <ul class="list">
             <li><strong>Consejo General del Poder Judicial (CGPJ)</strong></li>
@@ -345,13 +413,14 @@
             <li>Audiencia Nacional</li>
             <li>Tribunales Superiores de Justicia (CC.AA.)</li>
             <li>Juzgados de primera instancia e instrucción</li>
+            <li>Juzgados de Paz</li>
           </ul>
           <h4 style="margin-top:1rem">Principios:</h4>
           <ul class="list">
-            <li>Unidad jurisdiccional</li>
-            <li>Independencia</li>
-            <li>Inamovilidad de jueces</li>
-            <li>Responsabilidad</li>
+            <li><strong>Unidad jurisdiccional:</strong> Un solo orden jurisdiccional</li>
+            <li><strong>Independencia:</strong> Autonomía funcional</li>
+            <li><strong>Inamovilidad:</strong> Jueces no pueden ser trasladados sin consentimiento</li>
+            <li><strong>Responsabilidad:</strong> Responsabilidad civil y penal</li>
           </ul>
         </div>
       </div>
@@ -360,27 +429,27 @@
       <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
         <div class="card">
           <h4>¿Qué es?</h4>
-          <p>El máximo intérprete de la Constitución. Garantiza el orden constitucional y protege los derechos fundamentales.</p>
+          <p>El máximo intérprete de la Constitución. Garantiza el orden constitucional y protege los derechos fundamentales y libertades públicas.</p>
           <ul class="list">
             <li><strong>12 magistrados</strong></li>
             <li>Mandato de <strong>9 años</strong> renovables por tercios</li>
-            <li>Nombrados por el Rey</li>
+            <li>Nombrados por el Rey (4 por el Congreso, 4 por el Senado, 2 por el CGPJ, 2 por el Gobierno)</li>
           </ul>
         </div>
         <div class="card">
           <h4>Competencias</h4>
           <ul class="list">
-            <li>Recurso de inconstitucionalidad</li>
-            <li>Amparo constitucional (derechos fundamentales)</li>
-            <li>Conflictos de competencias</li>
-            <li>Conflictos entre Estado y CC.AA.</li>
+            <li><strong>Recurso de inconstitucionalidad</strong> contra leyes y disposiciones</li>
+            <li><strong>Amparo constitucional</strong> para proteger derechos fundamentales</li>
+            <li>Conflictos de competencias entre Estado y CC.AA.</li>
+            <li>Conflictos de competencias entre órganos del Estado</li>
           </ul>
         </div>
         <div class="card">
           <h4>Procedimientos</h4>
           <ul class="list">
-            <li>El recurso de inconstitucionalidad lo puede presentar cualquier órgano legitimado</li>
-            <li>El amparo lo presentan ciudadanos</li>
+            <li>Recurso de inconstitucionalidad: órgano legitimado (50 diputados, 50 senadores, etc.)</li>
+            <li>Amparo: ciudadanos que agotaron vías judiciales ordinarias (plazo: 30 días)</li>
             <li>Las sentencias son vinculantes</li>
             <li>Sus decisiones no pueden ser recurridas</li>
           </ul>
@@ -393,6 +462,8 @@
   <section class="section" id="s4">
     <div class="container">
       <h2>🗺️ Organización Territorial del Estado</h2>
+      <p style="margin-bottom:1.5rem">La Constitución reconoce el derecho a la autonomía de las nacionalidades y regiones (Art. 2). La unidad de España es indeclinable, pero el Estado garantiza el derecho a la autonomía.</p>
+
       <div class="grid grid-3">
         <div class="card">
           <h3>Comunidades Autónomas</h3>
@@ -402,6 +473,7 @@
             <li><strong>2 Ciudades Autónomas</strong> (Ceuta y Melilla)</li>
             <li>Entidades territoriales con autonomía política</li>
             <li>Tienen Estatuto de Autonomía propio</li>
+            <li>Instituciones de autogobierno</li>
           </ul>
           <h4 style="margin-top:1rem">Instituciones:</h4>
           <ul class="list">
@@ -419,13 +491,14 @@
             <li>Divisiones administrativas con fines territoriales</li>
             <li>Gestionadas por Diputaciones Provinciales</li>
             <li>También existen Cabildos (islas) y Consejos (Navarra)</li>
+            <li>Creación: 1833 (Javier de Burgos)</li>
           </ul>
           <h4 style="margin-top:1rem">Funciones de las Diputaciones:</h4>
           <ul class="list">
             <li>Coordinación de servicios municipales</li>
             <li>Prestación de servicios supramunicipales</li>
             <li>Asistencia y cooperación con municipios</li>
-            <li>Gestión de competencias estatales</li>
+            <li>Gestión de competencias estatales y autonómicas</li>
           </ul>
         </div>
 
@@ -437,6 +510,7 @@
             <li>Entidad básica de organización territorial</li>
             <li>Elemento de cercanía al ciudadano</li>
             <li>Autonomía para gestionar intereses propios</li>
+            <li>Personalidad jurídica propia</li>
           </ul>
           <h4 style="margin-top:1rem">Gobierno municipal:</h4>
           <ul class="list">
@@ -448,48 +522,236 @@
         </div>
       </div>
 
+      <h3 style="margin-top:2rem">📍 Las 17 Comunidades Autónomas y sus provincias</h3>
+      <div class="ccaa-grid" style="margin-top: 1rem;">
+        <div class="ccaa-card">
+          <h4>🇦🇽 Andalucía</h4>
+          <div class="capital"><strong>Capital:</strong> Sevilla</div>
+          <div class="provincias"><strong>Provincias (8):</strong> Almería, Cádiz, Córdoba, Granada, Huelva, Jaén, Málaga, Sevilla</div>
+        </div>
+        <div class="ccaa-card">
+          <h4>🏔️ Aragón</h4>
+          <div class="capital"><strong>Capital:</strong> Zaragoza</div>
+          <div class="provincias"><strong>Provincias (3):</strong> Huesca, Teruel, Zaragoza</div>
+        </div>
+        <div class="ccaa-card">
+          <h4>⭐ Asturias (Principado de)</h4>
+          <div class="capital"><strong>Capital:</strong> Oviedo</div>
+          <div class="provincias"><strong>Provincia única (1):</strong> Asturias</div>
+        </div>
+        <div class="ccaa-card">
+          <h4>🌙 Illes Balears</h4>
+          <div class="capital"><strong>Capital:</strong> Palma de Mallorca</div>
+          <div class="provincias"><strong>Provincias (1):</strong> Illes Balears</div>
+        </div>
+        <div class="ccaa-card">
+          <h4>🏰 País Vasco</h4>
+          <div class="capital"><strong>Capital:</strong> Vitoria-Gasteiz</div>
+          <div class="provincias"><strong>Provincias (3):</strong> Araba/Álava, Gipuzkoa, Bizkaia</div>
+        </div>
+        <div class="ccaa-card">
+          <h4>🏰 Canarias</h4>
+          <div class="capital"><strong>Capitales:</strong> Las Palmas de GC y Santa Cruz de Tenerife</div>
+          <div class="provincias"><strong>Provincias (2):</strong> Las Palmas, Santa Cruz de Tenerife</div>
+        </div>
+        <div class="ccaa-card">
+          <h4>🐂 Cantabria</h4>
+          <div class="capital"><strong>Capital:</strong> Santander</div>
+          <div class="provincias"><strong>Provincia única (1):</strong> Cantabria</div>
+        </div>
+        <div class="ccaa-card">
+          <h4>⭕ Castilla-La Mancha</h4>
+          <div class="capital"><strong>Capital:</strong> Toledo</div>
+          <div class="provincias"><strong>Provincias (5):</strong> Albacete, Ciudad Real, Cuenca, Guadalajara, Toledo</div>
+        </div>
+        <div class="ccaa-card">
+          <h4>🏰 Castilla y León</h4>
+          <div class="capital"><strong>Capital:</strong> Valladolid</div>
+          <div class="provincias"><strong>Provincias (9):</strong> Ávila, Burgos, León, Palencia, Salamanca, Segovia, Soria, Valladolid, Zamora</div>
+        </div>
+        <div class="ccaa-card">
+          <h4>🌹 Cataluña</h4>
+          <div class="capital"><strong>Capital:</strong> Barcelona</div>
+          <div class="provincias"><strong>Provincias (4):</strong> Barcelona, Girona, Lleida, Tarragona</div>
+        </div>
+        <div class="ccaa-card">
+          <h4>🌊 Extremadura</h4>
+          <div class="capital"><strong>Capital:</strong> Mérida</div>
+          <div class="provincias"><strong>Provincias (2):</strong> Badajoz, Cáceres</div>
+        </div>
+        <div class="ccaa-card">
+          <h4>🟢 Galicia</h4>
+          <div class="capital"><strong>Capital:</strong> Santiago de Compostela</div>
+          <div class="provincias"><strong>Provincias (4):</strong> A Coruña, Lugo, Ourense, Pontevedra</div>
+        </div>
+        <div class="ccaa-card">
+          <h4>🍓 Comunidad de Madrid</h4>
+          <div class="capital"><strong>Capital:</strong> Madrid</div>
+          <div class="provincias"><strong>Provincia única (1):</strong> Madrid</div>
+        </div>
+        <div class="ccaa-card">
+          <h4>🌍 Región de Murcia</h4>
+          <div class="capital"><strong>Capital:</strong> Murcia</div>
+          <div class="provincias"><strong>Provincia única (1):</strong> Murcia</div>
+        </div>
+        <div class="ccaa-card">
+          <h4>🍷 Comunidad Foral de Navarra</h4>
+          <div class="capital"><strong>Capital:</strong> Pamplona/Iruña</div>
+          <div class="provincias"><strong>Provincia única (1):</strong> Navarra</div>
+        </div>
+        <div class="ccaa-card">
+          <h4>⚽ La Rioja</h4>
+          <div class="capital"><strong>Capital:</strong> Logroño</div>
+          <div class="provincias"><strong>Provincia única (1):</strong> La Rioja</div>
+        </div>
+        <div class="ccaa-card">
+          <h4>🏛️ Comunidad Valenciana</h4>
+          <div class="capital"><strong>Capital:</strong> Valencia</div>
+          <div class="provincias"><strong>Provincias (3):</strong> Alicante/Alacant, Castelló de la Plana, València</div>
+        </div>
+        <div class="ccaa-card" style="background:#fef3c7;border-color:#f59e0b">
+          <h4>🇪🇸 Ciudades Autónomas</h4>
+          <div class="provincias"><strong>Ceuta</strong> y <strong>Melilla</strong></div>
+          <div class="provincias">Ciudades autónomas en el norte de África</div>
+        </div>
+      </div>
+
       <h3 style="margin-top:2rem">🔍 Distribución de competencias</h3>
       <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem;">
         <div class="card">
-          <h4 style="color:#1565c0">Competencias exclusivas del Estado</h4>
+          <h4 style="color:#1565c0">Competencias exclusivas del Estado (Art. 149)</h4>
           <ul class="list">
             <li>Defensa y Fuerzas Armadas</li>
-            <li>Relaciones internacionales</li>
+            <li>Relaciones internacionales, Tratados</li>
             <li>Justicia y legislación civil/penal</li>
-            <li>Extranjería y fronteras</li>
-            <li>Sistema monetario</li>
-            <li>Comercio exterior</li>
+            <li>Extranjería, inmigración y fronteras</li>
+            <li>Sistema monetario y divisas</li>
+            <li>Comercio exterior y aduanas</li>
+            <li>Marina mercante y aviación civil</li>
+            <li>Correos y telecomunicaciones</li>
           </ul>
         </div>
         <div class="card">
           <h4 style="color:#2e7d32">Competencias de las Comunidades Autónomas</h4>
           <ul class="list">
-            <li>Organización instituciones propias</li>
-            <li>Educación (en muchos casos)</li>
+            <li>Organización de instituciones de autogobierno</li>
+            <li>Educación (en la mayoría de CC.AA.)</li>
             <li>Sanidad</li>
-            <li>Ordenación del territorio</li>
+            <li>Ordenación del territorio y urbanismo</li>
             <li>Transporte y obras públicas</li>
-            <li>Agricultura y ganadería</li>
-            <li>Cultura y patrimonio</li>
+            <li>Agricultura, ganadería y pesca</li>
+            <li>Cultura, patrimonio y deporte</li>
+            <li>Medio ambiente</li>
+            <li>Turismo</li>
           </ul>
         </div>
         <div class="card">
           <h4 style="color:#c62828">Competencias compartidas</h4>
           <ul class="list">
             <li>Universidades</li>
-            <li>Seguridad Social</li>
-            <li>Medio ambiente</li>
-            <li>Vivienda y urbanismo</li>
+            <li>Seguridad Social ( gestión básica)</li>
             <li>Investigación y tecnología</li>
-            <li>Turismo</li>
+            <li>Vivienda</li>
+            <li>Agua y energía</li>
+            <li>Minas</li>
+            <li>Fondos estructurales</li>
+            <li>Cooperación internacional</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECCIÓN 5: UNIÓN EUROPEA -->
+  <!-- SECCIÓN 5: FONDOS EUROPEOS -->
   <section class="section" id="s5">
+    <div class="container">
+      <h2>💰 Fondos Europeos en España</h2>
+      <p style="margin-bottom:1.5rem">España ha recibido fondos europeos desde su incorporación en 1986. Actualmente, gestiona fondos para la recuperación, la resiliencia y la cohesión.</p>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>Fondos Estructurales y de Cohesión</h3>
+          <ul class="list">
+            <li><strong>FEDER:</strong> Fondo Europeo de Desarrollo Regional</li>
+            <li><strong>FSE:</strong> Fondo Social Europeo</li>
+            <li><strong>Fondo de Cohesión:</strong> Para infraestructuras y medio ambiente</li>
+          </ul>
+          <h4 style="margin-top:1rem">Objetivos:</h4>
+          <ul class="list">
+            <li>Reducir diferencias entre regiones</li>
+            <li>Fomentar empleo y desarrollo sostenible</li>
+            <li>Mejorar infraestructuras</li>
+            <li>Apoyar transición ecológica y digital</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Fondo de Recuperación (Next Generation EU)</h3>
+          <p style="font-size:3rem;text-align:center;margin:0.5rem 0">🇪🇺</p>
+          <ul class="list">
+            <li><strong>140.000 millones €</strong> para España (subvenciones y préstamos)</li>
+            <li>Plan de Recuperación, Transformación y Resiliencia</li>
+            <li>110 hitos y 52 inversiones</li>
+            <li>Periodo: 2021-2026</li>
+          </ul>
+          <h4 style="margin-top:1rem">Ejes transversales:</h4>
+          <ul class="list">
+            <li>Transición ecológica</li>
+            <li>Transformación digital</li>
+            <li>Resiliencia económica</li>
+            <li>Justicia social</li>
+            <li>Coordinación institucional</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Otros fondos</h3>
+          <ul class="list">
+            <li><strong>FEADER:</strong> Fondo Europeo Agrícola de Desarrollo Rural</li>
+            <li><strong>FEMP:</strong> Fondo Europeo Marítimo y de Pesca</li>
+            <li><strong>Horizonte Europa:</strong> Investigación e innovación</li>
+          </ul>
+          <h4 style="margin-top:1rem">Gestión:</h4>
+          <ul class="list">
+            <li>Administración General del Estado</li>
+            <li>Comunidades Autónomas (función ejecutiva)</li>
+            <li>Entidades locales</li>
+            <li>Organismos intermedios</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 style="margin-top:2rem">📊 Destino de los fondos europeos</h3>
+      <div class="grid grid-2">
+        <div class="card">
+          <h4>Areas principales</h4>
+          <ul class="list">
+            <li><strong>Transición ecológica y sostenibilidad</strong></li>
+            <li><strong>Transformación digital</strong></li>
+            <li><strong>Reactivación industrial y economía</strong></li>
+            <li><strong>Empleo y formación</strong></li>
+            <li><strong>Cohesión territorial y social</strong></li>
+            <li><strong>Infraestructuras</strong></li>
+            <li><strong>I+D+i</strong></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Ejemplos de proyectos</h4>
+          <ul class="list">
+            <li>Instalación de energías renovables</li>
+            <li>Digitalización de PYMES</li>
+            <li>Renovación de edificios públicos</li>
+            <li>Implantación de transporte sostenible</li>
+            <li>Programas de formación y reciclaje profesional</li>
+            <li>Infraestructuras de conectividad (5G, fibra)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 6: UNIÓN EUROPEA -->
+  <section class="section" id="s6">
     <div class="container">
       <h2>🇪🇺 España en la Unión Europea</h2>
       <div class="grid grid-3">
@@ -498,9 +760,10 @@
           <p style="font-size:3rem;text-align:center;margin:0.5rem 0">🇪🇺</p>
           <ul class="list">
             <li><strong>1 de enero de 1986:</strong> España ingresa en la entonces CEE</li>
-            <li>Referéndum de adhesión: 1985 (92% favorable)</li>
-            <li>Tratado de Adhesión firmado en 1985</li>
-            <li>Fondos estructurales para desarrollo</li>
+            <li><strong>Referéndum de adhesión:</strong> 1985 (92% favorable)</li>
+            <li><strong>Tratado de Adhesión:</strong> Firmado en 1985</li>
+            <li><strong>Países fundadores:</strong> 6 (Bélgica, Francia, Alemania, Italia, Luxemburgo, Países Bajos)</li>
+            <li><strong>Países actuales:</strong> 27 estados miembros</li>
           </ul>
           <h4 style="margin-top:1rem">Derechos como estado miembro:</h4>
           <ul class="list">
@@ -508,6 +771,7 @@
             <li>Libre circulación de ciudadanos</li>
             <li>Acceso al mercado único</li>
             <li>Fondos de cohesión y estructurales</li>
+            <li>Comisario europeo español</li>
           </ul>
         </div>
 
@@ -516,10 +780,11 @@
           <ul class="list">
             <li><strong>Consejo Europeo:</strong> Jefes de Estado/Gobierno (orientación política)</li>
             <li><strong>Consejo de la UE:</strong> Ministros de cada país (representa gobiernos)</li>
-            <li><strong>Comisión Europea:</strong> Ejecutivo europeo (propone leyes)</li>
-            <li><strong>Parlamento Europeo:</strong> Representación ciudadana</li>
+            <li><strong>Comisión Europea:</strong> Ejecutivo europeo (propone leyes y ejecuta políticas)</li>
+            <li><strong>Parlamento Europeo:</strong> Representación ciudadana (codecisión legislativa)</li>
             <li><strong>Tribunal de Justicia de la UE:</strong> Garantiza el cumplimiento del Derecho de la UE</li>
             <li><strong>Banco Central Europeo:</strong> Política monetaria (zona euro)</li>
+            <li><strong>Tribunal de Cuentas:</strong> Control presupuestario</li>
           </ul>
         </div>
 
@@ -529,31 +794,34 @@
           <ul class="list">
             <li><strong>1 de enero de 1999:</strong> Entrada en vigor del euro</li>
             <li><strong>2002:</strong> Puesta en circulación de billetes y monedas</li>
-            <li>España comparte política monetaria con otros países</li>
+            <li>España comparte política monetaria con otros países de la zona euro</li>
+            <li>El BCE controla los tipos de interés y la inflación</li>
           </ul>
           <h4 style="margin-top:1rem">Ventajas:</h4>
           <ul class="list">
-            <li>Sin cambio de moneda en viajes</li>
+            <li>Sin cambio de moneda en viajes dentro de la zona euro</li>
             <li>Transparencia de precios</li>
             <li>Estabilidad monetaria</li>
             <li>Mercado único</li>
+            <li>Protección frente a crisis cambiarias</li>
           </ul>
           <div class="highlight" style="background:#e8f5e9;border-left-color:#4caf50;margin-top:1rem">
-            <strong>España ha recibido:</strong> Miles de millones en fondos europeos para desarrollo regional, agricultura, empleo y cohesión.
+            <strong>España ha recibido:</strong> Miles de millones en fondos europeos para desarrollo regional, agricultura, empleo, infraestructuras y cohesión desde 1986.
           </div>
         </div>
       </div>
 
       <h3 style="margin-top:2rem">🌍 Diputados españoles en el Parlamento Europeo</h3>
       <div class="card">
-        <p>España elige <strong>61 eurodiputados</strong> ( tras el Brexit y redistribución de escaños). Las elecciones europeas se celebran cada 5 años.</p>
+        <p>España elige <strong>61 eurodiputados</strong> tras el Brexit y redistribución de escaños. Las elecciones europeas se celebran cada 5 años.</p>
         <h4 style="margin-top:1rem">Funciones del Parlamento Europeo:</h4>
         <ul class="list">
           <li>Aprobar, modificar o rechazar leyes europeas (codecisión con el Consejo)</li>
           <li>Control democrático de la Comisión Europea</li>
-          <li>Aprobar el presupuesto de la UE</li>
-          <li>Elegir al Presidente de la Comisión</li>
+          <li>Aprobar el presupuesto de la UE junto con el Consejo</li>
+          <li>Elegir al Presidente de la Comisión Europea</li>
           <li>Preguntas al Consejo y a la Comisión</li>
+          <li>Peticiones ciudadanas</li>
         </ul>
       </div>
     </div>
@@ -563,7 +831,7 @@
   <section style="background:#fafafa;padding:3rem 0">
     <div class="container">
       <h2 style="text-align:center">📋 Resumen del Estado español</h2>
-      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 2rem;">
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem;">
         <div class="card">
           <h4>🏛️ Forma política</h4>
           <p>Monarquía parlamentaria</p>
@@ -589,12 +857,20 @@
           <p>17 CC.AA. + 2 ciudades autónomas</p>
         </div>
         <div class="card">
+          <h4>🏘️ Municipios</h4>
+          <p>8.131 municipios en 50 provincias</p>
+        </div>
+        <div class="card">
           <h4>⚖️ Justicia</h4>
           <p>Poder Judicial independiente</p>
         </div>
         <div class="card">
           <h4>🇪🇺 Integración</h4>
           <p>Unión Europea desde 1986</p>
+        </div>
+        <div class="card">
+          <h4>💶 Moneda</h4>
+          <p>Euro (€)</p>
         </div>
       </div>
     </div>
