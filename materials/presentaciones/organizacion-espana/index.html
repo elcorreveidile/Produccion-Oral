@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Organización Política y Administrativa de España</title>
+  <style>
+    :root{
+      --fg:#1f2937; --bg:#ffffff; --border:#e5e7eb; --brand:#c62828; --card:#ffffff;
+      --s1:#fff3e0; --s2:#e3f2fd; --s3:#f3e5f5; --s4:#e8f5e9; --s5:#fce4ec;
+    }
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:1rem}
+    :target{scroll-margin-top:72px}
+
+    /* NAV */
+    .nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--border)}
+    .nav .inner{display:flex;gap:.5rem;align-items:center}
+    .brand{font-weight:800;display:flex;align-items:center;gap:.75rem}
+    .brand .logo{height:40px;width:auto;object-fit:contain}
+    .spacer{flex:1}
+    .links{display:flex;gap:.5rem;align-items:center}
+    .links a{display:inline-block;padding:.5rem .75rem;border:1px solid var(--border);border-radius:9999px;background:#fff;white-space:nowrap}
+    .hamb{display:none;appearance:none;border:1px solid var(--border);background:#fff;border-radius:.75rem;padding:.5rem .6rem}
+    .mobile-panel{display:none;position:fixed;top:56px;left:0;right:0;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 6px 20px rgba(0,0,0,.06)}
+    .mobile-panel .row{display:flex;overflow-x:auto;gap:.5rem;padding:.75rem 1rem}
+    .mobile-panel a{display:inline-block;padding:.5rem .75rem;border:1px solid var(--border);border-radius:9999px;background:#fff;white-space:nowrap}
+
+    /* Layout */
+    .section{padding:3rem 0;position:relative;overflow:hidden}
+    .section > .container{position:relative;z-index:1}
+    .section::before{content:"";position:absolute;inset:0;background-position:center;background-repeat:no-repeat;background-size:cover;opacity:.35;z-index:0}
+    #s1{background:var(--s1)} #s2{background:var(--s2)} #s3{background:var(--s3)} #s4{background:var(--s4)} #s5{background:var(--s5)}
+    #s1::before{background-image:url("img/constitucion.jpg?v=1")}
+    #s2::before{background-image:url("img/cortes.jpg?v=1")}
+    #s3::before{background-image:url("img/gobierno.jpg?v=1")}
+    #s4::before{background-image:url("img/territorial.jpg?v=1")}
+    #s5::before{background-image:url("img/ue.jpg?v=1")}
+
+    h1{font-size:clamp(1.8rem,2.5vw,3rem);margin:.3rem 0}
+    h2{font-size:clamp(1.5rem,2vw,2.2rem);margin:0 0 .5rem 0}
+    h3{margin:.5rem 0}
+    .muted{color:#374151;font-size:.95rem}
+    .btn{display:inline-block;padding:.6rem 1rem;border-radius:9999px;border:1px solid var(--border);background:#fff;cursor:pointer}
+    .btn.primary{background:var(--brand);color:#fff;border-color:var(--brand)}
+    .list{padding-left:1.1rem}
+    .list li{margin:.35rem 0}
+    .footer{border-top:1px solid var(--border);padding:1rem 0;color:#6b7280}
+    .card{background:rgba(255,255,255,.92);border:1px solid var(--border);border-radius:1rem;padding:1rem}
+    @media(max-width:899px){.card{background:rgba(255,255,255,.96)}}
+    .grid{display:grid;gap:1rem}
+    @media(min-width:900px){.grid-3{grid-template-columns: 1fr 1fr 1fr;}}
+    .chip{display:inline-block;padding:.25rem .6rem;border:1px solid var(--border);border-radius:9999px;margin:.15rem .25rem;background:#fff;cursor:pointer}
+    .chip.active{background:#c62828;color:#fff;border-color:#c62828}
+    .highlight{background:#fff8e1;padding:1rem;border-left:4px solid #ffc107;margin:.5rem 0}
+    .emoji-large{font-size:2.5rem}
+
+    @media (max-width:899px){.links{display:none}.hamb{display:inline-block}.container{padding:.75rem 1rem}.section{padding:2rem 0}}
+    .nav.open .mobile-panel{display:block}
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <div class="nav" id="nav">
+    <div class="container inner">
+      <div class="brand">
+        <span class="emoji-large">🇪🇸</span>
+        <div>
+          <div style="font-size:0.9rem;color:#6b7280">Organización Política y</div>
+          <div>Administrativa de España</div>
+        </div>
+      </div>
+      <div class="spacer"></div>
+      <div class="links" aria-label="Menú principal">
+        <a href="#s1">Constitución</a>
+        <a href="#s2">Cortes</a>
+        <a href="#s3">Gobierno</a>
+        <a href="#s4">Territorial</a>
+        <a href="#s5">Unión Europea</a>
+      </div>
+      <button class="hamb" id="hamb" aria-label="Abrir menú">☰</button>
+    </div>
+    <div class="mobile-panel" id="mobilePanel">
+      <div class="row">
+        <a href="#s1">Constitución</a>
+        <a href="#s2">Cortes</a>
+        <a href="#s3">Gobierno</a>
+        <a href="#s4">Territorial</a>
+        <a href="#s5">Unión Europea</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section style="background:linear-gradient(135deg,#c62828 0%,#ffc107 100%);color:#fff;padding:4rem 0;text-align:center">
+    <div class="container">
+      <h1 style="color:#fff;margin-bottom:1rem">🏛️ Organización Política y Administrativa de España</h1>
+      <p style="font-size:1.2rem;opacity:0.95;max-width:700px;margin:0 auto">
+        Guía completa sobre la estructura política, administrativa y territorial del Estado español
+      </p>
+      <p style="margin-top:1.5rem;font-size:1rem;opacity:0.9">Nivel B2 · Español para extranjeros</p>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 1: LA CONSTITUCIÓN -->
+  <section class="section" id="s1">
+    <div class="container">
+      <h2>📜 La Constitución Española</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>¿Qué es?</h3>
+          <p>La Constitución Española de 1978 es la norma fundamental del Estado español. Fue aprobada en referéndum el 6 de diciembre de 1978 y sancionada por el Rey Juan Carlos I el 27 de diciembre de 1978.</p>
+          <div class="highlight">
+            <strong>Datos clave:</strong>
+            <ul class="list">
+              <li>Año: 1978</li>
+              <li>Fecha: 6 de diciembre (Día de la Constitución)</li>
+              <li>Artículos: 169</li>
+              <li>Título: Constitución Española</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Características principales</h3>
+          <ul class="list">
+            <li><strong>Rígida:</strong> Requiere procedimiento especial para modificarse</li>
+            <li><strong>Escrita:</strong> Está recogida en un único documento</li>
+            <li><strong>Democrática:</strong> Nace de la voluntad del pueblo español</li>
+            <li><strong>Originaria:</strong> No deriva de ninguna norma anterior</li>
+          </ul>
+          <h3 style="margin-top:1rem">Título Preliminar</h3>
+          <p>Establece los principios básicos: la soberanía nacional, la forma política del Estado español (monarquía parlamentaria) y los valores superiores del ordenamiento jurídico.</p>
+        </div>
+        <div class="card">
+          <h3>Valores superiores</h3>
+          <p>El artículo 1.1 establece los valores que inspiran el ordenamiento jurídico español:</p>
+          <div class="highlight" style="background:#e8f5e9;border-left-color:#4caf50">
+            <strong style="color:#2e7d32">Libertad</strong> — Los ciudadanos pueden actuar sin restricciones arbitrarias<br><br>
+            <strong style="color:#1565c0">Justicia</strong> — Dar a cada uno lo que le corresponde<br><br>
+            <strong style="color:#c62828">Igualdad</strong> — Todos los ciudadanos tienen los mismos derechos y deberes<br><br>
+            <strong style="color:#f57c00">Pluralismo político</strong> — Existencia de diversas opciones políticas
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:2rem">📖 Estructura de la Constitución</h3>
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+        <div class="card">
+          <h4>Título Preliminar</h4>
+          <p class="muted">Principios básicos del Estado</p>
+        </div>
+        <div class="card">
+          <h4>Título I</h4>
+          <p class="muted">Derechos y deberes fundamentales (arts. 15-55)</p>
+        </div>
+        <div class="card">
+          <h4>Título II</h4>
+          <p class="muted">La Corona (arts. 56-65)</p>
+        </div>
+        <div class="card">
+          <h4>Título III</h4>
+          <p class="muted">Las Cortes Generales (arts. 66-96)</p>
+        </div>
+        <div class="card">
+          <h4>Título IV</h4>
+          <p class="muted">El Gobierno (arts. 97-107)</p>
+        </div>
+        <div class="card">
+          <h4>Título V</h4>
+          <p class="muted">Relaciones entre Cortes y Gobierno (arts. 108-116)</p>
+        </div>
+        <div class="card">
+          <h4>Título VI</h4>
+          <p class="muted">Poder Judicial (arts. 117-127)</p>
+        </div>
+        <div class="card">
+          <h4>Título VII</h4>
+          <p class="muted">Economía y Hacienda (arts. 128-136)</p>
+        </div>
+        <div class="card">
+          <h4>Título VIII</h4>
+          <p class="muted">Organización territorial del Estado (arts. 137-158)</p>
+        </div>
+        <div class="card">
+          <h4>Título IX</h4>
+          <p class="muted">Tribunal Constitucional (arts. 159-165)</p>
+        </div>
+        <div class="card">
+          <h4>Título X</h4>
+          <p class="muted">Reforma constitucional (arts. 166-169)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 2: LAS CORTES GENERALES -->
+  <section class="section" id="s2">
+    <div class="container">
+      <h2>🏛️ Las Cortes Generales</h2>
+      <p style="margin-bottom:1.5rem">Las Cortes Generales representan al pueblo español y están formadas por dos cámaras: el Congreso de los Diputados y el Senado.</p>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>Congreso de los Diputados</h3>
+          <p style="font-size:3rem;text-align:center;margin:0.5rem 0">🏢</p>
+          <ul class="list">
+            <li><strong>350 diputados</strong> elegidos por sufragio universal</li>
+            <li>Legislatura de <strong>4 años</strong></li>
+            <li>Cámara de representación <strong>popular</strong></li>
+            <li>Sede en Madrid (Palacio del Congreso)</li>
+          </ul>
+          <h4 style="margin-top:1rem">Funciones principales:</h4>
+          <ul class="list">
+            <li>Aprobar leyes y presupuestos</li>
+            <li>Control al Gobierno</li>
+            <li>Votar investidura del Presidente</li>
+            <li>Mociones de censura y confianza</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Senado</h3>
+          <p style="font-size:3rem;text-align:center;margin:0.5rem 0">🏛️</p>
+          <ul class="list">
+            <li>Cámara de <strong>representación territorial</strong></li>
+            <li><strong>266 senadores</strong> en total</li>
+            <li>Elegidos por circunscripciones provinciales</li>
+            <li>Cada provincia elige <strong>4 senadores</strong></li>
+          </ul>
+          <h4 style="margin-top:1rem">Composición:</h4>
+          <ul class="list">
+            <li>208 senadores por elección directa</li>
+            <li>58 senadores designados por las CC.AA.</li>
+            <li>Segunda lectura de leyes</li>
+            <li>Representa territorios y entidades</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>El proceso legislativo</h3>
+          <h4>¿Cómo se crea una ley?</h4>
+          <ol class="list">
+            <li><strong>Iniciativa:</strong> Presentación del proyecto</li>
+            <li><strong>Debate:</strong> Congreso la aprueba o modifica</li>
+            <li><strong>Senado:</strong> Segunda lectura (enmiendas)</li>
+            <li><strong>Sanción:</strong> El Rey firma la ley</li>
+            <li><strong>Publicación:</strong> BOE (Boletín Oficial del Estado)</li>
+          </ol>
+          <div class="highlight" style="background:#e3f2fd;border-left-color:#1976d2;margin-top:1rem">
+            <strong>Trámite de urgencia:</strong> El Congreso puede aprobar leyes en lectura única si es necesario por urgencia.
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:2rem">📊 El sistema electoral español</h3>
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+        <div class="card">
+          <h4>Circunscripciones electorales</h4>
+          <ul class="list">
+            <li>Cada provincia es una circunscripción</li>
+            <li>Ciudades autónomas (Ceuta, Melilla)</li>
+            <li>Se aplica la Ley D'Hondt</li>
+            <li>Se requiere 3% de votos para entrar</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Voto de los españoles en el extranjero</h4>
+          <ul class="list">
+            <li>Deben solicitar el voto antes</li>
+            <li>Voto por correo</li>
+            <li>Embajadas y consulados</li>
+            <li>Censos de residentes (CERA)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Derechos de participación</h4>
+          <ul class="list">
+            <li>Sufragio universal, libre, igual, directo y secreto</li>
+            <li>Mayores de 18 años</li>
+            <li>Nacionalidad española</li>
+            <li>No estar privado de derechos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 3: EL GOBIERNO Y LA CORONA -->
+  <section class="section" id="s3">
+    <div class="container">
+      <h2>👑 El Gobierno y La Corona</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>La Corona</h3>
+          <p style="font-size:3rem;text-align:center;margin:0.5rem 0">👑</p>
+          <h4>El Rey</h4>
+          <ul class="list">
+            <li><strong>Jefe del Estado</strong></li>
+            <li>Símbolo de la unidad y permanencia</li>
+            <li>Árbitro y moderador del funcionamiento</li>
+            <li>No tiene poder político directo</li>
+          </ul>
+          <h4 style="margin-top:1rem">Funciones:</h4>
+          <ul class="list">
+            <li>Sancionar y promulgar leyes</li>
+            <li>Convocar y disolver las Cortes</li>
+            <li>Nombrar candidatos a Presidente</li>
+            <li>Mandato de confianza investidura</li>
+          </ul>
+          <div class="highlight" style="margin-top:1rem">
+            <strong>Rey actual:</strong> Felipe VI (desde 2014)
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>El Gobierno</h3>
+          <p style="font-size:3rem;text-align:center;margin:0.5rem 0">🏛️</p>
+          <p>El Gobierno dirige la política interior y exterior, la administración civil y militar, y la defensa del Estado.</p>
+          <h4>Composición:</h4>
+          <ul class="list">
+            <li><strong>Presidente del Gobierno</strong></li>
+            <li>Vicepresidentes (si los hay)</li>
+            <li>Ministros y ministras</li>
+            <li>Órganos de apoyo (Gabinetes)</li>
+          </ul>
+          <h4 style="margin-top:1rem">Nombramiento:</h4>
+          <ol class="list">
+            <li>El Rey propone un candidato</li>
+            <li>Debate de investidura en el Congreso</li>
+            <li>Mayoría absoluta o simple</li>
+            <li>El Rey lo nombra Presidente</li>
+            <li>El Rey nombra ministros propuesta</li>
+          </ol>
+        </div>
+
+        <div class="card">
+          <h3>Poder Judicial</h3>
+          <p style="font-size:3rem;text-align:center;margin:0.5rem 0">⚖️</p>
+          <p>El poder judicial ejerce las funciones jurisdiccionales en nombre del Rey.</p>
+          <h4>Órganos principales:</h4>
+          <ul class="list">
+            <li><strong>Consejo General del Poder Judicial (CGPJ)</strong></li>
+            <li>Tribunal Supremo (máximo órgano jurisdiccional)</li>
+            <li>Audiencia Nacional</li>
+            <li>Tribunales Superiores de Justicia (CC.AA.)</li>
+            <li>Juzgados de primera instancia e instrucción</li>
+          </ul>
+          <h4 style="margin-top:1rem">Principios:</h4>
+          <ul class="list">
+            <li>Unidad jurisdiccional</li>
+            <li>Independencia</li>
+            <li>Inamovilidad de jueces</li>
+            <li>Responsabilidad</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 style="margin-top:2rem">⚖️ El Tribunal Constitucional</h3>
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+        <div class="card">
+          <h4>¿Qué es?</h4>
+          <p>El máximo intérprete de la Constitución. Garantiza el orden constitucional y protege los derechos fundamentales.</p>
+          <ul class="list">
+            <li><strong>12 magistrados</strong></li>
+            <li>Mandato de <strong>9 años</strong> renovables por tercios</li>
+            <li>Nombrados por el Rey</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Competencias</h4>
+          <ul class="list">
+            <li>Recurso de inconstitucionalidad</li>
+            <li>Amparo constitucional (derechos fundamentales)</li>
+            <li>Conflictos de competencias</li>
+            <li>Conflictos entre Estado y CC.AA.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Procedimientos</h4>
+          <ul class="list">
+            <li>El recurso de inconstitucionalidad lo puede presentar cualquier órgano legitimado</li>
+            <li>El amparo lo presentan ciudadanos</li>
+            <li>Las sentencias son vinculantes</li>
+            <li>Sus decisiones no pueden ser recurridas</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 4: ORGANIZACIÓN TERRITORIAL -->
+  <section class="section" id="s4">
+    <div class="container">
+      <h2>🗺️ Organización Territorial del Estado</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>Comunidades Autónomas</h3>
+          <p style="font-size:3rem;text-align:center;margin:0.5rem 0">📍</p>
+          <ul class="list">
+            <li><strong>17 Comunidades Autónomas</strong></li>
+            <li><strong>2 Ciudades Autónomas</strong> (Ceuta y Melilla)</li>
+            <li>Entidades territoriales con autonomía política</li>
+            <li>Tienen Estatuto de Autonomía propio</li>
+          </ul>
+          <h4 style="margin-top:1rem">Instituciones:</h4>
+          <ul class="list">
+            <li><strong>Asamblea Legislativa:</strong> Parlamento autonómico</li>
+            <li><strong>Consejo de Gobierno:</strong> Poder ejecutivo</li>
+            <li><strong>Presidente/a:</strong> Máxima autoridad</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Provincias</h3>
+          <p style="font-size:3rem;text-align:center;margin:0.5rem 0">🏛️</p>
+          <ul class="list">
+            <li><strong>50 provincias</strong> en total</li>
+            <li>Divisiones administrativas con fines territoriales</li>
+            <li>Gestionadas por Diputaciones Provinciales</li>
+            <li>También existen Cabildos (islas) y Consejos (Navarra)</li>
+          </ul>
+          <h4 style="margin-top:1rem">Funciones de las Diputaciones:</h4>
+          <ul class="list">
+            <li>Coordinación de servicios municipales</li>
+            <li>Prestación de servicios supramunicipales</li>
+            <li>Asistencia y cooperación con municipios</li>
+            <li>Gestión de competencias estatales</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Municipios</h3>
+          <p style="font-size:3rem;text-align:center;margin:0.5rem 0">🏘️</p>
+          <ul class="list">
+            <li><strong>8.131 municipios</strong> en España</li>
+            <li>Entidad básica de organización territorial</li>
+            <li>Elemento de cercanía al ciudadano</li>
+            <li>Autonomía para gestionar intereses propios</li>
+          </ul>
+          <h4 style="margin-top:1rem">Gobierno municipal:</h4>
+          <ul class="list">
+            <li><strong>Alcalde/alcaldesa:</strong> Jefe ejecutivo</li>
+            <li><strong>Concejales:</strong> Miembros de la corporación</li>
+            <li>Pleno: Órgano de control</li>
+            <li>Junta de Gobierno local</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 style="margin-top:2rem">🔍 Distribución de competencias</h3>
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem;">
+        <div class="card">
+          <h4 style="color:#1565c0">Competencias exclusivas del Estado</h4>
+          <ul class="list">
+            <li>Defensa y Fuerzas Armadas</li>
+            <li>Relaciones internacionales</li>
+            <li>Justicia y legislación civil/penal</li>
+            <li>Extranjería y fronteras</li>
+            <li>Sistema monetario</li>
+            <li>Comercio exterior</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4 style="color:#2e7d32">Competencias de las Comunidades Autónomas</h4>
+          <ul class="list">
+            <li>Organización instituciones propias</li>
+            <li>Educación (en muchos casos)</li>
+            <li>Sanidad</li>
+            <li>Ordenación del territorio</li>
+            <li>Transporte y obras públicas</li>
+            <li>Agricultura y ganadería</li>
+            <li>Cultura y patrimonio</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4 style="color:#c62828">Competencias compartidas</h4>
+          <ul class="list">
+            <li>Universidades</li>
+            <li>Seguridad Social</li>
+            <li>Medio ambiente</li>
+            <li>Vivienda y urbanismo</li>
+            <li>Investigación y tecnología</li>
+            <li>Turismo</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 5: UNIÓN EUROPEA -->
+  <section class="section" id="s5">
+    <div class="container">
+      <h2>🇪🇺 España en la Unión Europea</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>Incorporación a la UE</h3>
+          <p style="font-size:3rem;text-align:center;margin:0.5rem 0">🇪🇺</p>
+          <ul class="list">
+            <li><strong>1 de enero de 1986:</strong> España ingresa en la entonces CEE</li>
+            <li>Referéndum de adhesión: 1985 (92% favorable)</li>
+            <li>Tratado de Adhesión firmado en 1985</li>
+            <li>Fondos estructurales para desarrollo</li>
+          </ul>
+          <h4 style="margin-top:1rem">Derechos como estado miembro:</h4>
+          <ul class="list">
+            <li>Participación en instituciones europeas</li>
+            <li>Libre circulación de ciudadanos</li>
+            <li>Acceso al mercado único</li>
+            <li>Fondos de cohesión y estructurales</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Instituciones de la UE</h3>
+          <ul class="list">
+            <li><strong>Consejo Europeo:</strong> Jefes de Estado/Gobierno (orientación política)</li>
+            <li><strong>Consejo de la UE:</strong> Ministros de cada país (representa gobiernos)</li>
+            <li><strong>Comisión Europea:</strong> Ejecutivo europeo (propone leyes)</li>
+            <li><strong>Parlamento Europeo:</strong> Representación ciudadana</li>
+            <li><strong>Tribunal de Justicia de la UE:</strong> Garantiza el cumplimiento del Derecho de la UE</li>
+            <li><strong>Banco Central Europeo:</strong> Política monetaria (zona euro)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>España y el Euro</h3>
+          <p style="font-size:3rem;text-align:center;margin:0.5rem 0">💶</p>
+          <ul class="list">
+            <li><strong>1 de enero de 1999:</strong> Entrada en vigor del euro</li>
+            <li><strong>2002:</strong> Puesta en circulación de billetes y monedas</li>
+            <li>España comparte política monetaria con otros países</li>
+          </ul>
+          <h4 style="margin-top:1rem">Ventajas:</h4>
+          <ul class="list">
+            <li>Sin cambio de moneda en viajes</li>
+            <li>Transparencia de precios</li>
+            <li>Estabilidad monetaria</li>
+            <li>Mercado único</li>
+          </ul>
+          <div class="highlight" style="background:#e8f5e9;border-left-color:#4caf50;margin-top:1rem">
+            <strong>España ha recibido:</strong> Miles de millones en fondos europeos para desarrollo regional, agricultura, empleo y cohesión.
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:2rem">🌍 Diputados españoles en el Parlamento Europeo</h3>
+      <div class="card">
+        <p>España elige <strong>61 eurodiputados</strong> ( tras el Brexit y redistribución de escaños). Las elecciones europeas se celebran cada 5 años.</p>
+        <h4 style="margin-top:1rem">Funciones del Parlamento Europeo:</h4>
+        <ul class="list">
+          <li>Aprobar, modificar o rechazar leyes europeas (codecisión con el Consejo)</li>
+          <li>Control democrático de la Comisión Europea</li>
+          <li>Aprobar el presupuesto de la UE</li>
+          <li>Elegir al Presidente de la Comisión</li>
+          <li>Preguntas al Consejo y a la Comisión</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN: RESUMEN VISUAL -->
+  <section style="background:#fafafa;padding:3rem 0">
+    <div class="container">
+      <h2 style="text-align:center">📋 Resumen del Estado español</h2>
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 2rem;">
+        <div class="card">
+          <h4>🏛️ Forma política</h4>
+          <p>Monarquía parlamentaria</p>
+        </div>
+        <div class="card">
+          <h4>📜 Constitución</h4>
+          <p>1978 — Norma fundamental</p>
+        </div>
+        <div class="card">
+          <h4>👑 Jefe del Estado</h4>
+          <p>Rey Felipe VI</p>
+        </div>
+        <div class="card">
+          <h4>🏛️ Jefe del Gobierno</h4>
+          <p>Presidente del Gobierno</p>
+        </div>
+        <div class="card">
+          <h4>🏢 Parlamento</h4>
+          <p>Cortes Generales (Congreso + Senado)</p>
+        </div>
+        <div class="card">
+          <h4>📊 Territorio</h4>
+          <p>17 CC.AA. + 2 ciudades autónomas</p>
+        </div>
+        <div class="card">
+          <h4>⚖️ Justicia</h4>
+          <p>Poder Judicial independiente</p>
+        </div>
+        <div class="card">
+          <h4>🇪🇺 Integración</h4>
+          <p>Unión Europea desde 1986</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      © <span id="y"></span> Organización Política y Administrativa de España · Material didáctico para nivel B2
+    </div>
+  </footer>
+
+  <script>
+    // Año
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Menú móvil
+    const nav = document.getElementById('nav');
+    const hamb = document.getElementById('hamb');
+    hamb?.addEventListener('click', ()=> nav.classList.toggle('open'));
+    document.querySelectorAll('#mobilePanel a').forEach(a=> a.addEventListener('click', ()=> nav.classList.remove('open')));
+  </script>
+</body>
+</html>
